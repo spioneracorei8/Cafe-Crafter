@@ -10,7 +10,7 @@ func SetRouter() *gin.Engine {
 	CoffeeRotes := r.Group("/coffee-api")
 	{
 		CoffeeRotes.GET("/coffee", Controllers.GetCoffee)
-		// CoffeeRotes.GET("coffee/:id",Controllers.GetCoffeeById)
+		CoffeeRotes.GET("coffee/:id",Controllers.GetCoffeeById)
 		CoffeeRotes.POST("/coffee", Controllers.InsertCoffee)
 		CoffeeRotes.PUT("/coffee/:id", Controllers.UpdateCoffee)
 		CoffeeRotes.DELETE("/coffee/:id", Controllers.DeleteCoffee)

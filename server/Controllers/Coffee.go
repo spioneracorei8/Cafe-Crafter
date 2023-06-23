@@ -20,6 +20,28 @@ func GetCoffee(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+func GetCoffeeById(c *gin.Context) {
+
+	id := c.Param("id")
+	coffeeId, err := strconv.Atoi(id)
+	if err != nil {
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+	coffee, err := Models.GetCoffeeById(coffeeId)
+	if err != nil {
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+
+	response := gin.H{
+		"data": coffee,
+	}
+
+	c.JSON(http.StatusOK, response)
+
+}
+
 func InsertCoffee(c *gin.Context) {
 	var coffee Models.Coffee
 	if err := c.ShouldBindJSON(&coffee); err != nil {
