@@ -28,6 +28,28 @@ func GetCoffee() ([]Coffee, error) {
 	return coffeeList, nil
 }
 
+func GetCoffeeById(coffeeId int) (*Coffee, error) {
+	coffee := &Coffee{}
+
+	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price FROM coffeemenu WHERE id = ?`,coffeeId)
+
+	err := query.Scan(
+		&coffee.Id,
+		&coffee.Name,
+		&coffee.Image_url,
+		&coffee.Description,
+		&coffee.Price,
+	)
+	if err == sql.ErrNoRows {
+		return nil, nil
+	} else if err != nil {
+		log.Fatalln(err.Error())
+	}
+
+	return coffee, nil
+
+}
+
 func InsertCoffee(coffee *Coffee) (int64, error) {
 	insert := `INSERT INTO coffeemenu (name, image_url, description, price) VALUES (?, ?, ?, ?)`
 
