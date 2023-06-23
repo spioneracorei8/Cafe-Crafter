@@ -11,9 +11,8 @@ import (
 func GetCoffee(c *gin.Context) {
 	coffeeList, err := Models.GetCoffee()
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "Failed to query data from database.",
-		})
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
 	}
 	response := gin.H{
 		"data": coffeeList,
@@ -41,9 +40,37 @@ func InsertCoffee(c *gin.Context) {
 
 	c.JSON(http.StatusOK, response)
 }
+
+func UpdateCoffee(c *gin.Context) {
+	var coffee Models.Coffee
+
+	if err := c.ShouldBindJSON(&coffee); err != nil {
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+
+	id := c.Param("id")
+	coffeeId, err := strconv.Atoi(id)
+	if err != nil {
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+	updatedCoffee, err := Models.UpdateCoffee(&coffee, coffeeId)
+	if err != nil {
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return
+	}
+	response := gin.H{
+		"data":    updatedCoffee,
+		"message": "updated coffee successfully.",
+	}
+
+	c.JSON(http.StatusOK, response)
+}
+
 func DeleteCoffee(c *gin.Context) {
-	coffeeFromClient := c.Param("id")
-	coffeeId, err := strconv.Atoi(coffeeFromClient)
+	coffeeIdFromClient := c.Param("id")
+	coffeeId, err := strconv.Atoi(coffeeIdFromClient)
 	if err != nil {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return

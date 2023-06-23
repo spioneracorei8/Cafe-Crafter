@@ -16,19 +16,19 @@ func SetupDatabase() {
 	if err != nil {
 		panic(err.Error())
 	}
- /*
-	query := `CREATE TABLE coffeemenu
-	(id INT AUTO_INCREMENT,
-	name TEXT NOT NULL,
-	image_url TEXT NOT NULL,
-	description TEXT NOT NULL,
-	price FLOAT,
-	PRIMARY KEY (id)
-	);`
+	/*
+		query := `CREATE TABLE coffeemenu
+		(id INT AUTO_INCREMENT,
+		name TEXT NOT NULL,
+		image_url TEXT NOT NULL,
+		description TEXT NOT NULL,
+		price FLOAT,
+		PRIMARY KEY (id)
+		);`
 
-	if _, err := DB.Exec(query); err != nil {
-		panic(err.Error())
-	}
-*/
+		if _, err := DB.Exec(query); err != nil {
+			panic(err.Error())
+		}
+	*/
 	fmt.Println("Connect to database successfully.")
 }
