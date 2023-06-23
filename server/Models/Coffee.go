@@ -1,6 +1,7 @@
 package Models
 
 import (
+	"database/sql"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -10,7 +11,7 @@ import (
 func GetCoffee() ([]Coffee, error) {
 	var coffeeList []Coffee
 
-	query, err := Config.DB.Query(`SELECT * FROM coffeemenu`)
+	query, err := Config.DB.Query(`SELECT id, name, image_url, description, price FROM coffeemenu`)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
@@ -34,12 +35,41 @@ func InsertCoffee(coffee *Coffee) (int64, error) {
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
-	user_id, err := result.LastInsertId()
+	userId, err := result.LastInsertId()
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
 
-	return user_id, nil
+	return userId, nil
+}
+
+func UpdateCoffee(coffee *Coffee, coffeeId int) (*Coffee, error) {
+	coffeeRow := &Coffee{}
+
+	query := `SELECT id, name, image_url, description, price FROM coffeemenu WHERE id = ?`
+
+	update := `UPDATE coffeedatabase.coffeemenu SET name = ?, image_url = ?, description = ?, price = ? WHERE id = ?`
+
+	_, err := Config.DB.Exec(update, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price, coffeeId)
+
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	row := Config.DB.QueryRow(query, coffeeId)
+
+	err = row.Scan(
+		&coffeeRow.Id,
+		&coffeeRow.Name,
+		&coffeeRow.Image_url,
+		&coffeeRow.Description,
+		&coffeeRow.Price,
+	)
+	if err == sql.ErrNoRows {
+		return nil, nil
+	} else if err != nil {
+		log.Fatalln(err.Error())
+	}
+	return coffeeRow, nil
 }
 
 func DeleteCoffee(coffeeId int) (int, error) {
