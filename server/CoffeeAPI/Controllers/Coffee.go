@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/spioneracorei8/Cafe-Crafter/Models"
+	"github.com/spioneracorei8/Cafe-Crafter/CoffeeAPI/Models"
 )
 
 func GetCoffee(c *gin.Context) {

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/spioneracorei8/Cafe-Crafter/Config"
-	"github.com/spioneracorei8/Cafe-Crafter/Routes"
+	"github.com/spioneracorei8/Cafe-Crafter/CoffeeAPI/Config"
+	"github.com/spioneracorei8/Cafe-Crafter/CoffeeAPI/Routes"
 )
 
 const port = ":4000"

@@ -2,7 +2,7 @@ package Routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/spioneracorei8/Cafe-Crafter/Controllers"
+	"github.com/spioneracorei8/Cafe-Crafter/CoffeeAPI/Controllers"
 )
 
 func SetRouter() *gin.Engine {

@@ -5,7 +5,7 @@ import (
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/spioneracorei8/Cafe-Crafter/Config"
+	"github.com/spioneracorei8/Cafe-Crafter/CoffeeAPI/Config"
 )
 
 func GetCoffee() ([]Coffee, error) {
