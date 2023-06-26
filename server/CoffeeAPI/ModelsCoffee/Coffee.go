@@ -1,11 +1,11 @@
-package Models
+package ModelsCoffee
 
 import (
 	"database/sql"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/spioneracorei8/Cafe-Crafter/CoffeeAPI/Config"
+	"github.com/spioneracorei8/Cafe-Crafter/Config"
 )
 
 func GetCoffee() ([]Coffee, error) {
@@ -31,7 +31,7 @@ func GetCoffee() ([]Coffee, error) {
 func GetCoffeeById(coffeeId int) (*Coffee, error) {
 	coffee := &Coffee{}
 
-	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price FROM coffeemenu WHERE id = ?`,coffeeId)
+	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price FROM coffeemenu WHERE id = ?`, coffeeId)
 
 	err := query.Scan(
 		&coffee.Id,
