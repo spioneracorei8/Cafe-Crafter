@@ -1,15 +1,15 @@
-package Controllers
+package ControllersCoffee
 
 import (
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/spioneracorei8/Cafe-Crafter/CoffeeAPI/Models"
+	"github.com/spioneracorei8/Cafe-Crafter/CoffeeAPI/ModelsCoffee"
 )
 
 func GetCoffee(c *gin.Context) {
-	coffeeList, err := Models.GetCoffee()
+	coffeeList, err := ModelsCoffee.GetCoffee()
 	if err != nil {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
@@ -28,7 +28,7 @@ func GetCoffeeById(c *gin.Context) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
-	coffee, err := Models.GetCoffeeById(coffeeId)
+	coffee, err := ModelsCoffee.GetCoffeeById(coffeeId)
 	if err != nil {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
@@ -43,13 +43,13 @@ func GetCoffeeById(c *gin.Context) {
 }
 
 func InsertCoffee(c *gin.Context) {
-	var coffee Models.Coffee
+	var coffee ModelsCoffee.Coffee
 	if err := c.ShouldBindJSON(&coffee); err != nil {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
 
-	id, err := Models.InsertCoffee(&coffee)
+	id, err := ModelsCoffee.InsertCoffee(&coffee)
 	if err != nil {
 		c.AbortWithStatus(http.StatusInternalServerError) // c.AbortWithStatus return just statuscode
 		return
@@ -64,7 +64,7 @@ func InsertCoffee(c *gin.Context) {
 }
 
 func UpdateCoffee(c *gin.Context) {
-	var coffee Models.Coffee
+	var coffee ModelsCoffee.Coffee
 
 	if err := c.ShouldBindJSON(&coffee); err != nil {
 		c.AbortWithStatus(http.StatusBadRequest)
@@ -77,7 +77,7 @@ func UpdateCoffee(c *gin.Context) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
-	updatedCoffee, err := Models.UpdateCoffee(&coffee, coffeeId)
+	updatedCoffee, err := ModelsCoffee.UpdateCoffee(&coffee, coffeeId)
 	if err != nil {
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return
@@ -98,7 +98,7 @@ func DeleteCoffee(c *gin.Context) {
 		return
 	}
 
-	id, err := Models.DeleteCoffee(coffeeId)
+	id, err := ModelsCoffee.DeleteCoffee(coffeeId)
 	if err != nil {
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return

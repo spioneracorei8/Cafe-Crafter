@@ -1,4 +1,4 @@
-package Models
+package ModelsCoffee
 
 type Coffee struct {
 	Id          int
