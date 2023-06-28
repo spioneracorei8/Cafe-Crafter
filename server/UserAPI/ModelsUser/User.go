@@ -1,6 +1,7 @@
 package ModelsUser
 
 import (
+	"database/sql"
 	"log"
 
 	"github.com/spioneracorei8/Cafe-Crafter/Config"
@@ -26,4 +27,26 @@ func Register(user *User) (int64, error) {
 		log.Fatalln(err.Error())
 	}
 	return userId, nil
+}
+
+func Login(user *UserCredential) (bool, error) {
+	userCredential := &UserCredential{}
+	username := user.Username
+	password := user.Password
+
+	query := Config.DB.QueryRow(`SELECT username, password FROM users WHERE username = ?`, username)
+	err := query.Scan(
+		&userCredential.Username,
+		&userCredential.Password,
+	)
+	if err == sql.ErrNoRows {
+		return false, nil
+	} else if err != nil {
+		log.Fatalln(err.Error())
+	}
+
+	result := bcrypt.CompareHashAndPassword([]byte(userCredential.Password), []byte(password))
+
+	return result == nil, nil
+
 }

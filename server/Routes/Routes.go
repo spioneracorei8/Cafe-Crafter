@@ -19,6 +19,7 @@ func SetRouter() *gin.Engine {
 	UserRoutes := r.Group("/auth-user")
 	{
 		UserRoutes.POST("/register", ControllersUsers.Register)
+		UserRoutes.POST("/login", ControllersUsers.Login)
 	}
 	return r
 

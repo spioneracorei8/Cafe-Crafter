@@ -10,3 +10,7 @@ type User struct {
 	Address      string
 	Phone_number string
 }
+type UserCredential struct {
+	Username string
+	Password string
+}
