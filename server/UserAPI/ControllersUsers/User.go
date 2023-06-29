@@ -1,11 +1,15 @@
 package ControllersUsers
 
 import (
+	"fmt"
+	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/joho/godotenv"
 	"github.com/spioneracorei8/Cafe-Crafter/UserAPI/ModelsUser"
 )
 
@@ -29,6 +33,14 @@ func Register(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Println("Error Loading .env file")
+		log.Fatalln(err.Error())
+	}
+
+	SecretKey := os.Getenv("SECRET_KEY")
+
 	var user ModelsUser.UserCredential
 
 	if err := c.ShouldBindJSON(&user); err != nil {
@@ -46,7 +58,7 @@ func Login(c *gin.Context) {
 		"username": username,
 		"nbf":      time.Now().Add(3 * time.Hour).Unix(),
 	})
-	tokenString, err := token.SignedString([]byte("VeryVerySecert"))
+	tokenString, err := token.SignedString([]byte(SecretKey))
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
