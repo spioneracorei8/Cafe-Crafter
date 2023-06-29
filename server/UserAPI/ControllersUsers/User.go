@@ -22,11 +22,9 @@ func Register(c *gin.Context) {
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return
 	}
-
-	response := gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"message": "created new user successfully.",
-	}
-	c.JSON(http.StatusOK, response)
+	})
 
 }
 
@@ -37,7 +35,7 @@ func Login(c *gin.Context) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
-	result, err := ModelsUser.Login(&user)
+	result, err, username := ModelsUser.Login(&user)
 
 	if err != nil {
 		c.AbortWithStatus(http.StatusInternalServerError)
@@ -45,8 +43,8 @@ func Login(c *gin.Context) {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &jwt.MapClaims{
-		"foo": "bar",
-		"nbf": time.Now().Add(3 * time.Hour).Unix(),
+		"username": username,
+		"nbf":      time.Now().Add(3 * time.Hour).Unix(),
 	})
 	tokenString, err := token.SignedString([]byte("VeryVerySecert"))
 

@@ -29,7 +29,7 @@ func Register(user *User) (int64, error) {
 	return userId, nil
 }
 
-func Login(user *UserCredential) (bool, error) {
+func Login(user *UserCredential) (bool, error, string) {
 	userCredential := &UserCredential{}
 	username := user.Username
 	password := user.Password
@@ -40,13 +40,13 @@ func Login(user *UserCredential) (bool, error) {
 		&userCredential.Password,
 	)
 	if err == sql.ErrNoRows {
-		return false, nil
+		return false, nil, ""
 	} else if err != nil {
 		log.Fatalln(err.Error())
 	}
 
 	result := bcrypt.CompareHashAndPassword([]byte(userCredential.Password), []byte(password))
 
-	return result == nil, nil
+	return result == nil, nil, username
 
 }

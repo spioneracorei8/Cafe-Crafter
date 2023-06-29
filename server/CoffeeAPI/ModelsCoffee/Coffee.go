@@ -28,7 +28,7 @@ func GetCoffee() ([]Coffee, error) {
 	return coffeeList, nil
 }
 
-func GetCoffeeById(coffeeId int) (*Coffee, error) {
+func GetCoffeeById(coffeeId int) (*Coffee, error, error) {
 	coffee := &Coffee{}
 
 	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price FROM coffeemenu WHERE id = ?`, coffeeId)
@@ -41,13 +41,12 @@ func GetCoffeeById(coffeeId int) (*Coffee, error) {
 		&coffee.Price,
 	)
 	if err == sql.ErrNoRows {
-		return nil, nil
+		return nil, nil, err
 	} else if err != nil {
 		log.Fatalln(err.Error())
 	}
 
-	return coffee, nil
-
+	return coffee, nil, nil
 }
 
 func InsertCoffee(coffee *Coffee) (int64, error) {
@@ -57,20 +56,20 @@ func InsertCoffee(coffee *Coffee) (int64, error) {
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
-	userId, err := result.LastInsertId()
+	coffeeId, err := result.LastInsertId()
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
 
-	return userId, nil
+	return coffeeId, nil
 }
 
-func UpdateCoffee(coffee *Coffee, coffeeId int) (*Coffee, error) {
+func UpdateCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, error) {
 	coffeeRow := &Coffee{}
 
 	query := `SELECT id, name, image_url, description, price FROM coffeemenu WHERE id = ?`
 
-	update := `UPDATE coffeedatabase.coffeemenu SET name = ?, image_url = ?, description = ?, price = ? WHERE id = ?`
+	update := `UPDATE coffeemenu SET name = ?, image_url = ?, description = ?, price = ? WHERE id = ?`
 
 	_, err := Config.DB.Exec(update, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price, coffeeId)
 
@@ -87,20 +86,21 @@ func UpdateCoffee(coffee *Coffee, coffeeId int) (*Coffee, error) {
 		&coffeeRow.Price,
 	)
 	if err == sql.ErrNoRows {
-		return nil, nil
+		return nil, nil, err
 	} else if err != nil {
 		log.Fatalln(err.Error())
 	}
-	return coffeeRow, nil
+	return coffeeRow, nil, nil
 }
 
-func DeleteCoffee(coffeeId int) (int, error) {
-	deleteCoffeeById := `DELETE FROM coffeedatabase.coffeemenu WHERE id = ?`
+func DeleteCoffee(coffeeId int) (int, error, ) {
+	deleteCoffeeById := `DELETE FROM coffeemenu WHERE id = ?`
 
 	_, err := Config.DB.Exec(deleteCoffeeById, coffeeId)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
+	
 
 	return coffeeId, nil
 }
