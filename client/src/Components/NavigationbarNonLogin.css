@@ -1,0 +1,58 @@
+@import url('https://fonts.cdnfonts.com/css/whipsmart');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'whipsmart';
+}
+
+header {
+    width: 100vw;
+    height: 12vh;
+    background-color: #D4A276;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.header-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cc-logo {
+    width: 10rem;
+}
+
+.nav-middle-crafter ul {
+    display: flex;
+
+}
+
+.nav-middle-crafter li {
+    font-weight: 900;
+    font-size: 1.3rem;
+    list-style-type: none;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.nav-right-crafter button {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 1rem;
+    background-color: #FFEDD8;
+    cursor: pointer;
+    border-radius: 15%;
+    border: #D4A276;
+
+}
+
+.nav-right-crafter button:hover {
+    background-color: #FFE6A7;
+}
