@@ -1,12 +1,13 @@
 import React from "react";
-import NavigationbarNonLogin from "./Components/NavigationbarNonLogin";
+import HomePage from "./Pages/HomePage";
+import './App.css'
 function App() {
 
 
 
   return (
     <>
-      <NavigationbarNonLogin />
+      < HomePage/>
     </>
   )
 }
