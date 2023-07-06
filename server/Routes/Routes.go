@@ -11,8 +11,8 @@ func SetRouter() *gin.Engine {
 	r := gin.Default()
 	CoffeeRotes := r.Group("/coffee-api")
 	{
-		// CoffeeRotes.Use()
-		CoffeeRotes.GET("/coffee", Middlewares.Middleware(), Middlewares.CorsMiddleware(), ControllersCoffee.GetCoffee)
+		// CoffeeRotes.Use() Middlewares.Middleware()
+		CoffeeRotes.GET("/coffee", Middlewares.CorsMiddleware(), ControllersCoffee.GetCoffee)
 		CoffeeRotes.GET("coffee/:id", ControllersCoffee.GetCoffeeById)
 		CoffeeRotes.POST("/coffee", ControllersCoffee.InsertCoffee)
 		CoffeeRotes.PUT("/coffee/:id", ControllersCoffee.UpdateCoffee)
