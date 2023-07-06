@@ -48,7 +48,7 @@ func Login(c *gin.Context) {
 		return
 	}
 	result, err, username := ModelsUser.Login(&user)
-
+	fmt.Println(username)
 	if err != nil {
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return
@@ -56,8 +56,9 @@ func Login(c *gin.Context) {
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &jwt.MapClaims{
 		"username": username,
-		"nbf":      time.Now().Add(3 * time.Hour).Unix(),
+		"exp":      time.Now().Add(time.Hour * 24 * 30).Unix(),
 	})
+
 	tokenString, err := token.SignedString([]byte(SecretKey))
 
 	if err != nil {
@@ -69,6 +70,7 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "login successfully.",
 			"token":   tokenString,
+			// "tenko":   token,
 		})
 	} else {
 		c.JSON(http.StatusUnauthorized, gin.H{
