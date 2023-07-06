@@ -1,7 +1,7 @@
 .main-container {
     font-family: 'whipsmart';
     width: 100vw;
-    height: 95vh;
+    height: auto;
     background-color: #FFE6A7;
     padding-left: 3rem;
     padding-right: 3rem;
@@ -52,5 +52,159 @@
     object-fit: cover;
     image-rendering: auto;
     margin-right: 5%;
-    margin-top: -10%;
+    margin-top: 5%;
+    margin-bottom: 1.5rem;
+}
+
+.suggestions-coffee-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+    margin-bottom: 10rem;
+
+}
+
+.suggestions-coffee-container h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #432818;
+}
+
+.suggestions-coffee {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.suggestions-menu-container {
+    display: flex;
+    margin-top: 7rem;
+    background-color: #FEF9F0;
+    border-radius: 5%;
+    padding: 2rem;
+
+}
+
+.suggestions-menu h3 {
+    color: #432818;
+    margin-bottom: 1.5rem;
+}
+
+.suggestions-menu h4 {
+    color: #432818;
+    margin-bottom: 1.2rem;
+}
+
+.suggestions-menu img {
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+}
+
+.suggestions-menu-button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.suggestions-menu-button button {
+    font-family: 'whipsmart';
+    display: flex;
+    margin-left: 0.8rem;
+}
+
+.cafe-crafter-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cafe-crafter-container h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #432818;
+}
+
+.cafe-crafter-content {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5rem;
+}
+
+.cafe-crafter-content p {
+    width: 35rem;
+    height: auto;
+    margin-top: 3rem;
+    padding: 2%;
+    font-size: 1.5rem;
+    font-weight: 100;
+    color: #432818;
+}
+
+.coffee-ingredients-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.coffee-ingredients {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 33.3333333%;
+    margin-bottom: 40px;
+
+}
+
+.coffee-ingredients img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    filter: grayscale(100%);
+    border-radius: 20%;
+}
+
+.coffee-ingredients h4 {
+    align-items: start;
+    width: 250px;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: #432818;
+
+}
+
+.coffee-ingredients p {
+    width: 250px;
+    align-items: start;
+    font-weight: 100;
+    font-size: 1.2rem;
+    color: #432818;
+
+}
+
+.other-about-coffee-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+
+}
+
+.other-about-coffee h6 {
+    color: #432818;
+    font-weight: 900;
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.other-about-coffee li {
+    padding-bottom: 1rem;
+    color: #432818;
+    font-weight: 100;
+    font-size: 1.1rem;
 }
