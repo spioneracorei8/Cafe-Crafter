@@ -2,7 +2,7 @@ import React from "react";
 import "./NavigationbarNonLogin.css"
 import Cafe_Crafter_Logo from "../assets/Logo/Cafe_Crafter_Logo.png"
 
-function NavigationbarNonLogin() {
+const NavigationbarNonLogin = () => {
 
     return (
         <header>
@@ -12,6 +12,9 @@ function NavigationbarNonLogin() {
                 </div>
                 <div className="nav-middle-crafter">
                     <ul>
+                        <li>
+                            Suggestions Coffee
+                        </li>
                         <li>
                             Cafe-Crafter?
                         </li>
