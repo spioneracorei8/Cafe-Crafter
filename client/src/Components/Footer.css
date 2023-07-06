@@ -1,0 +1,43 @@
+footer {
+    width: 100vw;
+    height: 30vh;
+    background-color: #D4A276;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    font-family: 'whipsmart';
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+
+}
+
+.contact-icon {
+    display: flex;
+    flex-direction: row;
+}
+
+.network-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+}
+
+.twitter-icon,
+.instagram-icon,
+.facebook-icon,
+.twitch-icon {
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+}
+
+.copyright p {
+    font-size: 1.2rem;
+    font-weight: 100;
+    margin-top: 1rem;
+}

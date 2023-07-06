@@ -1,12 +1,10 @@
 import React from 'react'
+import './HomePage.css'
+import { IngredientsCoffeeData, OtherAboutCoffeeData } from '../data/CoffeeData.js'
 import NavigationbarNonLogin from '../Components/NavigationbarNonLogin'
 import Footer from '../Components/Footer'
-import './HomePage.css'
-import useCoffee from '../Hook/useCoffee'
-import { IngredientsCoffeeData, OtherAboutCoffeeData } from '../data/CoffeeData.js'
 const HomePage = () => {
 
-    const { getAllCoffee } = useCoffee()
     return (
         <>
             <NavigationbarNonLogin />
@@ -91,8 +89,8 @@ const HomePage = () => {
                         )
                     })}
                 </div>
-                <Footer />
             </main>
+            <Footer />
         </>
     )
 }
