@@ -57,6 +57,15 @@ func SetupDatabase() {
 	// ADD COLUMN username TEXT NOT NULL AFTER name,
 	// ADD COLUMN password TEXT NOT NULL AFTER username;`
 
+	// query := `CREATE TABLE suggestions_coffee
+	// 	(id INT AUTO_INCREMENT,
+	// 	name TEXT NOT NULL,
+	// 	image_url TEXT NOT NULL,
+	// 	description TEXT NOT NULL,
+	// 	price FLOAT NOT NULL,
+	// 	PRIMARY KEY (id)
+	// 	);`
+
 	// if _, err := DB.Exec(query); err != nil {
 	// 	panic(err.Error())
 	// }
