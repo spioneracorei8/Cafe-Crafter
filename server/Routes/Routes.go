@@ -18,6 +18,13 @@ func SetRouter() *gin.Engine {
 		CoffeeRotes.PUT("/coffee/:id", ControllersCoffee.UpdateCoffee)
 		CoffeeRotes.DELETE("/coffee/:id", ControllersCoffee.DeleteCoffee)
 	}
+	CoffeeSuggestions := r.Group("/suggestions-coffee")
+	{
+		CoffeeSuggestions.GET("/", ControllersCoffee.GetSuggestionsCoffee)
+		CoffeeSuggestions.POST("/", ControllersCoffee.InsertSuggestionsCoffee)
+		CoffeeSuggestions.PUT("/:id", ControllersCoffee.UpdateSuggestionsCoffee)
+		CoffeeSuggestions.DELETE("/:id", ControllersCoffee.DeleteSuggestionsCoffee)
+	}
 	UserRoutes := r.Group("/auth-user")
 	{
 		UserRoutes.POST("/register", ControllersUsers.Register)
