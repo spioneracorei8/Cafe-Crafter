@@ -61,8 +61,69 @@
     flex-direction: column;
     align-items: center;
     margin-top: 4rem;
-    margin-bottom: 10rem;
+    margin-bottom: 5rem;
 
+}
+
+.scroll-image-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scroll-image-view-all {
+    margin-left: 5rem;
+    padding: 8px;
+    border-radius: 100px;
+    background-color: #D4A276;
+
+}
+
+.scroll-image-arrow {
+    display: flex;
+    align-items: center;
+    margin-right: 7rem;
+    user-select: none;
+}
+
+.scroll-image-arrow-left {
+    padding-top: 7px;
+    padding-left: 5px;
+    padding-bottom: 4px;
+    padding-right: 10px;
+    border-radius: 100%;
+    background-color: #D4A276;
+    margin-right: 5px;
+
+}
+
+.scroll-image-arrow-right {
+    padding-right: 5px;
+    padding-top: 7px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    background-color: #D4A276;
+    border-radius: 100%;
+    margin-left: 5px;
+}
+
+.scroll-image-arrow-left img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.scroll-image-arrow-right img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.scroll-image-arrow-right:active,
+.scroll-image-arrow-left:active {
+    background-color: wheat;
 }
 
 .suggestions-coffee-container h1 {
@@ -77,43 +138,86 @@
     align-items: center;
 }
 
-
 .suggestions-menu-container {
     display: flex;
-    margin-top: 7rem;
+    align-items: center;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    margin-top: 1rem;
+    padding: 2rem;
+    scroll-behavior: smooth;
+}
+
+.suggestions-menu {
+    min-width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    scroll-snap-align: start;
     background-color: #FEF9F0;
     border-radius: 5%;
-    padding: 2rem;
-
+    margin: 2%;
+    padding: 2%;
+    user-select: none;
 }
 
 .suggestions-menu h3 {
     color: #432818;
     margin-bottom: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .suggestions-menu h4 {
-    color: #432818;
-    margin-bottom: 1.2rem;
+    color: #e38949;
+    margin-bottom: 1.3rem;
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 .suggestions-menu img {
+    width: 150px;
+    height: 150px;
     object-fit: cover;
-    width: 200px;
-    height: 200px;
+    border-radius: 5%;
 }
 
 .suggestions-menu-button {
     width: 100%;
+    margin-top: 1rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
 .suggestions-menu-button button {
     font-family: 'whipsmart';
-    display: flex;
-    margin-left: 0.8rem;
+    margin-right: 0.8rem;
+    padding: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 20%;
+    border: #D4A276;
+}
+
+.buy-now {
+    color: white;
+    background-color: black;
+}
+
+.buy-now:hover {
+    background-color: #E3BA9C;
+
+}
+
+.learn-more {
+    color: black;
+    border: white;
+}
+
+.learn-more:hover {
+    color: white;
+    background-color: black;
+
 }
 
 .cafe-crafter-container {

@@ -20,7 +20,7 @@ func SetRouter() *gin.Engine {
 	}
 	CoffeeSuggestions := r.Group("/suggestions-coffee")
 	{
-		CoffeeSuggestions.GET("/", ControllersCoffee.GetSuggestionsCoffee)
+		CoffeeSuggestions.GET("/", Middlewares.CorsMiddleware(), ControllersCoffee.GetSuggestionsCoffee)
 		CoffeeSuggestions.POST("/", ControllersCoffee.InsertSuggestionsCoffee)
 		CoffeeSuggestions.PUT("/:id", ControllersCoffee.UpdateSuggestionsCoffee)
 		CoffeeSuggestions.DELETE("/:id", ControllersCoffee.DeleteSuggestionsCoffee)

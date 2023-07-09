@@ -1,9 +1,34 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './HomePage.css'
 import { IngredientsCoffeeData, OtherAboutCoffeeData } from '../data/CoffeeData.js'
+import Arrow_Left_Icon from '../assets/Icon/Arrow_Left_Icon.png'
+import Arrow_Right_Icon from '../assets/Icon/Arrow_Right_Icon.png'
 import NavigationbarNonLogin from '../Components/NavigationbarNonLogin'
 import Footer from '../Components/Footer'
+import useCoffee from '../Hook/useCoffee'
+
+
 const HomePage = () => {
+    const { getAllSuggestionsCoffee, suggestionsCoffee } = useCoffee()
+    const scrollContainerRef = useRef(null)
+
+    useEffect(() => {
+        getAllSuggestionsCoffee()
+    }, [])
+
+    const scrollLeft = () => {
+        setIsClickOnArrow(!isClickOnArrow)
+        scrollContainerRef.current.scrollBy({
+            left: -250,
+            behavior: 'smooth',
+        });
+    };
+    const scrollRight = () => {
+        scrollContainerRef.current.scrollBy({
+            left: 250,
+            behavior: 'smooth',
+        });
+    };
 
     return (
         <>
@@ -22,20 +47,40 @@ const HomePage = () => {
                 {/* Suggestions Coffee Session */}
                 <div className='suggestions-coffee-container'>
                     <h1>Suggestions Coffee</h1>
-                    <div className='suggestions-coffee'>
-
-                        <div className='suggestions-menu-container'>
-                            <div className='suggestions-menu'>
-                                <h3>Coffee Name</h3>
-
-                                <h4>Price</h4>
-                                <img src="" alt="img" />
-
-                                <div className='suggestions-menu-button'>
-                                    <button>Buy Now</button>
-                                    <button>Learn more</button>
-                                </div>
+                    <div className='scroll-image-container'>
+                        <div className='scroll-image-view-all'>
+                            <h2>View All</h2>
+                        </div>
+                        <div className='scroll-image-arrow'>
+                            <div className="scroll-image-arrow-left" onClick={() => scrollLeft()}>
+                                <img src={Arrow_Left_Icon} alt="arrow left icon" className='arrow-left' />
                             </div>
+                            <div className="scroll-image-arrow-right" onClick={scrollRight}>
+                                <img src={Arrow_Right_Icon} alt="arrow left icon" className='arrow-right' />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className='suggestions-coffee'>
+                        <div className='suggestions-menu-container' ref={scrollContainerRef}>
+                            {suggestionsCoffee.map((item, index) => {
+                                return (
+                                    <div
+                                        className='suggestions-menu'
+                                        key={index}
+                                    >
+                                        <h3>{item.Name}</h3>
+
+                                        <h4>{item.Price}฿</h4>
+                                        <img src={item.Image_url} alt="img" />
+
+                                        <div className='suggestions-menu-button'>
+                                            <button className='buy-now'>Buy Now</button>
+                                            <button className='learn-more'>Learn more</button>
+                                        </div>
+                                    </div>
+                                )
+                            })}
                         </div>
 
                     </div>
