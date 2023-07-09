@@ -3,17 +3,27 @@ import { useEffect, useState } from 'react'
 
 
 const useCoffee = () => {
-    const [coffee, setCoffee] = useState([])
-
-    const getAllCoffee = async () => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [isError, setIsError] = useState(false)
+    const [suggestionsCoffee, setSuggestionsCoffee] = useState([])
+    const getAllSuggestionsCoffee = async () => {
         try {
-            const result = await axios.get(`http://localhost:4000/coffee-api/coffee`)
-            console.log(result);
+            setIsError(false);
+            setIsLoading(true);
+            const result = await axios.get(`http://localhost:4000/suggestions-coffee/`)
+            setSuggestionsCoffee(result.data.data)
+            setIsLoading(false)
         } catch (error) {
+            setIsError(true);
+            setIsLoading(false);
             console.log(error);
         }
     }
     return {
+        isLoading,
+        isError,
+        getAllSuggestionsCoffee,
+        suggestionsCoffee
     }
 }
 
