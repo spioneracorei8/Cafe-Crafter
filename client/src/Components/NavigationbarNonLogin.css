@@ -33,6 +33,11 @@ header {
     margin-left: 1rem;
 }
 
+.nav-middle-crafter a {
+    color: black;
+    text-decoration: none;
+}
+
 .nav-right-crafter button {
     font-size: 1rem;
     font-weight: 400;
