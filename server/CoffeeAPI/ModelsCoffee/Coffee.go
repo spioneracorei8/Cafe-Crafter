@@ -69,6 +69,26 @@ func GetCoffeeById(coffeeId int) (*Coffee, error, error) {
 	return coffee, nil, nil
 }
 
+func GetSuggestionsCoffeeById(coffeeId int) (*Coffee, error, error) {
+	coffee := &Coffee{}
+
+	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price FROM suggestions_coffee WHERE id = ?`, coffeeId)
+
+	err := query.Scan(
+		&coffee.Id,
+		&coffee.Name,
+		&coffee.Image_url,
+		&coffee.Description,
+		&coffee.Price,
+	)
+	if err == sql.ErrNoRows {
+		return nil, nil, err
+	} else if err != nil {
+		return nil, nil, nil
+	}
+	return coffee, nil, nil
+}
+
 func InsertCoffee(coffee *Coffee) (int64, error) {
 	insert := `INSERT INTO coffeemenu (name, image_url, description, price) VALUES (?, ?, ?, ?)`
 
