@@ -16,14 +16,13 @@ const HomePage = () => {
         getAllSuggestionsCoffee()
     }, [])
 
-    const scrollLeft = () => {
-        setIsClickOnArrow(!isClickOnArrow)
+    const ScrollLeft = () => {
         scrollContainerRef.current.scrollBy({
             left: -250,
             behavior: 'smooth',
         });
     };
-    const scrollRight = () => {
+    const ScrollRight = () => {
         scrollContainerRef.current.scrollBy({
             left: 250,
             behavior: 'smooth',
@@ -45,17 +44,17 @@ const HomePage = () => {
                 </div>
 
                 {/* Suggestions Coffee Session */}
-                <div className='suggestions-coffee-container'>
+                <div className='suggestions-coffee-container' id='suggestions-coffee'>
                     <h1>Suggestions Coffee</h1>
                     <div className='scroll-image-container'>
                         <div className='scroll-image-view-all'>
                             <h2>View All</h2>
                         </div>
                         <div className='scroll-image-arrow'>
-                            <div className="scroll-image-arrow-left" onClick={() => scrollLeft()}>
+                            <div className="scroll-image-arrow-left" onClick={() => ScrollLeft()}>
                                 <img src={Arrow_Left_Icon} alt="arrow left icon" className='arrow-left' />
                             </div>
-                            <div className="scroll-image-arrow-right" onClick={scrollRight}>
+                            <div className="scroll-image-arrow-right" onClick={ScrollRight}>
                                 <img src={Arrow_Right_Icon} alt="arrow left icon" className='arrow-right' />
 
                             </div>
@@ -87,7 +86,7 @@ const HomePage = () => {
                 </div>
 
                 {/* What is Cafe-Crafter Session */}
-                <div className='cafe-crafter-container'>
+                <div className='cafe-crafter-container' id='cafe-crafter?'>
                     <h1>Cafe-Crafter?</h1>
 
                     <div className='cafe-crafter-content'>

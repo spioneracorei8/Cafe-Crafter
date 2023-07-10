@@ -1,25 +1,43 @@
 import React from "react";
+import { Link } from "react-router-dom"
 import "./NavigationbarNonLogin.css"
 import Cafe_Crafter_Logo from "../assets/Logo/Cafe_Crafter_Logo.png"
 
 const NavigationbarNonLogin = () => {
+    const handleNavigate = (event, id) => {
+        event.preventDefault()
+        const element = document.getElementById(id)
+        if (element.id === "cafe-crafter-logo") {
+            window.location.replace("/")
+        } else if (element) {
+            element.scrollIntoView({ behavior: "smooth" })
+        }
+    }
 
     return (
         <header>
             <nav className="header-container">
                 <div>
-                    <img src={Cafe_Crafter_Logo} alt="Cafe_Crafter_Logo" className="cc-logo" />
+                    <Link to={"/"} onClick={(event) => handleNavigate(event, "cafe-crafter-logo")}>
+                        <img src={Cafe_Crafter_Logo} alt="Cafe_Crafter_Logo" className="cc-logo" id="cafe-crafter-logo" />
+                    </Link>
                 </div>
                 <div className="nav-middle-crafter">
                     <ul>
                         <li>
-                            Suggestions Coffee
+                            <Link to={"/"} onClick={(event) => handleNavigate(event, "suggestions-coffee")}>
+                                Suggestions Coffee
+                            </Link>
                         </li>
                         <li>
-                            Cafe-Crafter?
+                            <Link to={"/"} onClick={(event) => handleNavigate(event, "cafe-crafter?")}>
+                                Cafe-Crafter?
+                            </Link>
                         </li>
                         <li>
-                            Contact us
+                            <Link to={"/"} onClick={(event) => handleNavigate(event, "contact-us")}>
+                                Contact us
+                            </Link>
                         </li>
                     </ul>
                 </div>
