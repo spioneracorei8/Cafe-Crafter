@@ -56,12 +56,10 @@ func GetCoffeeById(c *gin.Context) {
 }
 
 func GetSuggestionsCoffeeById(c *gin.Context) {
-	id := c.Param("id")
-	coffeeId, err := strconv.Atoi(id)
-	if err != nil {
-		panic(err.Error())
-	}
-	coffee, err, errNoRow := ModelsCoffee.GetSuggestionsCoffeeById(coffeeId)
+
+	name := c.Param("name")
+
+	coffee, err, errNoRow := ModelsCoffee.GetSuggestionsCoffeeById(name)
 
 	if errNoRow != nil {
 		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": errNoRow})

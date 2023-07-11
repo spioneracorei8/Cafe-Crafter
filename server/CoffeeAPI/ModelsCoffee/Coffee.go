@@ -69,10 +69,10 @@ func GetCoffeeById(coffeeId int) (*Coffee, error, error) {
 	return coffee, nil, nil
 }
 
-func GetSuggestionsCoffeeById(coffeeId int) (*Coffee, error, error) {
+func GetSuggestionsCoffeeById(name string) (*Coffee, error, error) {
 	coffee := &Coffee{}
 
-	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price FROM suggestions_coffee WHERE id = ?`, coffeeId)
+	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price FROM suggestions_coffee WHERE name = ?`, name)
 
 	err := query.Scan(
 		&coffee.Id,

@@ -6,15 +6,12 @@ import Arrow_Right_Icon from '../assets/Icon/Arrow_Right_Icon.png'
 import NavigationbarNonLogin from '../Components/NavigationbarNonLogin'
 import Footer from '../Components/Footer'
 import useCoffee from '../Hook/useCoffee'
-
+import axios from 'axios'
 
 const HomePage = () => {
-    const { getAllSuggestionsCoffee, suggestionsCoffee } = useCoffee()
+    const { isLoading, setIsLoading, isError, setIsError, suggestionsCoffee } = useCoffee()
     const scrollContainerRef = useRef(null)
-
-    useEffect(() => {
-        getAllSuggestionsCoffee()
-    }, [])
+    const [suggestionsCoffeeByName, setSuggestionsCoffeeByName] = useState({})
 
     const ScrollLeft = () => {
         scrollContainerRef.current.scrollBy({
@@ -29,8 +26,28 @@ const HomePage = () => {
         });
     };
 
+    const getSuggestionsCoffeeByName = async (coffeeName) => {
+        try {
+            setIsError(false);
+            setIsLoading(true);
+            const result = await axios.get(`http://localhost:4000/suggestions-coffee/${coffeeName}`)
+            setSuggestionsCoffeeByName(result.data.data)
+            setIsLoading(false)
+        } catch (error) {
+            setIsError(true);
+            setIsLoading(false);
+            console.log(error);
+        }
+    }
+
     return (
         <>
+            {isError &&
+                <h1>Fetching Data Error...</h1>
+            }
+            {isLoading &&
+                <h1>Loading...</h1>
+            }
             <NavigationbarNonLogin />
             <main className='main-container'>
                 <div className='discover-you-brew'>
@@ -75,7 +92,12 @@ const HomePage = () => {
 
                                         <div className='suggestions-menu-button'>
                                             <button className='buy-now'>Buy Now</button>
-                                            <button className='learn-more'>Learn more</button>
+                                            <button
+                                                className='learn-more'
+                                                onClick={() => getSuggestionsCoffeeByName(item.Name)}
+                                            >
+                                                Learn more
+                                            </button>
                                         </div>
                                     </div>
                                 )

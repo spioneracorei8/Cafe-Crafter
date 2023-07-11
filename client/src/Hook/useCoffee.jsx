@@ -6,6 +6,9 @@ const useCoffee = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [suggestionsCoffee, setSuggestionsCoffee] = useState([])
+
+
+
     const getAllSuggestionsCoffee = async () => {
         try {
             setIsError(false);
@@ -19,11 +22,19 @@ const useCoffee = () => {
             console.log(error);
         }
     }
+
+
+    useEffect(() => {
+        getAllSuggestionsCoffee()
+    }, [])
+
+
     return {
         isLoading,
+        setIsLoading,
         isError,
-        getAllSuggestionsCoffee,
-        suggestionsCoffee
+        setIsError,
+        suggestionsCoffee,
     }
 }
 
