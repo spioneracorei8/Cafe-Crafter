@@ -16,20 +16,20 @@ const Footer = () => {
                 <img src={Network_Icon} alt="network icon" className='network-icon' />
                 <div className='contact-icon'>
 
-                    <Link to={"/pageNotFound"}>
+                    <Link to={"/pageNotFound"} target='_blank'>
                         <img src={Twitter_Icon} a="twitter icon" className='twitter-icon' />
                     </Link>
 
-                    <Link to={"/pageNotFound"}>
+                    <Link to={"/pageNotFound"} target='_blank'>
                         <img src={Instagram_Icon} alt="instagram icon" className='instagram-icon' />
                     </Link>
 
-                    <Link to={"/pageNotFound"}>
+                    <Link to={"/pageNotFound"} target='_blank'>
                         <img src={Facebook_Icon} alt="facebook icon" className='facebook-icon' />
 
                     </Link>
 
-                    <Link to={"/pageNotFound"}>
+                    <Link to={"/pageNotFound"} target='_blank'>
                         <img src={Twitch_Icon} alt="twitch icon" className='twitch-icon' />
 
                     </Link>
