@@ -1,0 +1,111 @@
+.loading-container {
+    background-color: rgba(250, 235, 215, .5);
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 50;
+    padding: 1rem;
+    inset: 0;
+    font-family: 'whipsmart';
+    overflow-y: auto;
+}
+
+.loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    animation: rotate_3922 1.2s linear infinite;
+    background-color: #D4A276;
+    background-image: linear-gradient(#D4A276, #FFE6A7, #D4A276);
+}
+
+.loading-spinner span {
+    position: absolute;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    background-color: #D4A276;
+    background-image: linear-gradient(#D4A276, #FFE6A7, #D4A276);
+}
+
+.loading-spinner span:nth-of-type(1) {
+    filter: blur(5px);
+}
+
+.loading-spinner span:nth-of-type(2) {
+    filter: blur(10px);
+}
+
+.loading-spinner span:nth-of-type(3) {
+    filter: blur(25px);
+}
+
+.loading-spinner span:nth-of-type(4) {
+    filter: blur(50px);
+}
+
+.loading-spinner::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background-color: #fff;
+    border: solid 5px #ffffff;
+    border-radius: 50%;
+}
+
+@keyframes rotate_3922 {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.loading-text {
+    position: absolute;
+    top: 35%;
+    overflow: hidden;
+    border-right: 4px solid;
+    width: 0px;
+    animation: typewriter 2s steps(10) infinite alternate, blink 0.5s steps(10) infinite;
+}
+
+.loading-text h1{
+    font-size: 40px;
+    font-weight: 700;
+    background: linear-gradient(to right, #5ad1cd, #84cdfa ,#9b59b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes typewriter {
+    0% {
+        width: 0px;
+    }
+
+    100% {
+        width: 240px;
+    }
+}
+
+@keyframes blink {
+    0% {
+        border-right-color: rgba(255, 255, 255, .75);
+        ;
+    }
+
+    100% {
+        border-right-color: transparent;
+    }
+}
