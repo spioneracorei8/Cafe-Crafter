@@ -1,0 +1,90 @@
+.coffee-popup-container {
+    background-color: rgba(250, 235, 215, .5);
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 50;
+    padding: 1rem;
+    inset: 0;
+    font-family: 'whipsmart';
+    overflow-y: auto;
+}
+
+.coffee-popup {
+    background-color: white;
+    width: 50rem;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    position: relative;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.popup-content h1 {
+    color: #6F1D1B;
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+.popup-content h3 {
+    color: #e38949;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.popup-content img {
+    width: 200px;
+    height: 200px;
+    object-position: center center;
+    object-fit: cover;
+    image-rendering: auto;
+    border-radius: 5%;
+
+}
+
+.popup-content p {
+    width: 30rem;
+    color: #432818;
+    font-size: 1.2rem;
+}
+
+.popup-content p span {
+    font-weight: 900;
+}
+
+.popup-button {
+    display: flex;
+    gap: 100px;
+    position: absolute;
+    bottom: 1rem;
+}
+
+.popup-button button {
+    font-family: 'whipsmart';
+    padding: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 20%;
+    border: #D4A276;
+    color: white;
+    background-color: black;
+}
+
+.popup-button button:hover {
+    background-color: #D4A276;
+}

@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './HomePage.css'
 import { IngredientsCoffeeData, OtherAboutCoffeeData } from '../data/CoffeeData.js'
-import Arrow_Left_Icon from '../assets/Icon/Arrow_Left_Icon.png'
-import Arrow_Right_Icon from '../assets/Icon/Arrow_Right_Icon.png'
 import NavigationbarNonLogin from '../Components/NavigationbarNonLogin'
 import Footer from '../Components/Footer'
+import SuggestionsCoffeePopup from '../Components/SuggestionsCoffeePopup'
+import Loading from '../Components/Loading'
+import Arrow_Left_Icon from '../assets/Icon/Arrow_Left_Icon.png'
+import Arrow_Right_Icon from '../assets/Icon/Arrow_Right_Icon.png'
 import useCoffee from '../Hook/useCoffee'
 import axios from 'axios'
 
@@ -12,6 +14,7 @@ const HomePage = () => {
     const { isLoading, setIsLoading, isError, setIsError, suggestionsCoffee } = useCoffee()
     const scrollContainerRef = useRef(null)
     const [suggestionsCoffeeByName, setSuggestionsCoffeeByName] = useState({})
+    const [coffeePopUp, setCoffeePopUp] = useState(false)
 
     const ScrollLeft = () => {
         scrollContainerRef.current.scrollBy({
@@ -40,16 +43,33 @@ const HomePage = () => {
         }
     }
 
+    const handleShowPopUp = () => {
+        setCoffeePopUp(true)
+    }
+
+    const handleClosePopUp = () => {
+        setCoffeePopUp(false)
+    }
+
+    console.log(suggestionsCoffeeByName);
     return (
         <>
             {isError &&
                 <h1>Fetching Data Error...</h1>
             }
             {isLoading &&
-                <h1>Loading...</h1>
+                <Loading />
             }
             <NavigationbarNonLogin />
+            {coffeePopUp &&
+                <SuggestionsCoffeePopup
+                    handleClosePopUp={handleClosePopUp}
+                    suggestionsCoffee={suggestionsCoffeeByName}
+                />
+            }
+
             <main className='main-container'>
+
                 <div className='discover-you-brew'>
                     <div className='coffee-content'>
                         <h1>Discover Your Brew!</h1>
@@ -94,7 +114,14 @@ const HomePage = () => {
                                             <button className='buy-now'>Buy Now</button>
                                             <button
                                                 className='learn-more'
-                                                onClick={() => getSuggestionsCoffeeByName(item.Name)}
+                                                onClick={(() => {
+                                                    return (
+                                                        getSuggestionsCoffeeByName(item.Name),
+                                                        handleShowPopUp()
+                                                    )
+                                                })}
+
+
                                             >
                                                 Learn more
                                             </button>

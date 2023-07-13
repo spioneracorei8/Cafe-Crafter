@@ -272,6 +272,10 @@
     border-radius: 20%;
 }
 
+.coffee-ingredients img:hover {
+    filter: none;
+}
+
 .coffee-ingredients h4 {
     align-items: start;
     width: 250px;
