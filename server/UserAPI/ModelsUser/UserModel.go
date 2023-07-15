@@ -9,6 +9,7 @@ type User struct {
 	Email        string
 	Address      string
 	Phone_number string
+	Role         string
 }
 type UserCredential struct {
 	Username string
