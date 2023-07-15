@@ -13,7 +13,8 @@ const Footer = () => {
     return (
         <footer id='contact-us'>
             <div className='footer-container'>
-                <img src={Network_Icon} alt="network icon" className='network-icon' />
+                <div className='coffee-icon'>☕</div>
+
                 <div className='contact-icon'>
 
                     <Link to={"/pageNotFound"} target='_blank'>

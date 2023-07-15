@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./NavigationbarNonLogin.css"
 import Cafe_Crafter_Logo from "../assets/Logo/Cafe_Crafter_Logo.png"
 
 const NavigationbarNonLogin = () => {
+    const navigate = useNavigate()
+    
     const handleNavigate = (event, id) => {
         event.preventDefault()
         const element = document.getElementById(id)
@@ -42,7 +44,7 @@ const NavigationbarNonLogin = () => {
                     </ul>
                 </div>
                 <div className="nav-right-crafter">
-                    <button>Register</button>
+                    <button onClick={() => navigate("/Register")}>Register</button>
                     <button>Login</button>
                 </div>
             </nav>
