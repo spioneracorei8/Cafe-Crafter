@@ -9,14 +9,14 @@ import (
 )
 
 func Register(user *User) (int64, error) {
-	insert := `INSERT INTO users (name, username, password, gender, email, address, phone_number) VALUES (?, ?, ?, ?, ?, ?, ?)`
+	insert := `INSERT INTO users (name, username, password, gender, email, address, phone_number, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
 
 	hashPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
 
-	result, err := Config.DB.Exec(insert, user.Name, user.Username, hashPassword, user.Gender, user.Email, user.Address, user.Phone_number)
+	result, err := Config.DB.Exec(insert, user.Name, user.Username, hashPassword, user.Gender, user.Email, user.Address, user.Phone_number, "customer")
 
 	if err != nil {
 		log.Fatalln(err.Error())

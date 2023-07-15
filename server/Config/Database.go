@@ -54,8 +54,7 @@ func SetupDatabase() {
 
 	// // edit table
 	// query := `ALTER TABLE users
-	// ADD COLUMN username TEXT NOT NULL AFTER name,
-	// ADD COLUMN password TEXT NOT NULL AFTER username;`
+	// ADD COLUMN role TEXT NOT NULL AFTER phone_number;`
 
 	// query := `CREATE TABLE suggestions_coffee
 	// 	(id INT AUTO_INCREMENT,
