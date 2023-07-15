@@ -21,10 +21,10 @@ footer {
     flex-direction: row;
 }
 
-.network-icon {
-    width: 60px;
-    height: 60px;
+.coffee-icon {
     margin-bottom: 1rem;
+    font-size: 3rem;
+    user-select: none;
 }
 
 .twitter-icon,

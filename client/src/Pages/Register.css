@@ -1,0 +1,62 @@
+.register-container {
+    font-family: 'whipsmart';
+    width: 100vw;
+    height: auto;
+    object-fit: cover;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFE6A7;
+    padding-top: 10rem;
+}
+
+input,
+select,
+option {
+    font-family: 'whipsmart';
+}
+
+.register-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-form {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.name-box,
+.email-box,
+.gender-box,
+.username-box,
+.phone-number-box,
+.password-box,
+.address-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input {
+    padding: 2px;
+    font-size: 1.2rem;
+    min-width: 200px;
+    min-height: 25px;
+}
+
+.submit-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
