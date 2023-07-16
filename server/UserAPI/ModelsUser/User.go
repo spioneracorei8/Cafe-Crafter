@@ -9,6 +9,7 @@ import (
 )
 
 func Register(user *User) (int64, error) {
+
 	insert := `INSERT INTO users (name, username, password, gender, email, address, phone_number, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
 
 	hashPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
@@ -16,6 +17,7 @@ func Register(user *User) (int64, error) {
 		log.Fatalln(err.Error())
 	}
 
+	// this code when you want to change role from customer to admin
 	result, err := Config.DB.Exec(insert, user.Name, user.Username, hashPassword, user.Gender, user.Email, user.Address, user.Phone_number, "customer")
 
 	if err != nil {
