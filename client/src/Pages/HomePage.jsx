@@ -52,7 +52,6 @@ const HomePage = () => {
         setCoffeePopUp(false)
     }
 
-    console.log(suggestionsCoffeeByName);
     return (
         <>
             {isError &&
