@@ -27,8 +27,8 @@ const Register = () => {
 
                 <form className='register-form'>
                     <div className='register-form-page'>
-                        <h1>1</h1>
-                        <h1>2</h1>
+                        <button onClick={(event) => handlePreviousRegisterPage(event)}>1</button>
+                        <button onClick={(event) => handleNextRegisterPage(event)}>2</button>
                     </div>
                     <div className='register-form-header'>
                         <img src={Cafe_Crafter_Logo} alt="Cafe crafter logo" />
@@ -36,7 +36,7 @@ const Register = () => {
                     </div>
                     {
                         registerPage === 1
-                            ? <div className='register-whole-form'>
+                            ? <div className='register-whole-form-1'>
                                 <div className="register-form-input-container">
                                     <div className='register-form-input'>
                                         <label htmlFor="name">Name</label>
@@ -45,7 +45,7 @@ const Register = () => {
                                     </div>
                                     <div className='register-form-input'>
                                         <label htmlFor="password">Password</label>
-                                        <input type="text" placeholder='************' />
+                                        <input type="password" placeholder='************' />
                                     </div>
                                 </div>
                                 <div className="register-form-input-container">
@@ -56,56 +56,66 @@ const Register = () => {
 
                                     <div className='register-form-input'>
                                         <label htmlFor="confirm password">Confirm Password</label>
-                                        <input type="text" placeholder='************' />
+                                        <input type="password" placeholder='************' />
                                     </div>
                                 </div>
 
                             </div>
-                            : ""
-                    }
-                    {
-                        registerPage === 2
-                            ? <div className='register-whole-form'>
-                                <div className="register-form-input-container">
-                                    <div className='register-form-input'>
-                                        <label htmlFor="email">Email</label>
-                                        <input type="text" placeholder='Email...' />
+                            : registerPage == 2
+                                ? <div className='register-whole-form-2'>
+                                    <div className="register-form-input-container">
+                                        <div className='register-form-input'>
+                                            <label htmlFor="email">Email</label>
+                                            <input type="email" placeholder='Email...' />
+                                        </div>
+                                        <div className='register-form-input'>
+                                            <label htmlFor="gender">Gender</label>
+                                            <select className='form-select'>
+                                                <option value="male">male</option>
+                                                <option value="female">female</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div className='register-form-input'>
-                                        <label htmlFor="username">Username</label>
-                                        <input type="text" placeholder='Username...' />
+                                    <div className="register-form-input-container">
+                                        <div className='register-form-input'>
+                                            <label htmlFor="phone number">Phone Number</label>
+                                            <input type="tel" placeholder='Phone Number...' />
+                                        </div>
+
+                                        <div className='register-form-input'>
+                                            <label htmlFor="address">Address</label>
+                                            <textarea
+                                                cols="25"
+                                                rows="8"
+                                                className='form-textarea'
+                                                style={{
+                                                    marginBottom: "1.5rem"
+                                                }}
+                                            ></textarea>
+                                        </div>
                                     </div>
+
                                 </div>
-                                <div className="register-form-input-container">
-                                    <div className='register-form-input'>
-                                        <label htmlFor="password">Phone Number</label>
-                                        <input type="text" placeholder='Phone Number...' />
-                                    </div>
-
-
-                                    <div className='register-form-input'>
-                                        <label htmlFor="confirm password">Confirm Password</label>
-                                        <input type="text" placeholder='************' />
-                                    </div>
-                                </div>
-
-                            </div>
-                            : ""
+                                : ""
                     }
+
                     {
                         registerPage === 1
                             ? <div className='register-next-button'>
                                 <button className='next-button' onClick={(event) => handleNextRegisterPage(event)}>Next</button>
                             </div>
-                            : ""
+                            : registerPage === 2
+                                ? <>
+                                    <div className='register-previous-button'>
+                                        <button className='previous-button' onClick={(event) => handlePreviousRegisterPage(event)}>Previous</button>
+                                    </div>
+                                    <div className='registering-button'>
+                                        <button onClick={(event) => console.log("Registerrrr")}>Register Now!</button>
+                                    </div>
+                                </>
+                                : ""
                     }
-                    {
-                        registerPage === 2
-                            ? <div className='register-previous-button'>
-                                <button className='previous-button' onClick={(event) => handlePreviousRegisterPage(event)}>Previous</button>
-                            </div>
-                            : ""
-                    }
+
                 </form>
             </div >
             <Footer />
