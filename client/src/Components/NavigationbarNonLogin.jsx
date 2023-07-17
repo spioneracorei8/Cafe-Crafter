@@ -5,7 +5,7 @@ import Cafe_Crafter_Logo from "../assets/Logo/Cafe_Crafter_Logo.png"
 
 const NavigationbarNonLogin = () => {
     const navigate = useNavigate()
-    
+
     const handleNavigate = (event, id) => {
         event.preventDefault()
         const element = document.getElementById(id)
@@ -45,7 +45,7 @@ const NavigationbarNonLogin = () => {
                 </div>
                 <div className="nav-right-crafter">
                     <button onClick={() => navigate("/Register")}>Register</button>
-                    <button>Login</button>
+                    <button onClick={() => navigate("/Login")}>Login</button>
                 </div>
             </nav>
         </header>
