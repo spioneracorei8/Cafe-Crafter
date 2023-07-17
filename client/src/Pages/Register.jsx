@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Register.css'
-import NavigationbarNonLogin from '../Components/NavigationbarNonLogin'
+import NavigationbarRegisLogin from '../Components/NavigationbarRegisLogin'
 import Footer from "../Components/Footer"
 import Coffee_Beans from "../assets/Background/Coffee_Beans.jpg"
 import Cafe_Crafter_Logo from '../assets/Logo/Cafe_Crafter_Logo.png'
@@ -18,10 +18,10 @@ const Register = () => {
         setRegisterPage(registerPage = 1)
 
     }
-    console.log(registerPage);
+
     return (
         <>
-            <NavigationbarNonLogin />
+            <NavigationbarRegisLogin />
             <img src={Coffee_Beans} alt="coffee beans" className='register-background' />
             <div className='register-container'>
 
