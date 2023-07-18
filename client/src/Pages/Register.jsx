@@ -75,6 +75,7 @@ const Register = () => {
                                                 <option value="female">female</option>
                                             </select>
                                         </div>
+
                                     </div>
                                     <div className="register-form-input-container">
                                         <div className='register-form-input'>
@@ -92,6 +93,10 @@ const Register = () => {
                                                     marginBottom: "1.5rem"
                                                 }}
                                             ></textarea>
+                                        </div>
+                                        <div className='register-form-checkbox'>
+                                            <p>asdasd</p>
+                                            <input type="checkbox" />
                                         </div>
                                     </div>
 
