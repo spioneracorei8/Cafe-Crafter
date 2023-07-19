@@ -2,7 +2,6 @@ package ModelsCoffee
 
 import (
 	"database/sql"
-	"log"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/spioneracorei8/Cafe-Crafter/Config"
@@ -13,7 +12,7 @@ func GetCoffee() ([]Coffee, error) {
 
 	query, err := Config.DB.Query(`SELECT id, name, image_url, description, price FROM coffeemenu`)
 	if err != nil {
-		return nil, nil
+		return nil, err
 	}
 
 	for query.Next() {
@@ -28,11 +27,11 @@ func GetCoffee() ([]Coffee, error) {
 	return coffeeList, nil
 }
 
-func GetSuggestionsCoffee() ([]Coffee, error) {
+func GetSuggestCoffee() ([]Coffee, error) {
 	var coffeeList []Coffee
 	query, err := Config.DB.Query(`SELECT id, name, image_url, description, price FROM suggestions_coffee`)
 	if err != nil {
-		return nil, nil
+		return nil, err
 	}
 
 	for query.Next() {
@@ -48,7 +47,7 @@ func GetSuggestionsCoffee() ([]Coffee, error) {
 	return coffeeList, nil
 }
 
-func GetCoffeeById(coffeeId int) (*Coffee, error, error) {
+func GetCoffeeId(coffeeId int) (*Coffee, error, error) {
 	coffee := &Coffee{}
 
 	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price FROM coffeemenu WHERE id = ?`, coffeeId)
@@ -63,13 +62,13 @@ func GetCoffeeById(coffeeId int) (*Coffee, error, error) {
 	if err == sql.ErrNoRows {
 		return nil, nil, err
 	} else if err != nil {
-		log.Fatalln(err.Error())
+		return nil, err, nil
 	}
 
 	return coffee, nil, nil
 }
 
-func GetSuggestionsCoffeeById(name string) (*Coffee, error, error) {
+func GetSuggestCoffeName(name string) (*Coffee, error, error) {
 	coffee := &Coffee{}
 
 	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price FROM suggestions_coffee WHERE name = ?`, name)
@@ -84,7 +83,7 @@ func GetSuggestionsCoffeeById(name string) (*Coffee, error, error) {
 	if err == sql.ErrNoRows {
 		return nil, nil, err
 	} else if err != nil {
-		return nil, nil, nil
+		return nil, err, nil
 	}
 	return coffee, nil, nil
 }
@@ -94,27 +93,27 @@ func InsertCoffee(coffee *Coffee) (int64, error) {
 
 	result, err := Config.DB.Exec(insert, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price)
 	if err != nil {
-		log.Fatalln(err.Error())
+		return -999, err
 	}
 	coffeeId, err := result.LastInsertId()
 	if err != nil {
-		log.Fatalln(err.Error())
+		return -888, err
 	}
 
 	return coffeeId, nil
 }
 
-func InsertSuggestionsCoffee(coffee Coffee) (int64, error) {
+func InsertSuggestCoffee(coffee Coffee) (int64, error) {
 	insert := `INSERT INTO suggestions_coffee (name, image_url, description, price) VALUES (?, ?, ?, ?)`
 
 	result, err := Config.DB.Exec(insert, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price)
 	if err != nil {
-		return -888, nil
+		return -999, err
 	}
 
 	coffeeId, err := result.LastInsertId()
 	if err != nil {
-		return -999, nil
+		return -888, err
 	}
 	return coffeeId, nil
 }
@@ -129,7 +128,7 @@ func UpdateCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, error) {
 	_, err := Config.DB.Exec(update, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price, coffeeId)
 
 	if err != nil {
-		log.Fatalln(err.Error())
+		return nil, err, nil
 	}
 	row := Config.DB.QueryRow(query, coffeeId)
 
@@ -143,12 +142,12 @@ func UpdateCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, error) {
 	if err == sql.ErrNoRows {
 		return nil, nil, err
 	} else if err != nil {
-		log.Fatalln(err.Error())
+		return nil, err, nil
 	}
 	return coffeeRow, nil, nil
 }
 
-func UpdateSuggestionsCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, error) {
+func UpdateSuggestCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, error) {
 	coffeeRow := &Coffee{}
 
 	query := `SELECT id, name, image_url, description, price FROM suggestions_coffee WHERE id = ?`
@@ -158,7 +157,7 @@ func UpdateSuggestionsCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, erro
 	_, err := Config.DB.Exec(update, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price, coffeeId)
 
 	if err != nil {
-		return nil, nil, nil
+		return nil, err, nil
 	}
 	row := Config.DB.QueryRow(query, coffeeId)
 
@@ -172,7 +171,7 @@ func UpdateSuggestionsCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, erro
 	if err == sql.ErrNoRows {
 		return nil, nil, err
 	} else if err != nil {
-		return nil, nil, nil
+		return nil, err, nil
 	}
 	return coffeeRow, nil, nil
 }
@@ -182,19 +181,19 @@ func DeleteCoffee(coffeeId int) (int, error) {
 
 	_, err := Config.DB.Exec(deleteCoffeeById, coffeeId)
 	if err != nil {
-		log.Fatalln(err.Error())
+		return -999, err
 	}
 
 	return coffeeId, nil
 }
 
-func DeleteSuggestionsCoffee(coffeeId int) (int, error) {
+func DeleteSuggestCoffee(coffeeId int) (int, error) {
 	deleteCoffeeById := `DELETE FROM suggestions_coffee WHERE id = ?`
 
 	_, err := Config.DB.Exec(deleteCoffeeById, coffeeId)
 
 	if err != nil {
-		return -1, nil
+		return -999, nil
 	}
 	return coffeeId, nil
 }

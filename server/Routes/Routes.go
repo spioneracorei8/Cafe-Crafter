@@ -9,22 +9,22 @@ import (
 
 func SetRouter() *gin.Engine {
 	r := gin.Default()
-	CoffeeRotes := r.Group("/coffee-api")
+	CoffeeRotes := r.Group("/coffee")
 	{
 		// CoffeeRotes.Use() Middlewares.Middleware()
-		CoffeeRotes.GET("/coffee", Middlewares.CorsMiddleware(), ControllersCoffee.GetCoffee)
-		CoffeeRotes.GET("coffee/:id", ControllersCoffee.GetCoffeeById)
-		CoffeeRotes.POST("/coffee", ControllersCoffee.InsertCoffee)
-		CoffeeRotes.PUT("/coffee/:id", ControllersCoffee.UpdateCoffee)
-		CoffeeRotes.DELETE("/coffee/:id", ControllersCoffee.DeleteCoffee)
+		CoffeeRotes.GET("/", Middlewares.CorsMiddleware(), ControllersCoffee.GetCoffee)
+		CoffeeRotes.GET("/:id", ControllersCoffee.GetCoffeeId)
+		CoffeeRotes.POST("/", ControllersCoffee.InsertCoffee)
+		CoffeeRotes.PUT("/:id", ControllersCoffee.UpdateCoffee)
+		CoffeeRotes.DELETE("/:id", ControllersCoffee.DeleteCoffee)
 	}
-	CoffeeSuggestions := r.Group("/suggestions-coffee")
+	CoffeeSuggestions := r.Group("/suggest-coffee")
 	{
-		CoffeeSuggestions.GET("/", Middlewares.CorsMiddleware(), ControllersCoffee.GetSuggestionsCoffee)
-		CoffeeSuggestions.GET("/:name", Middlewares.CorsMiddleware(), ControllersCoffee.GetSuggestionsCoffeeById)
-		CoffeeSuggestions.POST("/", ControllersCoffee.InsertSuggestionsCoffee)
-		CoffeeSuggestions.PUT("/:id", ControllersCoffee.UpdateSuggestionsCoffee)
-		CoffeeSuggestions.DELETE("/:id", ControllersCoffee.DeleteSuggestionsCoffee)
+		CoffeeSuggestions.GET("/", Middlewares.CorsMiddleware(), ControllersCoffee.GetSuggestCoffee)
+		CoffeeSuggestions.GET("/:name", Middlewares.CorsMiddleware(), ControllersCoffee.GetSuggestCoffeName)
+		CoffeeSuggestions.POST("/", ControllersCoffee.InsertSuggestCoffee)
+		CoffeeSuggestions.PUT("/:id", ControllersCoffee.UpdateSuggestCoffee)
+		CoffeeSuggestions.DELETE("/:id", ControllersCoffee.DeleteSuggestCoffee)
 	}
 	UserRoutes := r.Group("/auth-user")
 	{

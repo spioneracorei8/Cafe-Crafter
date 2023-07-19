@@ -35,7 +35,7 @@ const HomePage = () => {
         try {
             setIsError(false);
             setIsLoading(true);
-            const result = await axios.get(`http://localhost:4000/suggestions-coffee/${coffeeName}`)
+            const result = await axios.get(`http://localhost:4000/suggest-coffee/${coffeeName}`)
             setSuggestionsCoffeeByName(result.data.data)
             setIsLoading(false)
         } catch (error) {
