@@ -5,7 +5,7 @@ export const IngredientsCoffeeData = [
     title: "Bean Bonanza",
     description:
       "From fruity to nutty, we’ve hand-selected a vibrant variety of beans to craft your perfect cup.",
-  },
+  },  
   {
     imageUrl:
       "https://framerusercontent.com/images/JTftN5Bahq5R0keAtG2HvH2x93I.jpg?scale-down-to=512",
