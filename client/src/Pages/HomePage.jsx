@@ -10,6 +10,7 @@ import Arrow_Left_Icon from '../assets/Icon/Arrow_Left_Icon.png'
 import Arrow_Right_Icon from '../assets/Icon/Arrow_Right_Icon.png'
 import useCoffee from '../Hook/useCoffee'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const HomePage = () => {
     const { isLoading, setIsLoading, isError, setIsError, suggestionsCoffee } = useCoffee()
@@ -168,15 +169,23 @@ const HomePage = () => {
                                     {item.title}
                                 </h6>
                                 <ul>
-                                    <li>
-                                        {item.subContentOne}
-                                    </li>
-                                    <li>
-                                        {item.subContentTwo}
-                                    </li>
-                                    <li>
-                                        {item.subContentThree}
-                                    </li>
+                                    <Link to={`/Coffee-${item.title}-${item.subContentOne}`} target='_blank'>
+                                        <li>
+                                            {item.subContentOne}
+                                        </li>
+                                    </Link>
+
+                                    <Link to={`/Coffee-${item.title}-${item.subContentTwo}`} target='_blank'>
+                                        <li>
+                                            {item.subContentTwo}
+                                        </li>
+                                    </Link>
+
+                                    <Link to={`/Coffee-${item.title}-${item.subContentThree}`} target='_blank'>
+                                        <li>
+                                            {item.subContentThree}
+                                        </li>
+                                    </Link>
                                 </ul>
                             </div>
                         )
