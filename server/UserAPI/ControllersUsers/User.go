@@ -23,7 +23,7 @@ func Register(c *gin.Context) {
 
 	_, err := ModelsUser.Register(&user)
 	if err != nil {
-		c.AbortWithStatus(http.StatusInternalServerError)
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
@@ -48,9 +48,9 @@ func Login(c *gin.Context) {
 		return
 	}
 	result, err, username := ModelsUser.Login(&user)
-	fmt.Println(username)
+
 	if err != nil {
-		c.AbortWithStatus(http.StatusInternalServerError)
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
