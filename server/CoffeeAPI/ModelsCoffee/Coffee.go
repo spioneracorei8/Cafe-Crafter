@@ -176,24 +176,46 @@ func UpdateSuggestCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, error) {
 	return coffeeRow, nil, nil
 }
 
-func DeleteCoffee(coffeeId int) (int, error) {
+func DeleteCoffee(coffeeId int) (bool, error) {
+	var count int
+
+	query := `SELECT COUNT(*) FROM coffeedatabase.coffeemenu WHERE id = ?`
+
 	deleteCoffeeById := `DELETE FROM coffeemenu WHERE id = ?`
 
-	_, err := Config.DB.Exec(deleteCoffeeById, coffeeId)
+	err := Config.DB.QueryRow(query, coffeeId).Scan(&count)
+
 	if err != nil {
-		return -999, err
+		return false, err
 	}
 
-	return coffeeId, nil
+	_, err = Config.DB.Exec(deleteCoffeeById, coffeeId)
+
+	if err != nil {
+		return false, err
+	}
+
+	return count > 0, nil
 }
 
-func DeleteSuggestCoffee(coffeeId int) (int, error) {
+func DeleteSuggestCoffee(coffeeId int) (bool, error) {
+	var count int
+
+	query := `SELECT COUNT(*) FROM coffeedatabase.suggestions_coffee WHERE id = ?`
+
 	deleteCoffeeById := `DELETE FROM suggestions_coffee WHERE id = ?`
 
-	_, err := Config.DB.Exec(deleteCoffeeById, coffeeId)
+	err := Config.DB.QueryRow(query, coffeeId).Scan(&count)
 
 	if err != nil {
-		return -999, nil
+		return false, err
 	}
-	return coffeeId, nil
+
+	_, err = Config.DB.Exec(deleteCoffeeById, coffeeId)
+
+	if err != nil {
+		return false, err
+	}
+
+	return count > 0, nil
 }
