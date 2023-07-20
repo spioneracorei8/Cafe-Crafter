@@ -138,6 +138,7 @@ func UpdateCoffee(c *gin.Context) {
 	}
 
 	updatedCoffee, err, errNoRow := ModelsCoffee.UpdateCoffee(&coffee, coffeeId)
+
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -191,18 +192,22 @@ func DeleteCoffee(c *gin.Context) {
 		return
 	}
 
-	coffeeId, err := ModelsCoffee.DeleteCoffee(id)
+	isDeleted, err := ModelsCoffee.DeleteCoffee(id)
+
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
-	} else if coffeeId == -999 {
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	}
+
+	if isDeleted {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "deleted coffee successfully.",
+		})
+	} else {
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"coffee_id": coffeeId,
-		"message":   "deleted coffee successfully.",
-	})
+
 }
 
 func DeleteSuggestCoffee(c *gin.Context) {
@@ -213,19 +218,20 @@ func DeleteSuggestCoffee(c *gin.Context) {
 		return
 	}
 
-	coffeeId, err := ModelsCoffee.DeleteSuggestCoffee(id)
+	isDeleted, err := ModelsCoffee.DeleteSuggestCoffee(id)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
-	} else if coffeeId == -999 {
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"coffee_id": coffeeId,
-		"message":   "deleted coffee successfully.",
-	})
+	if isDeleted {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "deleted coffee successfully.",
+		})
+	} else {
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})
+		return
+	}
 
 }
