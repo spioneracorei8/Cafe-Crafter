@@ -2,7 +2,6 @@ package ModelsUser
 
 import (
 	"database/sql"
-	"log"
 
 	"github.com/spioneracorei8/Cafe-Crafter/Config"
 	"golang.org/x/crypto/bcrypt"
@@ -14,19 +13,19 @@ func Register(user *User) (int64, error) {
 
 	hashPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
 	if err != nil {
-		log.Fatalln(err.Error())
+		return 0, err
 	}
 
 	// this code when you want to change role from customer to admin
 	result, err := Config.DB.Exec(insert, user.Name, user.Username, hashPassword, user.Gender, user.Email, user.Address, user.Phone_number, "customer")
 
 	if err != nil {
-		log.Fatalln(err.Error())
+		return 0, err
 	}
 	userId, err := result.LastInsertId()
 
 	if err != nil {
-		log.Fatalln(err.Error())
+		return 0, err
 	}
 	return userId, nil
 }
@@ -42,9 +41,9 @@ func Login(user *UserCredential) (bool, error, string) {
 		&userCredential.Password,
 	)
 	if err == sql.ErrNoRows {
-		return false, nil, ""
+		return false, err, ""
 	} else if err != nil {
-		log.Fatalln(err.Error())
+		return false, err, ""
 	}
 
 	result := bcrypt.CompareHashAndPassword([]byte(userCredential.Password), []byte(password))
