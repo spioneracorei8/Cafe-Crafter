@@ -26,6 +26,27 @@
     position: relative;
 }
 
+.cross-icon {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+}
+
+.cross-icon button {
+    background-color: white;
+    border: none;
+}
+
+.cross-icon button img {
+    width: 24px;
+    height: 24px;
+}
+
+.cross-icon button img:active {
+    width: 20px;
+    height: 20px;
+}
+
 .popup-content {
     display: flex;
     flex-direction: column;

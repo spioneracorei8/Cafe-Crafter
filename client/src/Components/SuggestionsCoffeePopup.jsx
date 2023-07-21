@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import './SuggestionsCoffeePopup.css'
 import Loading from './Loading'
-
+import Cross from '../assets/Icon/Cross.png'
 
 const SuggestionsCoffeePopup = (props) => {
     const {
@@ -13,8 +13,13 @@ const SuggestionsCoffeePopup = (props) => {
 
 
     return (
-        <div className='coffee-popup-container' onClick={props.handleClosePopUp}>
+        <div className='coffee-popup-container' onClick={() => props.handleClosePopUp()}>
             <div className='coffee-popup' onClick={(event) => event.stopPropagation()}>
+                <div className='cross-icon'>
+                    <button onClick={() => props.handleClosePopUp()}>
+                        <img src={Cross} alt="cross icon" />
+                    </button>
+                </div>
                 <Suspense fallback={<Loading />}>
                     <div className="popup-content">
                         <h1>{Name}</h1>
