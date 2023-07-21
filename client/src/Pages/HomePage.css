@@ -14,7 +14,7 @@
     justify-content: space-between;
 }
 
-.coffee-content {
+.discover-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,13 +22,13 @@
     margin-left: 3%;
 }
 
-.coffee-content h1 {
+.discover-content h1 {
     color: #6F1D1B;
     font-size: 4rem;
     font-weight: 900;
 }
 
-.coffee-content p {
+.discover-content p {
     width: 38rem;
     height: auto;
     color: #432818;
@@ -38,12 +38,12 @@
     padding-left: 3%;
 }
 
-.coffee-machine {
+.discover-machine {
     display: flex;
     align-items: center;
 }
 
-.coffee-machine img {
+.discover-machine img {
     width: 38rem;
     height: 38rem;
     display: block;
@@ -56,7 +56,7 @@
     margin-right: 5%;
 }
 
-.suggestions-coffee-container {
+.suggest-coffee-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,14 +81,14 @@
 
 }
 
-.scroll-image-arrow {
+.scroll-arrow {
     display: flex;
     align-items: center;
     margin-right: 7rem;
     user-select: none;
 }
 
-.scroll-image-arrow-left {
+.scroll-arrow-left {
     padding-top: 7px;
     padding-left: 5px;
     padding-bottom: 4px;
@@ -99,7 +99,7 @@
 
 }
 
-.scroll-image-arrow-right {
+.scroll-arrow-right {
     padding-right: 5px;
     padding-top: 7px;
     padding-bottom: 4px;
@@ -109,36 +109,36 @@
     margin-left: 5px;
 }
 
-.scroll-image-arrow-left img {
+.scroll-arrow-left img {
     width: 24px;
     height: 24px;
     cursor: pointer;
 }
 
-.scroll-image-arrow-right img {
+.scroll-arrow-right img {
     width: 24px;
     height: 24px;
     cursor: pointer;
 }
 
-.scroll-image-arrow-right:active,
-.scroll-image-arrow-left:active {
+.scroll-arrow-right:active,
+.scroll-arrow-left:active {
     background-color: wheat;
 }
 
-.suggestions-coffee-container h1 {
+.suggest-coffee-container h1 {
     font-size: 4rem;
     font-weight: 900;
     color: #432818;
 }
 
-.suggestions-coffee {
+.suggest-coffee {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-.suggestions-menu-container {
+.suggest-coffee-menu {
     display: flex;
     align-items: center;
     overflow-x: hidden;
@@ -181,14 +181,14 @@
     border-radius: 5%;
 }
 
-.suggestions-menu-button {
+.buy-now-container {
     width: 100%;
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
 }
 
-.suggestions-menu-button button {
+.buy-now-container button {
     font-family: 'whipsmart';
     margin-right: 0.8rem;
     padding: 8px;
