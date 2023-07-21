@@ -3,7 +3,8 @@ import './Login.css'
 import NavigationbarRegisLogin from '../Components/NavigationbarRegisLogin'
 import Coffee_Cup from "../assets/Background/Coffee_Cup.jpeg"
 import Cafe_Crafter_Logo from '../assets/Logo/Cafe_Crafter_Logo.png'
-import Footer from '../Components/Footer'
+import Footer from '../Components/Footer' 
+
 const Login = () => {
     return (
         <>

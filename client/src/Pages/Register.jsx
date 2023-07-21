@@ -30,7 +30,7 @@ const Register = () => {
                         <button onClick={(event) => handlePreviousRegisterPage(event)}>1</button>
                         <button onClick={(event) => handleNextRegisterPage(event)}>2</button>
                     </div>
-                    <div className='register-form-header'>
+                    <div className='register-form-top'>
                         <img src={Cafe_Crafter_Logo} alt="Cafe crafter logo" />
                         <h2>Create An Account</h2>
                     </div>
@@ -83,7 +83,7 @@ const Register = () => {
                                             <input type="tel" placeholder='Phone Number...' />
                                         </div>
 
-                                        <div className='register-form-input'>
+                                        <div className='register-form-input-textarea'>
                                             <label htmlFor="address">Address</label>
                                             <textarea
                                                 cols="25"
@@ -95,7 +95,7 @@ const Register = () => {
                                             ></textarea>
                                         </div>
                                         <div className='register-form-checkbox'>
-                                            <p>asdasd</p>
+                                            <p>I agree to the <span>Terms of service</span></p>
                                             <input type="checkbox" />
                                         </div>
                                     </div>
