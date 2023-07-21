@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './HomePage.css'
 import { IngredientsCoffeeData, OtherAboutCoffeeData } from '../data/CoffeeData.js'
 import NavigationbarNonLogin from '../Components/NavigationbarNonLogin'
@@ -12,7 +12,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 const HomePage = () => {
-    const { isLoading, setIsLoading, isError, setIsError, suggestionsCoffee } = useCoffee()
+    const { isLoading, setIsLoading, isError, setIsError, suggestCoffee } = useCoffee()
     const scrollContainerRef = useRef(null)
     const [suggestCoffeeName, setSuggestCoffeeName] = useState({})
     const [coffeePopUp, setCoffeePopUp] = useState(false)
@@ -97,38 +97,42 @@ const HomePage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='suggest-coffee'>
-                        <div className='suggest-coffee-menu' ref={scrollContainerRef}>
-                            {suggestionsCoffee.map((item, index) => {
-                                return (
-                                    <div
-                                        className='suggestions-menu'
-                                        key={index}
-                                    >
-                                        <h3>{item.Name}</h3>
 
-                                        <h4>{item.Price}฿</h4>
-                                        <img src={item.Image_url} alt="img" />
+                    <div
 
-                                        <div className='buy-now-container'>
-                                            <button className='buy-now'>Buy Now</button>
-                                            <button
-                                                className='learn-more'
-                                                onClick={(() => {
-                                                    return (
-                                                        getCoffeeName(item.Name),
-                                                        handleShowPopUp()
-                                                    )
-                                                })}
-                                            >
-                                                Learn more
-                                            </button>
+                    >
+                        <div className='suggest-coffee'>
+                            <div className='suggest-coffee-menu' ref={scrollContainerRef}>
+                                {suggestCoffee.map((item, index) => {
+                                    return (
+                                        <div
+                                            className='suggestions-menu'
+                                            key={index}
+                                        >
+                                            <h3>{item.Name}</h3>
+
+                                            <h4>{item.Price}฿</h4>
+                                            <img src={item.Image_url} alt="img" />
+
+                                            <div className='buy-now-container'>
+                                                <button className='buy-now'>Buy Now</button>
+                                                <button
+                                                    className='learn-more'
+                                                    onClick={(() => {
+                                                        return (
+                                                            getCoffeeName(item.Name),
+                                                            handleShowPopUp()
+                                                        )
+                                                    })}
+                                                >
+                                                    Learn more
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })}
+                                    )
+                                })}
+                            </div>
                         </div>
-
                     </div>
                 </div>
 

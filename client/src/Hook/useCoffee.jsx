@@ -5,16 +5,16 @@ import { useEffect, useState } from 'react'
 const useCoffee = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
-    const [suggestionsCoffee, setSuggestionsCoffee] = useState([])
+    const [suggestCoffee, setSuggestCoffee] = useState([])
 
 
 
-    const getAllSuggestionsCoffee = async () => {
+    const getSuggestCoffee = async () => {
         try {
             setIsError(false);
             setIsLoading(true);
             const result = await axios.get(`http://localhost:4000/suggest-coffee/`)
-            setSuggestionsCoffee(result.data.data)
+            setSuggestCoffee(result.data.data)
             setIsLoading(false)
         } catch (error) {
             setIsError(true);
@@ -25,7 +25,7 @@ const useCoffee = () => {
 
 
     useEffect(() => {
-        getAllSuggestionsCoffee()
+        getSuggestCoffee()
     }, [])
 
 
@@ -34,7 +34,7 @@ const useCoffee = () => {
         setIsLoading,
         isError,
         setIsError,
-        suggestionsCoffee,
+        suggestCoffee,
     }
 }
 
