@@ -4,9 +4,21 @@ import NavigationbarRegisLogin from '../Components/NavigationbarRegisLogin'
 import Footer from "../Components/Footer"
 import Coffee_Beans from "../assets/Background/Coffee_Beans.jpg"
 import Cafe_Crafter_Logo from '../assets/Logo/Cafe_Crafter_Logo.png'
+import { useAuth } from '../Context/Authentication'
+
 
 const Register = () => {
     let [registerPage, setRegisterPage] = useState(1)
+    const [name, setName] = useState("")
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [gender, setGender] = useState("male")
+    const [email, setEmail] = useState("")
+    const [address, setAddress] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
+
+    const { register } = useAuth()
 
     const handleNextRegisterPage = (event) => {
         event.preventDefault()
@@ -14,8 +26,23 @@ const Register = () => {
     }
 
     const handlePreviousRegisterPage = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         setRegisterPage(registerPage = 1)
+
+    }
+    const handleRegisterNow = (event) => {
+        event.preventDefault()
+        const data = {
+            name,
+            username,
+            password,
+            gender,
+            email,
+            address,
+            phoneNumber,
+        }
+        
+        register(data)
 
     }
 
@@ -25,7 +52,7 @@ const Register = () => {
             <img src={Coffee_Beans} alt="coffee beans" className='register-background' />
             <div className='register-container'>
 
-                <form className='register-form'>
+                <form className='register-form' onSubmit={(event) => handleRegisterNow(event)}>
                     <div className='register-form-page'>
                         <button onClick={(event) => handlePreviousRegisterPage(event)}>1</button>
                         <button onClick={(event) => handleNextRegisterPage(event)}>2</button>
@@ -40,23 +67,43 @@ const Register = () => {
                                 <div className="register-form-input-container">
                                     <div className='register-form-input'>
                                         <label htmlFor="name">Name</label>
-                                        <input type="text" placeholder='Name...' />
+                                        <input
+                                            type="text"
+                                            placeholder='Name...'
+                                            onChange={(event) => setName(event.target.value)}
+                                            value={name}
+                                        />
 
                                     </div>
                                     <div className='register-form-input'>
                                         <label htmlFor="password">Password</label>
-                                        <input type="password" placeholder='************' />
+                                        <input
+                                            type="password"
+                                            placeholder='************'
+                                            onChange={(event) => setPassword(event.target.value)}
+                                            value={password}
+                                        />
                                     </div>
                                 </div>
                                 <div className="register-form-input-container">
                                     <div className='register-form-input'>
                                         <label htmlFor="username">Username</label>
-                                        <input type="text" placeholder='Username...' />
+                                        <input
+                                            type="text"
+                                            placeholder='Username...'
+                                            onChange={(event) => setUsername(event.target.value)}
+                                            value={username}
+                                        />
                                     </div>
 
                                     <div className='register-form-input'>
                                         <label htmlFor="confirm password">Confirm Password</label>
-                                        <input type="password" placeholder='************' />
+                                        <input
+                                            type="password"
+                                            placeholder='************'
+                                            onChange={(event) => setConfirmPassword(event.target.value)}
+                                            value={confirmPassword}
+                                        />
                                     </div>
                                 </div>
 
@@ -66,11 +113,16 @@ const Register = () => {
                                     <div className="register-form-input-container">
                                         <div className='register-form-input'>
                                             <label htmlFor="email">Email</label>
-                                            <input type="email" placeholder='Email...' />
+                                            <input
+                                                type="email"
+                                                placeholder='Email...'
+                                                onChange={(event) => setEmail(event.target.value)}
+                                                value={email}
+                                            />
                                         </div>
                                         <div className='register-form-input'>
                                             <label htmlFor="gender">Gender</label>
-                                            <select className='form-select'>
+                                            <select className='form-select' onChange={(event) => setGender(event.target.value)} value={gender}>
                                                 <option value="male">male</option>
                                                 <option value="female">female</option>
                                             </select>
@@ -80,7 +132,12 @@ const Register = () => {
                                     <div className="register-form-input-container">
                                         <div className='register-form-input'>
                                             <label htmlFor="phone number">Phone Number</label>
-                                            <input type="tel" placeholder='Phone Number...' />
+                                            <input
+                                                type="tel"
+                                                placeholder='Phone Number...'
+                                                onChange={(event) => setPhoneNumber(event.target.value)}
+                                                value={phoneNumber}
+                                            />
                                         </div>
 
                                         <div className='register-form-input-textarea'>
@@ -92,7 +149,11 @@ const Register = () => {
                                                 style={{
                                                     marginBottom: "1.5rem"
                                                 }}
-                                            ></textarea>
+                                                onChange={(event) => setAddress(event.target.value)}
+                                                value={address}
+                                            >
+
+                                            </textarea>
                                         </div>
                                         <div className='register-form-checkbox'>
                                             <p>I agree to the <span>Terms of service</span></p>
@@ -115,7 +176,7 @@ const Register = () => {
                                         <button className='previous-button' onClick={(event) => handlePreviousRegisterPage(event)}>Previous</button>
                                     </div>
                                     <div className='registering-button'>
-                                        <button onClick={(event) => console.log("Registerrrr")}>Register Now!</button>
+                                        <button type='submit'>Register Now!</button>
                                     </div>
                                 </>
                                 : ""

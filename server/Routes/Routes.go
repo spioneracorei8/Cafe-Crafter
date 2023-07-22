@@ -9,6 +9,7 @@ import (
 
 func SetRouter() *gin.Engine {
 	r := gin.Default()
+	r.Use(Middlewares.CorsMiddleware())
 	CoffeeRotes := r.Group("/coffee")
 	{
 		// CoffeeRotes.Use() Middlewares.Middleware()
@@ -20,8 +21,8 @@ func SetRouter() *gin.Engine {
 	}
 	CoffeeSuggestions := r.Group("/suggest-coffee")
 	{
-		CoffeeSuggestions.GET("/", Middlewares.CorsMiddleware(), ControllersCoffee.GetSuggestCoffee)
-		CoffeeSuggestions.GET("/:name", Middlewares.CorsMiddleware(), ControllersCoffee.GetSuggestCoffeName)
+		CoffeeSuggestions.GET("/", ControllersCoffee.GetSuggestCoffee)
+		CoffeeSuggestions.GET("/:name", ControllersCoffee.GetSuggestCoffeName)
 		CoffeeSuggestions.POST("/", ControllersCoffee.InsertSuggestCoffee)
 		CoffeeSuggestions.PUT("/:id", ControllersCoffee.UpdateSuggestCoffee)
 		CoffeeSuggestions.DELETE("/:id", ControllersCoffee.DeleteSuggestCoffee)
