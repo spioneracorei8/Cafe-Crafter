@@ -16,8 +16,7 @@ const Register = () => {
     const [gender, setGender] = useState("male")
     const [email, setEmail] = useState("")
     const [address, setAddress] = useState("")
-    const [phoneNumber, setPhoneNumber] = useState("")
-
+    const [phone_number, setPhone_number] = useState("")
     const { register } = useAuth()
 
     const handleNextRegisterPage = (event) => {
@@ -39,9 +38,9 @@ const Register = () => {
             gender,
             email,
             address,
-            phoneNumber,
+            phone_number,
         }
-        
+
         register(data)
 
     }
@@ -135,8 +134,8 @@ const Register = () => {
                                             <input
                                                 type="tel"
                                                 placeholder='Phone Number...'
-                                                onChange={(event) => setPhoneNumber(event.target.value)}
-                                                value={phoneNumber}
+                                                onChange={(event) => setPhone_number(event.target.value)}
+                                                value={phone_number}
                                             />
                                         </div>
 
