@@ -19,9 +19,11 @@ const AuthProvider = (props) => {
         navigate("/Login")
     }
 
+    const isAuthenticated = Boolean(localStorage.getItem("token"))
+
     return (
         <AuthContext.Provider
-            value={{ state, register }}
+            value={{ state, register, isAuthenticated }}
         >
             {props.children}
         </AuthContext.Provider>
