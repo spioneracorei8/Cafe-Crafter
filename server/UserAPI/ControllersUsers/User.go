@@ -21,8 +21,6 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	fmt.Println(user)
-	
 	_, err := ModelsUser.Register(&user)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
