@@ -18,30 +18,66 @@ const Register = () => {
     const [address, setAddress] = useState("")
     const [phone_number, setPhone_number] = useState("")
     const { register } = useAuth()
+    const phoneNumberRegex = /^[0-9]+$/
 
     const handleNextRegisterPage = (event) => {
         event.preventDefault()
-        setRegisterPage(registerPage = 2)
+        if (name === "") {
+            alert("The Name input cannot be blank.")
+        } else if (username === "") {
+            alert("The Username input cannot be blank.")
+        } else if (username.length < 8) {
+            alert("The Username input should enter at least 6 characters.")
+        } else if (password === "") {
+            alert("The Password input cannot be blank.")
+        } else if (password.length < 10) {
+            alert("The Password input should enter at least 10 characters.")
+        } else if (confirmPassword === "") {
+            alert("The Confirm Password input cannot be blank")
+        } else if (password != confirmPassword) {
+            alert("The Password not match cannot be blank")
+        }
+        else {
+            setRegisterPage(registerPage = 2)
+        }
     }
-
+    
     const handlePreviousRegisterPage = (event) => {
         event.preventDefault();
         setRegisterPage(registerPage = 1)
 
     }
+
     const handleRegisterNow = (event) => {
         event.preventDefault()
-        const data = {
-            name,
-            username,
-            password,
-            gender,
-            email,
-            address,
-            phone_number,
+
+        if (email === "") {
+            alert("The Email input cannot be blank.")
+        } else if (phone_number === "") {
+            alert("The Phone Number input cannot be blank.")
+        } else if (phone_number.length < 10) {
+            alert("The Phone Number input should have at least 10 digits.")
+        } else if (!phoneNumberRegex.test(phone_number)) {
+            alert("The Phone Number input is malformed.")
+        } else if (address === "") {
+            alert("The Address input cannot be blank.")
+        } else if (address.length < 30) {
+            alert("The Address input should have at least 30 characters.")
+        } else {
+            const data = {
+                name,
+                username,
+                password,
+                gender,
+                email,
+                address,
+                phone_number,
+            }
+
+            register(data)
         }
 
-        register(data)
+
 
     }
 
