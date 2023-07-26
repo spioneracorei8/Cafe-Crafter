@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import './HomePage.css'
+import './HomePageNonLogin.css'
 import { IngredientsCoffeeData, OtherAboutCoffeeData } from '../data/CoffeeData.js'
 import NavigationbarNonLogin from '../Components/NavigationbarNonLogin'
 import Footer from '../Components/Footer'
@@ -11,7 +11,7 @@ import useCoffee from '../Hook/useCoffee'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-const HomePage = () => {
+const HomePageNonLogin = () => {
     const { isLoading, setIsLoading, isError, setIsError, suggestCoffee } = useCoffee()
     const scrollContainerRef = useRef(null)
     const [suggestCoffeeName, setSuggestCoffeeName] = useState({})
@@ -197,4 +197,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage
+export default HomePageNonLogin
