@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import HomePage from './HomePage'
+import HomePageNonLogin from './HomePageNonLogin'
 import Register from './Register'
 import Login from './Login'
 import PageNotFound from './PageNotFound'
@@ -9,7 +9,7 @@ const UnauthenticatedApp = () => {
     return (
         <>
             <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<HomePageNonLogin />} />
                 <Route path="/Register" element={<Register />} />
                 <Route path="/Login" element={<Login />} />
                 <Route path="/pageNotFound" element={<PageNotFound />} />
