@@ -17,7 +17,7 @@ const NavigationbarNonLogin = () => {
     }
 
     return (
-        <header>
+        <header className="non-login-header">
             <nav className="header-container">
                 <div>
                     <Link to={"/"} onClick={(event) => handleNavigate(event, "cafe-crafter-logo")}>

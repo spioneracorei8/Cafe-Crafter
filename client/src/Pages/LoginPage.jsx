@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import './Login.css'
+import './LoginPage.css'
 import NavigationbarRegisLogin from '../Components/NavigationbarRegisLogin'
 import Coffee_Cup from "../assets/Background/Coffee_Cup.jpeg"
 import Cafe_Crafter_Logo from '../assets/Logo/Cafe_Crafter_Logo.png'
 import Footer from '../Components/Footer'
 import { useAuth } from '../Context/Authentication'
-const Login = () => {
+const LoginPage = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const { login } = useAuth()
@@ -62,4 +62,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default LoginPage

@@ -70,17 +70,24 @@
     width: 50px;
     height: 40px;
     border-radius: 40%;
-    background-color: white;
     border: 2px solid #c69d35;
 
 }
 
-.register-form-page button:hover {
+.load-page-one {
     background-color: #E3BA9C;
 }
 
-.register-form-page button {
+.unload-page-one {
+    background-color: white;
+}
+
+.load-page-two {
     background-color: #E3BA9C;
+}
+
+.unload-page-two {
+    background-color: white;
 }
 
 .register-whole-form-1 {
@@ -144,6 +151,12 @@
     font-weight: 100;
     background-color: white;
     border-radius: 25%;
+}
+
+.register-next-button .next-button:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
 }
 
 .register-previous-button {

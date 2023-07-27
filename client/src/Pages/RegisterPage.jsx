@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import './Register.css'
+import React, { useState, useEffect } from 'react'
+import './RegisterPage.css'
 import NavigationbarRegisLogin from '../Components/NavigationbarRegisLogin'
 import Footer from "../Components/Footer"
 import Coffee_Beans from "../assets/Background/Coffee_Beans.jpg"
@@ -7,7 +7,7 @@ import Cafe_Crafter_Logo from '../assets/Logo/Cafe_Crafter_Logo.png'
 import { useAuth } from '../Context/Authentication'
 
 
-const Register = () => {
+const RegisterPage = () => {
     let [registerPage, setRegisterPage] = useState(1)
     const [name, setName] = useState("")
     const [username, setUsername] = useState("")
@@ -41,7 +41,7 @@ const Register = () => {
             setRegisterPage(registerPage = 2)
         }
     }
-    
+
     const handlePreviousRegisterPage = (event) => {
         event.preventDefault();
         setRegisterPage(registerPage = 1)
@@ -81,6 +81,7 @@ const Register = () => {
 
     }
 
+
     return (
         <>
             <NavigationbarRegisLogin />
@@ -89,8 +90,19 @@ const Register = () => {
 
                 <form className='register-form' onSubmit={(event) => handleRegisterNow(event)}>
                     <div className='register-form-page'>
-                        <button onClick={(event) => handlePreviousRegisterPage(event)}>1</button>
-                        <button onClick={(event) => handleNextRegisterPage(event)}>2</button>
+                        <button
+                            className={registerPage === 1 ? "load-page-one" : "unload-page-one"}
+                            onClick={(event) => handlePreviousRegisterPage(event)}
+
+                        >
+                            1
+                        </button>
+                        <button
+                            className={registerPage === 2 ? "load-page-two" : "unload-page-two"}
+                            onClick={(event) => handleNextRegisterPage(event)}
+                        >
+                            2
+                        </button>
                     </div>
                     <div className='register-form-top'>
                         <img src={Cafe_Crafter_Logo} alt="Cafe crafter logo" />
@@ -224,4 +236,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default RegisterPage
