@@ -1,0 +1,16 @@
+.category-menu {
+    width: 100%;
+    height: auto;
+    background-color: #CE8909;
+
+}
+
+.category-menu ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+}
