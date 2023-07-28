@@ -1,25 +1,3 @@
-.category-menu {
-    width: 100%;
-    height: auto;
-    background-color: #CE9563;
-
-}
-
-.category-menu ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
-
-.category-menu ul li {
-    font-size: 1.3rem;
-    font-weight: 900;
-    color: #432818;
-}
-
 .menu-container {
     width: 100%;
     height: 100%;
@@ -35,6 +13,8 @@
     align-items: center;
     margin-top: 1rem;
     padding: 2rem;
+    font-family: 'whipsmart';
+
 }
 
 .menu {
@@ -96,5 +76,34 @@
 
 .content-left {
     display: flex;
+    margin: auto;
+    padding: auto;
+}
 
+
+.see-more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.see-more button {
+    background-color: white;
+    border: wheat 1px solid;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 20%;
+    font-family: 'whipsmart';
+}
+
+.see-more button:hover {
+    background-color: black;
+    color: white;
+}
+
+.see-more button h1 {
+    font-weight: 900;
+    font-size: 2rem;
+    font-style: normal;
 }
