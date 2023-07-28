@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import NavigationbarLogin from '../Components/NavigationbarLogin'
 import './HomePageLogin.css'
 import useCoffee from '../Hook/useCoffee'
+import Footer from "../Components/Footer"
+
 const HomePageLogin = () => {
 
     const { getAllCoffee, allCoffee } = useCoffee()
@@ -15,13 +17,7 @@ const HomePageLogin = () => {
     return (
         <>
             <NavigationbarLogin />
-            <nav className='category-menu'>
-                <ul>
-                    <li>Coffee</li>
-                    <li>Tea</li>
-                    <li>Cake</li>
-                </ul>
-            </nav>
+
             <div className='menu-container'>
                 <div className='menu-background'>
                     {allCoffee.map((item, index) => {
@@ -47,7 +43,14 @@ const HomePageLogin = () => {
                         )
                     })}
                 </div>
+                <div className='see-more'>
+                    <button>
+                        <h1>See more</h1>
+                    </button>
+                </div>
             </div>
+
+            <Footer />
         </>
     )
 }
