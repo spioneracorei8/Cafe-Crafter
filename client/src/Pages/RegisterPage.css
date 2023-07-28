@@ -74,6 +74,10 @@
 
 }
 
+.register-form-page button:hover {
+    cursor: pointer;
+}
+
 .load-page-one {
     background-color: #E3BA9C;
 }
