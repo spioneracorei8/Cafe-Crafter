@@ -13,6 +13,11 @@ const UnauthenticatedApp = () => {
                 <Route path="/Register" element={<RegisterPage />} />
                 <Route path="/Login" element={<LoginPage />} />
                 <Route path="/pageNotFound" element={<PageNotFound />} />
+
+                <Route path="/Cafe-Crafter-Twitter" element={<PageNotFound />} />
+                <Route path="/Cafe-Crafter-Instagram" element={<PageNotFound />} />
+                <Route path="/Cafe-Crafter-Facebook" element={<PageNotFound />} />
+                <Route path="/Cafe-Crafter-Twitch" element={<PageNotFound />} />
                 <Route path="/Coffee-Beans-Arabica" element={<PageNotFound />} />
                 <Route path="/Coffee-Beans-Robusta" element={<PageNotFound />} />
                 <Route path="/Coffee-Beans-Liberica" element={<PageNotFound />} />

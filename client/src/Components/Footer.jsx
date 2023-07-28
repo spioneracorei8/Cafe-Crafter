@@ -30,20 +30,20 @@ const Footer = () => {
 
                     {
                         state.isHoverTwitter
-                            ? <Link to={"/pageNotFound"} target='_blank'>
+                            ? <Link to={"/Cafe-Crafter-Twitter"} target='_blank'>
                                 <img src={Twitter_Icon_White} a="twitter icon" className='twitter-icon' onMouseLeave={() => setState({ ...state, isHoverTwitter: false })} />
                             </Link>
-                            : <Link to={"/pageNotFound"} target='_blank'>
+                            : <Link to={"/Cafe-Crafter-Twitter"} target='_blank'>
                                 <img src={Twitter_Icon_Black} a="twitter icon" className='twitter-icon' onMouseEnter={() => setState({ ...state, isHoverTwitter: true })} />
                             </Link>
                     }
 
                     {
                         state.isHoverInstagram
-                            ? <Link to={"/pageNotFound"} target='_blank'>
+                            ? <Link to={"/Cafe-Crafter-Instagram"} target='_blank'>
                                 <img src={Instagram_Icon_White} alt="instagram icon" className='instagram-icon' onMouseLeave={() => setState({ ...state, isHoverInstagram: false })} />
                             </Link>
-                            : <Link to={"/pageNotFound"} target='_blank'>
+                            : <Link to={"/Cafe-Crafter-Instagram"} target='_blank'>
                                 <img src={Instagram_Icon_Black} alt="instagram icon" className='instagram-icon' onMouseEnter={() => setState({ ...state, isHoverInstagram: true })} />
                             </Link>
                     }
@@ -51,11 +51,11 @@ const Footer = () => {
 
                     {
                         state.isHoverFacebook
-                            ? <Link to={"/pageNotFound"} target='_blank'>
+                            ? <Link to={"/Cafe-Crafter-Facebook"} target='_blank'>
                                 <img src={Facebook_Icon_White} alt="facebook icon" className='facebook-icon' onMouseLeave={() => setState({ ...state, isHoverFacebook: false })} />
 
                             </Link>
-                            : <Link to={"/pageNotFound"} target='_blank'>
+                            : <Link to={"/Cafe-Crafter-Facebook"} target='_blank'>
                                 <img src={Facebook_Icon_Black} alt="facebook icon" className='facebook-icon' onMouseEnter={() => setState({ ...state, isHoverFacebook: true })} />
 
                             </Link>
@@ -63,11 +63,11 @@ const Footer = () => {
 
                     {
                         state.isHoverTwitch
-                            ? <Link to={"/pageNotFound"} target='_blank'>
+                            ? <Link to={"/Cafe-Crafter-Twitch"} target='_blank'>
                                 <img src={Twitch_Icon_White} alt="twitch icon" className='twitch-icon' onMouseLeave={() => setState({ ...state, isHoverTwitch: false })} />
 
                             </Link>
-                            : <Link to={"/pageNotFound"} target='_blank'>
+                            : <Link to={"/Cafe-Crafter-Twitch"} target='_blank'>
                                 <img src={Twitch_Icon_Black} alt="twitch icon" className='twitch-icon' onMouseEnter={() => setState({ ...state, isHoverTwitch: true })} />
 
                             </Link>
