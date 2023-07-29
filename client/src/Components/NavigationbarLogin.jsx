@@ -1,20 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './NavigationbarLogin.css'
 import { useNavigate, Link } from 'react-router-dom'
 import Cafe_Crafter_Logo from "../assets/Logo/Cafe_Crafter_Logo.png"
 import { useAuth } from '../Context/Authentication'
+import HomePageLogin from '../Pages/HomePageLogin'
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+        right: 10,
+        top: 10,
+        border: `2px solid ${theme.palette.background.paper}`,
+        position: 'absolute',
+    }
+}));
+
 const NavigationbarLogin = () => {
     const navigate = useNavigate()
     const { logout } = useAuth()
 
     const [category, setCategory] = useState("Coffee")
-
-    const handleCategory = (event, categry) => {
-        event.preventDefault()
-        setCategory(categry)
-    }
-
-    console.log(category);
 
     const handleNavigate = (event, id) => {
         event.preventDefault()
@@ -25,6 +33,13 @@ const NavigationbarLogin = () => {
             element.scrollIntoView({ behavior: "smooth" })
         }
     }
+
+    const handleCategory = (event, categry) => {
+        event.preventDefault()
+        setCategory(categry)
+    }
+
+    HomePageLogin({ category })
 
     return (
         <header className='login-header'>
@@ -59,7 +74,14 @@ const NavigationbarLogin = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="nav-right-crafter">
+                <div className="nav-right-crafter-login">
+                    <IconButton aria-label="cart">
+
+                        <StyledBadge badgeContent={5} color="warning">
+                            <ShoppingCartIcon />
+
+                        </StyledBadge>
+                    </IconButton>
                     <button>
                         Profile
                     </button>

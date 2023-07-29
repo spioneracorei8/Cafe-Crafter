@@ -102,7 +102,7 @@
 }
 
 
-.nav-right-crafter button {
+.nav-right-crafter-login button {
     font-size: 1rem;
     font-weight: 400;
     margin-left: 0.5rem;
@@ -113,10 +113,14 @@
     border-radius: 15%;
     border: #D4A276;
     font-family: 'whipsmart';
-
+    position: relative;
 
 }
 
-.nav-right-crafter button:hover {
+.nav-right-crafter-login button:hover {
     background-color: #FFE6A7;
+}
+
+.MuiButtonBase-root span {
+    position: static;
 }

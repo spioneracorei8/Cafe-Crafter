@@ -34,19 +34,19 @@
 .menu h3 {
     color: #432818;
     margin-bottom: 1.5rem;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
 }
 
 .menu h4 {
     color: #e38949;
     margin-bottom: 1.3rem;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 500;
 }
 
 .menu img {
-    width: 150px;
-    height: 150px;
+    width: 170px;
+    height: 170px;
     object-fit: cover;
     border-radius: 5%;
 }
@@ -106,4 +106,35 @@
     font-weight: 900;
     font-size: 2rem;
     font-style: normal;
+}
+
+.three-button-container {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.three-button-container button {
+    font-family: 'whipsmart';
+    margin-right: 0.8rem;
+    padding: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 20%;
+    border: #D4A276;
+}
+
+.learn-more,
+.add-to-cart {
+    color: black;
+    border: white;
+}
+
+.learn-more:hover,
+.add-to-cart:hover {
+    color: white;
+    background-color: black;
+
 }
