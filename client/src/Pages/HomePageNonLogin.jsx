@@ -3,7 +3,7 @@ import './HomePageNonLogin.css'
 import { IngredientsCoffeeData, OtherAboutCoffeeData } from '../data/CoffeeData.js'
 import NavigationbarNonLogin from '../Components/NavigationbarNonLogin'
 import Footer from '../Components/Footer'
-import SuggestionsCoffeePopup from '../Components/SuggestionsCoffeePopup'
+import CoffeePopup from '../Components/CoffeePopup'
 import Loading from '../Components/Loading'
 import Arrow_Left_Icon from '../assets/Icon/Arrow_Left_Icon.png'
 import Arrow_Right_Icon from '../assets/Icon/Arrow_Right_Icon.png'
@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom'
 const HomePageNonLogin = () => {
     const { isLoading, setIsLoading, isError, setIsError, suggestCoffee } = useCoffee()
     const scrollContainerRef = useRef(null)
-    const [suggestCoffeeName, setSuggestCoffeeName] = useState({})
+    const [coffeeData, setCoffeeData] = useState({})
     const [coffeePopUp, setCoffeePopUp] = useState(false)
 
     const ScrollLeft = () => {
@@ -35,7 +35,7 @@ const HomePageNonLogin = () => {
             setIsError(false);
             setIsLoading(true);
             const result = await axios.get(`http://localhost:4000/suggest-coffee/${coffeeName}`)
-            setSuggestCoffeeName(result.data.data)
+            setCoffeeData(result.data.data)
             setIsLoading(false)
         } catch (error) {
             setIsError(true);
@@ -44,12 +44,8 @@ const HomePageNonLogin = () => {
         }
     }
 
-    const handleShowPopUp = () => {
-        setCoffeePopUp(true)
-    }
-
-    const handleClosePopUp = () => {
-        setCoffeePopUp(false)
+    const handleCoffeePopUp = () => {
+        setCoffeePopUp(!coffeePopUp)
     }
 
     return (
@@ -62,9 +58,9 @@ const HomePageNonLogin = () => {
             }
             <NavigationbarNonLogin />
             {coffeePopUp &&
-                <SuggestionsCoffeePopup
-                    handleClosePopUp={handleClosePopUp}
-                    suggestionsCoffee={suggestCoffeeName}
+                <CoffeePopup
+                    handleCoffeePopUp={handleCoffeePopUp}
+                    coffeeData={coffeeData}
                 />
             }
 
@@ -121,7 +117,7 @@ const HomePageNonLogin = () => {
                                                     onClick={(() => {
                                                         return (
                                                             getCoffeeName(item.Name),
-                                                            handleShowPopUp()
+                                                            handleCoffeePopUp()
                                                         )
                                                     })}
                                                 >

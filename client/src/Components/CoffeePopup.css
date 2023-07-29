@@ -42,6 +42,11 @@
     height: 24px;
 }
 
+.cross-icon button img:hover {
+    cursor: pointer;
+    widows: none;
+}
+
 .cross-icon button img:active {
     width: 20px;
     height: 20px;

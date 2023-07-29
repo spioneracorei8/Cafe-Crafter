@@ -4,22 +4,27 @@ import './HomePageLogin.css'
 import useCoffee from '../Hook/useCoffee'
 import Footer from "../Components/Footer"
 import axios from 'axios'
+import CoffeePopup from '../Components/CoffeePopup'
+import Loading from '../Components/Loading'
+import { useNavigate } from 'react-router-dom'
 
 const HomePageLogin = (props) => {
 
     const { getAllCoffee, allCoffee, isLoading, setIsLoading, isError, setIsError } = useCoffee()
-    const [coffee, setCoffee] = useState([])
+    const [coffeeData, setCoffeeData] = useState({})
+    const [coffeePopUp, setCoffeePopUp] = useState(false)
+    const navigate = useNavigate()
+
     useEffect(() => {
         getAllCoffee()
     }, [])
 
-    const getCoffeeName = async (coffeeId) => {
+    const getCoffeeName = async (coffeeById) => {
         try {
-            console.log(coffeeId);
             setIsError(false)
             setIsError(true)
-            const result = await axios.get(`http://localhost:4000/coffee/${coffeeId}`)
-            setCoffee(result.data.data)
+            const result = await axios.get(`http://localhost:4000/coffee/${coffeeById}`)
+            setCoffeeData(result.data.data)
             setIsLoading(false)
         } catch (error) {
             setIsError(true)
@@ -27,12 +32,33 @@ const HomePageLogin = (props) => {
             console.log(error);
         }
     }
-    console.log(props?.category);
-    console.log(coffee);
+
+    const handleCoffeePopUp = () => {
+        setCoffeePopUp(!coffeePopUp)
+    }
+
+    // console.log(props?.category);
+
     return (
         <>
+            {isLoading &&
+                <Loading />
+            }
+
+            {isError &&
+                <h1>Fetching Data Error...</h1>
+            }
+
             <NavigationbarLogin />
-            
+
+            {coffeePopUp &&
+                <CoffeePopup
+                    handleCoffeePopUp={handleCoffeePopUp}
+                    coffeeData={coffeeData}
+                />
+
+            }
+
             <div className='menu-container'>
                 <div className='menu-background'>
                     {allCoffee.map((item, index) => {
@@ -52,6 +78,7 @@ const HomePageLogin = (props) => {
                                         className='learn-more'
                                         onClick={(() => {
                                             getCoffeeName(item.Id)
+                                            handleCoffeePopUp()
                                         })}
                                     >
                                         Learn More
