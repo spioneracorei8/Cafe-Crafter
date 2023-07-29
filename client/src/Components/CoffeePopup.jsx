@@ -1,22 +1,22 @@
 import React, { Suspense } from 'react'
-import './SuggestionsCoffeePopup.css'
+import './CoffeePopup.css'
 import Loading from './Loading'
 import Cross from '../assets/Icon/Cross.png'
 
-const SuggestionsCoffeePopup = (props) => {
+const CoffeePopup = (props) => {
     const {
         Name,
         Image_url,
         Price,
         Description
-    } = props?.suggestionsCoffee
+    } = props?.coffeeData
 
 
     return (
-        <div className='coffee-popup-container' onClick={() => props.handleClosePopUp()}>
+        <div className='coffee-popup-container' onClick={() => props.handleCoffeePopUp()}>
             <div className='coffee-popup' onClick={(event) => event.stopPropagation()}>
                 <div className='cross-icon'>
-                    <button onClick={() => props.handleClosePopUp()}>
+                    <button onClick={() => props.handleCoffeePopUp()}>
                         <img src={Cross} alt="cross icon" />
                     </button>
                 </div>
@@ -36,4 +36,4 @@ const SuggestionsCoffeePopup = (props) => {
     )
 }
 
-export default SuggestionsCoffeePopup
+export default CoffeePopup
