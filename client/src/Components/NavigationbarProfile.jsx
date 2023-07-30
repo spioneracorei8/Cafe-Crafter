@@ -18,28 +18,20 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     }
 }));
 
-const NavigationbarLogin = () => {
+const NavigationbarProfile = () => {
     const navigate = useNavigate()
     const { logout } = useAuth()
 
-    const [category, setCategory] = useState("Coffee")
+
 
     const handleNavigate = (event, id) => {
         event.preventDefault()
         const element = document.getElementById(id)
         if (element.id === "cafe-crafter-logo") {
             window.location.replace("/")
-        } else if (element) {
-            element.scrollIntoView({ behavior: "smooth" })
         }
     }
 
-    const handleCategory = (event, categry) => {
-        event.preventDefault()
-        setCategory(categry)
-    }
-
-    HomePageLogin({ category })
 
     return (
         <header className='login-header'>
@@ -49,31 +41,7 @@ const NavigationbarLogin = () => {
                         <img src={Cafe_Crafter_Logo} alt="Cafe_Crafter_Logo" className="cc-logo" id="cafe-crafter-logo" />
                     </Link>
                 </div>
-                <div className='nav-middle-crafter'>
-                    <ul>
-                        <li className={category === "Coffee" ? 'load-coffee-category' : 'unload-coffee-category'}>
-                            <button
-                                onClick={(event) => handleCategory(event, "Coffee")}
-                            >
-                                Coffee
-                            </button>
-                        </li>
-                        <li className={category === "Tea" ? 'load-tea-category' : 'unload-tea-category'}>
-                            <button
-                                onClick={(event) => handleCategory(event, "Tea")}
-                            >
-                                Tea
-                            </button>
-                        </li>
-                        <li className={category === "Cake" ? 'load-cake-category' : 'unload-cake-category'}>
-                            <button
-                                onClick={(event) => handleCategory(event, "Cake")}
-                            >
-                                Cake
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+
                 <div className="nav-right-crafter-login">
                     <IconButton aria-label="cart">
 
@@ -98,4 +66,4 @@ const NavigationbarLogin = () => {
     )
 }
 
-export default NavigationbarLogin
+export default NavigationbarProfile

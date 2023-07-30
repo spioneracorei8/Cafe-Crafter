@@ -1,0 +1,20 @@
+.profile-container {
+    font-family: 'whipsmart';
+    width: 100vw;
+    height: auto;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    background-color: #FFE6A7;
+}
+
+.edit-profile {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
