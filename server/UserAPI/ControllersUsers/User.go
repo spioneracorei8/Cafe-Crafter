@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -12,6 +13,29 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/spioneracorei8/Cafe-Crafter/UserAPI/ModelsUser"
 )
+
+func GetUserData(c *gin.Context) {
+	id := c.Param("id")
+	userId, err := strconv.Atoi(id)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
+	}
+	user, err, errNoRow := ModelsUser.GetUserData(userId)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err})
+		return
+	} else if errNoRow != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "The id you entered does not exist."})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": user,
+		})
+	}
+
+}
 
 func Register(c *gin.Context) {
 	var user ModelsUser.User
