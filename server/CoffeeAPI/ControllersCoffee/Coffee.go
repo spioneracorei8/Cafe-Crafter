@@ -37,6 +37,7 @@ func GetCoffeeId(c *gin.Context) {
 	coffeeId, err := strconv.Atoi(id)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
 	}
 	coffee, err, errNoRow := ModelsCoffee.GetCoffeeId(coffeeId)
 	if err != nil {

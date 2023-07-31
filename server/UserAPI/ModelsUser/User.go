@@ -7,6 +7,28 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+func GetUserData(userId int) (*User, error, error) {
+	user := &User{}
+
+	query := Config.DB.QueryRow(`SELECT id, name, username, gender, email, address, phone_number FROM coffeedatabase.users WHERE id = ?`, userId)
+
+	err := query.Scan(
+		&user.Id,
+		&user.Name,
+		&user.Username,
+		&user.Gender,
+		&user.Email,
+		&user.Address,
+		&user.Phone_number,
+	)
+	if err == sql.ErrNoRows {
+		return nil, nil, err
+	} else if err != nil {
+		return nil, err, nil
+	}
+	return user, nil, nil
+}
+
 func Register(user *User) (int64, error) {
 
 	insert := `INSERT INTO users (name, username, password, gender, email, address, phone_number, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
