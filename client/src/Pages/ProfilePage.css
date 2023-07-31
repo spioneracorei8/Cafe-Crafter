@@ -1,6 +1,6 @@
 .profile-container {
     font-family: 'whipsmart';
-    width: 100vw;
+    width: 100dvw;
     height: auto;
     padding-left: 3rem;
     padding-right: 3rem;
@@ -8,13 +8,111 @@
 }
 
 .edit-profile {
+    margin-top: 2rem;
+    margin-right: 2rem;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+.edit-profile button {
+    font-family: 'whipsmart';
+    font-size: 1.5rem;
+    font-weight: 900;
+    background-color: #E9B384;
+    border: none;
+    padding: 10px;
+    border-radius: 20%;
+    cursor: pointer;
+    color: #432818;
+}
+
+.edit-profile button:hover {
+    background-color: #ff996d;
 }
 
 .profile {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.profile h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #432818;
+}
+
+.profile-data-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-data-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.name-data,
+.password-data,
+.email-data,
+.gender-data {
+    margin-left: 11rem;
+    margin-bottom: 1.2rem;
+}
+
+.profile-data {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 33.33%;
+}
+
+.profile-data label {
+    font-size: 1.1rem;
+    font-weight: 100;
+    color: #432818;
+}
+
+.profile-data input {
+    font-family: 'whipsmart';
+    width: 300px;
+    height: 40px;
+    border-radius: 5%;
+    margin-bottom: 1.4rem;
+    font-size: 1.2rem;
+    color: #432818;
+    font-weight: 100;
+    padding: 5px;
+}
+
+.save-edit-changes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.save-edit-changes button {
+    font-family: 'whipsmart';
+    font-size: 1.5rem;
+    font-weight: 900;
+    background-color: #ff996d;
+    border: none;
+    padding: 10px;
+    border-radius: 20%;
+    cursor: pointer;
+    color: #432818;
+}
+
+.save-edit-changes button:hover {
+    background-color: #E9B384;
+
 }
