@@ -71,7 +71,7 @@ func Login(c *gin.Context) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
-	result, err, username := ModelsUser.Login(&user)
+	result, err, userData := ModelsUser.Login(&user)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -79,7 +79,8 @@ func Login(c *gin.Context) {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &jwt.MapClaims{
-		"username": username,
+		"id":       userData["id"],
+		"username": userData["username"],
 		"exp":      time.Now().Add(time.Hour * 24 * 30).Unix(),
 	})
 
