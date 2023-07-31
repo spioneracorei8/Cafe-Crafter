@@ -12,6 +12,7 @@ type User struct {
 	Role         string
 }
 type UserCredential struct {
+	Id       int
 	Username string
 	Password string
 }

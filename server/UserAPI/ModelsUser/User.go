@@ -3,6 +3,7 @@ package ModelsUser
 import (
 	"database/sql"
 
+	"github.com/gin-gonic/gin"
 	"github.com/spioneracorei8/Cafe-Crafter/Config"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -52,24 +53,30 @@ func Register(user *User) (int64, error) {
 	return userId, nil
 }
 
-func Login(user *UserCredential) (bool, error, string) {
+func Login(user *UserCredential) (bool, error, gin.H) {
 	userCredential := &UserCredential{}
 	username := user.Username
 	password := user.Password
 
-	query := Config.DB.QueryRow(`SELECT username, password FROM users WHERE username = ?`, username)
+	query := Config.DB.QueryRow(`SELECT id, username, password FROM users WHERE username = ?`, username)
 	err := query.Scan(
+		&userCredential.Id,
 		&userCredential.Username,
 		&userCredential.Password,
 	)
 	if err == sql.ErrNoRows {
-		return false, err, ""
+		return false, err, gin.H{}
 	} else if err != nil {
-		return false, err, ""
+		return false, err, gin.H{}
 	}
 
 	result := bcrypt.CompareHashAndPassword([]byte(userCredential.Password), []byte(password))
 
-	return result == nil, nil, username
+	userData := gin.H{
+		"id":       userCredential.Id,
+		"username": username,
+	}
+
+	return result == nil, nil, userData
 
 }
