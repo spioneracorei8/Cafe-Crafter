@@ -116,3 +116,12 @@
     background-color: #E9B384;
 
 }
+
+.address-data {
+    margin-bottom: 2rem;
+}
+
+.address-data textarea {
+    font-family: 'whipsmart';
+
+}
