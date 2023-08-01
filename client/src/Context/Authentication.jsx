@@ -23,11 +23,12 @@ const AuthProvider = (props) => {
     const login = async (data) => {
         const result = await axios.post(`http://localhost:4000/auth-user/login`, data)
         const token = result.data.token
-        localStorage.setItem("token", token)
-
         const userDataFromToken = jwtDecode(token)
-        setState({ ...state, user: userDataFromToken })
 
+        localStorage.setItem("token", token)
+        localStorage.setItem("id", userDataFromToken.id)
+
+        setState({ ...state, user: userDataFromToken })
         navigate("/")
     }
 
