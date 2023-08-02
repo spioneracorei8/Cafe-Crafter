@@ -12,7 +12,7 @@ func SetRouter() *gin.Engine {
 	r.Use(Middlewares.CorsMiddleware())
 	CoffeeRotes := r.Group("/coffee")
 	{
-		// CoffeeRotes.Use() Middlewares.Middleware()
+		// CoffeeRotes.Use(Middlewares.TokenMiddleware())
 		CoffeeRotes.GET("/", ControllersCoffee.GetCoffee)
 		CoffeeRotes.GET("/:id", ControllersCoffee.GetCoffeeId)
 		CoffeeRotes.POST("/", ControllersCoffee.InsertCoffee)

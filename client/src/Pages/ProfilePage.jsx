@@ -11,15 +11,14 @@ const ProfilePage = () => {
     const [isEdit, setIsEdit] = useState(false)
     const [userData, setUserData] = useState({})
     const { Name, Username, Email, Phone_number, Gender, Address } = userData
+    const [id, setId] = useState("")
     const [name, setName] = useState("")
     const [username, setUsername] = useState("")
-    const [email, setEmail] = useState("")
-    const [phone_Number, setPhone_Number] = useState("")
+    const [password, setPassword] = useState("")
     const [gender, setGender] = useState("")
+    const [email, setEmail] = useState("")
     const [address, setAddress] = useState("")
-
-    console.log(name);
-
+    const [phone_Number, setPhone_Number] = useState("")
 
     const getUserData = async () => {
         try {
@@ -27,12 +26,13 @@ const ProfilePage = () => {
             setIsLoading(true)
             const result = await axios.get(`http://localhost:4000/auth-user/${localStorage.getItem("id")}`)
             setUserData(result.data.data)
+            setId(result.data.data.Id)
             setName(result.data.data.Name)
             setUsername(result.data.data.Username)
-            setEmail(result.data.data.Email)
-            setPhone_Number(result.data.data.Phone_number)
             setGender(result.data.data.Gender)
+            setEmail(result.data.data.Email)
             setAddress(result.data.data.Address)
+            setPhone_Number(result.data.data.Phone_number)
             setIsLoading(false)
         } catch (error) {
             setIsError(true)
@@ -44,6 +44,31 @@ const ProfilePage = () => {
     const handleEditProfile = (event) => {
         event.preventDefault()
         setIsEdit(true)
+    }
+
+    const handleEditUserData = async (event, id) => {
+        event.preventDefault()
+        try {
+            setIsError(false)
+            setIsLoading(true)
+            const data = {
+                name,
+                username,
+                password,
+                gender,
+                email,
+                address,
+                phone_Number
+            }
+            await axios.put(`http://localhost:4000/auth-user/${id}`, data)
+            setIsLoading(false)
+            window.location.replace("/Profile")
+
+        } catch (error) {
+            setIsLoading(false)
+            setIsError(true)
+            console.log(error);
+        }
     }
 
 
@@ -116,6 +141,7 @@ const ProfilePage = () => {
                                 ? <input
                                     type="password"
                                     placeholder='************'
+                                    onChange={(event) => setPassword(event.target.value)}
 
                                 />
                                 : <input
@@ -225,9 +251,20 @@ const ProfilePage = () => {
                         </div>
                     </div>
                     <div className='save-edit-changes'>
-                        <button>
-                            Save Changes
-                        </button>
+                        {isEdit
+                            ? <button
+                                className='save-changes'
+                                onClick={(event) => handleEditUserData(event, id)}
+                            >
+                                Save Changes
+                            </button>
+                            : <button
+                                className='unsave-changes'
+                                disabled
+                            >
+                                Save Changes
+                            </button>
+                        }
                     </div>
                 </form>
             </section>

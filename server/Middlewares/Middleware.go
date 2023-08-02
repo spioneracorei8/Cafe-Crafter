@@ -13,7 +13,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func Middleware() gin.HandlerFunc {
+func TokenMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		err := godotenv.Load(".env")
 		if err != nil {

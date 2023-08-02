@@ -100,7 +100,7 @@
     margin-bottom: 3rem;
 }
 
-.save-edit-changes button {
+.save-changes {
     font-family: 'whipsmart';
     font-size: 1.5rem;
     font-weight: 900;
@@ -112,9 +112,20 @@
     color: #432818;
 }
 
-.save-edit-changes button:hover {
+.save-changes:hover {
     background-color: #E9B384;
+}
 
+.unsave-changes {
+    font-family: 'whipsmart';
+    font-size: 1.5rem;
+    font-weight: 900;
+    background-color: #E9B384;
+    border: none;
+    padding: 10px;
+    border-radius: 20%;
+    cursor: no-drop;
+    color: #432818;
 }
 
 .address-data {
