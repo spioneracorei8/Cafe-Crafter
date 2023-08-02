@@ -37,6 +37,37 @@ func GetUserData(c *gin.Context) {
 
 }
 
+func EditUserData(c *gin.Context) {
+	var user ModelsUser.User
+
+	if err := c.ShouldBindJSON(&user); err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	id := c.Param("id")
+
+	userId, err := strconv.Atoi(id)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
+	}
+
+	updateUserData, err, errNoRow := ModelsUser.EditUserData(&user, userId)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else if errNoRow != nil {
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data":    updateUserData,
+			"message": "updated user successfully.",
+		})
+	}
+}
+
 func Register(c *gin.Context) {
 	var user ModelsUser.User
 

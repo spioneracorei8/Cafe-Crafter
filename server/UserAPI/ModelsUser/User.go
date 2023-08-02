@@ -30,6 +30,46 @@ func GetUserData(userId int) (*User, error, error) {
 	return user, nil, nil
 }
 
+func EditUserData(user *User, userId int) (*User, error, error) {
+	userData := &User{}
+
+	query := `SELECT id, name, username, gender, email, address, phone_number FROM coffeedatabase.users WHERE id = ?`
+
+	update := `UPDATE coffeedatabase.users SET name = ?,username = ?, password = ?, gender = ?, email = ?, address = ?, phone_number = ? WHERE id = ?`
+
+	hashPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
+	if err != nil {
+		return nil, err, nil
+	}
+
+	_, err = Config.DB.Exec(update, user.Name, user.Username, hashPassword, user.Gender, user.Email, user.Address, user.Phone_number, userId)
+
+	if err != nil {
+		return nil, err, nil
+	}
+
+	userRow := Config.DB.QueryRow(query, userId)
+
+	err = userRow.Scan(
+		&userData.Id,
+		&userData.Name,
+		&userData.Username,
+		&userData.Gender,
+		&userData.Email,
+		&userData.Address,
+		&userData.Phone_number,
+	)
+
+	if err == sql.ErrNoRows {
+		return nil, nil, err
+	} else if err != nil {
+		return nil, err, nil
+	} else {
+		return userData, nil, nil
+	}
+
+}
+
 func Register(user *User) (int64, error) {
 
 	insert := `INSERT INTO users (name, username, password, gender, email, address, phone_number, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`

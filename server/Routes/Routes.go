@@ -32,6 +32,7 @@ func SetRouter() *gin.Engine {
 		UserRoutes.GET("/:id", ControllersUsers.GetUserData)
 		UserRoutes.POST("/register", ControllersUsers.Register)
 		UserRoutes.POST("/login", ControllersUsers.Login)
+		UserRoutes.PUT("/:id", ControllersUsers.EditUserData)
 	}
 	return r
 
