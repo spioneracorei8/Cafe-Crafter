@@ -1,4 +1,4 @@
-nav {
+.header-regis-login {
     width: 100vw;
     height: 12vh;
     background-color: #D4A276;
@@ -7,7 +7,7 @@ nav {
     font-family: 'whipsmart';
 }
 
-.nav-left-logo {
+.header-left-logo {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,7 +19,7 @@ nav {
     width: 10rem;
 }
 
-.nav-right-button button {
+.header-right-button button {
     font-size: 1rem;
     font-weight: 400;
     margin-left: 0.5rem;
@@ -32,6 +32,6 @@ nav {
     font-family: 'whipsmart';
 }
 
-.nav-right-button button:hover {
+.header-right-button button:hover {
     background-color: #FFE6A7;
 }

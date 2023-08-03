@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react'
 import './HomePageNonLogin.css'
 import { IngredientsCoffeeData, OtherAboutCoffeeData } from '../data/CoffeeData.js'
-import NavigationbarNonLogin from '../Components/NavigationbarNonLogin'
 import Footer from '../Components/Footer'
 import CoffeePopup from '../Components/CoffeePopup'
 import Loading from '../Components/Loading'
@@ -9,9 +8,11 @@ import Arrow_Left_Icon from '../assets/Icon/Arrow_Left_Icon.png'
 import Arrow_Right_Icon from '../assets/Icon/Arrow_Right_Icon.png'
 import useCoffee from '../Hook/useCoffee'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import Cafe_Crafter_Logo from "../assets/Logo/Cafe_Crafter_Logo.png"
 
 const HomePageNonLogin = () => {
+    const navigate = useNavigate()
     const { isLoading, setIsLoading, isError, setIsError, suggestCoffee } = useCoffee()
     const scrollContainerRef = useRef(null)
     const [coffeeData, setCoffeeData] = useState({})
@@ -44,8 +45,23 @@ const HomePageNonLogin = () => {
         }
     }
 
+    const handleNavigate = (event, id) => {
+        event.preventDefault()
+        const element = document.getElementById(id)
+        if (element.id === "cafe-crafter-logo") {
+            window.location.replace("/")
+        } else if (element) {
+            element.scrollIntoView({ behavior: "smooth" })
+        }
+    }
+
     const handleCoffeePopUp = () => {
         setCoffeePopUp(!coffeePopUp)
+    }
+    const handleViewAll = (event) => {
+        event.preventDefault()
+        window.scrollTo(0, 0)
+        navigate("/Login")
     }
 
     return (
@@ -56,7 +72,6 @@ const HomePageNonLogin = () => {
             {isLoading &&
                 <Loading />
             }
-            <NavigationbarNonLogin />
             {coffeePopUp &&
                 <CoffeePopup
                     handleCoffeePopUp={handleCoffeePopUp}
@@ -64,8 +79,42 @@ const HomePageNonLogin = () => {
                 />
             }
 
-            <main className='main-container'>
+            <header className="non-login-header">
+                <nav className="header-container">
+                    <div>
+                        <Link to={"/"} onClick={(event) => handleNavigate(event, "cafe-crafter-logo")}>
+                            <img src={Cafe_Crafter_Logo} alt="Cafe_Crafter_Logo" className="cc-logo" id="cafe-crafter-logo" />
+                        </Link>
+                    </div>
+                    <div className="nav-middle-crafter">
+                        <ul>
+                            <li>
+                                <Link to={"/"} onClick={(event) => handleNavigate(event, "suggestions-coffee")}>
+                                    Suggestions Coffee
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to={"/"} onClick={(event) => handleNavigate(event, "cafe-crafter?")}>
+                                    Cafe-Crafter?
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to={"/"} onClick={(event) => handleNavigate(event, "contact-us")}>
+                                    Contact us
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="nav-right-crafter">
+                        <button onClick={() => navigate("/Register")}>Register</button>
+                        <button onClick={() => navigate("/Login")}>Login</button>
+                    </div>
+                </nav>
+            </header>
 
+
+
+            <main className='main-container'>
                 <section className='discover-you-brew'>
                     <div className='discover-content'>
                         <h1>Discover Your Brew!</h1>
@@ -80,8 +129,11 @@ const HomePageNonLogin = () => {
                 <div className='suggest-coffee-container' id='suggestions-coffee'>
                     <h1>Suggestions Coffee</h1>
                     <div className='scroll-image-container'>
-                        <div className='scroll-image-view-all'>
-                            <h2>View All</h2>
+                        <div
+                            className='scroll-image-view-all'
+                            onClick={(event) => handleViewAll(event)}
+                        >
+                            <Link>View All</Link>
                         </div>
                         <div className='scroll-arrow'>
                             <div className="scroll-arrow-left" onClick={() => ScrollLeft()}>
