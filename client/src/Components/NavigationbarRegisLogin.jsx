@@ -16,17 +16,17 @@ const NavigationbarRegisLogin = () => {
 
     return (
         <>
-            <nav>
-                <div className='nav-left-logo'>
+            <header className='header-regis-login'>
+                <div className='header-left-logo'>
                     <Link to={"/"} onClick={(event) => handleNavigate(event, "cafe-crafter-logo")}>
                         <img src={Cafe_Crafter_Logo} alt="Cafe_Crafter_Logo" className="cc-logo" id="cafe-crafter-logo" />
                     </Link>
-                    <div className="nav-right-button">
+                    <div className="header-right-button">
                         <button onClick={() => navigate("/Register")}>Register</button>
                         <button onClick={() => navigate("/Login")}>Login</button>
                     </div>
                 </div>
-            </nav>
+            </header>
         </>
     )
 }

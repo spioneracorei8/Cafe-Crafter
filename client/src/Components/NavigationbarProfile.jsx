@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import './NavigationbarLogin.css'
 import { useNavigate, Link } from 'react-router-dom'
 import Cafe_Crafter_Logo from "../assets/Logo/Cafe_Crafter_Logo.png"
 import { useAuth } from '../Context/Authentication'
-import HomePageLogin from '../Pages/HomePageLogin'
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
@@ -23,7 +21,6 @@ const NavigationbarProfile = () => {
     const { logout } = useAuth()
 
 
-
     const handleNavigate = (event, id) => {
         event.preventDefault()
         const element = document.getElementById(id)
@@ -34,8 +31,8 @@ const NavigationbarProfile = () => {
 
 
     return (
-        <header className='login-header'>
-            <nav className="header-container">
+        <header className='login-header-container'>
+            <nav className="nav-login-container">
                 <div>
                     <Link to={"/"} onClick={(event) => handleNavigate(event, "cafe-crafter-logo")}>
                         <img src={Cafe_Crafter_Logo} alt="Cafe_Crafter_Logo" className="cc-logo" id="cafe-crafter-logo" />

@@ -5,9 +5,10 @@ import Footer from "../Components/Footer"
 import Coffee_Beans from "../assets/Background/Coffee_Beans.jpg"
 import Cafe_Crafter_Logo from '../assets/Logo/Cafe_Crafter_Logo.png'
 import { useAuth } from '../Context/Authentication'
-
+import CountryStateData from "../data/CountryStateData.json"
 
 const RegisterPage = () => {
+
     let [registerPage, setRegisterPage] = useState(1)
     const [name, setName] = useState("")
     const [username, setUsername] = useState("")
@@ -19,6 +20,8 @@ const RegisterPage = () => {
     const [phone_number, setPhone_number] = useState("")
     const { register } = useAuth()
     const phoneNumberRegex = /^[0-9]+$/
+
+    console.log(CountryStateData);
 
     const handleNextRegisterPage = (event) => {
         event.preventDefault()
@@ -45,7 +48,6 @@ const RegisterPage = () => {
     const handlePreviousRegisterPage = (event) => {
         event.preventDefault();
         setRegisterPage(registerPage = 1)
-
     }
 
     const handleRegisterNow = (event) => {
