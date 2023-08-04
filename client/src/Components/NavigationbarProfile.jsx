@@ -24,8 +24,11 @@ const NavigationbarProfile = () => {
     const handleNavigate = (event, id) => {
         event.preventDefault()
         const element = document.getElementById(id)
-        if (element.id === "cafe-crafter-logo") {
+        console.log(id);
+        if (element?.id === "cafe-crafter-logo") {
             window.location.replace("/")
+        } else if (id === "/Cart") {
+            navigate("/Cart")
         }
     }
 
@@ -40,7 +43,11 @@ const NavigationbarProfile = () => {
                 </div>
 
                 <div className="nav-right-crafter-login">
-                    <IconButton aria-label="cart">
+                    <IconButton
+                        aria-label="cart"
+                        onClick={() => navigate("/Cart")}
+
+                    >
 
                         <StyledBadge badgeContent={5} color="warning">
                             <ShoppingCartIcon />
