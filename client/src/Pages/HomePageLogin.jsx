@@ -55,9 +55,17 @@ const HomePageLogin = () => {
 
     const handleNavigate = (event, id) => {
         event.preventDefault()
+        console.log(id);
         const element = document.getElementById(id)
-        if (element.id === "cafe-crafter-logo") {
+        console.log(element.id);
+        if (element?.id === "cafe-crafter-logo") {
             window.location.replace("/")
+        } else if (element?.id === "/Cart") {
+            navigate("/Cart")
+            // window.location.replace("/Cart")
+        } else if (element?.id === "/Profile") {
+            navigate("/Profile")
+            // window.location.replace("/Profile")
         }
     }
 
@@ -117,7 +125,12 @@ const HomePageLogin = () => {
                         </ul>
                     </div>
                     <div className="nav-right-crafter-login">
-                        <IconButton aria-label="cart">
+                        <IconButton
+                            aria-label="cart"
+                            id='/Cart'
+                            onClick={(event) => handleNavigate(event, "/Cart")}
+
+                        >
 
                             <StyledBadge badgeContent={5} color="warning">
                                 <ShoppingCartIcon />
@@ -125,7 +138,8 @@ const HomePageLogin = () => {
                             </StyledBadge>
                         </IconButton>
                         <button
-                            onClick={() => navigate("/Profile")}
+                            id='/Profile'
+                            onClick={(event) => handleNavigate(event, "/Profile")}
                         >
                             Profile
                         </button>
