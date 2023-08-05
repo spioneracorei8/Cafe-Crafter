@@ -1,11 +1,11 @@
 import React from 'react'
-import NavigationbarProfile from '../Components/NavigationbarProfile'
 import "./CartPage.css"
+import NavigationbarProfile from '../Components/NavigationbarProfile'
 import Coffee_Beans from "../assets/Background/Coffee_Beans.jpg"
-
 import Footer from '../Components/Footer'
 
 const CartPage = () => {
+
     return (
         <>
 
@@ -48,13 +48,14 @@ const CartPage = () => {
                 </div>
                 <div className='underline-cart-topic'></div>
 
-
                 <div className='added-menu-container'>
                     <div className='img-name-added'>
-                        <img src={Coffee_Beans} alt="coffee" style={{ width: "120px", height: "130px" }} />
-                        <p>
-                            Coffeeeeeeeeeee
-                        </p>
+                        <img src={Coffee_Beans} alt="coffee" className='img-added' />
+                        <div className="coffee-name-added">
+                            <p>
+                                Coffeeesdeeeeeeeeeeeeeeeeeeee
+                            </p>
+                        </div>
                     </div>
                     <div className='category-price-added'>
                         <div className='category-added'>
@@ -66,21 +67,18 @@ const CartPage = () => {
                     </div>
                     <div className='quantity-total-added'>
                         <div className='add-reduce-quantity'>
-                            <div>
+                            <p className='add-symbol'>
                                 +
-                            </div>
-                            <p>1</p>
-                            <div>
-                                -
-                            </div>
+                            </p>
+                            <p className='quantity-added'>1</p>
+                            <p className='reduce-symbol'>
+                                −
+                            </p>
                         </div>
                         <div className='total-added'>
-                            <p>100$</p>
+                            <p>10000000$</p>
                         </div>
                     </div>
-
-
-
 
                 </div>
 

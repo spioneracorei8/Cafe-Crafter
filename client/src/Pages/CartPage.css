@@ -31,11 +31,12 @@
     display: flex;
     flex-direction: row;
     gap: 100px;
+    padding-right: 80px;
 }
 
 .container-cart-list li {
     font-size: 1.2rem;
-    font-weight: 200;
+    font-weight: 900;
     font-style: normal;
 }
 
@@ -52,45 +53,104 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 2rem;
+    overflow-y: hidden;
 }
 
 .img-name-added {
+    width: 33.3333333333%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
     gap: 10px;
 }
 
-.img-name-added p {
+.img-added {
+    width: 120px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 5%;
+    object-fit: cover;
+    object-position: center center;
+    image-rendering: auto;
+}
+
+.coffee-name-added {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 190px;
+    height: auto;
+}
+
+.coffee-name-added p {
+    font-size: 1.4rem;
+    font-weight: 900;
+    font-style: normal;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .category-price-added {
+    width: 33.3333333333%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 125px;
-    margin: auto;
+    gap: 105px;
+}
+
+.category-added p {
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.price-added p {
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
 }
 
 .quantity-total-added {
+    width: 33.3333333333%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-left: 205px;
+    margin-right: -30px;
+    gap: 80px;
 }
 
 .add-reduce-quantity {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
+}
+
+.add-symbol,
+.reduce-symbol {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.quantity-added {
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
 }
 
 .total-added {
-    margin-left: 105px;
+    width: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.total-added p {
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+    word-wrap: break-word;
 }
