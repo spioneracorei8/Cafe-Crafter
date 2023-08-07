@@ -82,6 +82,51 @@ const CartPage = () => {
 
                 </div>
 
+                <div className='bill-container'>
+                    <div className='coupon-code'>
+                        <div className='input-coupon'>
+                            <input type="text" placeholder='Apply The Coupon' />
+                            <button>
+                                <h1>
+                                    Check Discount Coupon
+                                </h1>
+                            </button>
+                        </div>
+                    </div>
+                    <div className='check-bill'>
+                        <div className='sub-total'>
+                            <h3>
+                                Subtotal:
+                            </h3>
+                            <h3>
+                                100฿
+                            </h3>
+                        </div>
+                        <div className='coupon-total'>
+                            <h3>
+                                Discount Coupon:
+                            </h3>
+                            <h3>
+                                100฿
+                            </h3>
+                        </div>
+                        <div className='grand-total'>
+                            <h3>
+                                <span>?</span> Grand total:
+                            </h3>
+                            <h3>
+                                100฿
+                            </h3>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div className='proceed-to-checkout'>
+                    <button>
+                        <h1>Proceed to checkout </h1>
+                    </button>
+                </div>
             </section>
 
             <Footer />
