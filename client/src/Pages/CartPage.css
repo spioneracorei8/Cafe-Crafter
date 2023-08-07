@@ -83,7 +83,7 @@
 }
 
 .coffee-name-added p {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 900;
     font-style: normal;
     max-width: 100%;
@@ -100,13 +100,13 @@
 }
 
 .category-added p {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 500;
 }
 
 .price-added p {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 500;
 }
@@ -136,7 +136,7 @@
 }
 
 .quantity-added {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 500;
 }
@@ -149,8 +149,177 @@
 }
 
 .total-added p {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 500;
     word-wrap: break-word;
+}
+
+.bill-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 3rem;
+    width: 100%;
+    height: auto;
+}
+
+.coupon-code {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 50%;
+    height: auto;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
+    border-radius: 10%;
+}
+
+.input-coupon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.input-coupon input {
+    padding: 2px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    width: 270px;
+    height: 40px;
+    border: 1px solid #D4A276;
+}
+
+.input-coupon button h1 {
+    color: #432818;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.input-coupon button {
+    padding: 1rem;
+    border-radius: 7%;
+    background-color: #FFEDD8;
+    cursor: pointer;
+    border: 2px solid #D4A276;
+}
+
+.input-coupon button:hover {
+    background-color: #ffdcb5;
+
+}
+
+.input-coupon button:active {
+    background-color: #ffc583;
+}
+
+.check-bill {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    background-color: #FFEDD8;
+    border: 2px solid #D4A276;
+    width: 50%;
+    height: auto;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
+    border-radius: 10%;
+}
+
+.sub-total {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.sub-total :first-child {
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #432818;
+}
+
+.sub-total :last-child {
+    color: #432818;
+    font-weight: 900;
+    font-size: 1.4rem;
+    user-select: none;
+}
+
+.coupon-total {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.coupon-total :first-child {
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: #432818;
+}
+
+.coupon-total :last-child {
+    color: #432818;
+    font-weight: 900;
+    font-size: 1.5rem;
+    user-select: none;
+}
+
+.grand-total {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.grand-total :first-child {
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #432818;
+}
+
+.grand-total :last-child {
+    color: #432818;
+    font-weight: 900;
+    font-size: 1.6rem;
+    user-select: none;
+}
+
+.proceed-to-checkout {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.proceed-to-checkout button {
+    padding: 1rem;
+    border-radius: 7%;
+    background-color: #FFEDD8;
+    cursor: pointer;
+    border: 2px solid #D4A276;
+}
+
+.proceed-to-checkout button:hover {
+    background-color: #ffdcb5;
+}
+
+.proceed-to-checkout button:active {
+    background-color: #ffc583;
+}
+
+.proceed-to-checkout button h1 {
+    color: #432818;
+    font-weight: 600;
 }
