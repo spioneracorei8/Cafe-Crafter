@@ -4,7 +4,9 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
 import { AuthProvider } from './Context/Authentication.jsx'
+import jwtInterceptor from './Utils/Jwtinterceptor.js'
 
+jwtInterceptor()
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
