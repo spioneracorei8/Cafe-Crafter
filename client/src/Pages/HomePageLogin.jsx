@@ -55,9 +55,9 @@ const HomePageLogin = () => {
 
     const handleNavigate = (event, id) => {
         event.preventDefault()
-        console.log(id);
+
         const element = document.getElementById(id)
-        console.log(element.id);
+
         if (element?.id === "cafe-crafter-logo") {
             window.location.replace("/")
         } else if (element?.id === "/Cart") {

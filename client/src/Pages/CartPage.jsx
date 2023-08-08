@@ -7,6 +7,7 @@ import Footer from '../Components/Footer'
 const CartPage = () => {
 
     return (
+
         <>
 
             <NavigationbarProfile />
@@ -57,6 +58,7 @@ const CartPage = () => {
                             </p>
                         </div>
                     </div>
+
                     <div className='category-price-added'>
                         <div className='category-added'>
                             <p>Coffee</p>
@@ -65,14 +67,15 @@ const CartPage = () => {
                             <p>100$</p>
                         </div>
                     </div>
+
                     <div className='quantity-total-added'>
                         <div className='add-reduce-quantity'>
                             <p className='add-symbol'>
-                                +
+                                −
                             </p>
                             <p className='quantity-added'>1</p>
                             <p className='reduce-symbol'>
-                                −
+                                +
                             </p>
                         </div>
                         <div className='total-added'>

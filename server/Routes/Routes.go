@@ -12,7 +12,7 @@ func SetRouter() *gin.Engine {
 	r.Use(Middlewares.CorsMiddleware())
 	CoffeeRotes := r.Group("/coffee")
 	{
-		// CoffeeRotes.Use(Middlewares.TokenMiddleware())
+		CoffeeRotes.Use(Middlewares.TokenMiddleware())
 		CoffeeRotes.GET("/", ControllersCoffee.GetCoffee)
 		CoffeeRotes.GET("/:id", ControllersCoffee.GetCoffeeId)
 		CoffeeRotes.POST("/", ControllersCoffee.InsertCoffee)
@@ -29,10 +29,10 @@ func SetRouter() *gin.Engine {
 	}
 	UserRoutes := r.Group("/auth-user")
 	{
-		UserRoutes.GET("/:id", ControllersUsers.GetUserData)
 		UserRoutes.POST("/register", ControllersUsers.Register)
 		UserRoutes.POST("/login", ControllersUsers.Login)
-		UserRoutes.PUT("/:id", ControllersUsers.EditUserData)
+		UserRoutes.GET("/:id", Middlewares.TokenMiddleware(), ControllersUsers.GetUserData)
+		UserRoutes.PUT("/:id", Middlewares.TokenMiddleware(), ControllersUsers.EditUserData)
 	}
 	return r
 
