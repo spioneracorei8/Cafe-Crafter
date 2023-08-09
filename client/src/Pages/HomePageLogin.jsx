@@ -74,6 +74,11 @@ const HomePageLogin = () => {
         setCategory(categry)
     }
 
+    const handleBuyNow = (event, coffeeName, coffeeId) => {
+        event.preventDefault()
+        navigate(`/Buy/${coffeeId}/${coffeeName}`)
+    }
+
     return (
         <>
             {isLoading &&
@@ -166,7 +171,12 @@ const HomePageLogin = () => {
                                 <img src={item.Image_url} alt="img" />
 
                                 <div className='three-button-container'>
-                                    <button className='buy-now'>Buy Now</button>
+                                    <button
+                                        className='buy-now'
+                                        onClick={(event) => handleBuyNow(event, item.Name, item.Id)}
+                                    >
+                                        Buy Now
+                                    </button>
                                     <button
                                         className='learn-more'
                                         onClick={(() => {
@@ -174,7 +184,7 @@ const HomePageLogin = () => {
                                             handleCoffeePopUp()
                                         })}
                                     >
-                                        Learn More
+                                        Details
                                     </button>
                                     <button
                                         className='add-to-cart'

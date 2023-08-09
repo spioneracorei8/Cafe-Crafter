@@ -1,0 +1,33 @@
+.buy-coffee-container {
+    width: 100dvw;
+    height: auto;
+    background-color: #FFE6A7;
+    font-family: 'whipsmart';
+    padding: 3rem;
+}
+
+.buy-coffee-data-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.buy-coffee-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buy-coffee-heading1 {
+    
+}
+
+.buy-coffee-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 5%;
+    object-fit: cover;
+    object-position: center center;
+    image-rendering: auto;
+}
