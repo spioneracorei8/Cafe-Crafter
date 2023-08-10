@@ -76,6 +76,7 @@ const HomePageLogin = () => {
 
     const handleBuyNow = (event, coffeeName, coffeeId) => {
         event.preventDefault()
+        window.scrollTo(0, 0)
         navigate(`/Buy/${coffeeId}/${coffeeName}`)
     }
 

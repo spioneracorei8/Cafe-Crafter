@@ -23,8 +23,9 @@ const NavigationbarProfile = () => {
 
     const handleNavigate = (event, id) => {
         event.preventDefault()
+
         const element = document.getElementById(id)
-        console.log(id);
+
         if (element?.id === "cafe-crafter-logo") {
             window.location.replace("/")
         } else if (id === "/Cart") {

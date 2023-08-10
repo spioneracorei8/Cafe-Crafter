@@ -3,16 +3,13 @@ import './BuyCoffeePage.css'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import NavigationbarProfile from '../Components/NavigationbarProfile'
-import Coffee_Beans from "../assets/Background/Coffee_Beans.jpg"
-
+import Footer from '../Components/Footer'
 
 const BuyCoffeePage = () => {
-    const { coffeeName, coffeeId } = useParams();
+    const { coffeeId } = useParams();
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [coffeeData, setCoffeeData] = useState({})
-
-    console.log(coffeeData);
 
     const getCoffeeId = async () => {
         try {
@@ -34,19 +31,45 @@ const BuyCoffeePage = () => {
 
     return (
         <>
+
             <NavigationbarProfile />
+
             <section className='buy-coffee-container'>
                 <div className='buy-coffee-data-container'>
                     <div className='buy-coffee-data'>
-                        <h1 className='buy-coffee-heading1'>
-                            Coffee Name
-                        </h1>
-                        <img src={Coffee_Beans} alt="google" className='buy-coffee-img' />
+                        <div className='buy-coffee-name-heading'>
+                            <h1>
+                                {coffeeData.Name}
+                            </h1>
+                        </div>
+                        <img src={coffeeData.Image_url} alt={`${coffeeData.Name} image`} className='buy-coffee-img' />
+
+                        <div className='buy-coffee-price'>
+                            <h2>
+                                {coffeeData.Price}฿
+                            </h2>
+                        </div>
+
+                        <div className='buy-coffee-description'>
+                            <p>
+                                {coffeeData.Description}
+                            </p>
+                        </div>
+
+                        <div className='buy-coffee-buy'>
+                            <button>
+                                <h1>
+                                    Buy Now!
+                                </h1>
+                            </button>
+                        </div>
+
                     </div>
+
                 </div>
             </section>
 
-
+            <Footer />
         </>
 
     )
