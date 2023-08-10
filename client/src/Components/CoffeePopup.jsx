@@ -2,15 +2,22 @@ import React, { Suspense } from 'react'
 import './CoffeePopup.css'
 import Loading from './Loading'
 import Cross from '../assets/Icon/Cross.png'
-
+import { useNavigate } from 'react-router-dom'
 const CoffeePopup = (props) => {
+    const navigate = useNavigate()
     const {
+        Id,
         Name,
         Image_url,
         Price,
         Description
     } = props?.coffeeData
 
+    const handleBuyNow = (event, coffeeName, coffeeId) => {
+        event.preventDefault()
+        window.scrollTo(0, 0)
+        navigate(`/Buy/${coffeeId}/${coffeeName}`)
+    }
 
     return (
         <div className='coffee-popup-container' onClick={() => props.handleCoffeePopUp()}>
@@ -29,7 +36,11 @@ const CoffeePopup = (props) => {
                     </div>
                 </Suspense>
                 <div className='popup-button'>
-                    <button>Buy Now!!</button>
+                    <button
+                        onClick={(event) => handleBuyNow(event, Name, Id)}
+                    >
+                        Buy Now!
+                    </button>
                 </div>
             </div>
         </div>
