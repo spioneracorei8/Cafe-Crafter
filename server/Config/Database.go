@@ -65,8 +65,19 @@ func SetupDatabase() {
 	// 	PRIMARY KEY (id)
 	// 	);`
 
-	// if _, err := DB.Exec(query); err != nil {
-	// 	panic(err.Error())
-	// }
+	// query := `CREATE TABLE carts
+	// (Cart_id INT AUTO_INCREMENT,
+	// PRIMARY KEY (Cart_id),
+	// user_id INT,
+	// FOREIGN KEY (user_id) REFERENCES users(id)
+	// );`
+
+	query := `ALTER TABLE carts
+	ADD COLUMN quantity INT NOT NULL;
+	`
+
+	if _, err := DB.Exec(query); err != nil {
+		panic(err.Error())
+	}
 
 }

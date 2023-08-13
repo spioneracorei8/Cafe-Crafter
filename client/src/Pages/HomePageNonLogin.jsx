@@ -58,6 +58,7 @@ const HomePageNonLogin = () => {
     const handleCoffeePopUp = () => {
         setCoffeePopUp(!coffeePopUp)
     }
+    
     const handleViewAll = (event) => {
         event.preventDefault()
         window.scrollTo(0, 0)
