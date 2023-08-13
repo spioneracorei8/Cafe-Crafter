@@ -29,6 +29,7 @@ const AuthProvider = (props) => {
         localStorage.setItem("id", userDataFromToken.id)
 
         setState({ ...state, user: userDataFromToken })
+        console.log(state);
         navigate("/")
     }
 
