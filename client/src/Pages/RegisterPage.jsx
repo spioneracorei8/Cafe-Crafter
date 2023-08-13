@@ -20,8 +20,8 @@ const RegisterPage = () => {
     const [phone_number, setPhone_number] = useState("")
     const { register } = useAuth()
     const phoneNumberRegex = /^[0-9]+$/
-
-    console.log(CountryStateData);
+    const countries = CountryStateData
+    const cities = CountryStateData.flatMap(country => country.states)
 
     const handleNextRegisterPage = (event) => {
         event.preventDefault()
@@ -177,6 +177,33 @@ const RegisterPage = () => {
                                             </select>
                                         </div>
 
+                                        <div className='register-form-input'>
+                                            <label htmlFor="city">city</label>
+                                            <select className='form-select'>
+
+                                                <option value="">Select your city</option>
+                                                {cities
+                                                    .filter((city) => {
+                                                        const filterCountries = CountryStateData.filter((country) => {
+                                                            return country.country_id === city.country_id;
+                                                        });
+                                                        // return filterCountries.some(
+                                                        //     (filterCountry) => filterCountry.country_name === props.location
+                                                        // );
+                                                    })
+                                                    .sort((a, b) => {
+                                                        return a > b ? -1 : 1;
+                                                    })
+                                                    .map((city, index) => {
+                                                        return (
+                                                            <option value={city.state_name} key={index}>
+                                                                {city.state_name}
+                                                            </option>
+                                                        );
+                                                    })}
+                                            </select>
+                                        </div>
+
                                     </div>
                                     <div className="register-form-input-container">
                                         <div className='register-form-input'>
@@ -187,6 +214,23 @@ const RegisterPage = () => {
                                                 onChange={(event) => setPhone_number(event.target.value)}
                                                 value={phone_number}
                                             />
+                                        </div>
+
+                                        <div className='register-form-input'>
+                                            <label htmlFor="country">country</label>
+                                            <select className='form-select' >
+                                                <option value="">Select your country</option>
+                                                {countries
+                                                    .sort((a, b) => {
+                                                        return a > b ? 1 : -1;
+                                                    })
+                                                    .map((country, index) => (
+                                                        <option value={country.country_name} key={index}>
+                                                            {country.country_name}
+                                                        </option>
+                                                    ))}
+                                            </select>
+
                                         </div>
 
                                         <div className='register-form-input-textarea'>
@@ -204,6 +248,8 @@ const RegisterPage = () => {
 
                                             </textarea>
                                         </div>
+
+
                                         <div className='register-form-checkbox'>
                                             <p>I agree to the <span>Terms of service</span></p>
                                             <input type="checkbox" />
