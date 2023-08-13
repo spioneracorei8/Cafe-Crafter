@@ -11,7 +11,7 @@ import (
 func GetUserData(userId int) (*User, error, error) {
 	user := &User{}
 
-	query := Config.DB.QueryRow(`SELECT id, name, username, gender, email, address, phone_number FROM coffeedatabase.users WHERE id = ?`, userId)
+	query := Config.DB.QueryRow(`SELECT id, name, username, gender, email, address, phone_number, role FROM coffeedatabase.users WHERE id = ?`, userId)
 
 	err := query.Scan(
 		&user.Id,
@@ -21,6 +21,7 @@ func GetUserData(userId int) (*User, error, error) {
 		&user.Email,
 		&user.Address,
 		&user.Phone_number,
+		&user.Role,
 	)
 	if err == sql.ErrNoRows {
 		return nil, nil, err

@@ -72,12 +72,21 @@ func SetupDatabase() {
 	// FOREIGN KEY (user_id) REFERENCES users(id)
 	// );`
 
-	query := `ALTER TABLE carts
-	ADD COLUMN quantity INT NOT NULL;
-	`
+	// query := `ALTER TABLE carts
+	// ADD COLUMN quantity INT NOT NULL;
+	// `
 
-	if _, err := DB.Exec(query); err != nil {
-		panic(err.Error())
-	}
+	// query := `CREATE TABLE categories
+	// (category_id INT AUTO_INCREMENT,
+	// 	PRIMARY KEY (categories_id),
+
+
+
+	// )
+	// `
+
+	// if _, err := DB.Exec(query); err != nil {
+	// 	panic(err.Error())
+	// }
 
 }
