@@ -15,4 +15,5 @@ type UserCredential struct {
 	Id       int
 	Username string
 	Password string
+	Role string
 }

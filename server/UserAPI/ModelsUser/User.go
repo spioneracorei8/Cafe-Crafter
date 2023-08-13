@@ -99,11 +99,12 @@ func Login(user *UserCredential) (bool, error, gin.H) {
 	username := user.Username
 	password := user.Password
 
-	query := Config.DB.QueryRow(`SELECT id, username, password FROM users WHERE username = ?`, username)
+	query := Config.DB.QueryRow(`SELECT id, username, password, role FROM users WHERE username = ?`, username)
 	err := query.Scan(
 		&userCredential.Id,
 		&userCredential.Username,
 		&userCredential.Password,
+		&userCredential.Role,
 	)
 	if err == sql.ErrNoRows {
 		return false, err, gin.H{}
@@ -116,6 +117,7 @@ func Login(user *UserCredential) (bool, error, gin.H) {
 	userData := gin.H{
 		"id":       userCredential.Id,
 		"username": username,
+		"role":     userCredential.Role,
 	}
 
 	return result == nil, nil, userData
