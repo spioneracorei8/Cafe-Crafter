@@ -76,14 +76,21 @@ func SetupDatabase() {
 	// ADD COLUMN quantity INT NOT NULL;
 	// `
 
+	// Not success
 	// query := `CREATE TABLE categories
 	// (category_id INT AUTO_INCREMENT,
 	// 	PRIMARY KEY (categories_id),
-
-
-
 	// )
 	// `
+
+	// query := `ALTER TABLE users
+	// ADD COLUMN role TEXT NOT NULL AFTER phone_number;`
+
+	// query := `ALTER TABLE users
+	// ADD COLUMN country TEXT NOT NULL AFTER address,
+	// ADD COLUMN city TEXT NOT NULL AFTER country;`
+
+	// query := `ALTER TABLE users DROP COLUMN country`
 
 	// if _, err := DB.Exec(query); err != nil {
 	// 	panic(err.Error())

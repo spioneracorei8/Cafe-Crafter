@@ -8,6 +8,8 @@ type User struct {
 	Gender       string
 	Email        string
 	Address      string
+	Country      string
+	City         string
 	Phone_number string
 	Role         string
 }
@@ -15,5 +17,5 @@ type UserCredential struct {
 	Id       int
 	Username string
 	Password string
-	Role string
+	Role     string
 }
