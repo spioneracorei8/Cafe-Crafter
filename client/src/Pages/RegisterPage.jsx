@@ -17,9 +17,12 @@ const RegisterPage = () => {
     const [gender, setGender] = useState("male")
     const [email, setEmail] = useState("")
     const [address, setAddress] = useState("")
+    const [country, setCountry] = useState("")
+    const [city, setCity] = useState("")
     const [phone_number, setPhone_number] = useState("")
     const { register } = useAuth()
     const phoneNumberRegex = /^[0-9]+$/
+
     const countries = CountryStateData
     const cities = CountryStateData.flatMap(country => country.states)
 
@@ -73,14 +76,13 @@ const RegisterPage = () => {
                 gender,
                 email,
                 address,
+                country,
+                city,
                 phone_number,
             }
 
             register(data)
         }
-
-
-
     }
 
 
@@ -102,6 +104,7 @@ const RegisterPage = () => {
                         <button
                             className={registerPage === 2 ? "load-page-two" : "unload-page-two"}
                             onClick={(event) => handleNextRegisterPage(event)}
+                            
                         >
                             2
                         </button>
@@ -171,7 +174,10 @@ const RegisterPage = () => {
                                         </div>
                                         <div className='register-form-input'>
                                             <label htmlFor="gender">Gender</label>
-                                            <select className='form-select' onChange={(event) => setGender(event.target.value)} value={gender}>
+                                            <select
+                                                className='form-select'
+                                                value={gender}>
+                                                onChange={(event) => setGender(event.target.value)}
                                                 <option value="male">male</option>
                                                 <option value="female">female</option>
                                             </select>
@@ -179,7 +185,10 @@ const RegisterPage = () => {
 
                                         <div className='register-form-input'>
                                             <label htmlFor="city">city</label>
-                                            <select className='form-select'>
+                                            <select className='form-select'
+                                                value={city}
+                                                onChange={(event) => setCity(event.target.value)}
+                                            >
 
                                                 <option value="">Select your city</option>
                                                 {cities
@@ -187,9 +196,9 @@ const RegisterPage = () => {
                                                         const filterCountries = CountryStateData.filter((country) => {
                                                             return country.country_id === city.country_id;
                                                         });
-                                                        // return filterCountries.some(
-                                                        //     (filterCountry) => filterCountry.country_name === props.location
-                                                        // );
+                                                        return filterCountries.some(
+                                                            (filterCountry) => filterCountry.country_name === country
+                                                        );
                                                     })
                                                     .sort((a, b) => {
                                                         return a > b ? -1 : 1;
@@ -218,7 +227,10 @@ const RegisterPage = () => {
 
                                         <div className='register-form-input'>
                                             <label htmlFor="country">country</label>
-                                            <select className='form-select' >
+                                            <select className='form-select'
+                                                value={country}
+                                                onChange={(event) => setCountry(event.target.value)}
+                                            >
                                                 <option value="">Select your country</option>
                                                 {countries
                                                     .sort((a, b) => {
