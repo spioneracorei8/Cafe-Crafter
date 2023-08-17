@@ -2,6 +2,7 @@ package Routes
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/spioneracorei8/Cafe-Crafter/CartAPI/ControllersCart"
 	"github.com/spioneracorei8/Cafe-Crafter/CoffeeAPI/ControllersCoffee"
 	"github.com/spioneracorei8/Cafe-Crafter/Middlewares"
 	"github.com/spioneracorei8/Cafe-Crafter/UserAPI/ControllersUsers"
@@ -33,6 +34,11 @@ func SetRouter() *gin.Engine {
 		UserRoutes.POST("/login", ControllersUsers.Login)
 		UserRoutes.GET("/:id", Middlewares.TokenMiddleware(), ControllersUsers.GetUserData)
 		UserRoutes.PUT("/:id", Middlewares.TokenMiddleware(), ControllersUsers.EditUserData)
+	}
+	CartRoutes := r.Group("/cart")
+	{
+		CartRoutes.POST("/:user_id/:quantity", ControllersCart.AddToCart)
+		CartRoutes.PUT("/:cart_id/:user_id/:quantity", ControllersCart.EditAddToCart)
 	}
 	return r
 
