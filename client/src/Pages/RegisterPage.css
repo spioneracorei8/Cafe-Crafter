@@ -70,7 +70,7 @@
     width: 50px;
     height: 40px;
     border-radius: 40%;
-    border: 2px solid #c69d35;
+    border: 2px solid #edaeae;
 
 }
 
@@ -79,7 +79,7 @@
 }
 
 .load-page-one {
-    background-color: #E3BA9C;
+    background-color: #FFE6A7;
 }
 
 .unload-page-one {
@@ -87,7 +87,7 @@
 }
 
 .load-page-two {
-    background-color: #E3BA9C;
+    background-color: #FFE6A7;
 }
 
 .unload-page-two {
@@ -140,6 +140,13 @@
     color: #432818;
     font-weight: 100;
     padding: 5px;
+    border: 2px solid gray;
+}
+
+.register-form-input input:hover,
+.register-form-input input:active {
+    border: 2px solid #d7a451;
+    outline: #d7a451;
 }
 
 .register-next-button {
@@ -187,7 +194,7 @@
     font-size: 1.2rem;
     color: #432818;
     font-weight: 100;
-    
+
 }
 
 .form-textarea {
