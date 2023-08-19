@@ -31,6 +31,7 @@ func TokenMiddleware() gin.HandlerFunc {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Malformed token"})
 			return
 		}
+
 		if len(authHeaderParts) == 2 {
 			tokenString = authHeaderParts[1]
 		}

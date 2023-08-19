@@ -9,8 +9,13 @@ import (
 )
 
 func AddToCart(c *gin.Context) {
+	var cart ModelsCart.Cart
+
 	userId := c.Param("user_id")
-	number := c.Param("quantity")
+	if err := c.ShouldBindJSON(&cart); err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 
 	user_id, err := strconv.Atoi(userId)
 
@@ -19,14 +24,7 @@ func AddToCart(c *gin.Context) {
 		return
 	}
 
-	quantity, err := strconv.Atoi(number)
-
-	if err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
-		return
-	}
-
-	cartId, err := ModelsCart.AddToCart(user_id, quantity)
+	cartId, err := ModelsCart.AddToCart(user_id, &cart)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -41,18 +39,17 @@ func AddToCart(c *gin.Context) {
 }
 
 func EditAddToCart(c *gin.Context) {
+	var cart ModelsCart.Cart
+
 	id := c.Param("user_id")
-	amount := c.Param("quantity")
 	cartId := c.Param("cart_id")
 
-	userId, err := strconv.Atoi(id)
-
-	if err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+	if err := c.ShouldBindJSON(&cart); err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	quantity, err := strconv.Atoi(amount)
+	userId, err := strconv.Atoi(id)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
@@ -66,7 +63,7 @@ func EditAddToCart(c *gin.Context) {
 		return
 	}
 
-	_, err, errNoRow := ModelsCart.EditAddToCart(userId, quantity, cart_id)
+	updateCartData, err, errNoRow := ModelsCart.EditAddToCart(userId, cart_id, &cart)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -75,6 +72,7 @@ func EditAddToCart(c *gin.Context) {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "The id you entered does not exist."})
 	} else {
 		c.JSON(http.StatusOK, gin.H{
+			"data":    updateCartData,
 			"message": "edit cart successfully.",
 		})
 	}
