@@ -92,6 +92,14 @@ func SetupDatabase() {
 
 	// query := `ALTER TABLE users DROP COLUMN country`
 
+	// // edit table
+	// query := `ALTER TABLE coffeemenu
+	// ADD COLUMN category TEXT NOT NULL AFTER price`
+	
+	// // edit table
+	// query := `ALTER TABLE suggestions_coffee
+	// ADD COLUMN category TEXT NOT NULL AFTER price`
+
 	// if _, err := DB.Exec(query); err != nil {
 	// 	panic(err.Error())
 	// }
