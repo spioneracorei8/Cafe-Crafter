@@ -6,10 +6,11 @@ import (
 	"github.com/spioneracorei8/Cafe-Crafter/Config"
 )
 
-func AddToCart(user_id int, quantity int) (int64, error) {
+func AddToCart(user_id int, cart *Cart) (int64, error) {
+
 	insert := `INSERT INTO coffeedatabase.carts (user_id, quantity) VALUES (?, ?)`
 
-	result, err := Config.DB.Exec(insert, user_id, quantity)
+	result, err := Config.DB.Exec(insert, user_id, cart.Quantity)
 
 	if err != nil {
 		return 0, err
@@ -25,22 +26,29 @@ func AddToCart(user_id int, quantity int) (int64, error) {
 
 }
 
-func EditAddToCart(userId int, quantity int, cart_id int) (int64, error ,error) {
+func EditAddToCart(userId int, cart_id int, cart *Cart) (*Cart, error, error) {
+	cartData := &Cart{}
+	
+	query := `SELECT cart_id, user_id, quantity FROM coffeedatabase.carts WHERE cart_id = ?`
 
 	update := `UPDATE coffeedatabase.carts SET user_id = ?, quantity = ? WHERE Cart_id = ?`
 
-	_, err := Config.DB.Exec(update, userId, quantity, cart_id)
+	_, err := Config.DB.Exec(update, userId, cart.Quantity, cart_id)
 
-	if err != nil {
-		return 0, err, nil
-	} else if err == sql.ErrNoRows {
-		return 0, nil, err
+	cartRow := Config.DB.QueryRow(query, cart_id)
+
+	err = cartRow.Scan(
+		&cartData.Cart_id,
+		&cartData.User_id,
+		&cartData.Quantity,
+	)
+
+	if err == sql.ErrNoRows {
+		return nil, nil, err
+	} else if err != nil {
+		return nil, err, nil
+	} else {
+		return cartData, nil, nil
 	}
 
-	if err != nil {
-		return 0, err, nil
-
-	}
-
-	return 1, nil, nil
 }

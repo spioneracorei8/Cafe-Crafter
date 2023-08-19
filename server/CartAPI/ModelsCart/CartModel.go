@@ -1,6 +1,7 @@
 package ModelsCart
 
 type Cart struct {
-	user_id  int
-	quantity int
+	Cart_id  int
+	User_id  int
+	Quantity int
 }
