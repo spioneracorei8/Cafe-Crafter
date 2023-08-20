@@ -6,6 +6,35 @@ import (
 	"github.com/spioneracorei8/Cafe-Crafter/Config"
 )
 
+func GetCarts(userId int) ([]Cart, error) {
+	var cartList []Cart
+
+	query, err := Config.DB.Query(`SELECT carts.cart_id, users.id AS user_id, coffeemenu.id AS coffee_id,carts.quantity ,coffeemenu.name, coffeemenu.category, coffeemenu.price, coffeemenu.image_url
+	FROM carts
+	INNER JOIN users ON carts.user_id = users.id
+	INNER JOIN coffeemenu ON carts.coffee_id = coffeemenu.id
+	WHERE user_id = ? `, userId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for query.Next() {
+		var cart Cart
+		query.Scan(
+			&cart.Cart_id,
+			&cart.User_id,
+			&cart.Coffee_id,
+			&cart.Quantity,
+			&cart.Name,
+			&cart.Category,
+			&cart.Price,
+			&cart.Image_url)
+		cartList = append(cartList, cart)
+	}
+	return cartList, nil
+}
+
 func AddToCart(user_id int, cart *Cart) (int64, error) {
 
 	insert := `INSERT INTO coffeedatabase.carts (user_id, coffee_id, quantity) VALUES (?, ?, ?)`
