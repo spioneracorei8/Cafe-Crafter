@@ -8,9 +8,9 @@ import (
 
 func AddToCart(user_id int, cart *Cart) (int64, error) {
 
-	insert := `INSERT INTO coffeedatabase.carts (user_id, quantity) VALUES (?, ?)`
+	insert := `INSERT INTO coffeedatabase.carts (user_id, coffee_id, quantity) VALUES (?, ?, ?)`
 
-	result, err := Config.DB.Exec(insert, user_id, cart.Quantity)
+	result, err := Config.DB.Exec(insert, user_id, cart.Coffee_id, cart.Quantity)
 
 	if err != nil {
 		return 0, err
@@ -28,7 +28,7 @@ func AddToCart(user_id int, cart *Cart) (int64, error) {
 
 func EditAddToCart(userId int, cart_id int, cart *Cart) (*Cart, error, error) {
 	cartData := &Cart{}
-	
+
 	query := `SELECT cart_id, user_id, quantity FROM coffeedatabase.carts WHERE cart_id = ?`
 
 	update := `UPDATE coffeedatabase.carts SET user_id = ?, quantity = ? WHERE Cart_id = ?`
