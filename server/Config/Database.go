@@ -66,10 +66,12 @@ func SetupDatabase() {
 	// 	);`
 
 	// query := `CREATE TABLE carts
-	// (Cart_id INT AUTO_INCREMENT,
-	// PRIMARY KEY (Cart_id),
+	// (cart_id INT AUTO_INCREMENT,
+	// PRIMARY KEY (cart_id),
 	// user_id INT,
-	// FOREIGN KEY (user_id) REFERENCES users(id)
+	// FOREIGN KEY (user_id) REFERENCES users(id),
+	// coffee_id INT,
+	// FOREIGN KEY (coffee_id) REFERENCES coffeemenu(id)
 	// );`
 
 	// query := `ALTER TABLE carts
@@ -95,10 +97,29 @@ func SetupDatabase() {
 	// // edit table
 	// query := `ALTER TABLE coffeemenu
 	// ADD COLUMN category TEXT NOT NULL AFTER price`
-	
+
 	// // edit table
 	// query := `ALTER TABLE suggestions_coffee
 	// ADD COLUMN category TEXT NOT NULL AFTER price`
+
+	// join table
+	// 	query := `SELECT carts.cart_id, users.id AS user_id, coffeemenu.id AS coffee_id,carts.quantity ,coffeemenu.name, coffeemenu.category, coffeemenu.price, coffeemenu.image_url
+	// 	FROM carts
+	// 	INNER JOIN users ON carts.user_id = users.id
+	// 	INNER JOIN coffeemenu ON carts.coffee_id = coffeemenu.id;
+	// `
+
+	// query := `CREATE TABLE carts
+	// (Cart_id INT AUTO_INCREMENT,
+	// PRIMARY KEY (Cart_id),
+	// user_id INT,
+	// FOREIGN KEY (user_id) REFERENCES users(id)
+	// );`
+
+	// delete field
+	// query := `ALTER TABLE carts
+	// DROP COLUMN coffee_id;
+	// `
 
 	// if _, err := DB.Exec(query); err != nil {
 	// 	panic(err.Error())
