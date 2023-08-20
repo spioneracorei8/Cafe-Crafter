@@ -17,7 +17,8 @@ func GetCoffee() ([]Coffee, error) {
 
 	for query.Next() {
 		var coffee Coffee
-		query.Scan(&coffee.Id,
+		query.Scan(
+			&coffee.Id,
 			&coffee.Name,
 			&coffee.Image_url,
 			&coffee.Description,
