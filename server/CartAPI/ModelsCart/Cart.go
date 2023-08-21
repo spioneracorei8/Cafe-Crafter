@@ -35,23 +35,79 @@ func GetCarts(userId int) ([]Cart, error) {
 	return cartList, nil
 }
 
-func AddToCart(user_id int, cart *Cart) (int64, error) {
+func AddToCart(user_id int, cart *Cart) (int64, error, error, bool, *Cart) {
+	cartQuery := &Cart{}
+
+	query := Config.DB.QueryRow(`SELECT * FROM carts WHERE user_id = ? AND coffee_id`, user_id, cart.Cart_id)
 
 	insert := `INSERT INTO coffeedatabase.carts (user_id, coffee_id, quantity) VALUES (?, ?, ?)`
 
-	result, err := Config.DB.Exec(insert, user_id, cart.Coffee_id, cart.Quantity)
+	err := query.Scan(
+		&cartQuery.Cart_id,
+		&cartQuery.User_id,
+		&cartQuery.Coffee_id,
+		&cartQuery.Quantity,
+	)
 
-	if err != nil {
-		return 0, err
+	if err == sql.ErrNoRows {
+		return 0, nil, err, false, nil
+	} else if err != nil {
+		return 0, err, nil, false, nil
+	} else {
+		return 0, nil, nil, false, cartQuery
 	}
 
-	cartId, err := result.LastInsertId()
+	var exists int
+	if err := query.Scan(&exists); err != nil {
+		if err == sql.ErrNoRows {
+			result, err := Config.DB.Exec(insert, user_id, cart.Coffee_id, cart.Quantity)
+			if err != nil {
+				return 0, err, nil, false, nil
+			}
+			cartId, err := result.LastInsertId()
+
+			if err != nil {
+				return 0, err, nil, false, nil
+			}
+
+			return cartId, nil, nil, false, nil
+
+		}
+		return 0, err, nil, false, nil
+	}
+
+	return 1, nil, nil, true, nil
+
+}
+
+func ExistsCart(cart *Cart) (*Cart, error, error) {
+
+	cartRow := &Cart{}
+
+	query := Config.DB.QueryRow(`SELECT * FROM carts WHERE user_id = ? AND coffee_id = ?`, cart.User_id, cart.Coffee_id)
+
+	update := `UPDATE coffeedatabase.carts SET user_id = ?, quantity = quantity + 1 WHERE Cart_id = ?`
+
+	_, err := Config.DB.Exec(update, cart.User_id, cart.Cart_id)
 
 	if err != nil {
-		return 0, err
-
+		return nil, err, nil
 	}
-	return cartId, nil
+
+	err = query.Scan(
+		&cartRow.Cart_id,
+		&cartRow.User_id,
+		&cartRow.Coffee_id,
+		&cartRow.Quantity,
+	)
+
+	if err == sql.ErrNoRows {
+		return nil, nil, err
+	} else if err != nil {
+		return nil, err, nil
+	} else {
+		return cartRow, nil, nil
+	}
 
 }
 
@@ -60,7 +116,7 @@ func EditAddToCart(userId int, cart_id int, cart *Cart) (*Cart, error, error) {
 
 	query := `SELECT cart_id, user_id, quantity FROM coffeedatabase.carts WHERE cart_id = ?`
 
-	update := `UPDATE coffeedatabase.carts SET user_id = ?, quantity = ? WHERE Cart_id = ?`
+	update := `UPDATE coffeedatabase.carts SET user_id = ?, quantity = ? WHERE cart_id = ?`
 
 	_, err := Config.DB.Exec(update, userId, cart.Quantity, cart_id)
 
