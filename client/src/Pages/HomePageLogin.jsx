@@ -48,7 +48,7 @@ const HomePageLogin = () => {
             console.log(error);
         }
     }
-
+    console.log(allCoffee);
     const handleCoffeePopUp = () => {
         setCoffeePopUp(!coffeePopUp)
     }
@@ -78,6 +78,24 @@ const HomePageLogin = () => {
         event.preventDefault()
         window.scrollTo(0, 0)
         navigate(`/Buy/${coffeeId}/${coffeeName}`)
+    }
+
+    const handleAddtoCart = async (event, coffeeId) => {
+        event.preventDefault()
+        const data = {
+            coffee_id: coffeeId,
+            quantity: 1
+        }
+        try {
+            setIsError(false)
+            setIsLoading(true)
+            await axios.post(`http://localhost:4000/cart/${localStorage.getItem("id")}`, data)
+            setIsLoading(false)
+        } catch (error) {
+            setIsError(true)
+            setIsLoading(false)
+            console.log(error);
+        }
     }
 
     return (
@@ -189,6 +207,7 @@ const HomePageLogin = () => {
                                     </button>
                                     <button
                                         className='add-to-cart'
+                                        onClick={(event) => handleAddtoCart(event, item.Id)}
                                     >
                                         Add To Cart
                                     </button>
