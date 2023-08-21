@@ -1,14 +1,58 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./CartPage.css"
 import NavigationbarProfile from '../Components/NavigationbarProfile'
-import Coffee_Beans from "../assets/Background/Coffee_Beans.jpg"
 import Footer from '../Components/Footer'
+import axios from 'axios'
+import Loading from '../Components/Loading'
+
 
 const CartPage = () => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [isError, setIsError] = useState(false)
+    const [carts, setCarts] = useState([])
+
+    console.log(carts);
+    const GetCarts = async () => {
+        try {
+            setIsLoading(true)
+            setIsError(false)
+            const result = await axios.get(`http://localhost:4000/cart/${localStorage.getItem("id")}`)
+            setCarts(result?.data?.data)
+            setIsLoading(false)
+        } catch (error) {
+            setIsLoading(false)
+            setIsError(true)
+        }
+    }
+    useEffect(() => {
+        GetCarts()
+    }, [])
+
+    // const addQuantity = (event) => {
+    //     event.preventDefault();
+    //     setQuantity(quantity + 1)
+    // }
+
+    // const reduceQuantity = (event) => {
+    //     event.preventDefault();
+    //     if (quantity = 1) {
+    //         setQuantity(1)
+    //     } else {
+    //         setQuantity(quantity - 1)
+    //     }
+    // }
 
     return (
 
         <>
+
+            {isLoading &&
+                <Loading />
+            }
+
+            {isError &&
+                <h1>Fetching Data Error...</h1>
+            }
 
             <NavigationbarProfile />
 
@@ -49,41 +93,11 @@ const CartPage = () => {
                 </div>
                 <div className='underline-cart-topic'></div>
 
-                <div className='added-menu-container'>
-                    <div className='img-name-added'>
-                        <img src={Coffee_Beans} alt="coffee" className='img-added' />
-                        <div className="coffee-name-added">
-                            <p>
-                                Coffeeesdeeeeeeeeeeeeeeeeeeee
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className='category-price-added'>
-                        <div className='category-added'>
-                            <p>Coffee</p>
-                        </div>
-                        <div className='price-added'>
-                            <p>100$</p>
-                        </div>
-                    </div>
-
-                    <div className='quantity-total-added'>
-                        <div className='add-reduce-quantity'>
-                            <p className='add-symbol'>
-                                −
-                            </p>
-                            <p className='quantity-added'>1</p>
-                            <p className='reduce-symbol'>
-                                +
-                            </p>
-                        </div>
-                        <div className='total-added'>
-                            <p>10000000$</p>
-                        </div>
-                    </div>
-
-                </div>
+                {
+                    carts.map((item, index) => (
+                        <CartItem key={index} item={item} />
+                    ))
+                }
 
                 <div className='bill-container'>
                     <div className='coupon-code'>
@@ -136,5 +150,70 @@ const CartPage = () => {
         </>
     )
 }
+
+const CartItem = ({ item }) => {
+    const [quantity, setQuantity] = useState(item?.Quantity)
+
+    const addQuantity = (event) => {
+        event.preventDefault()
+        setQuantity(quantity + 1)
+    }
+
+    const reduceQuantity = (event) => {
+        event.preventDefault()
+        if (quantity === 1) {
+            setQuantity(1)
+        } else {
+            setQuantity(quantity - 1)
+        }
+    }
+
+    return (
+        <div className='added-menu-container'>
+            <div className='img-name-added'>
+                <img src={item.Image_url} alt="coffee" className='img-added' />
+                <div className="coffee-name-added">
+                    <p>
+                        {item.Name}
+                    </p>
+                </div>
+            </div>
+
+            <div className='category-price-added'>
+                <div className='category-added'>
+                    <p>{item.Category}</p>
+                </div>
+                <div className='price-added'>
+                    <p>{item.Price}฿</p>
+                </div>
+            </div>
+
+            <div className='quantity-total-added'>
+                <div className='add-reduce-quantity'>
+                    <p
+                        className='add-symbol'
+                        onClick={(event) => reduceQuantity(event)}
+                    >
+                        −
+                    </p>
+                    <p className='quantity-added'>
+                        {quantity}
+                    </p>
+                    <p
+                        className='reduce-symbol'
+                        onClick={(event) => addQuantity(event)}
+                    >
+                        +
+                    </p>
+                </div>
+                <div className='total-added'>
+                    <p>10000000$</p>
+                </div>
+            </div>
+
+        </div>
+    )
+}
+
 
 export default CartPage
