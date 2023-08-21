@@ -41,7 +41,7 @@ func GetCoffeeId(c *gin.Context) {
 	}
 	coffee, err, errNoRow := ModelsCoffee.GetCoffeeId(coffeeId)
 	if err != nil {
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error":err.Error()})
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	} else if errNoRow != nil {
 		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})

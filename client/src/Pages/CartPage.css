@@ -1,12 +1,11 @@
 .cart-container {
     font-family: 'whipsmart';
     width: 100vw;
-    height: 100vh;
+    height: auto;
     padding-left: 3rem;
     padding-right: 8rem;
-    margin: auto;
     background-color: #FFE6A7;
-
+    padding-bottom: 2rem;
 }
 
 .cart-heading {
@@ -133,6 +132,8 @@
 .reduce-symbol {
     font-size: 25px;
     cursor: pointer;
+    user-select: none;
+
 }
 
 .quantity-added {
