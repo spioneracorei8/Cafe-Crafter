@@ -47,25 +47,22 @@ func AddToCart(c *gin.Context) {
 		return
 	}
 
-	cartId, err, errNoRow, isCartExists, cartQuery := ModelsCart.AddToCart(user_id, &cart)
+	cartQuery, err, isCartExists := ModelsCart.AddToCart(user_id, &cart)
 
 	if isCartExists {
-		cartRow, err, errNoRow := ModelsCart.ExistsCart(cartQuery)
+		// Increment the quantity
+		err := ModelsCart.IncrementCartQuantity(cartQuery)
 		if err != nil {
-
-		} else if errNoRow != nil {
-
-		} else {
-			
+			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
 		}
-	}
-
-	if err != nil {
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	} else if errNoRow != nil {
-		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The name you entered does not exist."})
 	} else {
+		// Add a new cart
+		cartId, err := ModelsCart.AddNewCart(user_id, &cart)
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
 		c.JSON(http.StatusOK, gin.H{
 			"cartId":  cartId,
 			"message": "add to cart successfully.",
