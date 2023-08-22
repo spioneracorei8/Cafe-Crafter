@@ -94,7 +94,7 @@ const CartPage = () => {
                 <div className='underline-cart-topic'></div>
 
                 {
-                    carts.map((item, index) => (
+                    carts?.map((item, index) => (
                         <CartItem key={index} item={item} />
                     ))
                 }
