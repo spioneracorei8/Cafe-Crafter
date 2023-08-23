@@ -2,6 +2,7 @@ package ModelsCart
 
 import (
 	"database/sql"
+	"fmt"
 
 	"github.com/spioneracorei8/Cafe-Crafter/Config"
 )
@@ -50,8 +51,6 @@ func AddToCart(user_id int, cart *Cart) (*Cart, error, bool) {
 }
 
 func IncrementCartQuantity(cart *Cart) error {
-	// Logic to increment cart quantity
-	// ...
 	update := `UPDATE coffeedatabase.carts SET user_id = ?, quantity = quantity + 1 WHERE cart_id = ?;`
 
 	_, err := Config.DB.Exec(update, cart.User_id, cart.Cart_id)
@@ -64,9 +63,6 @@ func IncrementCartQuantity(cart *Cart) error {
 }
 
 func AddNewCart(user_id int, cart *Cart) (int64, error) {
-	// Logic to add a new cart
-	// ...
-
 	insert := `INSERT INTO coffeedatabase.carts (user_id, coffee_id, quantity) VALUES (?, ?, ?)`
 
 	result, err := Config.DB.Exec(insert, user_id, cart.Coffee_id, cart.Quantity)
@@ -110,9 +106,11 @@ func EditAddToCart(userId int, cart_id int, cart *Cart) (*Cart, error, error) {
 
 	query := `SELECT cart_id, user_id, quantity FROM coffeedatabase.carts WHERE cart_id = ?`
 
-	update := `UPDATE coffeedatabase.carts SET user_id = ?, quantity = ? WHERE cart_id = ?`
+	update := `UPDATE coffeedatabase.carts SET user_id = ?, quantity = quantity + 1 WHERE cart_id = ?`
 
-	_, err := Config.DB.Exec(update, userId, cart.Quantity, cart_id)
+	fmt.Println(cart.Symbol)
+
+	_, err := Config.DB.Exec(update, userId, cart_id)
 
 	cartRow := Config.DB.QueryRow(query, cart_id)
 

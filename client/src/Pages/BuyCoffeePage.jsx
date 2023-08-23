@@ -10,7 +10,6 @@ const BuyCoffeePage = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [coffeeData, setCoffeeData] = useState({})
-
     const getCoffeeId = async () => {
         try {
             setIsError(false)
@@ -28,6 +27,7 @@ const BuyCoffeePage = () => {
     useEffect(() => {
         getCoffeeId()
     }, [])
+    
 
     return (
         <>

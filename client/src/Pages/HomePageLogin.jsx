@@ -48,7 +48,7 @@ const HomePageLogin = () => {
             console.log(error);
         }
     }
-    console.log(allCoffee);
+    
     const handleCoffeePopUp = () => {
         setCoffeePopUp(!coffeePopUp)
     }
