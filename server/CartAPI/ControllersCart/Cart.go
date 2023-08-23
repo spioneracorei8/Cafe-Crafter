@@ -74,22 +74,22 @@ func AddToCart(c *gin.Context) {
 func EditAddToCart(c *gin.Context) {
 	var cart ModelsCart.Cart
 
-	id := c.Param("user_id")
 	cartId := c.Param("cart_id")
+	id := c.Param("user_id")
 
 	if err := c.ShouldBindJSON(&cart); err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	userId, err := strconv.Atoi(id)
+	cart_id, err := strconv.Atoi(cartId)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
 		return
 	}
 
-	cart_id, err := strconv.Atoi(cartId)
+	userId, err := strconv.Atoi(id)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})

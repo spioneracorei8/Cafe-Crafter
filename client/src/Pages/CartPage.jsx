@@ -11,7 +11,6 @@ const CartPage = () => {
     const [isError, setIsError] = useState(false)
     const [carts, setCarts] = useState([])
 
-    console.log(carts);
     const GetCarts = async () => {
         try {
             setIsLoading(true)
@@ -24,23 +23,11 @@ const CartPage = () => {
             setIsError(true)
         }
     }
+
     useEffect(() => {
         GetCarts()
     }, [])
 
-    // const addQuantity = (event) => {
-    //     event.preventDefault();
-    //     setQuantity(quantity + 1)
-    // }
-
-    // const reduceQuantity = (event) => {
-    //     event.preventDefault();
-    //     if (quantity = 1) {
-    //         setQuantity(1)
-    //     } else {
-    //         setQuantity(quantity - 1)
-    //     }
-    // }
 
     return (
 
@@ -95,7 +82,14 @@ const CartPage = () => {
 
                 {
                     carts?.map((item, index) => (
-                        <CartItem key={index} item={item} />
+                        <CartItem
+                            key={index}
+                            item={item}
+                            isLoading={isLoading}
+                            setIsLoading={setIsLoading}
+                            isError={isError}
+                            setIsError={setIsError}
+                        />
                     ))
                 }
 
@@ -151,12 +145,26 @@ const CartPage = () => {
     )
 }
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, isLoading, setIsLoading, isError, setIsError }) => {
     const [quantity, setQuantity] = useState(item?.Quantity)
+    const price = item?.Price
+    const [totalMenuPrice, setTotalMenuPrice] = useState(0)
 
-    const addQuantity = (event) => {
+    const addQuantity = async (event, cart_id, symbol) => {
         event.preventDefault()
         setQuantity(quantity + 1)
+        const data = {
+            symbol: symbol
+        }
+        try {
+            setIsLoading(true)
+            setIsError(false)
+            await axios.put(`http://localhost:4000/cart/${cart_id}/${localStorage.getItem("id")}`, data)
+            setIsLoading(false)
+        } catch (error) {
+            setIsLoading(false)
+            setIsError(true)
+        }
     }
 
     const reduceQuantity = (event) => {
@@ -167,6 +175,15 @@ const CartItem = ({ item }) => {
             setQuantity(quantity - 1)
         }
     }
+
+    const handleCalculatePriceMenu = () => {
+        setTotalMenuPrice(price * quantity)
+    }
+
+
+    useEffect(() => {
+        handleCalculatePriceMenu()
+    }, [quantity])
 
     return (
         <div className='added-menu-container'>
@@ -201,13 +218,13 @@ const CartItem = ({ item }) => {
                     </p>
                     <p
                         className='reduce-symbol'
-                        onClick={(event) => addQuantity(event)}
+                        onClick={(event) => addQuantity(event, item?.Cart_id, "+")}
                     >
                         +
                     </p>
                 </div>
                 <div className='total-added'>
-                    <p>10000000$</p>
+                    <p>{totalMenuPrice}฿</p>
                 </div>
             </div>
 
