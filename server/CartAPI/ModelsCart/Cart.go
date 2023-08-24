@@ -2,7 +2,6 @@ package ModelsCart
 
 import (
 	"database/sql"
-	"fmt"
 
 	"github.com/spioneracorei8/Cafe-Crafter/Config"
 )
@@ -101,14 +100,39 @@ func ExistsCart(user_id int, coffee_id int) (*Cart, error) {
 	return &cartQuery, nil
 }
 
-func EditAddToCart(userId int, cart_id int, cart *Cart) (*Cart, error, error) {
+func EditAddToCart(userId int, cart_id int) (*Cart, error, error) {
 	cartData := &Cart{}
 
 	query := `SELECT cart_id, user_id, quantity FROM coffeedatabase.carts WHERE cart_id = ?`
 
 	update := `UPDATE coffeedatabase.carts SET user_id = ?, quantity = quantity + 1 WHERE cart_id = ?`
 
-	fmt.Println(cart.Symbol)
+	_, err := Config.DB.Exec(update, userId, cart_id)
+
+	cartRow := Config.DB.QueryRow(query, cart_id)
+
+	err = cartRow.Scan(
+		&cartData.Cart_id,
+		&cartData.User_id,
+		&cartData.Quantity,
+	)
+
+	if err == sql.ErrNoRows {
+		return nil, nil, err
+	} else if err != nil {
+		return nil, err, nil
+	} else {
+		return cartData, nil, nil
+	}
+
+}
+
+func EditReduceToCart(userId int, cart_id int) (*Cart, error, error) {
+	cartData := &Cart{}
+
+	query := `SELECT cart_id, user_id, quantity FROM coffeedatabase.carts WHERE cart_id = ?`
+
+	update := `UPDATE coffeedatabase.carts SET user_id = ?, quantity = quantity - 1 WHERE cart_id = ?`
 
 	_, err := Config.DB.Exec(update, userId, cart_id)
 
