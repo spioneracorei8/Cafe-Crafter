@@ -31,6 +31,11 @@ func GetCarts(c *gin.Context) {
 
 }
 
+// func GetSubTotal(c *gin.Context)  {
+// 	userId := c.Param("user_id")
+	
+// }
+
 func AddToCart(c *gin.Context) {
 	var cart ModelsCart.Cart
 

@@ -10,7 +10,7 @@ const CartPage = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [carts, setCarts] = useState([])
-
+    console.log(carts);
     const GetCarts = async () => {
         try {
             setIsLoading(true)

@@ -121,8 +121,12 @@ func SetupDatabase() {
 	// DROP COLUMN coffee_id;
 	// `
 
-	// if _, err := DB.Exec(query); err != nil {
-	// 	panic(err.Error())
-	// }
+
+	query := `ALTER TABLE carts
+	ADD COLUMN sub_total float NOT NULL `
+
+	if _, err := DB.Exec(query); err != nil {
+		panic(err.Error())
+	}
 
 }
