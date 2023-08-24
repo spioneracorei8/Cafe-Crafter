@@ -31,10 +31,32 @@ func GetCarts(c *gin.Context) {
 
 }
 
-// func GetSubTotal(c *gin.Context)  {
-// 	userId := c.Param("user_id")
+func GetSubTotal(c *gin.Context)  {
+	id := c.Param("user_id")
+
+	userId, err := strconv.Atoi(id)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	subTotal, err, errNoRow := ModelsCart.GetSubTotal(userId)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else if errNoRow != nil {
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The userId you entered does not exist."})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": subTotal,
+		})
+	}
+ 
 	
-// }
+}
 
 func AddToCart(c *gin.Context) {
 	var cart ModelsCart.Cart
