@@ -150,29 +150,37 @@ const CartItem = ({ item, isLoading, setIsLoading, isError, setIsError }) => {
     const price = item?.Price
     const [totalMenuPrice, setTotalMenuPrice] = useState(0)
 
-    const addQuantity = async (event, cart_id, symbol) => {
+    const addQuantity = async (event, cart_id) => {
         event.preventDefault()
         setQuantity(quantity + 1)
-        const data = {
-            symbol: symbol
-        }
         try {
             setIsLoading(true)
             setIsError(false)
-            await axios.put(`http://localhost:4000/cart/${cart_id}/${localStorage.getItem("id")}`, data)
+            await axios.put(`http://localhost:4000/cart/add/${cart_id}/${localStorage.getItem("id")}`)
             setIsLoading(false)
         } catch (error) {
             setIsLoading(false)
             setIsError(true)
+            console.log(error);
         }
     }
 
-    const reduceQuantity = (event) => {
+    const reduceQuantity = async (event, cart_id) => {
         event.preventDefault()
         if (quantity === 1) {
             setQuantity(1)
         } else {
             setQuantity(quantity - 1)
+            try {
+                setIsLoading(true)
+                setIsError(false)
+                await axios.put(`http://localhost:4000/cart/reduce/${cart_id}/${localStorage.getItem("id")}`)
+                setIsLoading(false)
+            } catch (error) {
+                setIsLoading(false)
+                setIsError(true)
+                console.log(error);
+            }
         }
     }
 
@@ -209,7 +217,7 @@ const CartItem = ({ item, isLoading, setIsLoading, isError, setIsError }) => {
                 <div className='add-reduce-quantity'>
                     <p
                         className='add-symbol'
-                        onClick={(event) => reduceQuantity(event)}
+                        onClick={(event) => reduceQuantity(event, item?.Cart_id)}
                     >
                         −
                     </p>
@@ -218,7 +226,7 @@ const CartItem = ({ item, isLoading, setIsLoading, isError, setIsError }) => {
                     </p>
                     <p
                         className='reduce-symbol'
-                        onClick={(event) => addQuantity(event, item?.Cart_id, "+")}
+                        onClick={(event) => addQuantity(event, item?.Cart_id)}
                     >
                         +
                     </p>
