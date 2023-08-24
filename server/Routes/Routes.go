@@ -38,6 +38,7 @@ func SetRouter() *gin.Engine {
 	CartRoutes := r.Group("/cart")
 	{
 		CartRoutes.GET("/:user_id", ControllersCart.GetCarts)
+		CartRoutes.GET("/subtotal/:user_id", ControllersCart.GetSubTotal)
 		CartRoutes.POST("/:user_id", ControllersCart.AddToCart)
 		CartRoutes.PUT("/add/:cart_id/:user_id", ControllersCart.EditAddToCart)
 		CartRoutes.PUT("/reduce/:cart_id/:user_id", ControllersCart.EditReduceToCart)

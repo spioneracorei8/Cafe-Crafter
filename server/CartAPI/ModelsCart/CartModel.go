@@ -5,6 +5,7 @@ type Cart struct {
 	User_id   int
 	Coffee_id int
 	Quantity  int
+	Sub_total float64
 	Name      string
 	Category  string
 	Price     float64

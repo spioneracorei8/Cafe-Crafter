@@ -118,15 +118,15 @@ func SetupDatabase() {
 
 	// delete field
 	// query := `ALTER TABLE carts
-	// DROP COLUMN coffee_id;
+	// DROP COLUMN sub_total;
 	// `
 
 
-	query := `ALTER TABLE carts
-	ADD COLUMN sub_total float NOT NULL `
+	// query := `ALTER TABLE carts
+	// ADD COLUMN sub_total float NOT NULL `
 
-	if _, err := DB.Exec(query); err != nil {
-		panic(err.Error())
-	}
+	// if _, err := DB.Exec(query); err != nil {
+	// 	panic(err.Error())
+	// }
 
 }

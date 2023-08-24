@@ -9,7 +9,7 @@ import (
 func GetCarts(userId int) ([]Cart, error) {
 	var cartList []Cart
 
-	query, err := Config.DB.Query(`SELECT carts.cart_id, users.id AS user_id, coffeemenu.id AS coffee_id,carts.quantity ,coffeemenu.name, coffeemenu.category, coffeemenu.price, coffeemenu.image_url
+	query, err := Config.DB.Query(`SELECT carts.cart_id, users.id AS user_id, coffeemenu.id AS coffee_id,carts.quantity, coffeemenu.price,
 	FROM carts
 	INNER JOIN users ON carts.user_id = users.id
 	INNER JOIN coffeemenu ON carts.coffee_id = coffeemenu.id
@@ -33,6 +33,29 @@ func GetCarts(userId int) ([]Cart, error) {
 		cartList = append(cartList, cart)
 	}
 	return cartList, nil
+}
+
+func GetSubTotal(userId int) (*Cart, error, error) {
+	subTotal := &Cart{}
+
+	query := Config.DB.QueryRow(`SELECT SUM(carts.quantity * coffeemenu.price) AS sub_total
+	FROM carts
+	INNER JOIN users ON carts.user_id = users.id
+	INNER JOIN coffeemenu ON carts.coffee_id = coffeemenu.id
+	WHERE user_id = ?`, userId)
+
+	err := query.Scan(
+		&subTotal.Sub_total,
+	)
+
+	if err == sql.ErrNoRows {
+		return nil, nil, err
+	} else if err != nil {
+		return nil, err, nil
+	} else {
+		return subTotal, nil, nil
+	}
+
 }
 
 func AddToCart(user_id int, cart *Cart) (*Cart, error, bool) {
