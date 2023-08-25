@@ -10,7 +10,8 @@ const CartPage = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [carts, setCarts] = useState([])
-    console.log(carts);
+    const [subtotal, setSubtotal] = useState(0)
+
     const GetCarts = async () => {
         try {
             setIsLoading(true)
@@ -21,6 +22,21 @@ const CartPage = () => {
         } catch (error) {
             setIsLoading(false)
             setIsError(true)
+            console.log(error);
+        }
+    }
+
+    const GetSubTotal = async () => {
+        try {
+            setIsLoading(true)
+            setIsError(false)
+            const result = await axios.get(`http://localhost:4000/cart/subtotal/${localStorage.getItem("id")}`)
+            setSubtotal(result?.data?.data?.Sub_total)
+            setIsLoading(false)
+        } catch (error) {
+            setIsLoading(false)
+            setIsError(true)
+            console.log(error);
         }
     }
 
@@ -29,13 +45,10 @@ const CartPage = () => {
     }, [])
 
 
+
     return (
 
         <>
-
-            {isLoading &&
-                <Loading />
-            }
 
             {isError &&
                 <h1>Fetching Data Error...</h1>
@@ -89,6 +102,7 @@ const CartPage = () => {
                             setIsLoading={setIsLoading}
                             isError={isError}
                             setIsError={setIsError}
+                            GetSubTotal={GetSubTotal}
                         />
                     ))
                 }
@@ -110,7 +124,7 @@ const CartPage = () => {
                                 Subtotal:
                             </h3>
                             <h3>
-                                100฿
+                                {subtotal}฿
                             </h3>
                         </div>
                         <div className='coupon-total'>
@@ -145,7 +159,7 @@ const CartPage = () => {
     )
 }
 
-const CartItem = ({ item, isLoading, setIsLoading, isError, setIsError }) => {
+const CartItem = ({ item, isLoading, setIsLoading, isError, setIsError, GetSubTotal }) => {
     const [quantity, setQuantity] = useState(item?.Quantity)
     const price = item?.Price
     const [totalMenuPrice, setTotalMenuPrice] = useState(0)
@@ -191,6 +205,7 @@ const CartItem = ({ item, isLoading, setIsLoading, isError, setIsError }) => {
 
     useEffect(() => {
         handleCalculatePriceMenu()
+        GetSubTotal()
     }, [quantity])
 
     return (
