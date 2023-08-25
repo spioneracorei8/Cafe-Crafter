@@ -31,7 +31,7 @@ func GetCarts(c *gin.Context) {
 
 }
 
-func GetSubTotal(c *gin.Context)  {
+func GetSubTotal(c *gin.Context) {
 	id := c.Param("user_id")
 
 	userId, err := strconv.Atoi(id)
@@ -54,8 +54,7 @@ func GetSubTotal(c *gin.Context)  {
 			"data": subTotal,
 		})
 	}
- 
-	
+
 }
 
 func AddToCart(c *gin.Context) {
@@ -99,15 +98,8 @@ func AddToCart(c *gin.Context) {
 }
 
 func EditAddToCart(c *gin.Context) {
-	var cart ModelsCart.Cart
-
 	cartId := c.Param("cart_id")
 	id := c.Param("user_id")
-
-	if err := c.ShouldBindJSON(&cart); err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
 
 	cart_id, err := strconv.Atoi(cartId)
 
