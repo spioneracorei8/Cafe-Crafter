@@ -12,6 +12,7 @@ const CartPage = () => {
     const [carts, setCarts] = useState([])
     const [subtotal, setSubtotal] = useState(0)
 
+
     const GetCarts = async () => {
         try {
             setIsLoading(true)
@@ -31,7 +32,7 @@ const CartPage = () => {
             setIsLoading(true)
             setIsError(false)
             const result = await axios.get(`http://localhost:4000/cart/subtotal/${localStorage.getItem("id")}`)
-            setSubtotal(result?.data?.data?.Sub_total)
+            // setSubtotal(result?.data?.data?.Sub_total)
             setIsLoading(false)
         } catch (error) {
             setIsLoading(false)
@@ -40,9 +41,17 @@ const CartPage = () => {
         }
     }
 
+    const handleCalculateSubTotal = () => {
+        const subTotal = carts?.reduce((total, cartItem) => {
+            return total + cartItem?.Price * cartItem?.Quantity;
+        }, 0);
+        setSubtotal(subTotal);
+    }
+
     useEffect(() => {
         GetCarts()
-    }, [])
+        handleCalculateSubTotal();
+    }, [isLoading])
 
 
 
