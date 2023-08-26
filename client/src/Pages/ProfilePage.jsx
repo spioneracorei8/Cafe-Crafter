@@ -4,13 +4,14 @@ import './ProfilePage.css'
 import Footer from '../Components/Footer'
 import axios from 'axios'
 import Loading from '../Components/Loading'
+import CountryStateData from "../data/CountryStateData.json"
 
 const ProfilePage = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [isEdit, setIsEdit] = useState(false)
     const [userData, setUserData] = useState({})
-    const { Name, Username, Email, Phone_number, Gender, Address } = userData
+    const { Name, Username, Email, Phone_number, Gender, Address, Country, City } = userData
     const [id, setId] = useState("")
     const [name, setName] = useState("")
     const [username, setUsername] = useState("")
@@ -18,7 +19,12 @@ const ProfilePage = () => {
     const [gender, setGender] = useState("")
     const [email, setEmail] = useState("")
     const [address, setAddress] = useState("")
+    const [country, setCountry] = useState("")
+    const [city, setCity] = useState("")
     const [phone_Number, setPhone_Number] = useState("")
+    console.log(userData);
+    const countries = CountryStateData
+    const cities = CountryStateData.flatMap(country => country.states)
 
     const getUserData = async () => {
         try {
@@ -33,6 +39,8 @@ const ProfilePage = () => {
             setEmail(result.data.data.Email)
             setAddress(result.data.data.Address)
             setPhone_Number(result.data.data.Phone_number)
+            setCountry(result.data.data.Country)
+            setCity(result.data.data.City)
             setIsLoading(false)
         } catch (error) {
             setIsError(true)
@@ -196,6 +204,7 @@ const ProfilePage = () => {
                                 />
                             }
                         </div>
+
                         <div className='profile-data gender-data'>
                             <label htmlFor="Gender">Gender</label>
                             {isEdit
@@ -220,6 +229,118 @@ const ProfilePage = () => {
                                 >
                                     <option value="male">male</option>
                                     <option value="female">female</option>
+                                </select>
+                            }
+                        </div>
+
+                        <div className='profile-data country-data'>
+                            <label htmlFor="country">country</label>
+                            {isEdit
+                                ? <select className='form-select'
+                                    value={country}
+                                    onChange={(event) => setCountry(event.target.value)}
+                                    style={{
+                                        width: "300px",
+                                        height: "40px"
+                                    }}
+                                >
+                                    <option value="">Select your country</option>
+                                    {countries
+                                        .sort((a, b) => {
+                                            return a > b ? 1 : -1;
+                                        })
+                                        .map((country, index) => (
+                                            <option value={country.country_name} key={index}>
+                                                {country.country_name}
+                                            </option>
+                                        ))}
+                                </select>
+                                : <select className='form-select'
+                                    disabled
+                                    value={country}
+                                    onChange={(event) => setCountry(event.target.value)}
+                                    style={{
+                                        width: "300px",
+                                        height: "40px"
+                                    }}
+                                >
+                                    <option value="">Select your country</option>
+                                    {countries
+                                        .sort((a, b) => {
+                                            return a > b ? 1 : -1;
+                                        })
+                                        .map((country, index) => (
+                                            <option value={country.country_name} key={index}>
+                                                {country.country_name}
+                                            </option>
+                                        ))}
+                                </select>
+                            }
+                        </div>
+
+                        <div className='profile-data gender-data'>
+                            <label htmlFor="city">city</label>
+                            {isEdit
+                                ? <select className='form-select'
+                                    value={city}
+                                    onChange={(event) => setCity(event.target.value)}
+                                    style={{
+                                        width: "300px",
+                                        height: "40px"
+                                    }}
+                                >
+
+                                    <option value="">Select your city</option>
+                                    {cities
+                                        .filter((city) => {
+                                            const filterCountries = CountryStateData.filter((country) => {
+                                                return country.country_id === city.country_id;
+                                            });
+                                            return filterCountries.some(
+                                                (filterCountry) => filterCountry.country_name === country
+                                            );
+                                        })
+                                        .sort((a, b) => {
+                                            return a > b ? -1 : 1;
+                                        })
+                                        .map((city, index) => {
+                                            return (
+                                                <option value={city.state_name} key={index}>
+                                                    {city.state_name}
+                                                </option>
+                                            );
+                                        })}
+                                </select>
+                                : <select className='form-select'
+                                    disabled
+                                    value={city}
+                                    onChange={(event) => setCity(event.target.value)}
+                                    style={{
+                                        width: "300px",
+                                        height: "40px"
+                                    }}
+                                >
+
+                                    <option value="">Select your city</option>
+                                    {cities
+                                        .filter((city) => {
+                                            const filterCountries = CountryStateData.filter((country) => {
+                                                return country.country_id === city.country_id;
+                                            });
+                                            return filterCountries.some(
+                                                (filterCountry) => filterCountry.country_name === country
+                                            );
+                                        })
+                                        .sort((a, b) => {
+                                            return a > b ? -1 : 1;
+                                        })
+                                        .map((city, index) => {
+                                            return (
+                                                <option value={city.state_name} key={index}>
+                                                    {city.state_name}
+                                                </option>
+                                            );
+                                        })}
                                 </select>
                             }
                         </div>
