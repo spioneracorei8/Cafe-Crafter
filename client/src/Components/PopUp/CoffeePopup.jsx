@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import './CoffeePopup.css'
-import Loading from './Loading'
-import Cross from '../assets/Icon/Cross.png'
+import Loading from '../Loading/Loading'
+import Cross from '../../assets/Icon/Cross.png'
 import { useNavigate } from 'react-router-dom'
 const CoffeePopup = (props) => {
     const navigate = useNavigate()

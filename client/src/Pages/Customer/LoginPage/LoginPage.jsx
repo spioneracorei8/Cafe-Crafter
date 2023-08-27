@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import './LoginPage.css'
-import NavigationbarRegisLogin from '../Components/NavigationbarRegisLogin'
-import Coffee_Cup from "../assets/Background/Coffee_Cup.jpeg"
-import Cafe_Crafter_Logo from '../assets/Logo/Cafe_Crafter_Logo.png'
-import Footer from '../Components/Footer'
-import { useAuth } from '../Context/Authentication'
+import NavigationbarRegisLogin from '../../../Components/Navigationbar/NavigationbarRegisLogin'
+import Coffee_Cup from "../../../assets/Background/Coffee_Cup.jpeg"
+import Cafe_Crafter_Logo from "../../../assets/Logo/Cafe_Crafter_Logo.png"
+import Footer from '../../../Components/Footer/Footer'
+import { useAuth } from '../../../Context/Authentication'
 const LoginPage = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")

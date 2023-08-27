@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import "./CartPage.css"
-import NavigationbarProfile from '../Components/NavigationbarProfile'
-import Footer from '../Components/Footer'
+import NavigationbarProfile from '../../Components/NavigationbarProfile'
+import Footer from '../../Components/Footer/Footer'
 import axios from 'axios'
-import Loading from '../Components/Loading'
+import Loading from '../../Components/Loading'
 
 
 const CartPage = () => {

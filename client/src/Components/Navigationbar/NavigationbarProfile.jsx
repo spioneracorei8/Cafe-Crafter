@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import Cafe_Crafter_Logo from "../assets/Logo/Cafe_Crafter_Logo.png"
-import { useAuth } from '../Context/Authentication'
+import Cafe_Crafter_Logo from "../../assets/Logo/Cafe_Crafter_Logo.png"
+import { useAuth } from '../../Context/Authentication'
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';

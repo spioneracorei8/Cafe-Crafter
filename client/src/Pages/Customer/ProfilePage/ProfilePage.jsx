@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import NavigationbarProfile from '../Components/NavigationbarProfile'
+import NavigationbarProfile from '../../../Components/Navigationbar/NavigationbarProfile'
 import './ProfilePage.css'
-import Footer from '../Components/Footer'
+import Footer from '../../../Components/Footer/Footer'
 import axios from 'axios'
-import Loading from '../Components/Loading'
-import CountryStateData from "../data/CountryStateData.json"
+import Loading from '../../../Components/Loading/Loading'
+import CountryStateData from "../../../data/CountryStateData.json"
 
 const ProfilePage = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -66,7 +66,9 @@ const ProfilePage = () => {
                 gender,
                 email,
                 address,
-                phone_Number
+                phone_Number,
+                country,
+                city
             }
             await axios.put(`http://localhost:4000/auth-user/${id}`, data)
             setIsLoading(false)

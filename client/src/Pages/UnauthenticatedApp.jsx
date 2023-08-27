@@ -1,8 +1,8 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import HomePageNonLogin from './HomePageNonLogin'
-import RegisterPage from './RegisterPage'
-import LoginPage from './LoginPage'
+import HomePageNonLogin from './Customer/HomePage/HomePageNonLogin'
+import RegisterPage from './Customer/RegisterPage/RegisterPage'
+import LoginPage from './Customer/LoginPage/LoginPage'
 import PageNotFound from './PageNotFound'
 
 const UnauthenticatedApp = () => {

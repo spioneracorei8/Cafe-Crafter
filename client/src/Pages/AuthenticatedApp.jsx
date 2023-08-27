@@ -1,10 +1,10 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import HomePageLogin from './HomePageLogin'
+import HomePageLogin from './Customer/HomePage/HomePageLogin'
 import PageNotFound from './PageNotFound'
-import ProfilePage from "./ProfilePage"
-import CartPage from './CartPage'
-import BuyCoffeePage from './BuyCoffeePage'
+import ProfilePage from "./Customer/ProfilePage/ProfilePage"
+import CartPage from './Customer/CartPage/CartPage'
+import BuyCoffeePage from './Customer/BuyCoffeePage/BuyCoffeePage'
 
 const AuthenticatedApp = () => {
 
