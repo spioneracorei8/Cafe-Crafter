@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import './BuyCoffeePage.css'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import NavigationbarProfile from '../Components/NavigationbarProfile'
-import Footer from '../Components/Footer'
+import NavigationbarProfile from '../../../Components/Navigationbar/NavigationbarProfile'
+import Footer from '../../../Components/Footer/Footer'
 
 const BuyCoffeePage = () => {
     const { coffeeId } = useParams();

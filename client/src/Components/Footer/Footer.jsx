@@ -1,13 +1,13 @@
 import React from 'react'
 import './Footer.css'
-import Twitter_Icon_Black from "../assets/Icon/Twitter_Icon_Black.svg"
-import Twitter_Icon_White from "../assets/Icon/Twitter_Icon_White.png"
-import Twitch_Icon_Black from "../assets/Icon/Twitch_Icon_Black.svg"
-import Twitch_Icon_White from "../assets/Icon/Twitch_Icon_White.png"
-import Instagram_Icon_Black from "../assets/Icon/Instagram_Icon_Black.svg"
-import Instagram_Icon_White from "../assets/Icon/Instagram_Icon_White.png"
-import Facebook_Icon_Black from "../assets/Icon/Facebook_Icon_Black.svg"
-import Facebook_Icon_White from "../assets/Icon/Facebook_Icon_White.png"
+import Twitter_Icon_Black from "../../assets/Icon/Twitter_Icon_Black.svg"
+import Twitter_Icon_White from "../../assets/Icon/Twitter_Icon_White.png"
+import Twitch_Icon_Black from "../../assets/Icon/Twitch_Icon_Black.svg"
+import Twitch_Icon_White from "../../assets/Icon/Twitch_Icon_White.png"
+import Instagram_Icon_Black from "../../assets/Icon/Instagram_Icon_Black.svg"
+import Instagram_Icon_White from "../../assets/Icon/Instagram_Icon_White.png"
+import Facebook_Icon_Black from "../../assets/Icon/Facebook_Icon_Black.svg"
+import Facebook_Icon_White from "../../assets/Icon/Facebook_Icon_White.png"
 
 
 import { Link } from "react-router-dom"

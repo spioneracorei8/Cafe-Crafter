@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import './HomePageLogin.css'
 import { useNavigate, Link } from 'react-router-dom'
-import useCoffee from '../Hook/useCoffee'
-import { useAuth } from '../Context/Authentication'
+import useCoffee from '../../../Hook/useCoffee'
+import { useAuth } from '../../../Context/Authentication'
 import axios from 'axios'
-import Footer from "../Components/Footer"
-import CoffeePopup from '../Components/CoffeePopup'
-import Loading from '../Components/Loading'
+import Footer from "../../../Components/Footer/Footer"
+import CoffeePopup from '../../../Components/PopUp/CoffeePopup'
+import Loading from '../../../Components/Loading/Loading'
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Cafe_Crafter_Logo from "../assets/Logo/Cafe_Crafter_Logo.png"
+import Cafe_Crafter_Logo from "../../../assets/Logo/Cafe_Crafter_Logo.png"
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {

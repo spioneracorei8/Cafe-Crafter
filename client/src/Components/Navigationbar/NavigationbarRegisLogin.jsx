@@ -1,7 +1,7 @@
 import React from 'react'
 import './NavigationbarRegisLogin.css'
 import { Link, useNavigate } from "react-router-dom"
-import Cafe_Crafter_Logo from "../assets/Logo/Cafe_Crafter_Logo.png"
+import Cafe_Crafter_Logo from "../../assets/Logo/Cafe_Crafter_Logo.png"
 
 const NavigationbarRegisLogin = () => {
     const navigate = useNavigate()

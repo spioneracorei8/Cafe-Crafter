@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import './RegisterPage.css'
-import NavigationbarRegisLogin from '../Components/NavigationbarRegisLogin'
-import Footer from "../Components/Footer"
-import Coffee_Beans from "../assets/Background/Coffee_Beans.jpg"
-import Cafe_Crafter_Logo from '../assets/Logo/Cafe_Crafter_Logo.png'
-import { useAuth } from '../Context/Authentication'
-import CountryStateData from "../data/CountryStateData.json"
+import NavigationbarRegisLogin from '../../../Components/Navigationbar/NavigationbarRegisLogin'
+import Footer from "../../../Components/Footer/Footer"
+import Coffee_Beans from "../../../assets/Background/Coffee_Beans.jpg"
+import Cafe_Crafter_Logo from "../../../assets/Logo/Cafe_Crafter_Logo.png"
+import { useAuth } from '../../../Context/Authentication'
+import CountryStateData from "../../../data/CountryStateData.json"
 
 const RegisterPage = () => {
 

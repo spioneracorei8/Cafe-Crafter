@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react'
 import './HomePageNonLogin.css'
-import { IngredientsCoffeeData, OtherAboutCoffeeData } from '../data/CoffeeData.js'
-import Footer from '../Components/Footer'
-import CoffeePopup from '../Components/CoffeePopup'
-import Loading from '../Components/Loading'
-import Arrow_Left_Icon from '../assets/Icon/Arrow_Left_Icon.png'
-import Arrow_Right_Icon from '../assets/Icon/Arrow_Right_Icon.png'
-import useCoffee from '../Hook/useCoffee'
+import { IngredientsCoffeeData, OtherAboutCoffeeData } from '../../../data/CoffeeData.js'
+import Footer from '../../../Components/Footer/Footer'
+import CoffeePopup from '../../../Components/PopUp/CoffeePopup'
+import Loading from '../../../Components/Loading/Loading'
+import Arrow_Left_Icon from "../../../assets/Icon/Arrow_Left_Icon.png"
+import Arrow_Right_Icon from "../../../assets/Icon/Arrow_Right_Icon.png"
+import useCoffee from '../../../Hook/useCoffee'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import Cafe_Crafter_Logo from "../assets/Logo/Cafe_Crafter_Logo.png"
+import Cafe_Crafter_Logo from "../../../assets/Logo/Cafe_Crafter_Logo.png"
 
 const HomePageNonLogin = () => {
     const navigate = useNavigate()
