@@ -58,6 +58,24 @@ func GetSubTotal(userId int) (*Cart, error, error) {
 
 }
 
+func GetCartQuantity(userId int) ([]Cart, error) {
+	var cartQuantity []Cart
+
+	query, err := Config.DB.Query(`SELECT COUNT(cart_id) FROM coffeedatabase.carts WHERE user_id = ?`, userId)
+
+	if err != nil {
+		return nil, nil
+	}
+
+	for query.Next() {
+		var cart Cart
+		query.Scan(
+			&cart.Cart_quantity)
+		cartQuantity = append(cartQuantity, cart)
+	}
+	return cartQuantity, nil
+}
+
 func AddToCart(user_id int, cart *Cart) (*Cart, error, bool) {
 	cartQuery, err := ExistsCart(user_id, cart.Coffee_id)
 	if err != nil {
