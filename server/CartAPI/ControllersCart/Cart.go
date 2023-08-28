@@ -57,6 +57,28 @@ func GetSubTotal(c *gin.Context) {
 
 }
 
+func GetCartQuantity(c *gin.Context) {
+	id := c.Param("user_id")
+
+	userId, err := strconv.Atoi(id)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
+	}
+
+	cartQuantity, err := ModelsCart.GetCartQuantity(userId)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": cartQuantity,
+		})
+	}
+}
+
 func AddToCart(c *gin.Context) {
 	var cart ModelsCart.Cart
 
