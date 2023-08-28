@@ -26,9 +26,6 @@ const RegisterPage = () => {
     const countries = CountryStateData
     const cities = CountryStateData.flatMap(country => country.states)
 
-    console.log(country);
-    console.log(city);
-
     const handleNextRegisterPage = (event) => {
         event.preventDefault()
         if (name === "") {

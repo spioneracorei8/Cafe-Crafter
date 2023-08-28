@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Cafe_Crafter_Logo from "../../../assets/Logo/Cafe_Crafter_Logo.png"
+import useCart from "../../../Hook/useCart"
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -26,6 +27,7 @@ const HomePageLogin = () => {
 
     const navigate = useNavigate()
     const { getAllCoffee, allCoffee, isLoading, setIsLoading, isError, setIsError } = useCoffee()
+    const { getCartQuantity, cartQuantity } = useCart()
     const { logout } = useAuth()
     const [coffeeData, setCoffeeData] = useState({})
     const [coffeePopUp, setCoffeePopUp] = useState(false)
@@ -34,6 +36,10 @@ const HomePageLogin = () => {
     useEffect(() => {
         getAllCoffee()
     }, [])
+
+    useEffect(() => {
+        getCartQuantity()
+    }, [isLoading])
 
     const getCoffeeName = async (coffeeById) => {
         try {
@@ -48,7 +54,7 @@ const HomePageLogin = () => {
             console.log(error);
         }
     }
-    
+
     const handleCoffeePopUp = () => {
         setCoffeePopUp(!coffeePopUp)
     }
@@ -156,7 +162,7 @@ const HomePageLogin = () => {
 
                         >
 
-                            <StyledBadge badgeContent={5} color="warning">
+                            <StyledBadge badgeContent={cartQuantity} color="warning">
                                 <ShoppingCartIcon />
 
                             </StyledBadge>
