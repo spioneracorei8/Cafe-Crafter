@@ -22,7 +22,7 @@ const ProfilePage = () => {
     const [country, setCountry] = useState("")
     const [city, setCity] = useState("")
     const [phone_Number, setPhone_Number] = useState("")
-    console.log(userData);
+    
     const countries = CountryStateData
     const cities = CountryStateData.flatMap(country => country.states)
 

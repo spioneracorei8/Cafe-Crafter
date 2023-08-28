@@ -6,6 +6,7 @@ import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import useCart from '../../Hook/useCart';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -19,7 +20,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const NavigationbarProfile = () => {
     const navigate = useNavigate()
     const { logout } = useAuth()
-
+    const { getCartQuantity, cartQuantity } = useCart()
 
     const handleNavigate = (event, id) => {
         event.preventDefault()
@@ -33,6 +34,9 @@ const NavigationbarProfile = () => {
         }
     }
 
+    useEffect(() => {
+        getCartQuantity()
+    },[])
 
     return (
         <header className='login-header-container'>
@@ -50,7 +54,7 @@ const NavigationbarProfile = () => {
 
                     >
 
-                        <StyledBadge badgeContent={5} color="warning">
+                        <StyledBadge badgeContent={cartQuantity} color="warning">
                             <ShoppingCartIcon />
 
                         </StyledBadge>
