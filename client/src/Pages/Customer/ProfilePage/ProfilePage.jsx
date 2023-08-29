@@ -5,49 +5,16 @@ import Footer from '../../../Components/Footer/Footer'
 import axios from 'axios'
 import Loading from '../../../Components/Loading/Loading'
 import CountryStateData from "../../../data/CountryStateData.json"
+import useUser from '../../../Hook/useUser'
 
 const ProfilePage = () => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [isError, setIsError] = useState(false)
+    const { isLoading, setIsLoading, isError, setIsError, userData, id, setId, name, setName, username, setUsername, password, setPassword, gender, setGender, email, setEmail, address, setAddress, country, setCountry, city, setCity, phone_Number, setPhone_Number } = useUser()
     const [isEdit, setIsEdit] = useState(false)
-    const [userData, setUserData] = useState({})
     const { Name, Username, Email, Phone_number, Gender, Address, Country, City } = userData
-    const [id, setId] = useState("")
-    const [name, setName] = useState("")
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [gender, setGender] = useState("")
-    const [email, setEmail] = useState("")
-    const [address, setAddress] = useState("")
-    const [country, setCountry] = useState("")
-    const [city, setCity] = useState("")
-    const [phone_Number, setPhone_Number] = useState("")
-    
+
+
     const countries = CountryStateData
     const cities = CountryStateData.flatMap(country => country.states)
-
-    const getUserData = async () => {
-        try {
-            setIsError(false)
-            setIsLoading(true)
-            const result = await axios.get(`http://localhost:4000/auth-user/${localStorage.getItem("id")}`)
-            setUserData(result.data.data)
-            setId(result.data.data.Id)
-            setName(result.data.data.Name)
-            setUsername(result.data.data.Username)
-            setGender(result.data.data.Gender)
-            setEmail(result.data.data.Email)
-            setAddress(result.data.data.Address)
-            setPhone_Number(result.data.data.Phone_number)
-            setCountry(result.data.data.Country)
-            setCity(result.data.data.City)
-            setIsLoading(false)
-        } catch (error) {
-            setIsError(true)
-            setIsLoading(false)
-            console.log(error);
-        }
-    }
 
     const handleEditProfile = (event) => {
         event.preventDefault()
@@ -81,23 +48,19 @@ const ProfilePage = () => {
         }
     }
 
-
-    useEffect(() => {
-        getUserData()
-    }, [])
-
-
-
     return (
         <>
 
             {isLoading &&
                 <Loading />
             }
+
             {isError &&
                 <h1>Fetching Data Error...</h1>
             }
+
             <NavigationbarProfile />
+
             <section className='profile-container'>
                 <div className='edit-profile'>
                     <button
