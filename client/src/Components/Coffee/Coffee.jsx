@@ -10,7 +10,7 @@ import NagigationbarLoggedIn from "../Navigationbar/NavigationbarLoggedIn"
 const Coffee = () => {
 
     const navigate = useNavigate()
-    const { getAllCoffee, allCoffee, setIsError, setIsLoading, isLoading, isError } = useCoffee()
+    const { getAllCoffee, allCoffee, setIsError, setIsLoading, isLoading } = useCoffee()
     const { getCartQuantity, cartQuantity } = useCart()
     const [coffeeData, setCoffeeData] = useState({})
     const [coffeePopUp, setCoffeePopUp] = useState(false)
@@ -68,6 +68,7 @@ const Coffee = () => {
 
     return (
         <>
+            
             {coffeePopUp &&
                 <CoffeePopup
                     handleCoffeePopUp={handleCoffeePopUp}

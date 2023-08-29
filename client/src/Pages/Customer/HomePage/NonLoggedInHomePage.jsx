@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import './HomePageNonLogin.css'
+import './NonLoggedInHomePage.css'
 import { IngredientsCoffeeData, OtherAboutCoffeeData } from '../../../data/CoffeeData.js'
 import Footer from '../../../Components/Footer/Footer'
 import CoffeePopup from '../../../Components/PopUp/CoffeePopup'
@@ -11,7 +11,7 @@ import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import Cafe_Crafter_Logo from "../../../assets/Logo/Cafe_Crafter_Logo.png"
 
-const HomePageNonLogin = () => {
+const NonLoggedInHomePage = () => {
     const navigate = useNavigate()
     const { isLoading, setIsLoading, isError, setIsError, suggestCoffee } = useCoffee()
     const scrollContainerRef = useRef(null)
@@ -246,4 +246,4 @@ const HomePageNonLogin = () => {
     )
 }
 
-export default HomePageNonLogin
+export default NonLoggedInHomePage

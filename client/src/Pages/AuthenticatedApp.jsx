@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import HomePageLogin from './Customer/HomePage/HomePageLogin'
+import LoggedInHomePage from './Customer/HomePage/LoggedInHomePage'
 import PageNotFound from './PageNotFound'
 import ProfilePage from "./Customer/ProfilePage/ProfilePage"
 import CartPage from './Customer/CartPage/CartPage'
@@ -11,7 +11,7 @@ const AuthenticatedApp = () => {
     return (
         <>
             <Routes>
-                <Route path="/" element={<HomePageLogin />} />
+                <Route path="/" element={<LoggedInHomePage />} />
                 <Route path="/Cafe-Crafter-Twitter" element={<PageNotFound />} />
                 <Route path="/Cafe-Crafter-Instagram" element={<PageNotFound />} />
                 <Route path="/Cafe-Crafter-Facebook" element={<PageNotFound />} />
