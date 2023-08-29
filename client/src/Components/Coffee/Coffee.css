@@ -1,0 +1,95 @@
+
+.menu-background {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 2rem;
+    font-family: 'whipsmart';
+
+}
+
+.menu {
+    min-width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    scroll-snap-align: start;
+    background-color: #FEF9F0;
+    border-radius: 5%;
+    margin: 2%;
+    padding: 2%;
+    user-select: none;
+}
+
+
+.menu h3 {
+    color: #432818;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.menu h4 {
+    color: #e38949;
+    margin-bottom: 1.3rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.menu img {
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 5%;
+}
+
+
+.background-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    width: auto;
+    height: auto;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.three-button-container {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.three-button-container button {
+    font-family: 'whipsmart';
+    margin-right: 0.8rem;
+    padding: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 20%;
+    border: #D4A276;
+}
+
+.learn-more,
+.add-to-cart {
+    color: black;
+    border: white;
+}
+
+.learn-more:hover,
+.add-to-cart:hover {
+    color: white;
+    background-color: black;
+
+}
