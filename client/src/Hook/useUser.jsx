@@ -4,7 +4,6 @@ import axios from 'axios'
 const useUser = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
-    const [userData, setUserData] = useState({})
     const [id, setId] = useState("")
     const [name, setName] = useState("")
     const [username, setUsername] = useState("")
@@ -25,7 +24,6 @@ const useUser = () => {
             setIsError(false)
             setIsLoading(true)
             const result = await axios.get(`http://localhost:4000/auth-user/${localStorage.getItem("id")}`)
-            setUserData(result.data.data)
             setId(result.data.data.Id)
             setName(result.data.data.Name)
             setUsername(result.data.data.Username)
@@ -43,13 +41,26 @@ const useUser = () => {
         }
     }
 
+    const editUserData = async (data, userId) => {
+        console.log(data);
+        console.log(userId);
+        try {
+            setIsError(false)
+            setIsLoading(true)
+            await axios.put(`http://localhost:4000/auth-user/${userId}`, data)
+            setIsLoading(false)
+            window.location.replace("/Profile")
+        } catch (error) {
+            setIsLoading(false)
+            setIsError(true)
+            console.log(error);
+        }
+    }
+
     return {
         isLoading,
-        setIsLoading,
         isError,
-        setIsError,
         getUserData,
-        userData,
         id,
         setId,
         name,
@@ -69,7 +80,7 @@ const useUser = () => {
         city,
         setCity,
         phone_Number,
-        setPassword
+        editUserData
 
     }
 
