@@ -2,16 +2,13 @@ import React, { useEffect, useState } from 'react'
 import NavigationbarProfile from '../../../Components/Navigationbar/NavigationbarProfile'
 import './ProfilePage.css'
 import Footer from '../../../Components/Footer/Footer'
-import axios from 'axios'
 import Loading from '../../../Components/Loading/Loading'
 import CountryStateData from "../../../data/CountryStateData.json"
 import useUser from '../../../Hook/useUser'
 
 const ProfilePage = () => {
-    const { isLoading, setIsLoading, isError, setIsError, userData, id, setId, name, setName, username, setUsername, password, setPassword, gender, setGender, email, setEmail, address, setAddress, country, setCountry, city, setCity, phone_Number, setPhone_Number } = useUser()
+    const { isLoading, isError, id, name, setName, username, setUsername, password, setPassword, gender, setGender, email, setEmail, address, setAddress, country, setCountry, city, setCity, phone_Number, setPhone_Number, editUserData } = useUser()
     const [isEdit, setIsEdit] = useState(false)
-    const { Name, Username, Email, Phone_number, Gender, Address, Country, City } = userData
-
 
     const countries = CountryStateData
     const cities = CountryStateData.flatMap(country => country.states)
@@ -21,31 +18,20 @@ const ProfilePage = () => {
         setIsEdit(true)
     }
 
-    const handleEditUserData = async (event, id) => {
+    const handleEditUserData = async (event, userId) => {
         event.preventDefault()
-        try {
-            setIsError(false)
-            setIsLoading(true)
-            const data = {
-                name,
-                username,
-                password,
-                gender,
-                email,
-                address,
-                phone_Number,
-                country,
-                city
-            }
-            await axios.put(`http://localhost:4000/auth-user/${id}`, data)
-            setIsLoading(false)
-            window.location.replace("/Profile")
-
-        } catch (error) {
-            setIsLoading(false)
-            setIsError(true)
-            console.log(error);
+        const data = {
+            name,
+            username,
+            password,
+            gender,
+            email,
+            address,
+            phone_Number,
+            country,
+            city
         }
+        editUserData(data, userId)
     }
 
     return (
@@ -71,7 +57,7 @@ const ProfilePage = () => {
                 </div>
                 <div className='profile'>
                     <h1>
-                        {Name}, Profile
+                        {name}, Profile
                     </h1>
                 </div>
                 <form className='profile-form'>
@@ -87,7 +73,7 @@ const ProfilePage = () => {
                                 />
                                 : <input
                                     type="text"
-                                    value={Name}
+                                    value={name}
                                     disabled
                                 />
                             }
@@ -102,7 +88,7 @@ const ProfilePage = () => {
                                 />
                                 : <input
                                     type="text"
-                                    value={Username}
+                                    value={username}
                                     disabled
                                 />
                             }
@@ -148,7 +134,7 @@ const ProfilePage = () => {
                                 />
                                 : <input
                                     type="text"
-                                    value={Email}
+                                    value={email}
                                     disabled
                                 />
                             }
@@ -164,7 +150,7 @@ const ProfilePage = () => {
                                 />
                                 : <input
                                     type="text"
-                                    value={Phone_number}
+                                    value={phone_Number}
                                     disabled
                                 />
                             }
@@ -185,7 +171,7 @@ const ProfilePage = () => {
                                     <option value="female">female</option>
                                 </select>
                                 : <select
-                                    value={Gender}
+                                    value={gender}
                                     disabled
                                     style={{
                                         width: "300px",
@@ -328,7 +314,7 @@ const ProfilePage = () => {
                                     style={{
                                         width: "300px"
                                     }}
-                                    value={Address}
+                                    value={address}
                                     disabled
                                 >
 
