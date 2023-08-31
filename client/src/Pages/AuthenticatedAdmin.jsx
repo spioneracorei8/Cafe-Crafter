@@ -1,12 +1,12 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import AdminPage from './Admin/AdminPage'
+import AdminHomePage from './Admin/AdminHomePage'
 
 const AuthenticatedAdmin = () => {
     return (
         <>
             <Routes>
-                <Route path='/' element={<AdminPage />} />
+                <Route path='/' element={<AdminHomePage />} />
             </Routes>
         </>
     )

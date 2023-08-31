@@ -7,7 +7,7 @@ import AuthenticatedAdmin from "./Pages/AuthenticatedAdmin";
 
 function App() {
   const auth = useAuth()
-
+  
   return auth?.isAuthenticated ? (
     auth?.state?.user?.role === 'admin' ? (
       <AuthenticatedAdmin />

@@ -21,15 +21,21 @@ const AuthProvider = (props) => {
     }
 
     const login = async (data) => {
-        const result = await axios.post(`http://localhost:4000/auth-user/login`, data)
-        const token = result.data.token
-        const userDataFromToken = jwtDecode(token)
+        try {
+            const result = await axios.post(`http://localhost:4000/auth-user/login`, data)
+            const token = result.data.token
 
-        localStorage.setItem("token", token)
-        localStorage.setItem("id", userDataFromToken.id)
+            localStorage.setItem("token", token)
 
-        setState({ ...state, user: userDataFromToken })
-        navigate("/")
+            const userDataFromToken = jwtDecode(token)
+
+            localStorage.setItem("id", userDataFromToken.id)
+            
+            setState({ ...state, user: userDataFromToken })
+            navigate("/")
+        } catch (error) {
+            return Promise.reject(error)
+        }
     }
 
     const logout = async () => {
