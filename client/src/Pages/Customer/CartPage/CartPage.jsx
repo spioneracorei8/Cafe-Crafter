@@ -4,7 +4,7 @@ import NavigationbarProfile from '../../../Components/Navigationbar/Navigationba
 import Footer from '../../../Components/Footer/Footer'
 import axios from 'axios'
 import Loading from '../../../Components/Loading/Loading'
-
+import Swal from 'sweetalert2'
 
 const CartPage = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -58,7 +58,6 @@ const CartPage = () => {
     return (
 
         <>
-
             {isError &&
                 <h1>Fetching Data Error...</h1>
             }

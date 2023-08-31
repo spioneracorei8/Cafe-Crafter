@@ -6,6 +6,7 @@ import Coffee_Beans from "../../../assets/Background/Coffee_Beans.jpg"
 import Cafe_Crafter_Logo from "../../../assets/Logo/Cafe_Crafter_Logo.png"
 import { useAuth } from '../../../Context/Authentication'
 import CountryStateData from "../../../data/CountryStateData.json"
+import Swal from 'sweetalert2'
 
 const RegisterPage = () => {
 
@@ -80,8 +81,8 @@ const RegisterPage = () => {
                 city,
                 phone_number,
             }
-
             register(data)
+
         }
     }
 
@@ -104,7 +105,7 @@ const RegisterPage = () => {
                         <button
                             className={registerPage === 2 ? "load-page-two" : "unload-page-two"}
                             onClick={(event) => handleNextRegisterPage(event)}
-                            
+
                         >
                             2
                         </button>
