@@ -4,6 +4,8 @@ import NavigationbarAdmin from '../../Components/Navigationbar/NavigationbarAdmi
 import MyAdmin from "../../assets/Pictures/MyAdmin.svg"
 import Arrow_Left_White_Icon from "../../assets/Icon/Arrow_Left_White_Icon.png"
 import Arrow_Right_White_Icon from "../../assets/Icon/Arrow_Right_White_Icon.png"
+import NavbarManageMenu from '../../Components/Navigationbar/NavbarManageMenu'
+import Footer from "../../Components/Footer/Footer"
 
 const AdminHomePage = () => {
 
@@ -12,6 +14,8 @@ const AdminHomePage = () => {
   const handleToggleNavbarLeft = () => {
     setToggleNavbarLeft(!toggleNavbarLeft)
   }
+
+
 
   return (
 
@@ -36,11 +40,7 @@ const AdminHomePage = () => {
           }
 
           {toggleNavbarLeft &&
-            <nav className='navbar-left-admin'>
-              <div>
-                Manage Coffee
-              </div>
-            </nav>
+            <NavbarManageMenu />
           }
 
           <div className='greeting-admin'>
@@ -70,6 +70,8 @@ const AdminHomePage = () => {
           </div>
         </section>
       </main>
+
+      <Footer />
     </>
   )
 }
