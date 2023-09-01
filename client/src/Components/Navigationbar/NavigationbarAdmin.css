@@ -1,0 +1,35 @@
+.header-navbar-admin {
+    width: 100vw;
+    height: 12vh;
+    background-color: #923327;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    font-family: 'whipsmart';
+}
+
+.header-navbar-admin nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.header-navbar-admin button {
+    color: white;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 1rem;
+    background-color: #fb7b69;
+    cursor: pointer;
+    border-radius: 15%;
+    border: #D4A276;
+    font-family: 'whipsmart';
+}
+
+.header-navbar-admin button:hover {
+    background-color: #fc998c;
+
+}

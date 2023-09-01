@@ -30,8 +30,13 @@ const AuthProvider = (props) => {
             const userDataFromToken = jwtDecode(token)
 
             localStorage.setItem("id", userDataFromToken.id)
-            
-            setState({ ...state, user: userDataFromToken })
+
+            localStorage.setItem("role", userDataFromToken.role)
+            setState((prevState) => ({
+                ...prevState,
+                user: userDataFromToken
+            }))
+
             navigate("/")
         } catch (error) {
             return Promise.reject(error)
