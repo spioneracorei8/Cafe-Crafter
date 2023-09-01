@@ -14,7 +14,7 @@ const AlertPopUp = () => {
           })
         }
       </div>
-    </>
+    </> 
   )
 }
 

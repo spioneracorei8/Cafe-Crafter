@@ -7,17 +7,16 @@ import AuthenticatedAdmin from "./Pages/AuthenticatedAdmin";
 
 function App() {
   const auth = useAuth()
-  
-  return auth?.isAuthenticated ? (
-    auth?.state?.user?.role === 'admin' ? (
-      <AuthenticatedAdmin />
-    ) : (
-      <AuthenticatedApp />
-    )
-  ) : (
-    <UnauthenticatedApp />
-  );
 
+  return auth?.isAuthenticated ? (
+    localStorage?.role === 'admin' ?
+      <AuthenticatedAdmin />
+      : localStorage?.role === 'customer' ?
+        <AuthenticatedApp />
+        :
+        <UnauthenticatedApp />
+  )
+    : <UnauthenticatedApp />
 }
 
 export default App
