@@ -1,7 +1,7 @@
 .header-navbar-admin {
     width: 100vw;
     height: 12vh;
-    background-color: #923327;
+    background-color: #940000;
     padding-left: 3rem;
     padding-right: 3rem;
     font-family: 'whipsmart';
@@ -22,7 +22,7 @@
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     padding: 1rem;
-    background-color: #fb7b69;
+    background-color: #ec5e4b;
     cursor: pointer;
     border-radius: 15%;
     border: #D4A276;

@@ -7,10 +7,9 @@
 .admin-section {
     display: flex;
     justify-content: space-between;
-    /* align-items: center; */
 }
 
-.greeting-admin {
+.admin-manage-menu {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -19,6 +18,7 @@
     width: 100%;
     height: 100%;
     position: relative;
+    padding-bottom: 2rem;
 }
 
 .arrow-left-toggle-navbar {
@@ -45,7 +45,52 @@
     cursor: pointer;
 }
 
-.greeting-image {}
+.navbar-left-admin {
+    background-color: #A62934;
+    width: 20%;
+    height: auto;
+}
+
+.manage-menu-container {
+    width: 100%;
+    height: 100%;
+}
+
+.manage-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.manage-menu button:first-child {
+    margin-top: 1rem;
+}
+
+.manage-menu button {
+    background-color: #fa5c47;
+    font-family: 'whipsmart';
+    padding: 10px;
+    border-radius: 50px;
+    border: 3px solid red;
+    cursor: pointer;
+}
+
+.manage-menu button h1 {
+    color: black;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.manage-menu li {
+    list-style: square;
+    font-size: 1.1rem;
+    background-color: #fb7b69;
+    padding: 8px;
+    border-radius: 30px;
+    cursor: pointer;
+}
 
 .greeting-content {
     display: flex;
@@ -59,6 +104,7 @@
     color: black;
     font-size: 2rem;
     font-weight: 900;
+    margin-top: 2rem;
 }
 
 .greeting-content p {
