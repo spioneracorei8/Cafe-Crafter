@@ -35,8 +35,6 @@ const AdminHomePage = () => {
     }
   }
 
-  console.log(isAddNewCoffee);
-
   return (
 
     <>
