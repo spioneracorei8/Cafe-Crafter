@@ -1,0 +1,125 @@
+.add-new-coffee-container {
+    width: 100vw;
+    height: auto;
+    font-family: 'whipsmart';
+}
+
+.add-new-coffee {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    gap: 30px;
+}
+
+.add-new-coffee-heading {
+    margin-top: 2rem;
+}
+
+.add-new-coffee-heading h1 {
+    font-size: 2.3rem;
+    font-weight: 900;
+}
+
+.new-coffee-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid #ad1f1f;
+    border-radius: 50px;
+    padding: 20px;
+    background-color: #d87c7c;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.new-coffee-name h1 {
+    font-size: 1.6rem;
+    font-weight: 900;
+}
+
+.new-coffee-name-input {
+    border: 2px solid #ad1f1f;
+    border-radius: 50px;
+    padding: 10px;
+    cursor: default;
+    display: flex;
+    align-items: center;
+}
+
+.new-coffee-name-input input {
+    width: auto;
+    height: 2rem;
+    border: 1px solid #d87c7c;
+    border-radius: 50px;
+    padding: 7px;
+    font-size: 1.4rem;
+    font-family: 'whipsmart';
+
+}
+
+.new-coffee-name-input input:focus {
+    border: 3px solid #ad1f1f;
+    outline: #ad1f1f;
+}
+
+.new-coffee-name-input h2 {
+    font-size: 1.4rem;
+    font-weight: 900;
+}
+
+
+.new-coffee-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid #ad1f1f;
+    border-radius: 50px;
+    padding: 20px;
+    background-color: #d87c7c;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.new-coffee-price h1 {
+    font-size: 1.6rem;
+    font-weight: 900;
+}
+
+.new-coffee-price-input {
+    border: 2px solid #ad1f1f;
+    border-radius: 50px;
+    padding: 10px;
+    cursor: default;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.new-coffee-price-input input {
+    width: auto;
+    height: 2rem;
+    border: 1px solid #d87c7c;
+    border-radius: 50px;
+    padding: 7px;
+    font-size: 1.4rem;
+    font-family: 'whipsmart';
+}
+
+.new-coffee-price-input input:focus {
+    border: 3px solid #ad1f1f;
+    outline: #ad1f1f;
+}
+
+.new-coffee-price-input h2 {
+    font-size: 1.4rem;
+    font-weight: 900;
+}

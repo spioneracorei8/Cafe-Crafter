@@ -32,6 +32,7 @@ const AuthProvider = (props) => {
             localStorage.setItem("id", userDataFromToken.id)
 
             localStorage.setItem("role", userDataFromToken.role)
+            
             setState((prevState) => ({
                 ...prevState,
                 user: userDataFromToken
