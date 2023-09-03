@@ -5,7 +5,7 @@ import MyAdmin from "../../assets/Pictures/MyAdmin.svg"
 import Arrow_Left_White_Icon from "../../assets/Icon/Arrow_Left_White_Icon.png"
 import Arrow_Right_White_Icon from "../../assets/Icon/Arrow_Right_White_Icon.png"
 import Footer from "../../Components/Footer/Footer"
-import AddNewCoffee from './Coffee/AddNewCoffee'
+import AddNewMenu from './AddNewMenu/AddNewMenu'
 
 const AdminHomePage = () => {
 
@@ -120,7 +120,9 @@ const AdminHomePage = () => {
 
             {
               isAddNewCoffee === true ?
-                <AddNewCoffee />
+                <AddNewMenu
+                  name="Coffee"
+                />
 
                 :
                 <>

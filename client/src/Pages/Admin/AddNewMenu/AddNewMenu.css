@@ -1,10 +1,10 @@
-.add-new-coffee-container {
+.add-new-menu-container {
     width: 100vw;
     height: auto;
     font-family: 'whipsmart';
 }
 
-.add-new-coffee {
+.add-new-menu {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,16 +14,13 @@
     gap: 30px;
 }
 
-.add-new-coffee-heading {
+.add-new-menu-heading h1 {
     margin-top: 2rem;
-}
-
-.add-new-coffee-heading h1 {
     font-size: 2.3rem;
     font-weight: 900;
 }
 
-.new-coffee-name {
+.new-menu-name {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,18 +29,22 @@
     border: 2px solid #ad1f1f;
     border-radius: 50px;
     padding: 20px;
-    background-color: #d87c7c;
+    background-color: #e28585;
     cursor: pointer;
     position: relative;
     user-select: none;
 }
 
-.new-coffee-name h1 {
+.new-menu-name:hover {
+    background-color: #d87c7c;
+}
+
+.new-menu-name h1 {
     font-size: 1.6rem;
     font-weight: 900;
 }
 
-.new-coffee-name-input {
+.new-coffee-menu-input {
     border: 2px solid #ad1f1f;
     border-radius: 50px;
     padding: 10px;
@@ -52,10 +53,10 @@
     align-items: center;
 }
 
-.new-coffee-name-input input {
+.new-menu-name-input input {
     width: auto;
     height: 2rem;
-    border: 1px solid #d87c7c;
+    border: 3px solid gray;
     border-radius: 50px;
     padding: 7px;
     font-size: 1.4rem;
@@ -63,38 +64,42 @@
 
 }
 
-.new-coffee-name-input input:focus {
+.new-menu-name-input input:focus {
     border: 3px solid #ad1f1f;
     outline: #ad1f1f;
 }
 
-.new-coffee-name-input h2 {
+.new-menu-name-input h2 {
     font-size: 1.4rem;
     font-weight: 900;
 }
 
 
-.new-coffee-price {
+.new-menu-price {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    background-color: #e28585;
     border: 2px solid #ad1f1f;
     border-radius: 50px;
     padding: 20px;
-    background-color: #d87c7c;
     cursor: pointer;
     position: relative;
     user-select: none;
 }
 
-.new-coffee-price h1 {
+.new-menu-price:hover {
+    background-color: #d87c7c;
+}
+
+.new-menu-price h1 {
     font-size: 1.6rem;
     font-weight: 900;
 }
 
-.new-coffee-price-input {
+.new-menu-price-input {
     border: 2px solid #ad1f1f;
     border-radius: 50px;
     padding: 10px;
@@ -104,10 +109,10 @@
     align-items: center;
 }
 
-.new-coffee-price-input input {
+.new-menu-price-input input {
     width: auto;
     height: 2rem;
-    border: 1px solid #d87c7c;
+    border: 3px solid gray;
     border-radius: 50px;
     padding: 7px;
     font-size: 1.4rem;
@@ -115,38 +120,42 @@
     appearance: none;
 }
 
-.new-coffee-price-input input::-webkit-inner-spin-button {
+.new-menu-price-input input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-.new-coffee-price-input input:focus {
+.new-menu-price-input input:focus {
     border: 3px solid #ad1f1f;
     outline: #ad1f1f;
 }
 
-.new-coffee-price-input h2 {
+.new-menu-price-input h2 {
     font-size: 1.4rem;
     font-weight: 900;
 }
 
 
 
-.new-coffee-description {
+.new-menu-description {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
     border: 2px solid #ad1f1f;
+    background-color: #e28585;
     border-radius: 50px;
     padding: 20px;
-    background-color: #d87c7c;
     cursor: pointer;
     position: relative;
     user-select: none;
 }
 
-.new-coffee-description h1 {
+.new-menu-description:hover {
+    background-color: #d87c7c;
+}
+
+.new-menu-description h1 {
     font-size: 1.6rem;
     font-weight: 900;
     width: 16rem;
@@ -154,7 +163,7 @@
     text-align: center;
 }
 
-.new-coffee-description-input {
+.new-menu-description-input {
     border: 2px solid #ad1f1f;
     border-radius: 50px;
     padding: 10px;
@@ -165,20 +174,20 @@
     justify-content: center;
 }
 
-.new-coffee-description-input textarea {
-    border: 1px solid #d87c7c;
+.new-menu-description-input textarea {
+    border: 3px solid gray;
     border-radius: 50px;
     padding: 15px;
     font-size: 1.4rem;
     font-family: 'whipsmart';
 }
 
-.new-coffee-description-input textarea:focus {
+.new-menu-description-input textarea:focus {
     border: 3px solid #ad1f1f;
     outline: #ad1f1f;
 }
 
-.new-coffee-description-input h2 {
+.new-menu-description-input h2 {
     font-size: 1.4rem;
     font-weight: 900;
     display: flex;
@@ -189,7 +198,7 @@
 
 
 
-.new-coffee-image-url {
+.new-menu-image-url {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -197,14 +206,18 @@
     gap: 10px;
     border: 2px solid #ad1f1f;
     border-radius: 50px;
+    background-color: #e28585;
     padding: 20px;
-    background-color: #d87c7c;
     cursor: pointer;
     position: relative;
     user-select: none;
 }
 
-.new-coffee-image-url h1 {
+.new-menu-image-url:hover {
+    background-color: #d87c7c;
+}
+
+.new-menu-image-url h1 {
     font-size: 1.6rem;
     font-weight: 900;
     width: 15.5rem;
@@ -213,7 +226,7 @@
 
 }
 
-.new-coffee-image-url-input {
+.new-menu-image-url-input {
     border: 2px solid #ad1f1f;
     border-radius: 50px;
     padding: 10px;
@@ -224,20 +237,20 @@
     justify-content: center;
 }
 
-.new-coffee-image-url-input textarea {
-    border: 1px solid #d87c7c;
+.new-menu-image-url-input textarea {
+    border: 3px solid gray;
     border-radius: 50px;
     padding: 15px;
     font-size: 1.4rem;
     font-family: 'whipsmart';
 }
 
-.new-coffee-image-url-input textarea:focus {
+.new-menu-image-url-input textarea:focus {
     border: 3px solid #ad1f1f;
     outline: #ad1f1f;
 }
 
-.new-coffee-image-url-input h2 {
+.new-menu-image-url-input h2 {
     font-size: 1.4rem;
     font-weight: 900;
     display: flex;
@@ -246,7 +259,7 @@
     justify-content: center;
 }
 
-.submit-add-new-coffee {
+.submit-add-new-menu {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -254,7 +267,7 @@
     margin-top: 4rem;
 }
 
-.submit-add-new-coffee button {
+.submit-add-new-menu button {
     background-color: #ad1f1f;
     padding: 10px;
     border-radius: 50px;
@@ -265,11 +278,15 @@
     outline: #ad1f1f;
 }
 
-.submit-add-new-coffee button:hover {
+.submit-add-new-menu button:hover {
     background-color: #dd1111;
 }
 
-.submit-add-new-coffee button h1 {
+.submit-add-new-menu button:active {
+    background-color: #ff0000;
+}
+
+.submit-add-new-menu button h1 {
     color: white;
     font-size: 1.4rem;
 }
