@@ -180,6 +180,7 @@
     padding: 15px;
     font-size: 1.4rem;
     font-family: 'whipsmart';
+    resize: none;
 }
 
 .new-menu-description-input textarea:focus {
@@ -226,6 +227,13 @@
 
 }
 
+.new-menu-image-url img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50px;
+    object-fit: cover;
+}
+
 .new-menu-image-url-input {
     border: 2px solid #ad1f1f;
     border-radius: 50px;
@@ -243,6 +251,8 @@
     padding: 15px;
     font-size: 1.4rem;
     font-family: 'whipsmart';
+    resize: none;
+
 }
 
 .new-menu-image-url-input textarea:focus {

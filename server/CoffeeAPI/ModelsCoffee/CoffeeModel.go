@@ -6,4 +6,5 @@ type Coffee struct {
 	Image_url   string
 	Description string
 	Price       float64
+	Category    string
 }
