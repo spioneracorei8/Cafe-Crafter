@@ -37,6 +37,20 @@ const useCoffee = () => {
         }
     }
 
+    const InsertCoffee = async (data) => {
+        console.log(data);
+        try {
+            setIsError(false)
+            setIsLoading(true)
+            await axios.post(`http://localhost:4000/coffee/`, data)
+            setIsLoading(false)
+
+        } catch (error) {
+            setIsError(true);
+            setIsLoading(false);
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
         getSuggestCoffee()
@@ -51,6 +65,7 @@ const useCoffee = () => {
         suggestCoffee,
         getAllCoffee,
         allCoffee,
+        InsertCoffee,
     }
 }
 

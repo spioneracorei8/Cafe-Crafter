@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import "./AddNewMenu.css"
+import useCoffee from '../../../Hook/useCoffee'
 
 const AddNewMenu = (props) => {
+    const { InsertCoffee } = useCoffee()
 
     const [name, setName] = useState("")
     const [price, setPrice] = useState("")
@@ -26,14 +28,25 @@ const AddNewMenu = (props) => {
             setIsOpenNewMenuImageUrl(!isOpenNewMenuImageUrl)
         }
     }
-    const value = parseInt(price)
 
-    console.log(value);
+    const handleAddNewMenu = (event, menu) => {
+        event.preventDefault()
+        if (menu === "coffee") {
+            const floatPrice = parseFloat(price)
+            const data = {
+                name,
+                price: floatPrice,
+                description,
+                image_url
+            }
+            InsertCoffee(data)
+        }
+    }
 
     return (
 
         <>
-            <form className='add-new-menu-container'>
+            <form className='add-new-menu-container' onSubmit={(event) => handleAddNewMenu(event, "coffee")}>
                 <div className='add-new-menu'>
                     <div className='add-new-menu-heading'>
                         <h1>

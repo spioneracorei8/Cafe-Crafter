@@ -90,9 +90,9 @@ func GetSuggestCoffeName(name string) (*Coffee, error, error) {
 }
 
 func InsertCoffee(coffee *Coffee) (int64, error) {
-	insert := `INSERT INTO coffeemenu (name, image_url, description, price) VALUES (?, ?, ?, ?)`
+	insert := `INSERT INTO coffeemenu (name, image_url, description, price, category) VALUES (?, ?, ?, ?, ?)`
 
-	result, err := Config.DB.Exec(insert, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price)
+	result, err := Config.DB.Exec(insert, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price, "coffee")
 	if err != nil {
 		return -999, err
 	}
