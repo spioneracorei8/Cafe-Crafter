@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-
+import { useNavigate } from "react-router-dom"
 
 const useCoffee = () => {
+    const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [suggestCoffee, setSuggestCoffee] = useState([])
@@ -38,13 +39,12 @@ const useCoffee = () => {
     }
 
     const InsertCoffee = async (data) => {
-        console.log(data);
         try {
             setIsError(false)
             setIsLoading(true)
             await axios.post(`http://localhost:4000/coffee/`, data)
             setIsLoading(false)
-
+            window.location.replace("/")
         } catch (error) {
             setIsError(true);
             setIsLoading(false);
