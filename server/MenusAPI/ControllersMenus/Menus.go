@@ -1,56 +1,62 @@
-package ControllersCoffee
+package ControllersMenus
 
 import (
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/spioneracorei8/Cafe-Crafter/CoffeeAPI/ModelsCoffee"
+	"github.com/spioneracorei8/Cafe-Crafter/MenusAPI/ModelsMenus"
 )
 
 func GetCoffee(c *gin.Context) {
-	coffeeList, err := ModelsCoffee.GetCoffee()
+	coffeeList, err := ModelsMenus.GetCoffee()
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": coffeeList,
+		})
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"data": coffeeList,
-	})
+
 }
 
 func GetSuggestCoffee(c *gin.Context) {
-	coffeeList, err := ModelsCoffee.GetSuggestCoffee()
+	coffeeList, err := ModelsMenus.GetSuggestCoffee()
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": coffeeList,
+		})
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"data": coffeeList,
-	})
+
 }
 
 func GetCoffeeId(c *gin.Context) {
-
 	id := c.Param("id")
 	coffeeId, err := strconv.Atoi(id)
+
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
 		return
 	}
-	coffee, err, errNoRow := ModelsCoffee.GetCoffeeId(coffeeId)
+
+	coffee, err, errNoRow := ModelsMenus.GetCoffeeId(coffeeId)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	} else if errNoRow != nil {
 		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})
 		return
-	}
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": coffee,
+		})
 
-	c.JSON(http.StatusOK, gin.H{
-		"data": coffee,
-	})
+	}
 
 }
 
@@ -58,7 +64,7 @@ func GetSuggestCoffeName(c *gin.Context) {
 
 	name := c.Param("name")
 
-	coffee, err, errNoRow := ModelsCoffee.GetSuggestCoffeName(name)
+	coffee, err, errNoRow := ModelsMenus.GetSuggestCoffeName(name)
 
 	if err != nil {
 		c.AbortWithStatus(http.StatusInternalServerError)
@@ -74,57 +80,53 @@ func GetSuggestCoffeName(c *gin.Context) {
 }
 
 func InsertCoffee(c *gin.Context) {
-	var coffee ModelsCoffee.Coffee
+	var coffee ModelsMenus.Menu
 	if err := c.ShouldBindJSON(&coffee); err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	coffeeId, err := ModelsCoffee.InsertCoffee(&coffee)
+	coffeeId, err := ModelsMenus.InsertCoffee(coffee)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
-	} else if coffeeId == -999 {
+	} else if coffeeId == 0 {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
-	} else if coffeeId == -888 {
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"coffeeId": coffeeId,
+			"message":  "insert new coffee successfully.",
+		})
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"coffee_id": coffeeId,
-		"message":   "insert new coffee successfully.",
-	})
 }
 
 func InsertSuggestCoffee(c *gin.Context) {
-	var coffee ModelsCoffee.Coffee
+	var coffee ModelsMenus.Menu
 	if err := c.ShouldBindJSON(&coffee); err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	coffeeId, err := ModelsCoffee.InsertSuggestCoffee(coffee)
+	coffeeId, err := ModelsMenus.InsertSuggestCoffee(coffee)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
-	} else if coffeeId == -999 {
+	} else if coffeeId == 0 {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
-	} else if coffeeId == -888 {
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"coffeeId": coffeeId,
+			"message":  "insert new coffee successfully.",
+		})
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"coffee_id": coffeeId,
-		"message":   "insert new coffee successfully.",
-	})
 }
 
 func UpdateCoffee(c *gin.Context) {
-	var coffee ModelsCoffee.Coffee
+	var coffee ModelsMenus.Menu
 
 	if err := c.ShouldBindJSON(&coffee); err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -138,7 +140,7 @@ func UpdateCoffee(c *gin.Context) {
 		return
 	}
 
-	updatedCoffee, err, errNoRow := ModelsCoffee.UpdateCoffee(&coffee, coffeeId)
+	updatedCoffee, err, errNoRow := ModelsMenus.UpdateCoffee(&coffee, coffeeId)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -146,16 +148,17 @@ func UpdateCoffee(c *gin.Context) {
 	} else if errNoRow != nil {
 		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})
 		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data":    updatedCoffee,
+			"message": "updated coffee successfully.",
+		})
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"data":    updatedCoffee,
-		"message": "updated coffee successfully.",
-	})
 }
 
 func UpdateSuggestCoffee(c *gin.Context) {
-	var coffee ModelsCoffee.Coffee
+	var coffee ModelsMenus.Menu
 
 	if err := c.ShouldBindJSON(&coffee); err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -169,7 +172,7 @@ func UpdateSuggestCoffee(c *gin.Context) {
 		return
 	}
 
-	updatedCoffee, err, errNoRow := ModelsCoffee.UpdateSuggestCoffee(&coffee, coffeeId)
+	updatedCoffee, err, errNoRow := ModelsMenus.UpdateSuggestCoffee(&coffee, coffeeId)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -177,23 +180,24 @@ func UpdateSuggestCoffee(c *gin.Context) {
 	} else if errNoRow != nil {
 		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})
 		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data":    updatedCoffee,
+			"message": "updated coffee successfully.",
+		})
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"data":    updatedCoffee,
-		"message": "updated coffee successfully.",
-	})
 
 }
 
 func DeleteCoffee(c *gin.Context) {
-	coffeeIdFromClient := c.Param("id")
-	id, err := strconv.Atoi(coffeeIdFromClient)
+	id := c.Param("id")
+	coffeeId, err := strconv.Atoi(id)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
 		return
 	}
 
-	isDeleted, err := ModelsCoffee.DeleteCoffee(id)
+	isDeleted, err := ModelsMenus.DeleteCoffee(coffeeId)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -212,14 +216,14 @@ func DeleteCoffee(c *gin.Context) {
 }
 
 func DeleteSuggestCoffee(c *gin.Context) {
-	coffeeIdFromClient := c.Param("id")
-	id, err := strconv.Atoi(coffeeIdFromClient)
+	id := c.Param("id")
+	coffeeId, err := strconv.Atoi(id)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
 		return
 	}
 
-	isDeleted, err := ModelsCoffee.DeleteSuggestCoffee(id)
+	isDeleted, err := ModelsMenus.DeleteSuggestCoffee(coffeeId)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

@@ -1,6 +1,6 @@
-package ModelsCoffee
+package ModelsMenus
 
-type Coffee struct {
+type Menu struct {
 	Id          int
 	Name        string
 	Image_url   string

@@ -3,7 +3,7 @@ package Routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/spioneracorei8/Cafe-Crafter/CartAPI/ControllersCart"
-	"github.com/spioneracorei8/Cafe-Crafter/CoffeeAPI/ControllersCoffee"
+	"github.com/spioneracorei8/Cafe-Crafter/MenusAPI/ControllersMenus"
 	"github.com/spioneracorei8/Cafe-Crafter/Middlewares"
 	"github.com/spioneracorei8/Cafe-Crafter/UserAPI/ControllersUsers"
 )
@@ -14,19 +14,19 @@ func SetRouter() *gin.Engine {
 	CoffeeRotes := r.Group("/coffee")
 	{
 		CoffeeRotes.Use(Middlewares.TokenMiddleware())
-		CoffeeRotes.GET("/", ControllersCoffee.GetCoffee)
-		CoffeeRotes.GET("/:id", ControllersCoffee.GetCoffeeId)
-		CoffeeRotes.POST("/", ControllersCoffee.InsertCoffee)
-		CoffeeRotes.PUT("/:id", ControllersCoffee.UpdateCoffee)
-		CoffeeRotes.DELETE("/:id", ControllersCoffee.DeleteCoffee)
+		CoffeeRotes.GET("/", ControllersMenus.GetCoffee)
+		CoffeeRotes.GET("/:id", ControllersMenus.GetCoffeeId)
+		CoffeeRotes.POST("/", ControllersMenus.InsertCoffee)
+		CoffeeRotes.PUT("/:id", ControllersMenus.UpdateCoffee)
+		CoffeeRotes.DELETE("/:id", ControllersMenus.DeleteCoffee)
 	}
 	CoffeeSuggestions := r.Group("/suggest-coffee")
 	{
-		CoffeeSuggestions.GET("/", ControllersCoffee.GetSuggestCoffee)
-		CoffeeSuggestions.GET("/:name", ControllersCoffee.GetSuggestCoffeName)
-		CoffeeSuggestions.POST("/", ControllersCoffee.InsertSuggestCoffee)
-		CoffeeSuggestions.PUT("/:id", ControllersCoffee.UpdateSuggestCoffee)
-		CoffeeSuggestions.DELETE("/:id", ControllersCoffee.DeleteSuggestCoffee)
+		CoffeeSuggestions.GET("/", ControllersMenus.GetSuggestCoffee)
+		CoffeeSuggestions.GET("/:name", ControllersMenus.GetSuggestCoffeName)
+		CoffeeSuggestions.POST("/", ControllersMenus.InsertSuggestCoffee)
+		CoffeeSuggestions.PUT("/:id", ControllersMenus.UpdateSuggestCoffee)
+		CoffeeSuggestions.DELETE("/:id", ControllersMenus.DeleteSuggestCoffee)
 	}
 	UserRoutes := r.Group("/auth-user")
 	{

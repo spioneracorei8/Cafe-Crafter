@@ -121,9 +121,18 @@ func SetupDatabase() {
 	// DROP COLUMN sub_total;
 	// `
 
-
 	// query := `ALTER TABLE carts
 	// ADD COLUMN sub_total float NOT NULL `
+
+	// query := `CREATE TABLE teamenu 
+	// (	id INT AUTO_INCREMENT,
+	// 	name TEXT NOT NULL,
+	// 	image_url TEXT NOT NULL,
+	// 	description TEXT NOT NULL,
+	// 	price FLOAT NOT NULL,
+	// 	category TEXT NOT NULL,
+	// 	PRIMARY KEY (id)
+	// );`
 
 	// if _, err := DB.Exec(query); err != nil {
 	// 	panic(err.Error())
