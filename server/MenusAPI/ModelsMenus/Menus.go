@@ -1,4 +1,4 @@
-package ModelsCoffee
+package ModelsMenus
 
 import (
 	"database/sql"
@@ -7,70 +7,73 @@ import (
 	"github.com/spioneracorei8/Cafe-Crafter/Config"
 )
 
-func GetCoffee() ([]Coffee, error) {
-	var coffeeList []Coffee
+func GetCoffee() ([]Menu, error) {
+	var coffeeList []Menu
 
-	query, err := Config.DB.Query(`SELECT id, name, image_url, description, price FROM coffeemenu`)
+	query, err := Config.DB.Query(`SELECT id, name, image_url, description, price, category FROM coffeemenu`)
 	if err != nil {
 		return nil, err
 	}
 
 	for query.Next() {
-		var coffee Coffee
+		var coffee Menu
 		query.Scan(
 			&coffee.Id,
 			&coffee.Name,
 			&coffee.Image_url,
 			&coffee.Description,
-			&coffee.Price)
+			&coffee.Price,
+			&coffee.Category)
 		coffeeList = append(coffeeList, coffee)
 	}
 	return coffeeList, nil
 }
 
-func GetSuggestCoffee() ([]Coffee, error) {
-	var coffeeList []Coffee
-	query, err := Config.DB.Query(`SELECT id, name, image_url, description, price FROM suggestions_coffee`)
+func GetSuggestCoffee() ([]Menu, error) {
+	var coffeeList []Menu
+	query, err := Config.DB.Query(`SELECT id, name, image_url, description, price, category FROM suggestions_coffee`)
 	if err != nil {
 		return nil, err
 	}
 
 	for query.Next() {
-		var coffee Coffee
+		var coffee Menu
 		query.Scan(
 			&coffee.Id,
 			&coffee.Name,
 			&coffee.Image_url,
 			&coffee.Description,
-			&coffee.Price)
+			&coffee.Price,
+			&coffee.Category)
 		coffeeList = append(coffeeList, coffee)
 	}
 	return coffeeList, nil
 }
 
-func GetCoffeeId(coffeeId int) (*Coffee, error, error) {
-	coffee := &Coffee{}
+func GetCoffeeId(coffeeId int) (*Menu, error, error) {
+	coffeeRow := &Menu{}
 
-	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price FROM coffeemenu WHERE id = ?`, coffeeId)
+	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price, category FROM coffeemenu WHERE id = ?`, coffeeId)
 
 	err := query.Scan(
-		&coffee.Id,
-		&coffee.Name,
-		&coffee.Image_url,
-		&coffee.Description,
-		&coffee.Price,
+		&coffeeRow.Id,
+		&coffeeRow.Name,
+		&coffeeRow.Image_url,
+		&coffeeRow.Description,
+		&coffeeRow.Price,
+		&coffeeRow.Category,
 	)
-	if err == sql.ErrNoRows {
-		return nil, nil, err
-	} else if err != nil {
+	if err != nil {
 		return nil, err, nil
+	} else if err == sql.ErrNoRows {
+		return nil, nil, err
 	}
 
-	return coffee, nil, nil
+	return coffeeRow, nil, nil
 }
 
-func GetSuggestCoffeName(name string) (*Coffee, error, error) {
-	coffee := &Coffee{}
+func GetSuggestCoffeName(name string) (*Menu, error, error) {
+	coffee := &Menu{}
 
 	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price FROM suggestions_coffee WHERE name = ?`, name)
 
@@ -89,44 +92,44 @@ func GetSuggestCoffeName(name string) (*Coffee, error, error) {
 	return coffee, nil, nil
 }
 
-func InsertCoffee(coffee *Coffee) (int64, error) {
+func InsertCoffee(coffee Menu) (int64, error) {
 	insert := `INSERT INTO coffeemenu (name, image_url, description, price, category) VALUES (?, ?, ?, ?, ?)`
 
-	result, err := Config.DB.Exec(insert, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price, "coffee")
+	result, err := Config.DB.Exec(insert, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price, coffee.Category)
 	if err != nil {
-		return -999, err
+		return 0, err
 	}
 	coffeeId, err := result.LastInsertId()
 	if err != nil {
-		return -888, err
+		return 0, err
 	}
 
 	return coffeeId, nil
 }
 
-func InsertSuggestCoffee(coffee Coffee) (int64, error) {
-	insert := `INSERT INTO suggestions_coffee (name, image_url, description, price) VALUES (?, ?, ?, ?)`
+func InsertSuggestCoffee(coffee Menu) (int64, error) {
+	insert := `INSERT INTO suggestions_coffee (name, image_url, description, price, category) VALUES (?, ?, ?, ?, ?)`
 
-	result, err := Config.DB.Exec(insert, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price)
+	result, err := Config.DB.Exec(insert, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price, coffee.Category)
 	if err != nil {
-		return -999, err
+		return 0, err
 	}
 
 	coffeeId, err := result.LastInsertId()
 	if err != nil {
-		return -888, err
+		return 0, err
 	}
 	return coffeeId, nil
 }
 
-func UpdateCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, error) {
-	coffeeRow := &Coffee{}
+func UpdateCoffee(coffee *Menu, coffeeId int) (*Menu, error, error) {
+	coffeeRow := &Menu{}
 
-	query := `SELECT id, name, image_url, description, price FROM coffeemenu WHERE id = ?`
+	query := `SELECT id, name, image_url, description, price, category FROM coffeemenu WHERE id = ?`
 
-	update := `UPDATE coffeemenu SET name = ?, image_url = ?, description = ?, price = ? WHERE id = ?`
+	update := `UPDATE coffeemenu SET name = ?, image_url = ?, description = ?, price = ?, category = ? WHERE id = ?`
 
-	_, err := Config.DB.Exec(update, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price, coffeeId)
+	_, err := Config.DB.Exec(update, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price, coffee.Category, coffeeId)
 
 	if err != nil {
 		return nil, err, nil
@@ -139,6 +142,7 @@ func UpdateCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, error) {
 		&coffeeRow.Image_url,
 		&coffeeRow.Description,
 		&coffeeRow.Price,
+		&coffeeRow.Category,
 	)
 	if err == sql.ErrNoRows {
 		return nil, nil, err
@@ -148,14 +152,14 @@ func UpdateCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, error) {
 	return coffeeRow, nil, nil
 }
 
-func UpdateSuggestCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, error) {
-	coffeeRow := &Coffee{}
+func UpdateSuggestCoffee(coffee *Menu, coffeeId int) (*Menu, error, error) {
+	coffeeRow := &Menu{}
 
-	query := `SELECT id, name, image_url, description, price FROM suggestions_coffee WHERE id = ?`
+	query := `SELECT id, name, image_url, description, price, category FROM suggestions_coffee WHERE id = ?`
 
-	update := `UPDATE suggestions_coffee SET name = ?, image_url = ?, description = ?, price = ? WHERE id = ?`
+	update := `UPDATE suggestions_coffee SET name = ?, image_url = ?, description = ?, price = ?, category = ? WHERE id = ?`
 
-	_, err := Config.DB.Exec(update, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price, coffeeId)
+	_, err := Config.DB.Exec(update, coffee.Name, coffee.Image_url, coffee.Description, coffee.Price, coffee.Category, coffeeId)
 
 	if err != nil {
 		return nil, err, nil
@@ -168,6 +172,7 @@ func UpdateSuggestCoffee(coffee *Coffee, coffeeId int) (*Coffee, error, error) {
 		&coffeeRow.Image_url,
 		&coffeeRow.Description,
 		&coffeeRow.Price,
+		&coffeeRow.Category,
 	)
 	if err == sql.ErrNoRows {
 		return nil, nil, err
