@@ -6,6 +6,7 @@ import Arrow_Left_White_Icon from "../../assets/Icon/Arrow_Left_White_Icon.png"
 import Arrow_Right_White_Icon from "../../assets/Icon/Arrow_Right_White_Icon.png"
 import Footer from "../../Components/Footer/Footer"
 import AddNewMenu from './AddNewMenu/AddNewMenu'
+import EditMenu from './EditMenu/EditMenu'
 
 const AdminHomePage = () => {
 
@@ -17,6 +18,10 @@ const AdminHomePage = () => {
   const [isAddNewCoffee, setIsAddNewCoffee] = useState(false)
   const [isAddNewTea, setIsAddNewTea] = useState(false)
   const [isAddNewCake, setIsAddNewCake] = useState(false)
+
+  const [isEditCoffee, setIsEditCoffee] = useState(false)
+  const [isEditTea, setIsEditTea] = useState(false)
+  const [isEditCake, setIsEditCake] = useState(false)
 
   const handleToggleNavbarLeft = () => {
     setToggleNavbarLeft(!toggleNavbarLeft)
@@ -81,10 +86,18 @@ const AdminHomePage = () => {
                             setIsAddNewCake(false)
                           )
                         }}
-
                       >
                         Add new coffee</li>
-                      <li>Edit coffee</li>
+                      <li
+                        onClick={() => {
+                          return (
+                            setIsEditCoffee(true),
+                            setIsEditTea(false),
+                            setIsEditCake(false)
+                          )
+                        }}
+                      >
+                        Edit coffee</li>
                     </>
                   }
 
@@ -107,7 +120,16 @@ const AdminHomePage = () => {
                         }}
                       >
                         Add new Tea</li>
-                      <li>Edit Tea</li>
+                      <li
+                        onClick={() => {
+                          return (
+                            setIsEditTea(true),
+                            setIsEditCoffee(false),
+                            setIsManageCake(false)
+                          )
+                        }}
+                      >
+                        Edit Tea</li>
                     </>
                   }
 
@@ -127,7 +149,16 @@ const AdminHomePage = () => {
                           setIsAddNewTea(false)
                         }}
                       >Add new Cake</li>
-                      <li>Edit new Cake</li>
+                      <li
+                        onClick={() => {
+                          return (
+                            setIsEditCake(true),
+                            setIsEditCoffee(false),
+                            setIsEditTea(false)
+                          )
+                        }}
+                      >
+                        Edit new Cake</li>
                     </>
                   }
                 </div>
@@ -152,42 +183,54 @@ const AdminHomePage = () => {
                   <AddNewMenu
                     name="Cake"
                   />
-                  :
-                  <>
-                    <div>
-                      <img src={MyAdmin} alt="human-sit-dow" />
-                    </div>
-                    <div className='greeting-content'>
-                      <h1>
-                        Hi, Admin Name
-                      </h1>
-                      <br />
-                      <br />
-                      <p>
-                        Good day! 👋 As we continue to improve the Cafe-Crafter admin page and make it even more awesome, we're really interested in hearing your suggestions and ideas. Your feedback is incredibly valuable to us!
-                      </p>
-                      <br />
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, aperiam eum. Hic tenetur ut, quaerat voluptate ipsam facere distinctio iusto! Temporibus, maiores! Eum iste corrupti numquam non libero, ex dolorem hic itaque distinctio nulla! Delectus magni voluptates explicabo laudantium dolorum iste, quasi maiores facilis dicta unde voluptas dolor libero voluptatum!
-                      </p>
-                      <br />
-                      <p>
-                        Prepare to be immersed in the coffee realm of Café Crafter’s admin panel, where coffee-making mastery meets digital surveillance. Here lies the ultimate toolbox for running the most kickass café on earth!
-                      </p>
-                      <br />
-                      <p>
-                        From inventory management to employee schedules, every aspect of your caffeinated wonderland can be tweaked, customized, and enhanced to sculpt your very own coffee paradise. You are just a few steps away from beverage domination.
-                      </p>
-                      <br />
-                      <p>
-                        Unleash your inner barista emperor, take a sip of your favorite brew, and dive into Café Crafter’s Admin Interface!
-                      </p>
-                      <br />
-                      <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea harum cumque nostrum ad voluptatibus dolorum ipsum vero quia, quae minima. Eveniet nulla, omnis consectetur, quisquam dicta numquam et veniam aspernatur quo eos facilis amet unde, ex dicta dignissimos sapiente natus quaerat officiis? sint ut voluptas eligendi culpa quia ratione.
-                      </p>
-                    </div>
-                  </>
+                  : isEditCoffee === true ?
+                    <EditMenu
+                      name="Coffee"
+                    />
+                    : isEditTea === true ?
+                      <EditMenu
+                        name="Tea"
+                      />
+                      : isEditCake === true ?
+                        <EditMenu
+                          name="Cake"
+                        />
+                        :
+                        <>
+                          <div>
+                            <img src={MyAdmin} alt="human-sit-dow" />
+                          </div>
+                          <div className='greeting-content'>
+                            <h1>
+                              Hi, Admin Name
+                            </h1>
+                            <br />
+                            <br />
+                            <p>
+                              Good day! 👋 As we continue to improve the Cafe-Crafter admin page and make it even more awesome, we're really interested in hearing your suggestions and ideas. Your feedback is incredibly valuable to us!
+                            </p>
+                            <br />
+                            <p>
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, aperiam eum. Hic tenetur ut, quaerat voluptate ipsam facere distinctio iusto! Temporibus, maiores! Eum iste corrupti numquam non libero, ex dolorem hic itaque distinctio nulla! Delectus magni voluptates explicabo laudantium dolorum iste, quasi maiores facilis dicta unde voluptas dolor libero voluptatum!
+                            </p>
+                            <br />
+                            <p>
+                              Prepare to be immersed in the coffee realm of Café Crafter’s admin panel, where coffee-making mastery meets digital surveillance. Here lies the ultimate toolbox for running the most kickass café on earth!
+                            </p>
+                            <br />
+                            <p>
+                              From inventory management to employee schedules, every aspect of your caffeinated wonderland can be tweaked, customized, and enhanced to sculpt your very own coffee paradise. You are just a few steps away from beverage domination.
+                            </p>
+                            <br />
+                            <p>
+                              Unleash your inner barista emperor, take a sip of your favorite brew, and dive into Café Crafter’s Admin Interface!
+                            </p>
+                            <br />
+                            <p>
+                              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea harum cumque nostrum ad voluptatibus dolorum ipsum vero quia, quae minima. Eveniet nulla, omnis consectetur, quisquam dicta numquam et veniam aspernatur quo eos facilis amet unde, ex dicta dignissimos sapiente natus quaerat officiis? sint ut voluptas eligendi culpa quia ratione.
+                            </p>
+                          </div>
+                        </>
             }
 
 

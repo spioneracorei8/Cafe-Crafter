@@ -37,7 +37,8 @@ const AddNewMenu = (props) => {
                 name,
                 price: floatPrice,
                 description,
-                image_url
+                image_url,
+                category: menu
             }
             InsertCoffee(data)
         }
@@ -101,7 +102,7 @@ const AddNewMenu = (props) => {
                         onClick={() => handleToggleOpenAddNewMenu("coffeeImageUrl")}
                     >
                         <h1>{menuName} ImageURL: <br /> </h1>
-                        <img src={image_url} alt={name + " Picture"} />
+                        <img src={image_url} alt={name + " Picture"} className={image_url === "" ? "" : "load-img"} />
                         {isOpenNewMenuImageUrl &&
                             <div className='new-menu-image-url-input' onClick={(event) => event.stopPropagation()}>
                                 <h2>
