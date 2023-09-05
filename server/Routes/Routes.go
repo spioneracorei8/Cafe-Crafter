@@ -11,14 +11,14 @@ import (
 func SetRouter() *gin.Engine {
 	r := gin.Default()
 	r.Use(Middlewares.CorsMiddleware())
-	CoffeeRotes := r.Group("/coffee")
+	MenusRotes := r.Group("/menus")
 	{
-		CoffeeRotes.Use(Middlewares.TokenMiddleware())
-		CoffeeRotes.GET("/", ControllersMenus.GetCoffee)
-		CoffeeRotes.GET("/:id", ControllersMenus.GetCoffeeId)
-		CoffeeRotes.POST("/", ControllersMenus.InsertCoffee)
-		CoffeeRotes.PUT("/:id", ControllersMenus.UpdateCoffee)
-		CoffeeRotes.DELETE("/:id", ControllersMenus.DeleteCoffee)
+		MenusRotes.Use(Middlewares.TokenMiddleware())
+		MenusRotes.GET("/coffee", ControllersMenus.GetCoffee)
+		MenusRotes.GET("/coffee/:id", ControllersMenus.GetCoffeeId)
+		MenusRotes.POST("/coffee", ControllersMenus.InsertCoffee)
+		MenusRotes.PUT("/coffee/:id", ControllersMenus.UpdateCoffee)
+		MenusRotes.DELETE("/coffee/:id", ControllersMenus.DeleteCoffee)
 	}
 	CoffeeSuggestions := r.Group("/suggest-coffee")
 	{

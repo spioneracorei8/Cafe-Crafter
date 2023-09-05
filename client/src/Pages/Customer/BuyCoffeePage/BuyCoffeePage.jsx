@@ -14,7 +14,7 @@ const BuyCoffeePage = () => {
         try {
             setIsError(false)
             setIsLoading(true)
-            const result = await axios.get(`http://localhost:4000/coffee/${coffeeId}`)
+            const result = await axios.get(`http://localhost:4000/menus/coffee/${coffeeId}`)
             setCoffeeData(result.data.data)
             setIsLoading(false)
         } catch (error) {
