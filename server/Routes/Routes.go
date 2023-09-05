@@ -23,6 +23,9 @@ func SetRouter() *gin.Engine {
 		MenusRotes.GET("/tea", ControllersMenus.GetTea)
 		MenusRotes.GET("/tea/:id", ControllersMenus.GetTeaId)
 		MenusRotes.POST("/tea", ControllersMenus.InsertTea)
+		MenusRotes.PUT("/tea/:id", ControllersMenus.UpdateTea)
+		MenusRotes.DELETE("/tea/:id", ControllersMenus.DeleteTea)
+
 	}
 	CoffeeSuggestions := r.Group("/suggest-coffee")
 	{
