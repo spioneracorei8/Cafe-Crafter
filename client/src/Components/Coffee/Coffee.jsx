@@ -27,7 +27,7 @@ const Coffee = () => {
         try {
             setIsError(false)
             setIsLoading(true)
-            const result = await axios.get(`http://localhost:4000/coffee/${coffeeById}`)
+            const result = await axios.get(`http://localhost:4000/menus/coffee/${coffeeById}`)
             setCoffeeData(result.data.data)
             setIsLoading(false)
         } catch (error) {
