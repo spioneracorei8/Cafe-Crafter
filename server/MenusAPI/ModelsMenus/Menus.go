@@ -29,6 +29,28 @@ func GetCoffee() ([]Menu, error) {
 	return coffeeList, nil
 }
 
+func GetTea() ([]Menu, error) {
+	var teaList []Menu
+
+	query, err := Config.DB.Query(`SELECT id, name, image_url, description, price, category FROM coffeedatabase.teamenu`)
+	if err != nil {
+		return nil, err
+	}
+
+	for query.Next() {
+		var tea Menu
+		query.Scan(
+			&tea.Id,
+			&tea.Name,
+			&tea.Image_url,
+			&tea.Description,
+			&tea.Price,
+			&tea.Category)
+		teaList = append(teaList, tea)
+	}
+	return teaList, nil
+}
+
 func GetSuggestCoffee() ([]Menu, error) {
 	var coffeeList []Menu
 	query, err := Config.DB.Query(`SELECT id, name, image_url, description, price, category FROM suggestions_coffee`)
@@ -70,6 +92,28 @@ func GetCoffeeId(coffeeId int) (*Menu, error, error) {
 	}
 
 	return coffeeRow, nil, nil
+}
+
+func GetTeaId(teaId int) (*Menu, error, error) {
+	teaRow := &Menu{}
+
+	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price, category FROM coffeedatabase.teamenu WHERE id = ?`, teaId)
+
+	err := query.Scan(
+		&teaRow.Id,
+		&teaRow.Name,
+		&teaRow.Image_url,
+		&teaRow.Description,
+		&teaRow.Price,
+		&teaRow.Category,
+	)
+	if err != nil {
+		return nil, err, nil
+	} else if err == sql.ErrNoRows {
+		return nil, nil, err
+	}
+
+	return teaRow, nil, nil
 }
 
 func GetSuggestCoffeName(name string) (*Menu, error, error) {
