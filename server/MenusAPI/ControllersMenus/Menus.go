@@ -18,7 +18,18 @@ func GetCoffee(c *gin.Context) {
 			"data": coffeeList,
 		})
 	}
+}
 
+func GetTea(c *gin.Context) {
+	teaList, err := ModelsMenus.GetTea()
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": teaList,
+		})
+	}
 }
 
 func GetSuggestCoffee(c *gin.Context) {
@@ -57,7 +68,30 @@ func GetCoffeeId(c *gin.Context) {
 		})
 
 	}
+}
 
+func GetTeaId(c *gin.Context)  {
+	id := c.Param("id")
+	teaId, err := strconv.Atoi(id)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
+	}
+
+	tea, err, errNoRow := ModelsMenus.GetTeaId(teaId)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else if errNoRow != nil {
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": tea,
+		})
+
+	}
 }
 
 func GetSuggestCoffeName(c *gin.Context) {
@@ -119,7 +153,7 @@ func InsertTea(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, gin.H{
 			"coffeeId": teaId,
-			"message":  "insert new coffee successfully.",
+			"message":  "insert new tea successfully.",
 		})
 	}
 
