@@ -107,6 +107,21 @@ func InsertCoffee(coffee Menu) (int64, error) {
 	return coffeeId, nil
 }
 
+func InsertTea(tea Menu) (int64, error) {
+	insert := `INSERT INTO teamenu (name, image_url, description, price, category) VALUES (?, ?, ?, ?, ?)`
+
+	result, err := Config.DB.Exec(insert, tea.Name, tea.Image_url, tea.Description, tea.Price, tea.Category)
+	if err != nil {
+		return 0, err
+	}
+	teaId, err := result.LastInsertId()
+	if err != nil {
+		return 0, err
+	}
+
+	return teaId, nil
+}
+
 func InsertSuggestCoffee(coffee Menu) (int64, error) {
 	insert := `INSERT INTO suggestions_coffee (name, image_url, description, price, category) VALUES (?, ?, ?, ?, ?)`
 

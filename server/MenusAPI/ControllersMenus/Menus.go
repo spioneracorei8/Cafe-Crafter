@@ -102,6 +102,29 @@ func InsertCoffee(c *gin.Context) {
 
 }
 
+func InsertTea(c *gin.Context) {
+	var tea ModelsMenus.Menu
+	if err := c.ShouldBindJSON(&tea); err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	teaId, err := ModelsMenus.InsertTea(tea)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else if teaId == 0 {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"coffeeId": teaId,
+			"message":  "insert new coffee successfully.",
+		})
+	}
+
+}
+
 func InsertSuggestCoffee(c *gin.Context) {
 	var coffee ModelsMenus.Menu
 	if err := c.ShouldBindJSON(&coffee); err != nil {
