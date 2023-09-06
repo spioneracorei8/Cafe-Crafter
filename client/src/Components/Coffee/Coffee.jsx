@@ -1,6 +1,6 @@
 import "./Coffee.css"
 import React, { useEffect, useState } from 'react'
-import useCoffee from '../../Hook/useCoffee'
+import useMenus from "../../Hook/useMenus"
 import axios from 'axios'
 import CoffeePopup from '../PopUp/CoffeePopup'
 import { useNavigate } from "react-router-dom"
@@ -10,7 +10,7 @@ import NagigationbarLoggedIn from "../Navigationbar/NavigationbarLoggedIn"
 const Coffee = () => {
 
     const navigate = useNavigate()
-    const { getAllCoffee, allCoffee, setIsError, setIsLoading, isLoading } = useCoffee()
+    const { getAllCoffee, allCoffee, setIsError, setIsLoading, isLoading } = useMenus()
     const { getCartQuantity, cartQuantity } = useCart()
     const [coffeeData, setCoffeeData] = useState({})
     const [coffeePopUp, setCoffeePopUp] = useState(false)

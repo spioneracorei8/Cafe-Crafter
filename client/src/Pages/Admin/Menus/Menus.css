@@ -1,0 +1,11 @@
+.menus-container {
+    width: 100vw;
+    height: auto;
+}
+
+.menus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}

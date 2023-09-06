@@ -6,14 +6,14 @@ import CoffeePopup from '../../../Components/PopUp/CoffeePopup'
 import Loading from '../../../Components/Loading/Loading'
 import Arrow_Left_Icon from "../../../assets/Icon/Arrow_Left_Icon.png"
 import Arrow_Right_Icon from "../../../assets/Icon/Arrow_Right_Icon.png"
-import useCoffee from '../../../Hook/useCoffee'
+import useMenus from '../../../Hook/useMenus'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import Cafe_Crafter_Logo from "../../../assets/Logo/Cafe_Crafter_Logo.png"
 
 const NonLoggedInHomePage = () => {
     const navigate = useNavigate()
-    const { isLoading, setIsLoading, isError, setIsError, suggestCoffee } = useCoffee()
+    const { isLoading, setIsLoading, isError, setIsError, suggestCoffee } = useMenus()
     const scrollContainerRef = useRef(null)
     const [coffeeData, setCoffeeData] = useState({})
     const [coffeePopUp, setCoffeePopUp] = useState(false)

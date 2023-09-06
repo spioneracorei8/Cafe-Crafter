@@ -93,7 +93,10 @@ const AdminHomePage = () => {
                           return (
                             setIsEditCoffee(true),
                             setIsEditTea(false),
-                            setIsEditCake(false)
+                            setIsEditCake(false),
+                            setIsAddNewCoffee(false),
+                            setIsAddNewTea(false),
+                            setIsAddNewCake(false)
                           )
                         }}
                       >
@@ -125,7 +128,10 @@ const AdminHomePage = () => {
                           return (
                             setIsEditTea(true),
                             setIsEditCoffee(false),
-                            setIsManageCake(false)
+                            setIsManageCake(false),
+                            setIsAddNewCoffee(false),
+                            setIsAddNewTea(false),
+                            setIsAddNewCake(false)
                           )
                         }}
                       >
@@ -154,7 +160,10 @@ const AdminHomePage = () => {
                           return (
                             setIsEditCake(true),
                             setIsEditCoffee(false),
-                            setIsEditTea(false)
+                            setIsEditTea(false),
+                            setIsAddNewCoffee(false),
+                            setIsAddNewTea(false),
+                            setIsAddNewCake(false)
                           )
                         }}
                       >
