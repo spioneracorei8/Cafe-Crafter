@@ -1,23 +1,63 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Menus.css"
-import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/css';
+import Carousel from 'react-elastic-carousel';
+import useMenus from '../../../Hook/useMenus';
 
+const Menus = (props) => {
+    const menuName = props?.menuName
+    const { getAllCoffee, allCoffee, setAllCoffee, getAllTea, allTea, setAllTea } = useMenus()
 
-const Menus = () => {
+    if (menuName === "Coffee") {
+        useEffect(() => {
+            getAllCoffee()
+            setAllTea([])
+        }, [menuName])
+    } else if (menuName === "Tea") {
+        useEffect(() => {
+            getAllTea()
+            setAllCoffee([])
+        }, [menuName])
+    }
+    console.log(allTea);
+    console.log(allCoffee);
     return (
-        <Swiper
-            spaceBetween={50}
-            slidesPerView={3}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
-        >
-            <SwiperSlide>Slide 1</SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
-            <SwiperSlide>Slide 4</SwiperSlide>
-        </Swiper>
 
+        <>
+            <div className='menus-container'>
+                <div className='menus'>
+                    <Carousel>
+                        {menuName === "Coffee"
+                            ? allCoffee.map((item, index) => {
+                                return (
+                                    <>
+                                        <div className='menus-list' key={index}>
+                                            <h3>
+                                                {item?.Name}
+                                            </h3>
+                                            <img src={item?.Image_url} alt="2" />
+                                        </div>
+                                    </>
+                                )
+                            })
+                            : menuName === "Tea"
+                                ? allTea.map((item, index) => {
+                                    return (
+                                        <>
+                                            <div className='menus-list' key={index}>
+                                                <h3>
+                                                    {item?.Name}
+                                                </h3>
+                                                <img src={item?.Image_url} alt="" />
+                                            </div>
+                                        </>
+                                    )
+                                })
+                                : ""
+                        }
+                    </Carousel>
+                </div>
+            </div>
+        </>
 
     )
 }

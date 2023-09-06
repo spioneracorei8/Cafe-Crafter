@@ -8,7 +8,7 @@ const useMenus = () => {
     const [isError, setIsError] = useState(false)
     const [suggestCoffee, setSuggestCoffee] = useState([])
     const [allCoffee, setAllCoffee] = useState([])
-
+    const [allTea, setAllTea] = useState([])
 
     const getSuggestCoffee = async () => {
         try {
@@ -30,6 +30,20 @@ const useMenus = () => {
             setIsLoading(true)
             const result = await axios.get(`http://localhost:4000/menus/coffee`)
             setAllCoffee(result.data.data)
+            setIsLoading(false)
+        } catch (error) {
+            setIsError(true);
+            setIsLoading(false);
+            console.log(error);
+        }
+    }
+
+    const getAllTea = async () => {
+        try {
+            setIsError(false)
+            setIsLoading(true)
+            const result = await axios.get(`http://localhost:4000/menus/tea`)
+            setAllTea(result.data.data)
             setIsLoading(false)
         } catch (error) {
             setIsError(true);
@@ -70,7 +84,6 @@ const useMenus = () => {
         getSuggestCoffee()
     }, [])
 
-
     return {
         isLoading,
         setIsLoading,
@@ -78,7 +91,11 @@ const useMenus = () => {
         setIsError,
         suggestCoffee,
         getAllCoffee,
+        getAllTea,
         allCoffee,
+        setAllCoffee,
+        allTea,
+        setAllTea,
         InsertCoffee,
         InsertTea,
     }

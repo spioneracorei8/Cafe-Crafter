@@ -7,8 +7,10 @@ import Arrow_Right_White_Icon from "../../assets/Icon/Arrow_Right_White_Icon.png
 import Footer from "../../Components/Footer/Footer"
 import AddNewMenu from './AddNewMenu/AddNewMenu'
 import EditMenu from './EditMenu/EditMenu'
+import { useNavigate } from 'react-router-dom'
 
 const AdminHomePage = () => {
+  const navigate = useNavigate()
 
   const [toggleNavbarLeft, setToggleNavbarLeft] = useState(true)
   const [isManageCoffee, setIsManageCoffee] = useState(false)
@@ -132,6 +134,7 @@ const AdminHomePage = () => {
                             setIsAddNewCoffee(false),
                             setIsAddNewTea(false),
                             setIsAddNewCake(false)
+                            // navigate("/edit-menu")
                           )
                         }}
                       >
