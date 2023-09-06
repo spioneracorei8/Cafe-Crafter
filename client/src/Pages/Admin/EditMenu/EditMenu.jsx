@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import "./EditMenu.css"
+import { Swiper, SwiperSlide } from 'swiper/react';
+// import 'swiper/css';
+import Menus from '../Menus/Menus'
 
 const EditMenu = (props) => {
-
 
     const [isOpenEditMenuName, setIsOpenEditMenuName] = useState(false)
     const [isOpenEditMenuPrice, setIsOpenEditMenuPrice] = useState(false)
@@ -25,7 +27,11 @@ const EditMenu = (props) => {
 
     return (
         <>
+
             <form className='edit-menu-container' onSubmit={(event) => (event, "coffee")}>
+
+                <Menus />
+                
                 <div className='edit-menu'>
                     <div className='edit-menu-heading'>
                         <h1>

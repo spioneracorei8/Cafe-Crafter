@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
-const useCoffee = () => {
+const useMenus = () => {
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
@@ -42,7 +42,21 @@ const useCoffee = () => {
         try {
             setIsError(false)
             setIsLoading(true)
-            await axios.post(`http://localhost:4000/coffee/`, data)
+            await axios.post(`http://localhost:4000/menus/coffee`, data)
+            setIsLoading(false)
+            window.location.replace("/")
+        } catch (error) {
+            setIsError(true);
+            setIsLoading(false);
+            console.log(error);
+        }
+    }
+
+    const InsertTea = async (data) => {
+        try {
+            setIsError(false)
+            setIsLoading(true)
+            await axios.post(`http://localhost:4000/menus/tea`, data)
             setIsLoading(false)
             window.location.replace("/")
         } catch (error) {
@@ -66,7 +80,8 @@ const useCoffee = () => {
         getAllCoffee,
         allCoffee,
         InsertCoffee,
+        InsertTea,
     }
 }
 
-export default useCoffee
+export default useMenus

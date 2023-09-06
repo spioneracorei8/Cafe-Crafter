@@ -13,7 +13,7 @@ func SetRouter() *gin.Engine {
 	r.Use(Middlewares.CorsMiddleware())
 	MenusRotes := r.Group("/menus")
 	{
-		// MenusRotes.Use(Middlewares.TokenMiddleware())
+		MenusRotes.Use(Middlewares.TokenMiddleware())
 		MenusRotes.GET("/coffee", ControllersMenus.GetCoffee)
 		MenusRotes.GET("/coffee/:id", ControllersMenus.GetCoffeeId)
 		MenusRotes.POST("/coffee", ControllersMenus.InsertCoffee)
@@ -25,7 +25,6 @@ func SetRouter() *gin.Engine {
 		MenusRotes.POST("/tea", ControllersMenus.InsertTea)
 		MenusRotes.PUT("/tea/:id", ControllersMenus.UpdateTea)
 		MenusRotes.DELETE("/tea/:id", ControllersMenus.DeleteTea)
-
 	}
 	CoffeeSuggestions := r.Group("/suggest-coffee")
 	{

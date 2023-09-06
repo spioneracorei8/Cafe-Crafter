@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './LoggedInHomePage.css'
-import useCoffee from '../../../Hook/useCoffee'
+import useMenus from '../../../Hook/useMenus'
 import Footer from "../../../Components/Footer/Footer"
 import Loading from '../../../Components/Loading/Loading'
 import Coffee from '../../../Components/Coffee/Coffee'
 
 const LoggedInHomePage = () => {
 
-    const { getAllCoffee, isLoading, isError } = useCoffee()
+    const { getAllCoffee, isLoading, isError } = useMenus()
 
     useEffect(() => {
         getAllCoffee()
