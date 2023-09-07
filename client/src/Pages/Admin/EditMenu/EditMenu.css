@@ -12,8 +12,14 @@
     width: 100%;
     height: auto;
     gap: 30px;
-    /* background-color: #ec8679; */
+}
 
+.edit-menu-heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
 
 .edit-menu-heading h1 {

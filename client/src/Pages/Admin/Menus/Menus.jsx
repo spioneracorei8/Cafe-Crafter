@@ -5,7 +5,16 @@ import useMenus from '../../../Hook/useMenus';
 
 const Menus = (props) => {
     const menuName = props?.menuName
+    const toggleNavbarLeft = props?.toggleNavbarLeft
     const { getAllCoffee, allCoffee, setAllCoffee, getAllTea, allTea, setAllTea } = useMenus()
+
+    const breakPoints = [
+        {
+            width: 550, itemsToShow: 1,
+            width: 768, itemsToShow: 2,
+            width: 1200, itemsToShow: 3,
+        }
+    ]
 
     if (menuName === "Coffee") {
         useEffect(() => {
@@ -18,23 +27,27 @@ const Menus = (props) => {
             setAllCoffee([])
         }, [menuName])
     }
-    console.log(allTea);
-    console.log(allCoffee);
+
     return (
 
         <>
             <div className='menus-container'>
                 <div className='menus'>
-                    <Carousel>
+                    <Carousel
+                        breakPoints={breakPoints}
+                        className={toggleNavbarLeft ? "rec-carousel-wrapper-load" : "rec-carousel-wrapper-unload"}
+                    >
                         {menuName === "Coffee"
                             ? allCoffee.map((item, index) => {
                                 return (
                                     <>
-                                        <div className='menus-list' key={index}>
-                                            <h3>
-                                                {item?.Name}
-                                            </h3>
-                                            <img src={item?.Image_url} alt="2" />
+                                        <div className="menus-list-container" key={index}>
+                                            <div className='menus-list'>
+                                                <h3>
+                                                    {item?.Name}
+                                                </h3>
+                                                <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' />
+                                            </div>
                                         </div>
                                     </>
                                 )
@@ -47,7 +60,7 @@ const Menus = (props) => {
                                                 <h3>
                                                     {item?.Name}
                                                 </h3>
-                                                <img src={item?.Image_url} alt="" />
+                                                <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' />
                                             </div>
                                         </>
                                     )
