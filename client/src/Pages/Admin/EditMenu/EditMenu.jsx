@@ -10,6 +10,7 @@ const EditMenu = (props) => {
     const [isOpenEditMenuImageUrl, setIsOpenEditMenuImageUrl] = useState(false)
 
     const menuName = props?.name
+    const toggleNavbarLeft = props?.toggleNavbarLeft
 
     const handleToggleOpenAddNewMenu = (newMenu) => {
         if (newMenu === "coffeeName") {
@@ -28,16 +29,19 @@ const EditMenu = (props) => {
 
             <form className='edit-menu-container' onSubmit={(event) => (event, "coffee")}>
 
+                <div className='edit-menu-heading'>
+                    <h1>
+                        Edit {menuName}
+                    </h1>
+                    <h2>Select {menuName} to Edit</h2>
+                </div>
+
                 <Menus
                     menuName={menuName}
+                    toggleNavbarLeft={toggleNavbarLeft}
                 />
 
                 <div className='edit-menu'>
-                    <div className='edit-menu-heading'>
-                        <h1>
-                            Edit {menuName}
-                        </h1>
-                    </div>
 
                     <div
                         className='edit-menu-name'
