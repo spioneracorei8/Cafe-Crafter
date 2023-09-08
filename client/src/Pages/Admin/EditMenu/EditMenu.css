@@ -294,9 +294,17 @@
 .edit-menu-description h1 {
     font-size: 1.6rem;
     font-weight: 900;
-    width: 16rem;
+    width: 20rem;
     word-break: break-all;
     text-align: center;
+}
+
+.edit-menu-description p {
+    width: 28rem;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 500;
+    font-style: normal;
 }
 
 .edit-menu-description-input {
@@ -315,6 +323,7 @@
     border-radius: 50px;
     padding: 15px;
     font-size: 1.4rem;
+    font-weight: 100;
     font-family: 'whipsmart';
     resize: none;
 }

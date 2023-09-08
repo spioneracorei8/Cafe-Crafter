@@ -11,11 +11,6 @@ const useMenus = () => {
     const [allCoffee, setAllCoffee] = useState([])
     const [allTea, setAllTea] = useState([])
 
-    const [editMenuName, setEditMenuName] = useState("")
-    const [editMenuPrice, setEditMenuPrice] = useState(0)
-    const [editMenuDescription, setEditMenuDescription] = useState("")
-    const [editMenuImageUrl, setEditMenuImageUrl] = useState("")
-
     const getSuggestCoffee = async () => {
         try {
             setIsError(false);
@@ -36,23 +31,6 @@ const useMenus = () => {
             setIsLoading(true)
             const result = await axios.get(`http://localhost:4000/menus/coffee`)
             setAllCoffee(result.data.data)
-            setIsLoading(false)
-        } catch (error) {
-            setIsError(true);
-            setIsLoading(false);
-            console.log(error);
-        }
-    }
-
-    const GetCoffeeId = async (coffeeId) => {
-        try {
-            setIsError(false)
-            setIsLoading(true)
-            const result = await axios.get(`http://localhost:4000/menus/coffee/${coffeeId}`)
-            setEditMenuName(result.data.data?.Name)
-            setEditMenuPrice(result.data.data?.Price)
-            setEditMenuDescription(result.data.data?.Description)
-            setEditMenuImageUrl(result.data.data?.Image_url)
             setIsLoading(false)
         } catch (error) {
             setIsError(true);
@@ -114,7 +92,6 @@ const useMenus = () => {
         setIsError,
         suggestCoffee,
         getAllCoffee,
-        GetCoffeeId,
         getAllTea,
         allCoffee,
         setAllCoffee,
@@ -122,10 +99,6 @@ const useMenus = () => {
         setAllTea,
         InsertCoffee,
         InsertTea,
-        editMenuName,
-        editMenuPrice,
-        editMenuDescription,
-        editMenuImageUrl,
 
     }
 }
