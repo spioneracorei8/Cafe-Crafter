@@ -71,7 +71,22 @@ const EditMenu = (props) => {
         }
     }
 
-    
+    const handleSelectEditTea = async (teaId) => {
+        try {
+            setIsError(false)
+            setIsLoading(true)
+            const result = await axios.get(`http://localhost:4000/menus/tea/${teaId}`)
+            setEditMenuName(result.data.data?.Name)
+            setEditMenuPrice(result.data.data?.Price)
+            setEditMenuDescription(result.data.data?.Description)
+            setEditMenuImageUrl(result.data.data?.Image_url)
+            setIsLoading(false)
+        } catch (error) {
+            setIsError(true);
+            setIsLoading(false);
+            console.log(error);
+        }
+    }
 
     return (
         <>
