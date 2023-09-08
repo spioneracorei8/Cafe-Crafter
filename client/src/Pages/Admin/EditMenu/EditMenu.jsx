@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./EditMenu.css"
-import Menus from '../Menus/Menus'
+import useMenus from '../../../Hook/useMenus'
+import Carousel from 'react-elastic-carousel';
 
 const EditMenu = (props) => {
+
+    const { editMenuName } = useMenus()
+
+    const { getAllCoffee, GetCoffeeId, allCoffee, setAllCoffee, getAllTea, allTea, setAllTea } = useMenus()
 
     const [isOpenEditMenuName, setIsOpenEditMenuName] = useState(false)
     const [isOpenEditMenuPrice, setIsOpenEditMenuPrice] = useState(false)
@@ -11,6 +16,13 @@ const EditMenu = (props) => {
 
     const menuName = props?.name
     const toggleNavbarLeft = props?.toggleNavbarLeft
+
+    const breakPoints = [
+        {
+            width: 1200, itemsToShow: 3,
+        }
+    ]
+    console.log(allCoffee);
 
     const handleToggleOpenAddNewMenu = (newMenu) => {
         if (newMenu === "coffeeName") {
@@ -24,6 +36,28 @@ const EditMenu = (props) => {
         }
     }
 
+    if (menuName === "Coffee") {
+        useEffect(() => {
+            getAllCoffee()
+            setAllTea([])
+        }, [menuName])
+    } else if (menuName === "Tea") {
+        useEffect(() => {
+            getAllTea()
+            setAllCoffee([])
+        }, [menuName])
+    }
+
+    const handleSelectEditMenu = () => {
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
+
+    console.log(props);
+
     return (
         <>
 
@@ -36,10 +70,47 @@ const EditMenu = (props) => {
                     <h2>Select {menuName} to Edit</h2>
                 </div>
 
-                <Menus
-                    menuName={menuName}
-                    toggleNavbarLeft={toggleNavbarLeft}
-                />
+                <div className='menus-container'>
+                    <div className='menus'>
+                        <Carousel
+                            breakPoints={breakPoints}
+                            className={toggleNavbarLeft ? "rec-carousel-wrapper-load" : "rec-carousel-wrapper-unload"}
+                        >
+                            {menuName === "Coffee"
+                                ? allCoffee.map((item, index) => {
+                                    return (
+                                        <>
+                                            <div className="menus-list-container" key={index}>
+                                                <div className='menus-list' onClick={() => handleSelectEditMenu(item?.Id, "Coffee")}>
+                                                    <h3>
+                                                        {item?.Name}
+                                                    </h3>
+                                                    <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' />
+                                                </div>
+                                            </div>
+                                        </>
+                                    )
+                                })
+                                : menuName === "Tea"
+                                    ? allTea.map((item, index) => {
+                                        return (
+                                            <>
+                                                <div className="menus-list-container" key={index}>
+                                                    <div className='menus-list' onClick={() => handleSelectEditMenu(item?.Id, "Tea")}>
+                                                        <h3>
+                                                            {item?.Name}
+                                                        </h3>
+                                                        <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' />
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )
+                                    })
+                                    : ""
+                            }
+                        </Carousel>
+                    </div>
+                </div>
 
                 <div className='edit-menu'>
 
@@ -47,7 +118,7 @@ const EditMenu = (props) => {
                         className='edit-menu-name'
                         onClick={() => handleToggleOpenAddNewMenu("coffeeName")}
                     >
-                        <h1>{menuName} Name: {"name"} </h1>
+                        <h1>{menuName} Name: {editMenuName} </h1>
                         {isOpenEditMenuName &&
                             <div className='edit-menu-name-input' onClick={(event) => event.stopPropagation()}>
                                 <h2>
