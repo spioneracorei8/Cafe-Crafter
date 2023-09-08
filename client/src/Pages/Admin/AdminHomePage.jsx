@@ -134,7 +134,6 @@ const AdminHomePage = () => {
                             setIsAddNewCoffee(false),
                             setIsAddNewTea(false),
                             setIsAddNewCake(false)
-                            // navigate("/edit-menu")
                           )
                         }}
                       >
