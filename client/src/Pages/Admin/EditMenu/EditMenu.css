@@ -14,6 +14,42 @@
     gap: 30px;
 }
 
+.edit-menu-search-input {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 15rem;
+    gap: 15px;
+}
+
+.edit-menu-search-input label{
+    font-size: 1.2rem;
+}
+
+.edit-menu-search-input input {
+    height: 2rem;
+    width: 12rem;
+    border-radius: 50px;
+    border: 2px solid #ad1f1f;
+    font-family: 'whipsmart';
+    padding: 5px;
+    font-size: 1.1rem;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.edit-menu-search-input input:focus {
+    border: 3px solid #ad1f1f;
+    outline: #ad1f1f;
+}
+
+.search-icon {
+    width: 30px;
+    cursor: pointer;
+}
+
 .edit-menu-heading {
     display: flex;
     flex-direction: column;

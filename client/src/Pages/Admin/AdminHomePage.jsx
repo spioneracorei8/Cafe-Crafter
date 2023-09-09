@@ -184,24 +184,24 @@ const AdminHomePage = () => {
 
             {isAddNewCoffee === true ?
               <AddNewMenu
-                name="Coffee"
+                category="Coffee"
               />
               : isAddNewTea === true ?
                 <AddNewMenu
-                  name="Tea"
+                  category="Tea"
                 />
                 : isAddNewCake === true ?
                   <AddNewMenu
-                    name="Cake"
+                    category="Cake"
                   />
                   : isEditCoffee === true ?
                     <EditMenu
-                      name="Coffee"
+                      category="Coffee"
                       toggleNavbarLeft={toggleNavbarLeft}
                     />
                     : isEditTea === true ?
                       <EditMenu
-                        name="Tea"
+                        category="Tea"
                         toggleNavbarLeft={toggleNavbarLeft}
                       />
                       : isEditCake === true ?
