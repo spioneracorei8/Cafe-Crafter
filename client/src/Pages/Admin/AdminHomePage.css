@@ -31,6 +31,7 @@
     background-color: black;
     border-radius: 50%;
     cursor: pointer;
+    transition: all 1s ease;
 }
 
 .arrow-right-toggle-navbar {
@@ -43,6 +44,7 @@
     background-color: black;
     border-radius: 50%;
     cursor: pointer;
+    transition: all 1s ease;
 }
 
 .navbar-left-admin {
