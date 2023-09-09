@@ -3,8 +3,9 @@ import "./EditMenu.css"
 import useMenus from '../../../Hook/useMenus'
 import Carousel from 'react-elastic-carousel';
 import axios from 'axios';
+import Search_Icon from "../../../assets/Icon/Search_Icon.png"
 
-const EditMenu = (props) => {
+const EditMenu = ({ category, toggleNavbarLeft }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
 
@@ -15,16 +16,13 @@ const EditMenu = (props) => {
     const [isOpenEditMenuDescription, setIsOpenEditMenuDescription] = useState(false)
     const [isOpenEditMenuImageUrl, setIsOpenEditMenuImageUrl] = useState(false)
 
-    const menuName = props?.name
-    const toggleNavbarLeft = props?.toggleNavbarLeft
-
     const [editMenuId, setEditMenuId] = useState(0)
     const [editMenuName, setEditMenuName] = useState("")
     const [editMenuPrice, setEditMenuPrice] = useState(0)
     const [editMenuDescription, setEditMenuDescription] = useState("")
     const [editMenuImageUrl, setEditMenuImageUrl] = useState("")
 
-    console.log(editMenuId);
+    const [searchMenuName, setSearchMenuName] = useState("")
 
     const breakPoints = [
         {
@@ -44,20 +42,20 @@ const EditMenu = (props) => {
         }
     }
 
-    if (menuName === "Coffee") {
+    if (category === "Coffee") {
         useEffect(() => {
             getAllCoffee()
             setAllTea([])
-        }, [menuName])
-    } else if (menuName === "Tea") {
+        }, [category])
+    } else if (category === "Tea") {
         useEffect(() => {
             getAllTea()
             setAllCoffee([])
-        }, [menuName])
+        }, [category])
     }
 
-    const handleSelectEditMenu = async (menuId, menuName) => {
-        if (menuName === "Coffee") {
+    const handleSelectEditMenu = async (menuId, category) => {
+        if (category === "Coffee") {
             try {
                 setIsError(false)
                 setIsLoading(true)
@@ -72,7 +70,7 @@ const EditMenu = (props) => {
                 setIsLoading(false);
                 console.log(error);
             }
-        } else if (menuName === "Tea") {
+        } else if (category === "Tea") {
             try {
                 setIsError(false)
                 setIsLoading(true)
@@ -90,34 +88,63 @@ const EditMenu = (props) => {
         }
     }
 
-    const handleEditMenu = (menuName) => {
-        event.preventDefault()
+    const handleEditMenu = (category) => {
         const floatPrice = parseFloat(editMenuPrice)
         const data = {
             name: editMenuName,
             price: floatPrice,
             description: editMenuDescription,
             image_url: editMenuImageUrl,
-            category: menuName.toLowerCase()
+            category: category.toLowerCase()
 
         }
-        if (menuName === "Coffee") {
+        if (category === "Coffee") {
             UpdateCoffee(data, editMenuId)
-        } else if (menuName === "Tea") {
+        } else if (category === "Tea") {
             UpdateTea(data, editMenuId)
         }
+    }
+
+    const handleSearchInputChange = (category) => {
+        console.log(category);
+        if (category == "Coffee") {
+            const menuDataInput = allCoffee.find((item) => {
+                return searchMenuName === item.Name
+            })
+            handleSelectEditMenu(menuDataInput?.Id, "Coffee")
+        } else if (category === "Tea") {
+            const menuDataInput = allTea.find((item) => {
+                return searchMenuName === item.Name
+            })
+            handleSelectEditMenu(menuDataInput?.Id, "Tea")
+        }
+    }
+
+    const handleOptionSelect = (event, category) => {
+        if (category === "Coffee") {
+            const menuDataInput = allCoffee.find((item) => {
+                return searchMenuName === item.Name
+            })
+            handleSelectEditMenu(menuDataInput?.Id, "Coffee")
+        } else if (category === "Tea") {
+            const menuDataInput = allTea.find((item) => {
+                return searchMenuName === item.Name
+            })
+            handleSelectEditMenu(menuDataInput?.Id, "Tea")
+        }
+
     }
 
     return (
         <>
 
-            <form className='edit-menu-container' onSubmit={() => handleEditMenu(menuName)}>
+            <form className='edit-menu-container' onSubmit={() => handleEditMenu(category)}>
 
                 <div className='edit-menu-heading'>
                     <h1>
-                        Edit {menuName}
+                        Edit {category}
                     </h1>
-                    <h2>Select {menuName} to Edit</h2>
+                    <h2>Select {category} to Edit</h2>
                 </div>
 
                 <div className='menus-container'>
@@ -126,7 +153,7 @@ const EditMenu = (props) => {
                             breakPoints={breakPoints}
                             className={toggleNavbarLeft ? "rec-carousel-wrapper-load" : "rec-carousel-wrapper-unload"}
                         >
-                            {menuName === "Coffee"
+                            {category === "Coffee"
                                 ? allCoffee.map((item, index) => {
                                     return (
                                         <>
@@ -146,7 +173,7 @@ const EditMenu = (props) => {
                                         </>
                                     )
                                 })
-                                : menuName === "Tea"
+                                : category === "Tea"
                                     ? allTea.map((item, index) => {
                                         return (
                                             <>
@@ -174,15 +201,50 @@ const EditMenu = (props) => {
 
                 <div className='edit-menu'>
 
+                    <div className='edit-menu-search-input'>
+                        <label>Search {category} menu</label>
+                        <input
+                            type="text"
+                            list='menu-name'
+                            value={searchMenuName}
+                            onChange={(event) => setSearchMenuName(event.target.value)}
+                            onBlur={(event) => handleOptionSelect(setSearchMenuName(event.target.value), category)}
+                        />
+
+                        <datalist id='menu-name'>
+                            {category === "Coffee"
+                                ? allCoffee.map((item, index) => {
+                                    return (
+                                        <option value={item?.Name} key={index} />
+                                    )
+                                })
+                                : category === "Tea"
+                                    ? allTea.map((item, index) => {
+                                        return (
+                                            <option value={item?.Name} key={index}></option>
+                                        )
+                                    })
+                                    : ""
+                            }
+                        </datalist>
+
+                        <img
+                            src={Search_Icon}
+                            alt="Search"
+                            className='search-icon'
+                            onClick={() => handleSearchInputChange(category)}
+                        />
+                    </div>
+
                     <div
                         className='edit-menu-name'
                         onClick={() => handleToggleOpenAddNewMenu("coffeeName")}
                     >
-                        <h1>{menuName} Name: {editMenuName} </h1>
+                        <h1>{category} Name: {editMenuName} </h1>
                         {isOpenEditMenuName &&
                             <div className='edit-menu-name-input' onClick={(event) => event.stopPropagation()}>
                                 <h2>
-                                    New {menuName} Name: <input type="text" value={editMenuName} onChange={(event) => setEditMenuName(event?.target?.value)} />
+                                    New {category} Name: <input type="text" value={editMenuName} onChange={(event) => setEditMenuName(event?.target?.value)} />
                                 </h2>
                             </div>
                         }
@@ -192,11 +254,11 @@ const EditMenu = (props) => {
                         className='edit-menu-price'
                         onClick={() => handleToggleOpenAddNewMenu("coffeePrice")}
                     >
-                        <h1>{menuName} Price: {editMenuPrice}฿ </h1>
+                        <h1>{category} Price: {editMenuPrice}฿ </h1>
                         {isOpenEditMenuPrice &&
                             <div className='edit-menu-price-input' onClick={(event) => event.stopPropagation()}>
                                 <h2>
-                                    New {menuName} Price: <input type="number" value={editMenuPrice} onChange={(event) => setEditMenuPrice(event.target.value)} />
+                                    New {category} Price: <input type="number" value={editMenuPrice} onChange={(event) => setEditMenuPrice(event.target.value)} />
                                 </h2>
                             </div>
                         }
@@ -206,12 +268,12 @@ const EditMenu = (props) => {
                         className='edit-menu-description'
                         onClick={() => handleToggleOpenAddNewMenu("coffeeDescription")}
                     >
-                        <h1>{menuName} Description: <br /> </h1>
+                        <h1>{category} Description: <br /> </h1>
                         <p>{editMenuDescription}</p>
                         {isOpenEditMenuDescription &&
                             <div className='edit-menu-description-input' onClick={(event) => event.stopPropagation()}>
                                 <h2>
-                                    New {menuName} Description: <br />
+                                    New {category} Description: <br />
                                 </h2>
                                 <textarea cols="40" rows="10" value={editMenuDescription} onChange={(event) => setEditMenuDescription(event.target.value)}></textarea>
                             </div>
@@ -222,12 +284,12 @@ const EditMenu = (props) => {
                         className='edit-menu-image-url'
                         onClick={() => handleToggleOpenAddNewMenu("coffeeImageUrl")}
                     >
-                        <h1>{menuName} ImageURL: <br /> </h1>
+                        <h1>{category} ImageURL: <br /> </h1>
                         <img src={editMenuImageUrl} alt={editMenuName + " Picture"} className={editMenuImageUrl === "" ? "" : "load-img"} />
                         {isOpenEditMenuImageUrl &&
                             <div className='edit-menu-image-url-input' onClick={(event) => event.stopPropagation()}>
                                 <h2>
-                                    New {menuName} ImageURL: <br />
+                                    New {category} ImageURL: <br />
                                 </h2>
                                 <textarea cols="40" rows="10" value={editMenuImageUrl} onChange={(event) => setEditMenuImageUrl(event.target.value)}></textarea>
                             </div>
@@ -239,7 +301,7 @@ const EditMenu = (props) => {
                 <div className='submit-edit-menu'>
                     <button type='submit'>
                         <h1>
-                            Edit {menuName}
+                            Edit {category}
                         </h1>
                     </button>
                 </div>
