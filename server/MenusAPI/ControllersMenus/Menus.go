@@ -229,7 +229,7 @@ func UpdateTea(c *gin.Context) {
 		return
 	}
 
-	updatedTea, err, errNoRow := ModelsMenus.UpdateCoffee(&tea, teaId)
+	updatedTea, err, errNoRow := ModelsMenus.UpdateTea(&tea, teaId)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

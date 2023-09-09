@@ -29,7 +29,7 @@ const AddNewMenu = (props) => {
         }
     }
 
-    const handleAddNewMenu = (event, menu) => {
+    const handleAddNewMenu = (event, menuName) => {
         event.preventDefault()
         const floatPrice = parseFloat(price)
         const data = {
@@ -37,11 +37,11 @@ const AddNewMenu = (props) => {
             price: floatPrice,
             description,
             image_url,
-            category: menu.toLowerCase()
+            category: menuName.toLowerCase()
         }
-        if (menu === "Coffee") {
+        if (menuName === "Coffee") {
             InsertCoffee(data)
-        } else if (menu === "Tea") {
+        } else if (menuName === "Tea") {
             InsertTea(data)
         }
     }
@@ -89,12 +89,16 @@ const AddNewMenu = (props) => {
                         className='new-menu-description'
                         onClick={() => handleToggleOpenAddNewMenu("coffeeDescription")}
                     >
-                        <h1>{menuName} Description: <br /> {description}</h1>
+                        <h1>{menuName} Description: <br /> </h1>
+                        <p>
+                            {description}
+                        </p>
                         {isOpenNewMenuDescription &&
                             <div className='new-menu-description-input' onClick={(event) => event.stopPropagation()}>
                                 <h2>
-                                    New {menuName} Description: <br /> <textarea cols="40" rows="10" value={description} onChange={(event) => setDescription(event.target.value)}></textarea>
+                                    New {menuName} Description: <br />
                                 </h2>
+                                <textarea cols="40" rows="10" value={description} onChange={(event) => setDescription(event.target.value)}></textarea>
                             </div>
                         }
                     </div>
@@ -108,8 +112,9 @@ const AddNewMenu = (props) => {
                         {isOpenNewMenuImageUrl &&
                             <div className='new-menu-image-url-input' onClick={(event) => event.stopPropagation()}>
                                 <h2>
-                                    New {menuName} ImageURL: <br /> <textarea cols="40" rows="10" value={image_url} onChange={(event) => setImage_url(event.target.value)}></textarea>
+                                    New {menuName} ImageURL: <br />
                                 </h2>
+                                <textarea cols="40" rows="10" value={image_url} onChange={(event) => setImage_url(event.target.value)}></textarea>
                             </div>
                         }
                     </div>
