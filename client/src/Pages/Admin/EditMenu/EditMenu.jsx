@@ -8,7 +8,7 @@ const EditMenu = (props) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
 
-    const { getAllCoffee, allCoffee, setAllCoffee, getAllTea, allTea, setAllTea } = useMenus()
+    const { getAllCoffee, UpdateCoffee, allCoffee, setAllCoffee, getAllTea, UpdateTea, allTea, setAllTea } = useMenus()
 
     const [isOpenEditMenuName, setIsOpenEditMenuName] = useState(false)
     const [isOpenEditMenuPrice, setIsOpenEditMenuPrice] = useState(false)
@@ -18,17 +18,19 @@ const EditMenu = (props) => {
     const menuName = props?.name
     const toggleNavbarLeft = props?.toggleNavbarLeft
 
+    const [editMenuId, setEditMenuId] = useState(0)
     const [editMenuName, setEditMenuName] = useState("")
     const [editMenuPrice, setEditMenuPrice] = useState(0)
     const [editMenuDescription, setEditMenuDescription] = useState("")
     const [editMenuImageUrl, setEditMenuImageUrl] = useState("")
+
+    console.log(editMenuId);
 
     const breakPoints = [
         {
             width: 1200, itemsToShow: 3,
         }
     ]
-    console.log(allCoffee);
 
     const handleToggleOpenAddNewMenu = (newMenu) => {
         if (newMenu === "coffeeName") {
@@ -54,44 +56,62 @@ const EditMenu = (props) => {
         }, [menuName])
     }
 
-    const handleSelectEditCoffee = async (coffeeId) => {
-        try {
-            setIsError(false)
-            setIsLoading(true)
-            const result = await axios.get(`http://localhost:4000/menus/coffee/${coffeeId}`)
-            setEditMenuName(result.data.data?.Name)
-            setEditMenuPrice(result.data.data?.Price)
-            setEditMenuDescription(result.data.data?.Description)
-            setEditMenuImageUrl(result.data.data?.Image_url)
-            setIsLoading(false)
-        } catch (error) {
-            setIsError(true);
-            setIsLoading(false);
-            console.log(error);
+    const handleSelectEditMenu = async (menuId, menuName) => {
+        if (menuName === "Coffee") {
+            try {
+                setIsError(false)
+                setIsLoading(true)
+                const result = await axios.get(`http://localhost:4000/menus/coffee/${menuId}`)
+                setEditMenuName(result.data.data?.Name)
+                setEditMenuPrice(result.data.data?.Price)
+                setEditMenuDescription(result.data.data?.Description)
+                setEditMenuImageUrl(result.data.data?.Image_url)
+                setIsLoading(false)
+            } catch (error) {
+                setIsError(true);
+                setIsLoading(false);
+                console.log(error);
+            }
+        } else if (menuName === "Tea") {
+            try {
+                setIsError(false)
+                setIsLoading(true)
+                const result = await axios.get(`http://localhost:4000/menus/tea/${menuId}`)
+                setEditMenuName(result.data.data?.Name)
+                setEditMenuPrice(result.data.data?.Price)
+                setEditMenuDescription(result.data.data?.Description)
+                setEditMenuImageUrl(result.data.data?.Image_url)
+                setIsLoading(false)
+            } catch (error) {
+                setIsError(true);
+                setIsLoading(false);
+                console.log(error);
+            }
         }
     }
 
-    const handleSelectEditTea = async (teaId) => {
-        try {
-            setIsError(false)
-            setIsLoading(true)
-            const result = await axios.get(`http://localhost:4000/menus/tea/${teaId}`)
-            setEditMenuName(result.data.data?.Name)
-            setEditMenuPrice(result.data.data?.Price)
-            setEditMenuDescription(result.data.data?.Description)
-            setEditMenuImageUrl(result.data.data?.Image_url)
-            setIsLoading(false)
-        } catch (error) {
-            setIsError(true);
-            setIsLoading(false);
-            console.log(error);
+    const handleEditMenu = (menuName) => {
+        event.preventDefault()
+        const floatPrice = parseFloat(editMenuPrice)
+        const data = {
+            name: editMenuName,
+            price: floatPrice,
+            description: editMenuDescription,
+            image_url: editMenuImageUrl,
+            category: menuName.toLowerCase()
+
+        }
+        if (menuName === "Coffee") {
+            UpdateCoffee(data, editMenuId)
+        } else if (menuName === "Tea") {
+            UpdateTea(data, editMenuId)
         }
     }
 
     return (
         <>
 
-            <form className='edit-menu-container' onSubmit={(event) => (event, "coffee")}>
+            <form className='edit-menu-container' onSubmit={() => handleEditMenu(menuName)}>
 
                 <div className='edit-menu-heading'>
                     <h1>
@@ -111,11 +131,16 @@ const EditMenu = (props) => {
                                     return (
                                         <>
                                             <div className="menus-list-container" key={index}>
-                                                <div className='menus-list' onClick={() => handleSelectEditCoffee(item?.Id)}>
+                                                <div className='menus-list'>
                                                     <h3>
                                                         {item?.Name}
                                                     </h3>
-                                                    <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' />
+                                                    <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' onClick={() => {
+                                                        return (
+                                                            handleSelectEditMenu(item?.Id, "Coffee"),
+                                                            setEditMenuId(item?.Id)
+                                                        )
+                                                    }} />
                                                 </div>
                                             </div>
                                         </>
@@ -126,11 +151,16 @@ const EditMenu = (props) => {
                                         return (
                                             <>
                                                 <div className="menus-list-container" key={index}>
-                                                    <div className='menus-list' onClick={() => handleSelectEditTea(item?.Id)}>
+                                                    <div className='menus-list' >
                                                         <h3>
                                                             {item?.Name}
                                                         </h3>
-                                                        <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' />
+                                                        <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' onClick={() => {
+                                                            return (
+                                                                handleSelectEditMenu(item?.Id, "Tea"),
+                                                                setEditMenuId(item?.Id)
+                                                            )
+                                                        }} />
                                                     </div>
                                                 </div>
                                             </>
