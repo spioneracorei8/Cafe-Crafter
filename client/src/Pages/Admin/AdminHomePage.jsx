@@ -239,7 +239,7 @@ const AdminHomePage = () => {
                 />
                 : isAddNewCake === true ?
                   <AddNewMenu
-                    category="Cake"
+                    category="cake"
                   />
                   : isEditCoffee === true ?
                     <EditMenu
@@ -253,7 +253,7 @@ const AdminHomePage = () => {
                       />
                       : isEditCake === true ?
                         <EditMenu
-                          category="Cake"
+                          category="cake"
                         />
                         : isDeleteCoffee === true ?
                           <DeleteMenu
