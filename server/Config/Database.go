@@ -141,6 +141,17 @@ func SetupDatabase() {
 	// ON DELETE CASCADE;
 	// `
 
+	// create cakemenu table
+	// query := `CREATE TABLE cakemenu
+	// 	(	id INT AUTO_INCREMENT,
+	// 		name TEXT NOT NULL,
+	// 		image_url TEXT NOT NULL,
+	// 		description TEXT NOT NULL,
+	// 		price FLOAT NOT NULL,
+	// 		category TEXT NOT NULL,
+	// 		PRIMARY KEY (id)
+	// 	);`
+
 	// if _, err := DB.Exec(query); err != nil {
 	// 	panic(err.Error())
 	// }

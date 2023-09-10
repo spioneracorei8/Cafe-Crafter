@@ -51,6 +51,28 @@ func GetTea() ([]Menu, error) {
 	return teaList, nil
 }
 
+func GetCake() ([]Menu, error) {
+	var cakeList []Menu
+
+	query, err := Config.DB.Query(`SELECT id, name, image_url, description, price, category FROM coffeedatabase.cakemenu`)
+	if err != nil {
+		return nil, err
+	}
+
+	for query.Next() {
+		var cake Menu
+		query.Scan(
+			&cake.Id,
+			&cake.Name,
+			&cake.Image_url,
+			&cake.Description,
+			&cake.Price,
+			&cake.Category)
+		cakeList = append(cakeList, cake)
+	}
+	return cakeList, nil
+}
+
 func GetSuggestCoffee() ([]Menu, error) {
 	var coffeeList []Menu
 	query, err := Config.DB.Query(`SELECT id, name, image_url, description, price, category FROM suggestions_coffee`)
@@ -116,6 +138,28 @@ func GetTeaId(teaId int) (*Menu, error, error) {
 	return teaRow, nil, nil
 }
 
+func GetCakeId(cakeId int) (*Menu, error, error) {
+	cakeRow := &Menu{}
+
+	query := Config.DB.QueryRow(`SELECT id, name, image_url, description, price, category FROM coffeedatabase.cakemenu WHERE id = ?`, cakeId)
+
+	err := query.Scan(
+		&cakeRow.Id,
+		&cakeRow.Name,
+		&cakeRow.Image_url,
+		&cakeRow.Description,
+		&cakeRow.Price,
+		&cakeRow.Category,
+	)
+	if err != nil {
+		return nil, err, nil
+	} else if err == sql.ErrNoRows {
+		return nil, nil, err
+	}
+
+	return cakeRow, nil, nil
+}
+
 func GetSuggestCoffeName(name string) (*Menu, error, error) {
 	coffee := &Menu{}
 
@@ -164,6 +208,21 @@ func InsertTea(tea Menu) (int64, error) {
 	}
 
 	return teaId, nil
+}
+
+func InsertCake(cake Menu) (int64, error) {
+	insert := `INSERT INTO cakemenu (name, image_url, description, price, category) VALUES (?, ?, ?, ?, ?)`
+
+	result, err := Config.DB.Exec(insert, cake.Name, cake.Image_url, cake.Description, cake.Price, cake.Category)
+	if err != nil {
+		return 0, err
+	}
+	cakeId, err := result.LastInsertId()
+	if err != nil {
+		return 0, err
+	}
+
+	return cakeId, nil
 }
 
 func InsertSuggestCoffee(coffee Menu) (int64, error) {
@@ -241,6 +300,36 @@ func UpdateTea(tea *Menu, teaId int) (*Menu, error, error) {
 	return teaRow, nil, nil
 }
 
+func UpdateCake(cake *Menu, cakeId int) (*Menu, error, error) {
+	cakeRow := &Menu{}
+
+	query := `SELECT id, name, image_url, description, price, category FROM coffeedatabase.cakemenu WHERE id = ?`
+
+	update := `UPDATE coffeedatabase.cakemenu SET name = ?, image_url = ?, description = ?, price = ?, category = ? WHERE id = ?`
+
+	_, err := Config.DB.Exec(update, cake.Name, cake.Image_url, cake.Description, cake.Price, cake.Category, cakeId)
+
+	if err != nil {
+		return nil, err, nil
+	}
+	row := Config.DB.QueryRow(query, cakeId)
+
+	err = row.Scan(
+		&cakeRow.Id,
+		&cakeRow.Name,
+		&cakeRow.Image_url,
+		&cakeRow.Description,
+		&cakeRow.Price,
+		&cakeRow.Category,
+	)
+	if err == sql.ErrNoRows {
+		return nil, nil, err
+	} else if err != nil {
+		return nil, err, nil
+	}
+	return cakeRow, nil, nil
+}
+
 func UpdateSuggestCoffee(coffee *Menu, coffeeId int) (*Menu, error, error) {
 	coffeeRow := &Menu{}
 
@@ -307,6 +396,28 @@ func DeleteTea(teaId int) (bool, error) {
 	}
 
 	_, err = Config.DB.Exec(deleteCoffeeById, teaId)
+
+	if err != nil {
+		return false, err
+	}
+
+	return count > 0, nil
+}
+
+func DeleteCake(cakeId int) (bool, error) {
+	var count int
+
+	query := `SELECT COUNT(*) FROM coffeedatabase.cakemenu WHERE id = ?`
+
+	deleteCakeById := `DELETE FROM coffeedatabase.cakemenu WHERE id = ?`
+
+	err := Config.DB.QueryRow(query, cakeId).Scan(&count)
+
+	if err != nil {
+		return false, err
+	}
+
+	_, err = Config.DB.Exec(deleteCakeById, cakeId)
 
 	if err != nil {
 		return false, err

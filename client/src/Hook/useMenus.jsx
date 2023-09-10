@@ -86,6 +86,7 @@ const useMenus = () => {
             setIsLoading(true)
             await axios.delete(`http://localhost:4000/menus/${category}/${menuId}`)
             setIsLoading(false)
+            window.location.replace("/")
         } catch (error) {
             setIsError(true);
             setIsLoading(false);

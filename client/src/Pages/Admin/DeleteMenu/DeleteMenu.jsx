@@ -49,6 +49,8 @@ const DeleteMenu = ({ category, toggleNavbarLeft }) => {
     const handleConfirmDeleteMenu = (event, catrgory, menuId) => {
         if (category === "coffee") {
             DeleteMenu(catrgory, menuId)
+        } else if (category === "tea") {
+            DeleteMenu(catrgory, menuId)
         }
     }
 

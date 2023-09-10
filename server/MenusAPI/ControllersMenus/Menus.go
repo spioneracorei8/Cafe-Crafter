@@ -32,6 +32,18 @@ func GetTea(c *gin.Context) {
 	}
 }
 
+func GetCake(c *gin.Context) {
+	cakeList, err := ModelsMenus.GetCake()
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": cakeList,
+		})
+	}
+}
+
 func GetSuggestCoffee(c *gin.Context) {
 	coffeeList, err := ModelsMenus.GetSuggestCoffee()
 
@@ -89,6 +101,30 @@ func GetTeaId(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, gin.H{
 			"data": tea,
+		})
+
+	}
+}
+
+func GetCakeId(c *gin.Context) {
+	id := c.Param("id")
+	cakeId, err := strconv.Atoi(id)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
+	}
+
+	cake, err, errNoRow := ModelsMenus.GetCakeId(cakeId)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else if errNoRow != nil {
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": cake,
 		})
 
 	}
@@ -152,11 +188,33 @@ func InsertTea(c *gin.Context) {
 		return
 	} else {
 		c.JSON(http.StatusOK, gin.H{
-			"coffeeId": teaId,
-			"message":  "insert new tea successfully.",
+			"teaId":   teaId,
+			"message": "insert new tea successfully.",
 		})
 	}
 
+}
+
+func InsertCake(c *gin.Context) {
+	var cake ModelsMenus.Menu
+	if err := c.ShouldBindJSON(&cake); err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	cakeId, err := ModelsMenus.InsertCake(cake)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else if cakeId == 0 {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"cakeId":  cakeId,
+			"message": "insert new cake successfully.",
+		})
+	}
 }
 
 func InsertSuggestCoffee(c *gin.Context) {
@@ -229,7 +287,38 @@ func UpdateTea(c *gin.Context) {
 		return
 	}
 
-	updatedTea, err, errNoRow := ModelsMenus.UpdateTea(&tea, teaId)
+	updatedCake, err, errNoRow := ModelsMenus.UpdateTea(&tea, teaId)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else if errNoRow != nil {
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data":    updatedCake,
+			"message": "updated tea successfully.",
+		})
+	}
+}
+
+func UpdateCake(c *gin.Context) {
+	var cake ModelsMenus.Menu
+
+	if err := c.ShouldBindJSON(&cake); err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	id := c.Param("id")
+	cakeId, err := strconv.Atoi(id)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
+	}
+
+	updatedTea, err, errNoRow := ModelsMenus.UpdateCake(&cake, cakeId)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -243,7 +332,6 @@ func UpdateTea(c *gin.Context) {
 			"message": "updated tea successfully.",
 		})
 	}
-
 }
 
 func UpdateSuggestCoffee(c *gin.Context) {
@@ -322,6 +410,31 @@ func DeleteTea(c *gin.Context) {
 	if isDeleted {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "deleted tea successfully.",
+		})
+	} else {
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})
+		return
+	}
+}
+
+func DeleteCake(c *gin.Context) {
+	id := c.Param("id")
+	cakeId, err := strconv.Atoi(id)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
+	}
+
+	isDeleted, err := ModelsMenus.DeleteCake(cakeId)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if isDeleted {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "deleted cake successfully.",
 		})
 	} else {
 		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})
