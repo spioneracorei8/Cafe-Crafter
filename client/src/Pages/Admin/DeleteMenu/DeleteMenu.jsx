@@ -9,7 +9,7 @@ const DeleteMenu = ({ category, toggleNavbarLeft }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
 
-    const { getAllCoffee, allCoffee, setAllCoffee, getAllTea, allTea, setAllTea } = useMenus()
+    const { getAllCoffee, allCoffee, setAllCoffee, getAllTea, allTea, setAllTea, DeleteMenu } = useMenus()
 
     const [deleteMenuId, setDeleteMenuId] = useState(0)
     const [deleteMenuName, setDeleteMenuName] = useState("")
@@ -22,7 +22,7 @@ const DeleteMenu = ({ category, toggleNavbarLeft }) => {
         }
     ]
 
-    if (category === "Coffee") {
+    if (category === "coffee") {
         useEffect(() => {
             getAllCoffee()
             setAllTea([])
@@ -35,7 +35,7 @@ const DeleteMenu = ({ category, toggleNavbarLeft }) => {
     }
 
     const handleSelectDeleteMenu = async (menuId, category) => {
-        if (category === "Coffee") {
+        if (category === "coffee") {
             try {
                 setIsError(false)
                 setIsLoading(true)
@@ -67,8 +67,8 @@ const DeleteMenu = ({ category, toggleNavbarLeft }) => {
     }
 
     const handleConfirmDeleteMenu = (event, catrgory, menuId) => {
-        if (category === "Coffee") {
-
+        if (category === "coffee") {
+            DeleteMenu(catrgory, menuId)
         }
     }
 
@@ -132,7 +132,7 @@ const DeleteMenu = ({ category, toggleNavbarLeft }) => {
                             breakPoints={breakPoints}
                             className={toggleNavbarLeft ? "rec-carousel-wrapper-load" : "rec-carousel-wrapper-unload"}
                         >
-                            {category === "Coffee"
+                            {category === "coffee"
                                 ? allCoffee.map((item, index) => {
                                     return (
                                         <>
@@ -143,7 +143,7 @@ const DeleteMenu = ({ category, toggleNavbarLeft }) => {
                                                     </h3>
                                                     <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' onClick={() => {
                                                         return (
-                                                            handleSelectDeleteMenu(item?.Id, "Coffee"),
+                                                            handleSelectDeleteMenu(item?.Id, "coffee"),
                                                             setDeleteMenuId(item?.Id)
                                                         )
                                                     }} />
@@ -180,14 +180,20 @@ const DeleteMenu = ({ category, toggleNavbarLeft }) => {
 
                 <div className='delete-menu-show'>
                     <h1>Delete {deleteMenuName === "" ? "?" : deleteMenuName}</h1>
-                    <img src={deleteMenuImageUrl} alt={deleteMenuImageUrl === "" ? "?" : deleteMenuName} />
+                    <img
+                        src={deleteMenuImageUrl}
+                        alt={deleteMenuImageUrl === "" ? "?" : deleteMenuName}
+                        className={deleteMenuName === "" ? "delete-menu-show-unload" : "delete-menu-show-load"}
+                    />
                 </div>
 
                 <div className='submit-delete-menu'>
-                    <button type='submit' >
-                        <h1>
-                            Delete {category}
-                        </h1>
+                    <button
+                        type='submit'
+                        className={deleteMenuName === "" ? "submit-delete-menu-button-unload" : "submit-delete-menu-button-load"}
+                        disabled={deleteMenuName === ""}
+                    >
+                        Delete {category}
                     </button>
                 </div>
 
