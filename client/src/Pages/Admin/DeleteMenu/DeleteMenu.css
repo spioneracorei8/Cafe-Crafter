@@ -35,7 +35,7 @@
     font-style: normal;
 }
 
-.delete-menu-show img {
+.delete-menu-show-load {
     width: 200px;
     height: 200px;
     object-fit: cover;
@@ -52,7 +52,19 @@
     margin-top: 4rem;
 }
 
-.submit-delete-menu button {
+.submit-delete-menu-button-unload {
+    background-color: black;
+    padding: 10px;
+    border-radius: 50px;
+    font-family: 'whipsmart';
+    cursor: no-drop;
+    border: 3px solid black;
+    color: gray;
+    font-size: 1.4rem;
+    font-weight: 900;
+}
+
+.submit-delete-menu-button-load {
     background-color: #ad1f1f;
     padding: 10px;
     border-radius: 50px;
@@ -61,19 +73,17 @@
     cursor: pointer;
     border: 3px solid #ad1f1f;
     outline: #ad1f1f;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 900;
 }
 
-.submit-delete-menu button:hover {
+.submit-delete-menu-button-load:hover {
     background-color: #dd1111;
 }
 
-.submit-delete-menu button:active {
+.submit-delete-menu-button-load:active {
     background-color: #ff0000;
-}
-
-.submit-delete-menu button h1 {
-    color: white;
-    font-size: 1.4rem;
 }
 
 .menu-popup-container {

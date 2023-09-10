@@ -124,7 +124,7 @@ func SetupDatabase() {
 	// query := `ALTER TABLE carts
 	// ADD COLUMN sub_total float NOT NULL `
 
-	// query := `CREATE TABLE teamenu 
+	// query := `CREATE TABLE teamenu
 	// (	id INT AUTO_INCREMENT,
 	// 	name TEXT NOT NULL,
 	// 	image_url TEXT NOT NULL,
@@ -133,6 +133,13 @@ func SetupDatabase() {
 	// 	category TEXT NOT NULL,
 	// 	PRIMARY KEY (id)
 	// );`
+
+	// Edit table and use ON DELETE CASCADE
+	// query := `ALTER TABLE carts
+	// ADD CONSTRAINT fk_coffee_id // ชื่ออะไรนะ555
+	// FOREIGN KEY(coffee_id) REFERENCES coffeemenu(id) // ต้องรู้ว่า fk อยู่ที่ไหน
+	// ON DELETE CASCADE;
+	// `
 
 	// if _, err := DB.Exec(query); err != nil {
 	// 	panic(err.Error())

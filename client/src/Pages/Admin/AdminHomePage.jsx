@@ -249,7 +249,7 @@ const AdminHomePage = () => {
                         />
                         : isDeleteCoffee === true ?
                           <DeleteMenu
-                            category="Coffee"
+                            category="coffee"
                             toggleNavbarLeft={toggleNavbarLeft}
                           />
                           :

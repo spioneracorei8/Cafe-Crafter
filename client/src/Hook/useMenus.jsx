@@ -108,6 +108,19 @@ const useMenus = () => {
         }
     }
 
+    const DeleteMenu = async (category, menuId) => {
+        try {
+            setIsError(false)
+            setIsLoading(true)
+            await axios.delete(`http://localhost:4000/menus/${category}/${menuId}`)
+            setIsLoading(false)
+        } catch (error) {
+            setIsError(true);
+            setIsLoading(false);
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         getSuggestCoffee()
     }, [])
@@ -128,6 +141,7 @@ const useMenus = () => {
         InsertTea,
         UpdateCoffee,
         UpdateTea,
+        DeleteMenu,
 
     }
 }
