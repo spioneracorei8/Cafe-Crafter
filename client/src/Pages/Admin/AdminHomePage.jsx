@@ -214,6 +214,19 @@ const AdminHomePage = () => {
                       >
                         Edit new Cake</li>
                       <li
+                        onClick={() => {
+                          return (
+                            setIsDeleteCake(true),
+                            setIsDeleteTea(false),
+                            setIsDeleteCoffee(false),
+                            setIsEditCoffee(false),
+                            setIsEditTea(false),
+                            setIsEditCake(false),
+                            setIsAddNewCoffee(false),
+                            setIsAddNewTea(false),
+                            setIsAddNewCake(false)
+                          )
+                        }}
                       >
                         Delete Cake
                       </li>
@@ -254,6 +267,7 @@ const AdminHomePage = () => {
                       : isEditCake === true ?
                         <EditMenu
                           category="cake"
+                          toggleNavbarLeft={toggleNavbarLeft}
                         />
                         : isDeleteCoffee === true ?
                           <DeleteMenu
@@ -265,42 +279,47 @@ const AdminHomePage = () => {
                               category="tea"
                               toggleNavbarLeft={toggleNavbarLeft}
                             />
-                            :
-                            <>
-                              <div>
-                                <img src={MyAdmin} alt="human-sit-dow" />
-                              </div>
-                              <div className='greeting-content'>
-                                <h1>
-                                  Hi, Admin Name
-                                </h1>
-                                <br />
-                                <br />
-                                <p>
-                                  Good day! 👋 As we continue to improve the Cafe-Crafter admin page and make it even more awesome, we're really interested in hearing your suggestions and ideas. Your feedback is incredibly valuable to us!
-                                </p>
-                                <br />
-                                <p>
-                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, aperiam eum. Hic tenetur ut, quaerat voluptate ipsam facere distinctio iusto! Temporibus, maiores! Eum iste corrupti numquam non libero, ex dolorem hic itaque distinctio nulla! Delectus magni voluptates explicabo laudantium dolorum iste, quasi maiores facilis dicta unde voluptas dolor libero voluptatum!
-                                </p>
-                                <br />
-                                <p>
-                                  Prepare to be immersed in the coffee realm of Café Crafter’s admin panel, where coffee-making mastery meets digital surveillance. Here lies the ultimate toolbox for running the most kickass café on earth!
-                                </p>
-                                <br />
-                                <p>
-                                  From inventory management to employee schedules, every aspect of your caffeinated wonderland can be tweaked, customized, and enhanced to sculpt your very own coffee paradise. You are just a few steps away from beverage domination.
-                                </p>
-                                <br />
-                                <p>
-                                  Unleash your inner barista emperor, take a sip of your favorite brew, and dive into Café Crafter’s Admin Interface!
-                                </p>
-                                <br />
-                                <p>
-                                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea harum cumque nostrum ad voluptatibus dolorum ipsum vero quia, quae minima. Eveniet nulla, omnis consectetur, quisquam dicta numquam et veniam aspernatur quo eos facilis amet unde, ex dicta dignissimos sapiente natus quaerat officiis? sint ut voluptas eligendi culpa quia ratione.
-                                </p>
-                              </div>
-                            </>
+                            : isDeleteCake === true ?
+                              <DeleteMenu
+                                category="cake"
+                                toggleNavbarLeft={toggleNavbarLeft}
+                              />
+                              :
+                              <>
+                                <div>
+                                  <img src={MyAdmin} alt="human-sit-dow" />
+                                </div>
+                                <div className='greeting-content'>
+                                  <h1>
+                                    Hi, Admin Name
+                                  </h1>
+                                  <br />
+                                  <br />
+                                  <p>
+                                    Good day! 👋 As we continue to improve the Cafe-Crafter admin page and make it even more awesome, we're really interested in hearing your suggestions and ideas. Your feedback is incredibly valuable to us!
+                                  </p>
+                                  <br />
+                                  <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, aperiam eum. Hic tenetur ut, quaerat voluptate ipsam facere distinctio iusto! Temporibus, maiores! Eum iste corrupti numquam non libero, ex dolorem hic itaque distinctio nulla! Delectus magni voluptates explicabo laudantium dolorum iste, quasi maiores facilis dicta unde voluptas dolor libero voluptatum!
+                                  </p>
+                                  <br />
+                                  <p>
+                                    Prepare to be immersed in the coffee realm of Café Crafter’s admin panel, where coffee-making mastery meets digital surveillance. Here lies the ultimate toolbox for running the most kickass café on earth!
+                                  </p>
+                                  <br />
+                                  <p>
+                                    From inventory management to employee schedules, every aspect of your caffeinated wonderland can be tweaked, customized, and enhanced to sculpt your very own coffee paradise. You are just a few steps away from beverage domination.
+                                  </p>
+                                  <br />
+                                  <p>
+                                    Unleash your inner barista emperor, take a sip of your favorite brew, and dive into Café Crafter’s Admin Interface!
+                                  </p>
+                                  <br />
+                                  <p>
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea harum cumque nostrum ad voluptatibus dolorum ipsum vero quia, quae minima. Eveniet nulla, omnis consectetur, quisquam dicta numquam et veniam aspernatur quo eos facilis amet unde, ex dicta dignissimos sapiente natus quaerat officiis? sint ut voluptas eligendi culpa quia ratione.
+                                  </p>
+                                </div>
+                              </>
             }
 
 

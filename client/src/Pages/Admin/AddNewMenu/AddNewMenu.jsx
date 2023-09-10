@@ -19,13 +19,13 @@ const AddNewMenu = ({ category }) => {
     const [isOpenNewMenuImageUrl, setIsOpenNewMenuImageUrl] = useState(false)
 
     const handleToggleOpenAddNewMenu = (newMenu) => {
-        if (newMenu === "coffeeName") {
+        if (newMenu === "menuName") {
             setIsOpenNewMenuName(!isOpenNewMenuName)
-        } else if (newMenu === "coffeePrice") {
+        } else if (newMenu === "menuPrice") {
             setIsOpenNewMenuPrice(!isOpenNewMenuPrice)
-        } else if (newMenu === "coffeeDescription") {
+        } else if (newMenu === "menuDescription") {
             setIsOpenNewMenuDescription(!isOpenNewMenuDescription)
-        } else if (newMenu === "coffeeImageUrl") {
+        } else if (newMenu === "menuImageUrl") {
             setIsOpenNewMenuImageUrl(!isOpenNewMenuImageUrl)
         }
     }
@@ -44,6 +44,8 @@ const AddNewMenu = ({ category }) => {
             InsertMenu(data, "coffee")
         } else if (category === "tea") {
             InsertMenu(data, "tea")
+        } else if (category === "cake") {
+            InsertMenu(data, "cake")
         }
     }
 
@@ -60,7 +62,7 @@ const AddNewMenu = ({ category }) => {
 
                     <div
                         className='new-menu-name'
-                        onClick={() => handleToggleOpenAddNewMenu("coffeeName")}
+                        onClick={() => handleToggleOpenAddNewMenu("menuName")}
                     >
                         <h1>{capitalCategory} Name: {name} </h1>
                         {isOpenNewMenuName &&
@@ -74,7 +76,7 @@ const AddNewMenu = ({ category }) => {
 
                     <div
                         className='new-menu-price'
-                        onClick={() => handleToggleOpenAddNewMenu("coffeePrice")}
+                        onClick={() => handleToggleOpenAddNewMenu("menuPrice")}
                     >
                         <h1>{capitalCategory} Price: {price}฿ </h1>
                         {isOpenNewMenuPrice &&
@@ -88,7 +90,7 @@ const AddNewMenu = ({ category }) => {
 
                     <div
                         className='new-menu-description'
-                        onClick={() => handleToggleOpenAddNewMenu("coffeeDescription")}
+                        onClick={() => handleToggleOpenAddNewMenu("menuDescription")}
                     >
                         <h1>{capitalCategory} Description: <br /> </h1>
                         <p>
@@ -106,7 +108,7 @@ const AddNewMenu = ({ category }) => {
 
                     <div
                         className='new-menu-image-url'
-                        onClick={() => handleToggleOpenAddNewMenu("coffeeImageUrl")}
+                        onClick={() => handleToggleOpenAddNewMenu("menuImageUrl")}
                     >
                         <h1>{capitalCategory} ImageURL: <br /> </h1>
                         <img src={image_url} alt={name + " Picture"} className={image_url === "" ? "" : "load-img"} />

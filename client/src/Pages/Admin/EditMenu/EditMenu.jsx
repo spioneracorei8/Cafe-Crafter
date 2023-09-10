@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./EditMenu.css"
 import useMenus from '../../../Hook/useMenus'
 import Carousel from 'react-elastic-carousel';
-import axios from 'axios';
+import axios, { all } from 'axios';
 import Search_Icon from "../../../assets/Icon/Search_Icon.png"
 
 const EditMenu = ({ category, toggleNavbarLeft }) => {
@@ -10,7 +10,7 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
     const fitstLetterCategory = category.charAt(0).toUpperCase()
     const capitalCategory = fitstLetterCategory + category.slice(1)
 
-    const { getAllCoffee, UpdateMenu, allCoffee, setAllCoffee, getAllTea, UpdateTea, allTea, setAllTea } = useMenus()
+    const { getAllCoffee, UpdateMenu, allCoffee, setAllCoffee, getAllTea, allTea, setAllTea, getAllCake, allCake, setAllCake } = useMenus()
 
     const [isOpenEditMenuName, setIsOpenEditMenuName] = useState(false)
     const [isOpenEditMenuPrice, setIsOpenEditMenuPrice] = useState(false)
@@ -47,12 +47,20 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
         useEffect(() => {
             getAllCoffee()
             setAllTea([])
+            setAllCake([])
         }, [category])
     } else if (category === "tea") {
         useEffect(() => {
             getAllTea()
             setAllCoffee([])
+            setAllCake([])
         }, [category])
+    } else if (category === "cake") {
+        useEffect(() => {
+            getAllCake()
+            setAllCoffee([])
+            setAllTea([])
+        })
     }
 
     const handleSelectEditMenu = async (menuId, category) => {
@@ -62,8 +70,6 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
         setEditMenuDescription(result.data.data?.Description)
         setEditMenuImageUrl(result.data.data?.Image_url)
     }
-
-
 
     const handleEditMenu = (category) => {
         const floatPrice = parseFloat(editMenuPrice)
@@ -79,6 +85,8 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
             UpdateMenu(data, editMenuId, "coffee")
         } else if (category === "tea") {
             UpdateMenu(data, editMenuId, "tea")
+        } else if (category === "cake") {
+            UpdateMenu(data, editMenuId, "cake")
         }
     }
 
@@ -93,6 +101,11 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                 return searchMenuName === item.Name
             })
             handleSelectEditMenu(menuDataInput?.Id, "tea")
+        } else if (category === "cake") {
+            const menuDataInput = allCake.find((item) => {
+                return searchMenuName === item.Name
+            })
+            handleSelectEditMenu(menuDataInput?.Id, "cake")
         }
     }
 
@@ -107,6 +120,11 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                 return searchMenuName === item.Name
             })
             handleSelectEditMenu(menuDataInput?.Id, "tea")
+        } else if (category === "cake") {
+            const menuDataInput = allCake.find((item) => {
+                return searchMenuName === item.Name
+            })
+            handleSelectEditMenu(menuDataInput?.Id, "cake")
         }
 
     }
@@ -169,7 +187,27 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                                             </>
                                         )
                                     })
-                                    : ""
+                                    : category === "cake"
+                                        ? allCake.map((item, index) => {
+                                            return (
+                                                <>
+                                                    <div className="menus-list-container" key={index}>
+                                                        <div className='menus-list' >
+                                                            <h3>
+                                                                {item?.Name}
+                                                            </h3>
+                                                            <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' onClick={() => {
+                                                                return (
+                                                                    handleSelectEditMenu(item?.Id, "cake"),
+                                                                    setEditMenuId(item?.Id)
+                                                                )
+                                                            }} />
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            )
+                                        })
+                                        : ""
                             }
                         </Carousel>
                     </div>
@@ -200,7 +238,13 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                                             <option value={item?.Name} key={index}></option>
                                         )
                                     })
-                                    : ""
+                                    : category === "cake"
+                                        ? allCake.map((item, index) => {
+                                            return (
+                                                <option value={item?.Name} key={index}></option>
+                                            )
+                                        })
+                                        : ""
                             }
                         </datalist>
 
