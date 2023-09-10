@@ -231,11 +231,11 @@ const AdminHomePage = () => {
 
             {isAddNewCoffee === true ?
               <AddNewMenu
-                category="Coffee"
+                category="coffee"
               />
               : isAddNewTea === true ?
                 <AddNewMenu
-                  category="Tea"
+                  category="tea"
                 />
                 : isAddNewCake === true ?
                   <AddNewMenu
