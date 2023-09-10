@@ -24,7 +24,7 @@
     gap: 15px;
 }
 
-.edit-menu-search-input label{
+.edit-menu-search-input label {
     font-size: 1.2rem;
 }
 
@@ -97,6 +97,12 @@
 .fcRlZe:focus:enabled {
     color: #fff;
     background-color: #b90000 !important;
+    box-shadow: 0 0 2px 0 #333;
+}
+
+.fcRlZe:active:enabled {
+    color: #fff;
+    background-color: #e30000 !important;
     box-shadow: 0 0 2px 0 #333;
 }
 

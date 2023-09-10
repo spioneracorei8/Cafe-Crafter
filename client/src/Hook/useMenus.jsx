@@ -100,7 +100,7 @@ const useMenus = () => {
             setIsLoading(true)
             await axios.post(`http://localhost:4000/menus/tea`, data)
             setIsLoading(false)
-            window.location.replace("/")
+            // window.location.replace("/")
         } catch (error) {
             setIsError(true);
             setIsLoading(false);
