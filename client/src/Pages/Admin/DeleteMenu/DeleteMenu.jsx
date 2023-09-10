@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const DeleteMenu = ({ category, toggleNavbarLeft }) => {
 
-    const { getAllCoffee, allCoffee, setAllCoffee, getAllTea, allTea, setAllTea, DeleteMenu } = useMenus()
+    const { getAllCoffee, allCoffee, setAllCoffee, getAllTea, allTea, setAllTea, getAllCake, allCake, setAllCake, DeleteMenu } = useMenus()
 
     if (category === "coffee") {
         useEffect(() => {
@@ -17,6 +17,11 @@ const DeleteMenu = ({ category, toggleNavbarLeft }) => {
         useEffect(() => {
             getAllTea()
             setAllCoffee([])
+        }, [category])
+    } else if (category === "cake") {
+        useEffect(() => {
+            getAllCake()
+            setAllCake([])
         }, [category])
     }
 
@@ -50,6 +55,8 @@ const DeleteMenu = ({ category, toggleNavbarLeft }) => {
         if (category === "coffee") {
             DeleteMenu(catrgory, menuId)
         } else if (category === "tea") {
+            DeleteMenu(catrgory, menuId)
+        } else if (category === "cake") {
             DeleteMenu(catrgory, menuId)
         }
     }
@@ -146,7 +153,27 @@ const DeleteMenu = ({ category, toggleNavbarLeft }) => {
                                             </>
                                         )
                                     })
-                                    : ""
+                                    : category === "cake"
+                                        ? allCake.map((item, index) => {
+                                            return (
+                                                <>
+                                                    <div className="menus-list-container" key={index}>
+                                                        <div className='menus-list' >
+                                                            <h3>
+                                                                {item?.Name}
+                                                            </h3>
+                                                            <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' onClick={() => {
+                                                                return (
+                                                                    handleSelectDeleteMenu(item?.Id, "cake"),
+                                                                    setDeleteMenuId(item?.Id)
+                                                                )
+                                                            }} />
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            )
+                                        })
+                                        : ""
                             }
                         </Carousel>
                     </div>
