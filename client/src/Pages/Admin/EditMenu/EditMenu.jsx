@@ -6,10 +6,11 @@ import axios from 'axios';
 import Search_Icon from "../../../assets/Icon/Search_Icon.png"
 
 const EditMenu = ({ category, toggleNavbarLeft }) => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [isError, setIsError] = useState(false)
 
-    const { getAllCoffee, UpdateCoffee, allCoffee, setAllCoffee, getAllTea, UpdateTea, allTea, setAllTea } = useMenus()
+    const fitstLetterCategory = category.charAt(0).toUpperCase()
+    const capitalCategory = fitstLetterCategory + category.slice(1)
+
+    const { getAllCoffee, UpdateMenu, allCoffee, setAllCoffee, getAllTea, UpdateTea, allTea, setAllTea } = useMenus()
 
     const [isOpenEditMenuName, setIsOpenEditMenuName] = useState(false)
     const [isOpenEditMenuPrice, setIsOpenEditMenuPrice] = useState(false)
@@ -42,12 +43,12 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
         }
     }
 
-    if (category === "Coffee") {
+    if (category === "coffee") {
         useEffect(() => {
             getAllCoffee()
             setAllTea([])
         }, [category])
-    } else if (category === "Tea") {
+    } else if (category === "tea") {
         useEffect(() => {
             getAllTea()
             setAllCoffee([])
@@ -55,38 +56,14 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
     }
 
     const handleSelectEditMenu = async (menuId, category) => {
-        if (category === "Coffee") {
-            try {
-                setIsError(false)
-                setIsLoading(true)
-                const result = await axios.get(`http://localhost:4000/menus/coffee/${menuId}`)
-                setEditMenuName(result.data.data?.Name)
-                setEditMenuPrice(result.data.data?.Price)
-                setEditMenuDescription(result.data.data?.Description)
-                setEditMenuImageUrl(result.data.data?.Image_url)
-                setIsLoading(false)
-            } catch (error) {
-                setIsError(true);
-                setIsLoading(false);
-                console.log(error);
-            }
-        } else if (category === "Tea") {
-            try {
-                setIsError(false)
-                setIsLoading(true)
-                const result = await axios.get(`http://localhost:4000/menus/tea/${menuId}`)
-                setEditMenuName(result.data.data?.Name)
-                setEditMenuPrice(result.data.data?.Price)
-                setEditMenuDescription(result.data.data?.Description)
-                setEditMenuImageUrl(result.data.data?.Image_url)
-                setIsLoading(false)
-            } catch (error) {
-                setIsError(true);
-                setIsLoading(false);
-                console.log(error);
-            }
-        }
+        const result = await axios.get(`http://localhost:4000/menus/${category}/${menuId}`)
+        setEditMenuName(result.data.data?.Name)
+        setEditMenuPrice(result.data.data?.Price)
+        setEditMenuDescription(result.data.data?.Description)
+        setEditMenuImageUrl(result.data.data?.Image_url)
     }
+
+
 
     const handleEditMenu = (category) => {
         const floatPrice = parseFloat(editMenuPrice)
@@ -95,42 +72,41 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
             price: floatPrice,
             description: editMenuDescription,
             image_url: editMenuImageUrl,
-            category: category.toLowerCase()
+            category
 
         }
-        if (category === "Coffee") {
-            UpdateCoffee(data, editMenuId)
-        } else if (category === "Tea") {
-            UpdateTea(data, editMenuId)
+        if (category === "coffee") {
+            UpdateMenu(data, editMenuId, "coffee")
+        } else if (category === "tea") {
+            UpdateMenu(data, editMenuId, "tea")
         }
     }
 
     const handleSearchInputChange = (category) => {
-        console.log(category);
-        if (category == "Coffee") {
+        if (category == "coffee") {
             const menuDataInput = allCoffee.find((item) => {
                 return searchMenuName === item.Name
             })
-            handleSelectEditMenu(menuDataInput?.Id, "Coffee")
-        } else if (category === "Tea") {
+            handleSelectEditMenu(menuDataInput?.Id, "coffee")
+        } else if (category === "tea") {
             const menuDataInput = allTea.find((item) => {
                 return searchMenuName === item.Name
             })
-            handleSelectEditMenu(menuDataInput?.Id, "Tea")
+            handleSelectEditMenu(menuDataInput?.Id, "tea")
         }
     }
 
     const handleOptionSelect = (event, category) => {
-        if (category === "Coffee") {
+        if (category === "coffee") {
             const menuDataInput = allCoffee.find((item) => {
                 return searchMenuName === item.Name
             })
-            handleSelectEditMenu(menuDataInput?.Id, "Coffee")
-        } else if (category === "Tea") {
+            handleSelectEditMenu(menuDataInput?.Id, "coffee")
+        } else if (category === "tea") {
             const menuDataInput = allTea.find((item) => {
                 return searchMenuName === item.Name
             })
-            handleSelectEditMenu(menuDataInput?.Id, "Tea")
+            handleSelectEditMenu(menuDataInput?.Id, "tea")
         }
 
     }
@@ -142,9 +118,9 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
 
                 <div className='edit-menu-heading'>
                     <h1>
-                        Edit {category}
+                        Edit {capitalCategory}
                     </h1>
-                    <h2>Select {category} to Edit</h2>
+                    <h2>Select {capitalCategory} to Edit</h2>
                 </div>
 
                 <div className='menus-container'>
@@ -153,7 +129,7 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                             breakPoints={breakPoints}
                             className={toggleNavbarLeft ? "rec-carousel-wrapper-load" : "rec-carousel-wrapper-unload"}
                         >
-                            {category === "Coffee"
+                            {category === "coffee"
                                 ? allCoffee.map((item, index) => {
                                     return (
                                         <>
@@ -164,7 +140,7 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                                                     </h3>
                                                     <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' onClick={() => {
                                                         return (
-                                                            handleSelectEditMenu(item?.Id, "Coffee"),
+                                                            handleSelectEditMenu(item?.Id, "coffee"),
                                                             setEditMenuId(item?.Id)
                                                         )
                                                     }} />
@@ -173,7 +149,7 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                                         </>
                                     )
                                 })
-                                : category === "Tea"
+                                : category === "tea"
                                     ? allTea.map((item, index) => {
                                         return (
                                             <>
@@ -184,7 +160,7 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                                                         </h3>
                                                         <img src={item?.Image_url} alt={item?.Name + " Picture"} loading='lazy' onClick={() => {
                                                             return (
-                                                                handleSelectEditMenu(item?.Id, "Tea"),
+                                                                handleSelectEditMenu(item?.Id, "tea"),
                                                                 setEditMenuId(item?.Id)
                                                             )
                                                         }} />
@@ -212,13 +188,13 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                         />
 
                         <datalist id='menu-name'>
-                            {category === "Coffee"
+                            {category === "coffee"
                                 ? allCoffee.map((item, index) => {
                                     return (
                                         <option value={item?.Name} key={index} />
                                     )
                                 })
-                                : category === "Tea"
+                                : category === "tea"
                                     ? allTea.map((item, index) => {
                                         return (
                                             <option value={item?.Name} key={index}></option>
@@ -240,11 +216,11 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                         className='edit-menu-name'
                         onClick={() => handleToggleOpenAddNewMenu("coffeeName")}
                     >
-                        <h1>{category} Name: {editMenuName} </h1>
+                        <h1>{capitalCategory} Name: {editMenuName} </h1>
                         {isOpenEditMenuName &&
                             <div className='edit-menu-name-input' onClick={(event) => event.stopPropagation()}>
                                 <h2>
-                                    New {category} Name: <input type="text" value={editMenuName} onChange={(event) => setEditMenuName(event?.target?.value)} />
+                                    New {capitalCategory} Name: <input type="text" value={editMenuName} onChange={(event) => setEditMenuName(event?.target?.value)} />
                                 </h2>
                             </div>
                         }
@@ -254,11 +230,11 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                         className='edit-menu-price'
                         onClick={() => handleToggleOpenAddNewMenu("coffeePrice")}
                     >
-                        <h1>{category} Price: {editMenuPrice}฿ </h1>
+                        <h1>{capitalCategory} Price: {editMenuPrice}฿ </h1>
                         {isOpenEditMenuPrice &&
                             <div className='edit-menu-price-input' onClick={(event) => event.stopPropagation()}>
                                 <h2>
-                                    New {category} Price: <input type="number" value={editMenuPrice} onChange={(event) => setEditMenuPrice(event.target.value)} />
+                                    New {capitalCategory} Price: <input type="number" value={editMenuPrice} onChange={(event) => setEditMenuPrice(event.target.value)} />
                                 </h2>
                             </div>
                         }
@@ -268,12 +244,12 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                         className='edit-menu-description'
                         onClick={() => handleToggleOpenAddNewMenu("coffeeDescription")}
                     >
-                        <h1>{category} Description: <br /> </h1>
+                        <h1>{capitalCategory} Description: <br /> </h1>
                         <p>{editMenuDescription}</p>
                         {isOpenEditMenuDescription &&
                             <div className='edit-menu-description-input' onClick={(event) => event.stopPropagation()}>
                                 <h2>
-                                    New {category} Description: <br />
+                                    New {capitalCategory} Description: <br />
                                 </h2>
                                 <textarea cols="40" rows="10" value={editMenuDescription} onChange={(event) => setEditMenuDescription(event.target.value)}></textarea>
                             </div>
@@ -284,12 +260,12 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                         className='edit-menu-image-url'
                         onClick={() => handleToggleOpenAddNewMenu("coffeeImageUrl")}
                     >
-                        <h1>{category} ImageURL: <br /> </h1>
+                        <h1>{capitalCategory} ImageURL: <br /> </h1>
                         <img src={editMenuImageUrl} alt={editMenuName + " Picture"} className={editMenuImageUrl === "" ? "" : "load-img"} />
                         {isOpenEditMenuImageUrl &&
                             <div className='edit-menu-image-url-input' onClick={(event) => event.stopPropagation()}>
                                 <h2>
-                                    New {category} ImageURL: <br />
+                                    New {capitalCategory} ImageURL: <br />
                                 </h2>
                                 <textarea cols="40" rows="10" value={editMenuImageUrl} onChange={(event) => setEditMenuImageUrl(event.target.value)}></textarea>
                             </div>
@@ -301,7 +277,7 @@ const EditMenu = ({ category, toggleNavbarLeft }) => {
                 <div className='submit-edit-menu'>
                     <button type='submit'>
                         <h1>
-                            Edit {category}
+                            Edit {capitalCategory}
                         </h1>
                     </button>
                 </div>

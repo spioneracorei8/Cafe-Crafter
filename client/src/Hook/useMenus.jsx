@@ -53,24 +53,11 @@ const useMenus = () => {
         }
     }
 
-    const UpdateCoffee = async (data, coffeeId) => {
+    const UpdateMenu = async (data, coffeeId, category) => {
         try {
             setIsError(false)
             setIsLoading(true)
-            await axios.put(`http://localhost:4000/menus/coffee/${coffeeId}`, data)
-            setIsLoading(false)
-        } catch (error) {
-            setIsError(true);
-            setIsLoading(false);
-            console.log(error);
-        }
-    }
-
-    const UpdateTea = async (data, teaId) => {
-        try {
-            setIsError(false)
-            setIsLoading(true)
-            await axios.put(`http://localhost:4000/menus/tea/${teaId}`, data)
+            await axios.put(`http://localhost:4000/menus/${category}/${coffeeId}`, data)
             setIsLoading(false)
         } catch (error) {
             setIsError(true);
@@ -122,8 +109,7 @@ const useMenus = () => {
         setAllCoffee,
         allTea,
         setAllTea,
-        UpdateCoffee,
-        UpdateTea,
+        UpdateMenu,
         DeleteMenu,
         InsertMenu,
 

@@ -243,12 +243,12 @@ const AdminHomePage = () => {
                   />
                   : isEditCoffee === true ?
                     <EditMenu
-                      category="Coffee"
+                      category="coffee"
                       toggleNavbarLeft={toggleNavbarLeft}
                     />
                     : isEditTea === true ?
                       <EditMenu
-                        category="Tea"
+                        category="tea"
                         toggleNavbarLeft={toggleNavbarLeft}
                       />
                       : isEditCake === true ?
