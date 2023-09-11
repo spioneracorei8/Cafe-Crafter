@@ -52,11 +52,11 @@ const Tea = () => {
 
             }
 
-            <section className='menu-background'>
+            <section className='tea-menu-background'>
                 {allTea.map((item, index) => {
                     return (
                         <div
-                            className='menu'
+                            className='tea-menu'
                             key={index}
                         >
                             <h3>{item.Name}</h3>
@@ -64,15 +64,15 @@ const Tea = () => {
                             <h4>{item.Price}฿</h4>
                             <img src={item.Image_url} alt="img" />
 
-                            <div className='three-button-container'>
+                            <div className='tea-three-button-container'>
                                 <button
-                                    className='buy-now'
+                                    className='tea-buy-now'
                                     onClick={(event) => handleBuyNow(event, item.Id, item.Name)}
                                 >
                                     Buy Now
                                 </button>
                                 <button
-                                    className='learn-more'
+                                    className='tea-learn-more'
                                     onClick={(() => {
                                         getTeaId(item?.Id)
                                         handleMenuPopUp()
@@ -81,7 +81,7 @@ const Tea = () => {
                                     Details
                                 </button>
                                 <button
-                                    className='add-to-cart'
+                                    className='tea-add-to-cart'
                                     onClick={(event) => handleAddtoCart(event, item.Id)}
                                 >
                                     Add To Cart

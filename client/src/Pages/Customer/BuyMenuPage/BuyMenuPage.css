@@ -1,4 +1,4 @@
-.buy-coffee-container {
+.buy-menu-container {
     width: 100dvw;
     height: auto;
     background-color: #FFE6A7;
@@ -6,7 +6,7 @@
     padding: 3rem;
 }
 
-.buy-coffee-data-container {
+.buy-menu-data-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,7 +15,7 @@
 }
 
 
-.buy-coffee-data {
+.buy-menu-data {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,32 +27,32 @@
     border-radius: 5%;
 }
 
-.buy-coffee-name-heading {
+.buy-menu-name-heading {
     margin-bottom: 1rem;
 }
 
-.buy-coffee-name-heading h1 {
+.buy-menu-name-heading h1 {
     font-size: 3rem;
     font-style: normal;
     font-weight: 900;
     color: #6F1D1B;
 }
 
-.buy-coffee-img {
+.buy-menu-img {
     width: 400px;
     height: 400px;
-    border-radius: 5%;
+    border-radius: 20px;
     object-fit: cover;
     object-position: center center;
     image-rendering: auto;
 }
 
-.buy-coffee-price {
+.buy-menu-price {
     padding-right: 20rem;
     margin-top: 1rem;
 }
 
-.buy-coffee-price h2 {
+.buy-menu-price h2 {
     font-size: 2rem;
     font-style: normal;
     font-weight: 900;
@@ -60,12 +60,12 @@
 
 }
 
-.buy-coffee-description {
+.buy-menu-description {
     margin-top: 2rem;
     width: 500px;
 }
 
-.buy-coffee-description p {
+.buy-menu-description p {
     word-wrap: break-word;
     font-style: normal;
     color: #432818;
@@ -73,12 +73,12 @@
     font-style: normal;
 }
 
-.buy-coffee-buy {
+.buy-menu-buy {
     padding-left: 20rem;
     margin-top: 2rem;
 }
 
-.buy-coffee-buy button {
+.buy-menu-buy button {
     font-family: 'whipsmart';
     background-color: #FFE6A7;
     border: 1px solid chocolate;
@@ -87,15 +87,15 @@
     cursor: pointer;
 }
 
-.buy-coffee-buy button:hover {
+.buy-menu-buy button:hover {
     background-color: #ffcc49;
 }
 
-.buy-coffee-buy button:active {
+.buy-menu-buy button:active {
     background-color: #ffba0b;
 }
 
-.buy-coffee-buy button h1 {
+.buy-menu-buy button h1 {
     font-size: 1.4rem;
     font-weight: 900;
 }

@@ -47,11 +47,11 @@ const Cake = () => {
 
             }
 
-            <section className='menu-background'>
+            <section className='cake-menu-background'>
                 {allCake.map((item, index) => {
                     return (
                         <div
-                            className='menu'
+                            className='cake-menu'
                             key={index}
                         >
                             <h3>{item.Name}</h3>
@@ -59,15 +59,15 @@ const Cake = () => {
                             <h4>{item.Price}฿</h4>
                             <img src={item.Image_url} alt="img" />
 
-                            <div className='three-button-container'>
+                            <div className='cake-three-button-container'>
                                 <button
-                                    className='buy-now'
+                                    className='cake-buy-now'
                                     onClick={(event) => handleBuyNow(event, item.Id, item.Name)}
                                 >
                                     Buy Now
                                 </button>
                                 <button
-                                    className='learn-more'
+                                    className='cake-learn-more'
                                     onClick={(() => {
                                         getCakeId(item?.Id)
                                         handleMenuPopUp()
@@ -76,7 +76,7 @@ const Cake = () => {
                                     Details
                                 </button>
                                 <button
-                                    className='add-to-cart'
+                                    className='cake-add-to-cart'
                                     onClick={(event) => handleAddtoCart(event, item.Id)}
                                 >
                                     Add To Cart
