@@ -1,4 +1,4 @@
-.coffee-menu-background {
+.menu-background {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -8,7 +8,7 @@
     font-family: 'whipsmart';
 }
 
-.coffee-menu {
+.menu {
     min-width: 20%;
     display: flex;
     flex-direction: column;
@@ -22,26 +22,27 @@
 }
 
 
-.coffee-menu h3 {
+.menu h3 {
     color: #432818;
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
 }
 
-.coffee-menu h4 {
+.menu h4 {
     color: #e38949;
     margin-bottom: 1.3rem;
     font-size: 1.3rem;
     font-weight: 500;
 }
 
-.coffee-menu img {
+.menu img {
     width: 170px;
     height: 170px;
     object-fit: cover;
     border-radius: 5%;
     -webkit-user-drag: none;
 }
+
 
 .background-menu {
     display: flex;
@@ -55,14 +56,14 @@
     height: auto;
 }
 
-.coffee-three-button-container {
+.three-button-container {
     width: 100%;
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
 }
 
-.coffee-three-button-container button {
+.three-button-container button {
     font-family: 'whipsmart';
     margin-right: 0.8rem;
     padding: 8px;
@@ -73,25 +74,15 @@
     border: #D4A276;
 }
 
-.coffee-buy-now {
-    color: white;
-    background-color: #cdaa49;
-}
-
-.coffee-buy-now:hover {
-    background-color: #f1ce6e;
-}
-
-
-.coffee-learn-more,
-.coffee-add-to-cart {
+.learn-more,
+.add-to-cart {
     color: black;
     border: white;
 }
 
-.coffee-learn-more:hover,
-.coffee-add-to-cart:hover {
+.learn-more:hover,
+.add-to-cart:hover {
     color: white;
-    background-color: #f1ce6e;
+    background-color: black;
 
 }

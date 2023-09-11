@@ -4,7 +4,7 @@ import LoggedInHomePage from './Customer/HomePage/LoggedInHomePage'
 import PageNotFound from './PageNotFound'
 import ProfilePage from "./Customer/ProfilePage/ProfilePage"
 import CartPage from './Customer/CartPage/CartPage'
-import BuyCoffeePage from './Customer/BuyCoffeePage/BuyCoffeePage'
+import BuyMenuPage from './Customer/BuyMenuPage/BuyMenuPage'
 
 const AuthenticatedApp = () => {
 
@@ -18,7 +18,7 @@ const AuthenticatedApp = () => {
                 <Route path="/Cafe-Crafter-Twitch" element={<PageNotFound />} />
                 <Route path="/Profile" element={<ProfilePage />} />
                 <Route path="/Cart" element={<CartPage />} />
-                <Route path={`/Buy/:coffeeId/:coffeeName`} element={<BuyCoffeePage />} />
+                <Route path={`/Buy/:menuId/:menuName/:category`} element={<BuyMenuPage />} />
             </Routes>
         </>
     )

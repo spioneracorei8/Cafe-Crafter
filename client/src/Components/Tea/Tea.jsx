@@ -1,41 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import "./Coffee.css"
-import useMenus from "../../Hook/useMenus"
-import axios from 'axios'
+import "./Tea.css"
+import useMenus from '../../Hook/useMenus'
 import MenuPopup from '../PopUp/MenuPopup'
-import { useNavigate } from "react-router-dom"
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import BuyCoffeePage from '../../Pages/Customer/BuyMenuPage/BuyMenuPage'
 
-const Coffee = () => {
-
+const Tea = () => {
     const navigate = useNavigate()
 
-    const { getAllCoffee, allCoffee } = useMenus()
+    const { getAllTea, allTea } = useMenus()
 
-    const [menuData, setMenuData] = useState({})
     const [menuPopUp, setMenuPopUp] = useState(false)
 
+    const [menuData, setMenuData] = useState({})
+
     useEffect(() => {
-        getAllCoffee()
+        getAllTea()
     }, [])
 
-
-    const getCoffeeId = async (coffeeId) => {
+    const getTeaId = async (teaId) => {
         try {
-            const result = await axios.get(`http://localhost:4000/menus/coffee/${coffeeId}`)
+            const result = await axios.get(`http://localhost:4000/menus/tea/${teaId}`)
             setMenuData(result.data.data)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    const handleAddtoCart = async (event, coffeeId) => {
-        event.preventDefault()
-        const data = {
-            coffee_id: coffeeId,
-            quantity: 1
-        }
-        try {
-            await axios.post(`http://localhost:4000/cart/${localStorage.getItem("id")}`, data)
         } catch (error) {
             console.log(error);
         }
@@ -47,10 +34,12 @@ const Coffee = () => {
 
     const handleBuyNow = (event, menuId, menuName) => {
         event.preventDefault()
-        window.scrollTo(0, 0)
-        navigate(`/Buy/${menuId}/${menuName}/coffee`)
+        window.scrollTo(0, 0),
+            < BuyCoffeePage
+                category="tea"
+            />
+        navigate(`/Buy/${menuId}/${menuName}/tea`)
     }
-
 
     return (
         <>
@@ -63,36 +52,36 @@ const Coffee = () => {
 
             }
 
-            <section className='coffee-menu-background'>
-                {allCoffee.map((item, index) => {
+            <section className='menu-background'>
+                {allTea.map((item, index) => {
                     return (
                         <div
-                            className='coffee-menu'
+                            className='menu'
                             key={index}
                         >
                             <h3>{item.Name}</h3>
 
                             <h4>{item.Price}฿</h4>
-                            <img src={item.Image_url} alt={item.Name + " Picture"} />
+                            <img src={item.Image_url} alt="img" />
 
-                            <div className='coffee-three-button-container'>
+                            <div className='three-button-container'>
                                 <button
-                                    className='coffee-buy-now'
+                                    className='buy-now'
                                     onClick={(event) => handleBuyNow(event, item.Id, item.Name)}
                                 >
                                     Buy Now
                                 </button>
                                 <button
-                                    className='coffee-learn-more'
+                                    className='learn-more'
                                     onClick={(() => {
-                                        getCoffeeId(item.Id)
+                                        getTeaId(item?.Id)
                                         handleMenuPopUp()
                                     })}
                                 >
                                     Details
                                 </button>
                                 <button
-                                    className='coffee-add-to-cart'
+                                    className='add-to-cart'
                                     onClick={(event) => handleAddtoCart(event, item.Id)}
                                 >
                                     Add To Cart
@@ -104,9 +93,10 @@ const Coffee = () => {
             </section>
 
 
-        </>
 
+        </>
     )
 }
 
-export default Coffee
+
+export default Tea
