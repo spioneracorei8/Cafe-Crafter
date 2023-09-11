@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import './NonLoggedInHomePage.css'
 import { IngredientsCoffeeData, OtherAboutCoffeeData } from '../../../data/CoffeeData.js'
 import Footer from '../../../Components/Footer/Footer'
-import CoffeePopup from '../../../Components/PopUp/CoffeePopup'
+import MenuPopup from '../../../Components/PopUp/MenuPopup'
 import Loading from '../../../Components/Loading/Loading'
 import Arrow_Left_Icon from "../../../assets/Icon/Arrow_Left_Icon.png"
 import Arrow_Right_Icon from "../../../assets/Icon/Arrow_Right_Icon.png"
@@ -16,7 +16,7 @@ const NonLoggedInHomePage = () => {
     const { isLoading, setIsLoading, isError, setIsError, suggestCoffee } = useMenus()
     const scrollContainerRef = useRef(null)
     const [coffeeData, setCoffeeData] = useState({})
-    const [coffeePopUp, setCoffeePopUp] = useState(false)
+    const [menuPopUp, setMenuPopUp] = useState(false)
 
     const ScrollLeft = () => {
         scrollContainerRef.current.scrollBy({
@@ -55,10 +55,10 @@ const NonLoggedInHomePage = () => {
         }
     }
 
-    const handleCoffeePopUp = () => {
-        setCoffeePopUp(!coffeePopUp)
+    const handleMenuPopUp = () => {
+        setMenuPopUp(!menuPopUp)
     }
-    
+
     const handleViewAll = (event) => {
         event.preventDefault()
         window.scrollTo(0, 0)
@@ -73,9 +73,9 @@ const NonLoggedInHomePage = () => {
             {isLoading &&
                 <Loading />
             }
-            {coffeePopUp &&
-                <CoffeePopup
-                    handleCoffeePopUp={handleCoffeePopUp}
+            {menuPopUp &&
+                <MenuPopup
+                    handleMenuPopUp={handleMenuPopUp}
                     coffeeData={coffeeData}
                 />
             }
@@ -170,7 +170,7 @@ const NonLoggedInHomePage = () => {
                                                     onClick={(() => {
                                                         return (
                                                             getCoffeeName(item.Name),
-                                                            handleCoffeePopUp()
+                                                            handleMenuPopUp()
                                                         )
                                                     })}
                                                 >

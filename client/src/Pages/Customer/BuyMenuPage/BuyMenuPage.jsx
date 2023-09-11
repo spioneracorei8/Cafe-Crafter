@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import './BuyCoffeePage.css'
+import './BuyMenuPage.css'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import NavigationbarProfile from '../../../Components/Navigationbar/NavigationbarProfile'
 import Footer from '../../../Components/Footer/Footer'
 
-const BuyCoffeePage = () => {
-    const { coffeeId } = useParams();
+const BuyMenuPage = () => {
+    const { category, menuId } = useParams();
+
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [coffeeData, setCoffeeData] = useState({})
-    const getCoffeeId = async () => {
+    
+    const getMenuId = async () => {
         try {
             setIsError(false)
             setIsLoading(true)
-            const result = await axios.get(`http://localhost:4000/menus/coffee/${coffeeId}`)
+            const result = await axios.get(`http://localhost:4000/menus/${category}/${menuId}`)
             setCoffeeData(result.data.data)
             setIsLoading(false)
         } catch (error) {
@@ -25,9 +27,9 @@ const BuyCoffeePage = () => {
     }
 
     useEffect(() => {
-        getCoffeeId()
+        getMenuId()
     }, [])
-    
+
 
     return (
         <>
@@ -75,4 +77,4 @@ const BuyCoffeePage = () => {
     )
 }
 
-export default BuyCoffeePage
+export default BuyMenuPage

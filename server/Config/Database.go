@@ -152,8 +152,35 @@ func SetupDatabase() {
 	// 		PRIMARY KEY (id)
 	// 	);`
 
-	// if _, err := DB.Exec(query); err != nil {
-	// 	panic(err.Error())
-	// }
+	// user_id INT,
+	// FOREIGN KEY (user_id) REFERENCES users(id)
+	// );`
+
+	// edit table add new column and add foreign key and use on delete cascade
+	// 	query := `ALTER TABLE carts
+	//     ADD COLUMN tea_id INT NOT NULL,
+	//     ADD COLUMN cake_id INT NOT NULL,
+	//     ADD COLUMN category TEXT NOT NULL,
+	//     ADD CONSTRAINT fk_tea FOREIGN KEY (tea_id) REFERENCES teamenu(id),
+	//     ADD CONSTRAINT fk_cake FOREIGN KEY (cake_id) REFERENCES cakemenu(id)
+	//     ON DELETE CASCADE;
+	// `
+
+	// edit table change from not null to can null
+	// 	query := `ALTER TABLE carts
+	// MODIFY coffee_id INT NULL,
+	// MODIFY tea_id INT NULL,
+	// MODIFY cake_id INT NULL;
+	// `
+
+	// edit table move column
+	// 	query := `ALTER TABLE carts
+	// 	CHANGE tea_id tea_id INT AFTER coffee_id,
+	// 	CHANGE cake_id cake_id INT AFTER tea_id;
+	// `
+
+	// 	if _, err := DB.Exec(query); err != nil {
+	// 		panic(err.Error())
+	// 	}
 
 }

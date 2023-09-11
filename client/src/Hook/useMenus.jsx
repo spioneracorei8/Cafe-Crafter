@@ -11,7 +11,7 @@ const useMenus = () => {
     const [allCoffee, setAllCoffee] = useState([])
     const [allTea, setAllTea] = useState([])
     const [allCake, setAllCake] = useState([])
-
+    
     const getSuggestCoffee = async () => {
         try {
             setIsError(false);

@@ -1,9 +1,10 @@
 import React, { Suspense } from 'react'
-import './CoffeePopup.css'
+import './MenuPopup.css'
 import Loading from '../Loading/Loading'
 import Cross from '../../assets/Icon/Cross.png'
 import { useNavigate } from 'react-router-dom'
-const CoffeePopup = (props) => {
+
+const MenuPopup = (props) => {
     const navigate = useNavigate()
     const {
         Id,
@@ -11,7 +12,7 @@ const CoffeePopup = (props) => {
         Image_url,
         Price,
         Description
-    } = props?.coffeeData
+    } = props?.menuData
 
     const handleBuyNow = (event, coffeeName, coffeeId) => {
         event.preventDefault()
@@ -20,10 +21,10 @@ const CoffeePopup = (props) => {
     }
 
     return (
-        <div className='coffee-popup-container' onClick={() => props.handleCoffeePopUp()}>
+        <div className='coffee-popup-container' onClick={() => props.handleMenuPopUp()}>
             <div className='coffee-popup' onClick={(event) => event.stopPropagation()}>
                 <div className='cross-icon'>
-                    <button onClick={() => props.handleCoffeePopUp()}>
+                    <button onClick={() => props.handleMenuPopUp()}>
                         <img src={Cross} alt="cross icon" />
                     </button>
                 </div>
@@ -47,4 +48,4 @@ const CoffeePopup = (props) => {
     )
 }
 
-export default CoffeePopup
+export default MenuPopup

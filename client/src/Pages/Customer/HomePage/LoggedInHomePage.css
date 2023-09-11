@@ -1,3 +1,132 @@
+.login-header-container {
+    width: 100vw;
+    height: 12vh;
+    background-color: #D4A276;
+    font-family: 'whipsmart';
+}
+
+.nav-login-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.cc-logo {
+    width: 10rem;
+}
+
+.nav-middle-crafter ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-middle-crafter ul li {
+    font-size: 1.5rem;
+    font-weight: 900;
+
+}
+
+.load-coffee-category button {
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: 'whipsmart';
+    background-color: #FFE6A7;
+    border: none;
+    border-radius: 10%;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.unload-coffee-category button {
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: 'whipsmart';
+    background-color: #D4A276;
+    border: none;
+    border-radius: 10%;
+    padding: 8px;
+    cursor: pointer;
+
+}
+
+
+.load-tea-category button {
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: 'whipsmart';
+    background-color: #FFE6A7;
+    border: none;
+    border-radius: 10%;
+    padding: 8px;
+    cursor: pointer;
+
+}
+
+.unload-tea-category button {
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: 'whipsmart';
+    background-color: #D4A276;
+    border: none;
+    border-radius: 10%;
+    padding: 8px;
+    cursor: pointer;
+
+}
+
+.load-cake-category button {
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: 'whipsmart';
+    background-color: #FFE6A7;
+    border: none;
+    border-radius: 10%;
+    padding: 8px;
+    cursor: pointer;
+
+}
+
+.unload-cake-category button {
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: 'whipsmart';
+    background-color: #D4A276;
+    border: none;
+    border-radius: 10%;
+    padding: 8px;
+    cursor: pointer;
+
+}
+
+
+.nav-right-crafter-login button {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 1rem;
+    background-color: #FFEDD8;
+    cursor: pointer;
+    border-radius: 15%;
+    border: #D4A276;
+    font-family: 'whipsmart';
+    position: relative;
+
+}
+
+.nav-right-crafter-login button:hover {
+    background-color: #FFE6A7;
+}
+
+.MuiButtonBase-root span {
+    position: static;
+}
+
 .menu-container {
     width: 100%;
     height: 100%;
@@ -14,31 +143,4 @@
     display: flex;
     margin: auto;
     padding: auto;
-}
-
-.see-more {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 4rem;
-}
-
-.see-more button {
-    background-color: white;
-    border: wheat 1px solid;
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 20%;
-    font-family: 'whipsmart';
-}
-
-.see-more button:hover {
-    background-color: black;
-    color: white;
-}
-
-.see-more button h1 {
-    font-weight: 900;
-    font-size: 2rem;
-    font-style: normal;
 }
