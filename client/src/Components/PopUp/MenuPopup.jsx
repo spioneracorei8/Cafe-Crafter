@@ -4,43 +4,49 @@ import Loading from '../Loading/Loading'
 import Cross from '../../assets/Icon/Cross.png'
 import { useNavigate } from 'react-router-dom'
 
-const MenuPopup = (props) => {
+const MenuPopup = ({ menuData, handleMenuPopUp }) => {
+
     const navigate = useNavigate()
+
     const {
         Id,
         Name,
         Image_url,
         Price,
-        Description
-    } = props?.menuData
+        Description,
+        Category
+    } = menuData
 
-    const handleBuyNow = (event, coffeeName, coffeeId) => {
-        event.preventDefault()
+    const fitstLetterCategory = Category?.charAt(0).toUpperCase()
+    const capitalCategory = fitstLetterCategory + Category?.slice(1)
+
+    const handleBuyNow = (coffeeName, coffeeId, category) => {
         window.scrollTo(0, 0)
-        navigate(`/Buy/${coffeeId}/${coffeeName}`)
+        navigate(`/Buy/${coffeeId}/${coffeeName}/${category}`)
     }
 
     return (
-        <div className='coffee-popup-container' onClick={() => props.handleMenuPopUp()}>
-            <div className='coffee-popup' onClick={(event) => event.stopPropagation()}>
+        <div className={Category === "coffee" ? 'buy-coffee-popup-container' : Category === "tea" ? 'buy-tea-popup-container' : Category === "cake" ? 'buy-cake-popup-container' : "buy-menu-popup-container"} onClick={() => handleMenuPopUp()}>
+            <div className='buy-menu-popup' onClick={(event) => event.stopPropagation()}>
                 <div className='cross-icon'>
-                    <button onClick={() => props.handleMenuPopUp()}>
+                    <button onClick={() => handleMenuPopUp()}>
                         <img src={Cross} alt="cross icon" />
                     </button>
                 </div>
                 <Suspense fallback={<Loading />}>
-                    <div className="popup-content">
+                    <div className="menu-popup-content">
                         <h1>{Name}</h1>
                         <h3>{Price}฿</h3>
-                        <img src={Image_url} alt={Name} />
-                        <p><span>Coffee Details:</span> {Description}</p>
+                        <img src={Image_url} alt={Name} loading='lazy' />
+                        <p><span>{capitalCategory} Details:</span> {Description}</p>
                     </div>
                 </Suspense>
-                <div className='popup-button'>
+                <div className='menu-popup-button'>
                     <button
-                        onClick={(event) => handleBuyNow(event, Name, Id)}
+                        onClick={() => handleBuyNow(Name, Id, Category)}
+                        className={Category === "coffee" ? "coffee-popup-button" : Category === "tea" ? "tea-popup-button" : Category === "cake" ? "cake-popup-button" : ""}
                     >
-                        Buy Now!
+                        Buy {capitalCategory} Now!
                     </button>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-.menu-background {
+.tea-menu-background {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -8,7 +8,7 @@
     font-family: 'whipsmart';
 }
 
-.menu {
+.tea-menu {
     min-width: 20%;
     display: flex;
     flex-direction: column;
@@ -22,20 +22,20 @@
 }
 
 
-.menu h3 {
+.tea-menu h3 {
     color: #432818;
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
 }
 
-.menu h4 {
+.tea-menu h4 {
     color: #e38949;
     margin-bottom: 1.3rem;
     font-size: 1.3rem;
     font-weight: 500;
 }
 
-.menu img {
+.tea-menu img {
     width: 170px;
     height: 170px;
     object-fit: cover;
@@ -43,27 +43,14 @@
     -webkit-user-drag: none;
 }
 
-
-.background-menu {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    margin-left: 2rem;
-    margin-right: 2rem;
-    width: auto;
-    height: auto;
-}
-
-.three-button-container {
+.tea-three-button-container {
     width: 100%;
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
 }
 
-.three-button-container button {
+.tea-three-button-container button {
     font-family: 'whipsmart';
     margin-right: 0.8rem;
     padding: 8px;
@@ -74,15 +61,24 @@
     border: #D4A276;
 }
 
-.learn-more,
-.add-to-cart {
+.tea-buy-now {
+    color: white;
+    background-color: #1db641;
+}
+
+.tea-buy-now:hover {
+    background-color: #32de5a;
+}
+
+.tea-learn-more,
+.tea-add-to-cart {
     color: black;
     border: white;
 }
 
-.learn-more:hover,
-.add-to-cart:hover {
+.tea-learn-more:hover,
+.tea-add-to-cart:hover {
     color: white;
-    background-color: black;
+    background-color: #32de5a;
 
 }

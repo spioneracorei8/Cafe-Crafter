@@ -11,7 +11,7 @@ const BuyMenuPage = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [coffeeData, setCoffeeData] = useState({})
-    
+
     const getMenuId = async () => {
         try {
             setIsError(false)
@@ -36,29 +36,29 @@ const BuyMenuPage = () => {
 
             <NavigationbarProfile />
 
-            <section className='buy-coffee-container'>
-                <div className='buy-coffee-data-container'>
-                    <div className='buy-coffee-data'>
-                        <div className='buy-coffee-name-heading'>
+            <section className='buy-menu-container'>
+                <div className='buy-menu-data-container'>
+                    <div className='buy-menu-data'>
+                        <div className='buy-menu-name-heading'>
                             <h1>
                                 {coffeeData.Name}
                             </h1>
                         </div>
-                        <img src={coffeeData.Image_url} alt={`${coffeeData.Name} image`} className='buy-coffee-img' />
+                        <img src={coffeeData.Image_url} alt={`${coffeeData.Name} image`} className='buy-menu-img' />
 
-                        <div className='buy-coffee-price'>
+                        <div className='buy-menu-price'>
                             <h2>
                                 {coffeeData.Price}฿
                             </h2>
                         </div>
 
-                        <div className='buy-coffee-description'>
+                        <div className='buy-menu-description'>
                             <p>
                                 {coffeeData.Description}
                             </p>
                         </div>
 
-                        <div className='buy-coffee-buy'>
+                        <div className='buy-menu-buy'>
                             <button>
                                 <h1>
                                     Buy Now!
