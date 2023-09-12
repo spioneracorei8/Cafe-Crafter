@@ -97,6 +97,10 @@ func AddToCart(c *gin.Context) {
 
 	cartQuery, err, isCartExists := ModelsCart.AddToCart(user_id, &cart)
 
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
 	if isCartExists {
 		// Increment the quantity
 		err := ModelsCart.IncrementCartQuantity(cartQuery)
@@ -120,24 +124,24 @@ func AddToCart(c *gin.Context) {
 }
 
 func EditAddToCart(c *gin.Context) {
-	cartId := c.Param("cart_id")
-	id := c.Param("user_id")
+	cart_id := c.Param("cart_id")
+	user_id := c.Param("user_id")
 
-	cart_id, err := strconv.Atoi(cartId)
-
-	if err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
-		return
-	}
-
-	userId, err := strconv.Atoi(id)
+	cartId, err := strconv.Atoi(cart_id)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
 		return
 	}
 
-	updateCartData, err, errNoRow := ModelsCart.EditAddToCart(userId, cart_id)
+	userId, err := strconv.Atoi(user_id)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
+	}
+
+	updateCartData, err, errNoRow := ModelsCart.EditAddToCart(userId, cartId)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -153,24 +157,24 @@ func EditAddToCart(c *gin.Context) {
 }
 
 func EditReduceToCart(c *gin.Context) {
-	cartId := c.Param("cart_id")
-	id := c.Param("user_id")
+	cart_id := c.Param("cart_id")
+	user_id := c.Param("user_id")
 
-	cart_id, err := strconv.Atoi(cartId)
-
-	if err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
-		return
-	}
-
-	userId, err := strconv.Atoi(id)
+	cartId, err := strconv.Atoi(cart_id)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
 		return
 	}
 
-	updateCartData, err, errNoRow := ModelsCart.EditReduceToCart(userId, cart_id)
+	userId, err := strconv.Atoi(user_id)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
+	}
+
+	updateCartData, err, errNoRow := ModelsCart.EditReduceToCart(userId, cartId)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
