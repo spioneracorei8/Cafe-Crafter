@@ -77,7 +77,7 @@ func GetCartQuantity(userId int) ([]Cart, error) {
 }
 
 func AddToCart(user_id int, cart *Cart) (*Cart, error, bool) {
-	cartQuery, err := ExistsCart(user_id, cart.Coffee_id)
+	cartQuery, err := ExistsCart(user_id, cart.Category, cart)
 	if err != nil {
 		return nil, err, false
 	}
@@ -103,41 +103,107 @@ func IncrementCartQuantity(cart *Cart) error {
 }
 
 func AddNewCart(user_id int, cart *Cart) (int64, error) {
-	insert := `INSERT INTO coffeedatabase.carts (user_id, coffee_id, quantity) VALUES (?, ?, ?)`
+	var cartId int64
 
-	result, err := Config.DB.Exec(insert, user_id, cart.Coffee_id, cart.Quantity)
+	if cart.Category == "coffee" {
+		insert := `INSERT INTO coffeedatabase.carts (user_id, coffee_id, quantity, category) VALUES (?, ?, ?, ?)`
 
-	if err != nil {
-		return 0, err
-	}
+		result, err := Config.DB.Exec(insert, user_id, cart.Coffee_id, 1, cart.Category)
 
-	cartId, err := result.LastInsertId()
+		if err != nil {
+			return 0, err
+		}
 
-	if err != nil {
-		return 0, nil
+		cartId, err = result.LastInsertId()
+
+		if err != nil {
+			return 0, nil
+		}
+
+	} else if cart.Category == "tea" {
+		insert := `INSERT INTO coffeedatabase.carts (user_id, tea_id, quantity, category) VALUES (?, ?, ?, ?)`
+
+		result, err := Config.DB.Exec(insert, user_id, cart.Tea_id, 1, cart.Category)
+
+		if err != nil {
+			return 0, err
+		}
+
+		cartId, err = result.LastInsertId()
+
+		if err != nil {
+			return 0, nil
+		}
+
+	} else if cart.Category == "cake" {
+		insert := `INSERT INTO coffeedatabase.carts (user_id, cake_id, quantity, category) VALUES (?, ?, ?, ?)`
+
+		result, err := Config.DB.Exec(insert, user_id, cart.Cake_id, 1, cart.Category)
+
+		if err != nil {
+			return 0, err
+		}
+
+		cartId, err = result.LastInsertId()
+
+		if err != nil {
+			return 0, nil
+		}
+
 	}
 
 	return cartId, nil
 }
 
-func ExistsCart(user_id int, coffee_id int) (*Cart, error) {
+func ExistsCart(user_id int, category string, cart *Cart) (*Cart, error) {
 	var cartQuery Cart
 
-	query := Config.DB.QueryRow(`SELECT * FROM carts WHERE user_id = ? AND coffee_id = ?`, user_id, coffee_id)
+	if category == "coffee" {
+		query := Config.DB.QueryRow(`SELECT cart_id, user_id FROM carts WHERE user_id = ? AND coffee_id = ?`, user_id, cart.Coffee_id)
 
-	err := query.Scan(
-		&cartQuery.Cart_id,
-		&cartQuery.User_id,
-		&cartQuery.Coffee_id,
-		&cartQuery.Quantity,
-	)
+		err := query.Scan(
+			&cartQuery.Cart_id,
+			&cartQuery.User_id,
+		)
 
-	if err == sql.ErrNoRows {
-		return nil, nil
-	} else if err != nil {
-		return nil, err
+		if err == sql.ErrNoRows {
+			return nil, nil
+		} else if err != nil {
+			return nil, err
+		}
+
+		return &cartQuery, nil
+
+	} else if category == "tea" {
+		query := Config.DB.QueryRow(`SELECT cart_id, user_id FROM carts WHERE user_id = ? AND tea_id = ?`, user_id, cart.Tea_id)
+
+		err := query.Scan(
+			&cartQuery.Cart_id,
+			&cartQuery.User_id,
+		)
+
+		if err == sql.ErrNoRows {
+			return nil, nil
+		} else if err != nil {
+			return nil, err
+		}
+		return &cartQuery, nil
+
+	} else if category == "cake" {
+		query := Config.DB.QueryRow(`SELECT cart_id, user_id FROM carts WHERE user_id = ? AND cake_id = ?`, user_id, cart.Cake_id)
+
+		err := query.Scan(
+			&cartQuery.Cart_id,
+			&cartQuery.User_id,
+		)
+
+		if err == sql.ErrNoRows {
+			return nil, nil
+		} else if err != nil {
+			return nil, err
+		}
+		return &cartQuery, nil
 	}
-
 	return &cartQuery, nil
 }
 

@@ -152,10 +152,6 @@ func SetupDatabase() {
 	// 		PRIMARY KEY (id)
 	// 	);`
 
-	// user_id INT,
-	// FOREIGN KEY (user_id) REFERENCES users(id)
-	// );`
-
 	// edit table add new column and add foreign key and use on delete cascade
 	// 	query := `ALTER TABLE carts
 	//     ADD COLUMN tea_id INT NOT NULL,
@@ -177,6 +173,18 @@ func SetupDatabase() {
 	// 	query := `ALTER TABLE carts
 	// 	CHANGE tea_id tea_id INT AFTER coffee_id,
 	// 	CHANGE cake_id cake_id INT AFTER tea_id;
+	// `
+
+	// Delete Foreign key
+	// query := `ALTER TABLE carts
+	// DROP FOREIGN KEY fk_tea;
+	// `
+
+	// Edit table and use ON DELETE CASCADE
+	// query := `ALTER TABLE carts
+	// ADD CONSTRAINT fk_tea
+	// FOREIGN KEY(tea_id) REFERENCES teamenu(id)
+	// ON DELETE CASCADE;
 	// `
 
 	// 	if _, err := DB.Exec(query); err != nil {
