@@ -32,7 +32,7 @@ const Coffee = () => {
         event.preventDefault()
         const data = {
             coffee_id: coffeeId,
-            quantity: 1
+            category: "coffee"
         }
         try {
             await axios.post(`http://localhost:4000/cart/${localStorage.getItem("id")}`, data)

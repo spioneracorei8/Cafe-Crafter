@@ -12,7 +12,7 @@ const CartPage = () => {
     const [carts, setCarts] = useState([])
     const [subtotal, setSubtotal] = useState(0)
 
-
+    console.log(carts);
     const GetCarts = async () => {
         try {
             setIsLoading(true)

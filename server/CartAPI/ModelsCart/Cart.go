@@ -9,7 +9,7 @@ import (
 func GetCarts(userId int) ([]Cart, error) {
 	var cartList []Cart
 
-	query, err := Config.DB.Query(`SELECT carts.cart_id, users.id AS user_id, coffeemenu.id AS coffee_id,carts.quantity ,coffeemenu.name, coffeemenu.category, coffeemenu.price, coffeemenu.image_url
+	query, err := Config.DB.Query(`SELECT carts.cart_id, users.id AS user_id, coffeemenu.id AS coffee_id, carts.quantity, coffeemenu.name, coffeemenu.category, coffeemenu.price, coffeemenu.image_url
 	FROM carts
 	INNER JOIN users ON carts.user_id = users.id
 	INNER JOIN coffeemenu ON carts.coffee_id = coffeemenu.id
