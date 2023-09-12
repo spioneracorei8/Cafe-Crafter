@@ -26,6 +26,19 @@ const Cake = () => {
         }
     }
 
+    const handleAddtoCart = async (event, cakeId) => {
+        event.preventDefault()
+        const data = {
+            cake_id: cakeId,
+            category: "cake"
+        }
+        try {
+            await axios.post(`http://localhost:4000/cart/${localStorage.getItem("id")}`, data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const handleMenuPopUp = () => {
         setMenuPopUp(!menuPopUp)
     }

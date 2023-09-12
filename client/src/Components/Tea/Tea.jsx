@@ -28,6 +28,19 @@ const Tea = () => {
         }
     }
 
+    const handleAddtoCart = async (event, teaId) => {
+        event.preventDefault()
+        const data = {
+            tea_id: teaId,
+            category: "tea"
+        }
+        try {
+            await axios.post(`http://localhost:4000/cart/${localStorage.getItem("id")}`, data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const handleMenuPopUp = () => {
         setMenuPopUp(!menuPopUp)
     }
