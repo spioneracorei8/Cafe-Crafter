@@ -9,16 +9,17 @@ import Swal from 'sweetalert2'
 const CartPage = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
-    const [carts, setCarts] = useState([])
-    const [subtotal, setSubtotal] = useState(0)
+    const [coffeeCart, setCoffeeCart] = useState([])
+    const [teaCart, setTeaCart] = useState([])
+    const [cakeCart, setCakeCart] = useState([])
+    const [subTotal, setSubTotal] = useState(0)
 
-    console.log(carts);
-    const GetCarts = async () => {
+    const GetCoffeeCart = async () => {
         try {
             setIsLoading(true)
             setIsError(false)
-            const result = await axios.get(`http://localhost:4000/cart/${localStorage.getItem("id")}`)
-            setCarts(result?.data?.data)
+            const result = await axios.get(`http://localhost:4000/cart/coffee/${localStorage.getItem("id")}`)
+            setCoffeeCart(result?.data?.data)
             setIsLoading(false)
         } catch (error) {
             setIsLoading(false)
@@ -27,6 +28,34 @@ const CartPage = () => {
         }
     }
 
+    const GetTeaCart = async () => {
+        try {
+            setIsLoading(true)
+            setIsError(false)
+            const result = await axios.get(`http://localhost:4000/cart/tea/${localStorage.getItem("id")}`)
+            setTeaCart(result?.data?.data)
+            setIsLoading(false)
+        } catch (error) {
+            setIsLoading(false)
+            setIsError(true)
+            console.log(error);
+        }
+    }
+
+    const GetCakeCart = async () => {
+        try {
+            setIsLoading(true)
+            setIsError(false)
+            const result = await axios.get(`http://localhost:4000/cart/cake/${localStorage.getItem("id")}`)
+            setCakeCart(result?.data?.data)
+            setIsLoading(false)
+        } catch (error) {
+            setIsLoading(false)
+            setIsError(true)
+            console.log(error);
+        }
+    }
+    console.log(subTotal);
     const GetSubTotal = async () => {
         try {
             setIsLoading(true)
@@ -42,17 +71,27 @@ const CartPage = () => {
     }
 
     const handleCalculateSubTotal = () => {
-        const subTotal = carts?.reduce((total, cartItem) => {
+        const coffeeSubTotal = coffeeCart?.reduce((total, cartItem) => {
             return total + cartItem?.Price * cartItem?.Quantity;
         }, 0);
-        setSubtotal(subTotal);
+        const teaSubTotal = teaCart?.reduce((total, cartItem) => {
+            return total + cartItem?.Price * cartItem?.Quantity;
+        }, 0);
+        const cakeSubTotal = cakeCart?.reduce((total, cartItem) => {
+            return total + cartItem?.Price * cartItem?.Quantity;
+        }, 0);
+        setSubTotal(coffeeSubTotal + teaSubTotal + cakeSubTotal);
     }
 
     useEffect(() => {
-        GetCarts()
         handleCalculateSubTotal();
     }, [isLoading])
 
+    useEffect(() => {
+        GetCoffeeCart()
+        GetTeaCart()
+        GetCakeCart()
+    }, [isLoading])
 
 
     return (
@@ -102,15 +141,41 @@ const CartPage = () => {
                 <div className='underline-cart-topic'></div>
 
                 {
-                    carts?.map((item, index) => (
+                    coffeeCart?.map((item, index) => (
                         <CartItem
                             key={index}
                             item={item}
-                            isLoading={isLoading}
                             setIsLoading={setIsLoading}
-                            isError={isError}
+                            isLoading={isLoading}
                             setIsError={setIsError}
                             GetSubTotal={GetSubTotal}
+                            handleCalculateSubTotal={handleCalculateSubTotal}
+                        />
+                    ))
+                }
+                {
+                    teaCart?.map((item, index) => (
+                        <CartItem
+                            key={index}
+                            item={item}
+                            setIsLoading={setIsLoading}
+                            isLoading={isLoading}
+                            setIsError={setIsError}
+                            GetSubTotal={GetSubTotal}
+                            handleCalculateSubTotal={handleCalculateSubTotal}
+                        />
+                    ))
+                }
+                {
+                    cakeCart?.map((item, index) => (
+                        <CartItem
+                            key={index}
+                            item={item}
+                            setIsLoading={setIsLoading}
+                            isLoading={isLoading}
+                            setIsError={setIsError}
+                            GetSubTotal={GetSubTotal}
+                            handleCalculateSubTotal={handleCalculateSubTotal}
                         />
                     ))
                 }
@@ -132,7 +197,7 @@ const CartPage = () => {
                                 Subtotal:
                             </h3>
                             <h3>
-                                {subtotal}฿
+                                {subTotal}฿
                             </h3>
                         </div>
                         <div className='coupon-total'>
@@ -167,7 +232,7 @@ const CartPage = () => {
     )
 }
 
-const CartItem = ({ item, isLoading, setIsLoading, isError, setIsError, GetSubTotal }) => {
+const CartItem = ({ item, setIsLoading, isLoading, setIsError, GetSubTotal, handleCalculateSubTotal }) => {
     const [quantity, setQuantity] = useState(item?.Quantity)
     const price = item?.Price
     const [totalMenuPrice, setTotalMenuPrice] = useState(0)
@@ -179,6 +244,7 @@ const CartItem = ({ item, isLoading, setIsLoading, isError, setIsError, GetSubTo
             setIsLoading(true)
             setIsError(false)
             await axios.put(`http://localhost:4000/cart/add/${cart_id}/${localStorage.getItem("id")}`)
+            handleCalculateSubTotal()
             setIsLoading(false)
         } catch (error) {
             setIsLoading(false)
@@ -209,7 +275,9 @@ const CartItem = ({ item, isLoading, setIsLoading, isError, setIsError, GetSubTo
     const handleCalculatePriceMenu = () => {
         setTotalMenuPrice(price * quantity)
     }
-
+    useEffect(() => {
+        handleCalculateSubTotal();
+    }, [isLoading])
 
     useEffect(() => {
         handleCalculatePriceMenu()
