@@ -8,24 +8,70 @@ import (
 	"github.com/spioneracorei8/Cafe-Crafter/CartAPI/ModelsCart"
 )
 
-func GetCarts(c *gin.Context) {
-	id := c.Param("user_id")
+func GetCoffeeCarts(c *gin.Context) {
+	user_id := c.Param("user_id")
 
-	userId, err := strconv.Atoi(id)
+	userId, err := strconv.Atoi(user_id)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
 		return
 	}
 
-	cartList, err := ModelsCart.GetCarts(userId)
+	cartCoffeeList, err := ModelsCart.GetCoffeeCarts(userId)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	} else {
 		c.JSON(http.StatusOK, gin.H{
-			"data": cartList,
+			"data": cartCoffeeList,
+		})
+	}
+
+}
+
+func GetTeaCarts(c *gin.Context) {
+	user_id := c.Param("user_id")
+
+	userId, err := strconv.Atoi(user_id)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
+	}
+
+	cartTeaList, err := ModelsCart.GetTeaCarts(userId)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": cartTeaList,
+		})
+	}
+
+}
+
+func GetCakeCarts(c *gin.Context) {
+	user_id := c.Param("user_id")
+
+	userId, err := strconv.Atoi(user_id)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
+	}
+
+	cartCakeList, err := ModelsCart.GetCakeCarts(userId)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"data": cartCakeList,
 		})
 	}
 
