@@ -6,8 +6,10 @@ import (
 	"github.com/spioneracorei8/Cafe-Crafter/Config"
 )
 
-func GetCarts(userId int) ([]Cart, error) {
-	var cartList []Cart
+// Create more api get tea and cake in cart
+
+func GetCoffeeCarts(userId int) ([]Cart, error) {
+	var cartCoffeeList []Cart
 
 	query, err := Config.DB.Query(`SELECT carts.cart_id, users.id AS user_id, coffeemenu.id AS coffee_id, carts.quantity, coffeemenu.name, coffeemenu.category, coffeemenu.price, coffeemenu.image_url
 	FROM carts
@@ -30,9 +32,67 @@ func GetCarts(userId int) ([]Cart, error) {
 			&cart.Category,
 			&cart.Price,
 			&cart.Image_url)
-		cartList = append(cartList, cart)
+		cartCoffeeList = append(cartCoffeeList, cart)
 	}
-	return cartList, nil
+	return cartCoffeeList, nil
+}
+
+func GetTeaCarts(userId int) ([]Cart, error) {
+	var cartTeaList []Cart
+
+	query, err := Config.DB.Query(`SELECT carts.cart_id, users.id AS user_id, teamenu.id AS tea_id,carts.quantity ,teamenu.name, teamenu.category, teamenu.price, teamenu.image_url
+		FROM carts
+		INNER JOIN users ON carts.user_id = users.id
+		INNER JOIN teamenu ON carts.tea_id = teamenu.id
+		WHERE user_id = ? `, userId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for query.Next() {
+		var cart Cart
+		query.Scan(
+			&cart.Cart_id,
+			&cart.User_id,
+			&cart.Tea_id,
+			&cart.Quantity,
+			&cart.Name,
+			&cart.Category,
+			&cart.Price,
+			&cart.Image_url)
+		cartTeaList = append(cartTeaList, cart)
+	}
+	return cartTeaList, nil
+}
+
+func GetCakeCarts(userId int) ([]Cart, error) {
+	var cartCakeList []Cart
+
+	query, err := Config.DB.Query(`SELECT carts.cart_id, users.id AS user_id, cakemenu.id AS cake_id,carts.quantity ,cakemenu.name, cakemenu.category, cakemenu.price, cakemenu.image_url
+		FROM carts
+		INNER JOIN users ON carts.user_id = users.id
+		INNER JOIN cakemenu ON carts.cake_id = cakemenu.id
+		WHERE user_id = ? `, userId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for query.Next() {
+		var cart Cart
+		query.Scan(
+			&cart.Cart_id,
+			&cart.User_id,
+			&cart.Cake_id,
+			&cart.Quantity,
+			&cart.Name,
+			&cart.Category,
+			&cart.Price,
+			&cart.Image_url)
+		cartCakeList = append(cartCakeList, cart)
+	}
+	return cartCakeList, nil
 }
 
 func GetSubTotal(userId int) (*Cart, error, error) {
