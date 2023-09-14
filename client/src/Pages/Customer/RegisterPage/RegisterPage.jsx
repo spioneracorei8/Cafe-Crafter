@@ -30,7 +30,19 @@ const RegisterPage = () => {
     const handleNextRegisterPage = (event) => {
         event.preventDefault()
         if (name === "") {
-            alert("The Name input cannot be blank.")
+            Swal.fire({
+                title: '<strong>Wrong Name</strong>',
+                icon: 'info',
+
+                html: "The Name input cannot be blank.",
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                },
+                timer: 1500,
+            })
         } else if (username === "") {
             alert("The Username input cannot be blank.")
         } else if (username.length < 8) {

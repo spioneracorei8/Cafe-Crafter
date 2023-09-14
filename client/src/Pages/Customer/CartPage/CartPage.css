@@ -159,63 +159,10 @@
 .bill-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-top: 3rem;
     width: 100%;
     height: auto;
-}
-
-.coupon-code {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 2rem;
-    width: 50%;
-    height: auto;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    padding-right: 3rem;
-    padding-left: 3rem;
-    border-radius: 10%;
-}
-
-.input-coupon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-.input-coupon input {
-    padding: 2px;
-    font-size: 1.2rem;
-    font-weight: 500;
-    width: 270px;
-    height: 40px;
-    border: 1px solid #D4A276;
-}
-
-.input-coupon button h1 {
-    color: #432818;
-    font-weight: 600;
-    font-size: 1.2rem;
-}
-
-.input-coupon button {
-    padding: 1rem;
-    border-radius: 7%;
-    background-color: #FFEDD8;
-    cursor: pointer;
-    border: 2px solid #D4A276;
-}
-
-.input-coupon button:hover {
-    background-color: #ffdcb5;
-
-}
-
-.input-coupon button:active {
-    background-color: #ffc583;
 }
 
 .check-bill {
@@ -223,6 +170,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+    margin-top: 3rem;
     gap: 2rem;
     background-color: #FFEDD8;
     border: 2px solid #D4A276;
@@ -232,7 +180,7 @@
     padding-bottom: 3rem;
     padding-right: 3rem;
     padding-left: 3rem;
-    border-radius: 10%;
+    border-radius: 20px;
 }
 
 .sub-total {

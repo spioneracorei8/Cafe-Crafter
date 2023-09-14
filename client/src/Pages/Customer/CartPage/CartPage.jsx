@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 const CartPage = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
+
     const [coffeeCart, setCoffeeCart] = useState([])
     const [teaCart, setTeaCart] = useState([])
     const [cakeCart, setCakeCart] = useState([])
@@ -55,7 +56,9 @@ const CartPage = () => {
             console.log(error);
         }
     }
+
     console.log(subTotal);
+
     const GetSubTotal = async () => {
         try {
             setIsLoading(true)
@@ -71,16 +74,31 @@ const CartPage = () => {
     }
 
     const handleCalculateSubTotal = () => {
-        const coffeeSubTotal = coffeeCart?.reduce((total, cartItem) => {
+        const coffeeCartObj = coffeeCart.reduce((acc, curr, index) => {
+            acc[index] = curr
+            return acc
+        }, {})
+
+        let coffeeSubTotal = coffeeCart?.reduce((total, cartItem) => {
             return total + cartItem?.Price * cartItem?.Quantity;
         }, 0);
-        const teaSubTotal = teaCart?.reduce((total, cartItem) => {
+        let teaSubTotal = teaCart?.reduce((total, cartItem) => {
             return total + cartItem?.Price * cartItem?.Quantity;
         }, 0);
-        const cakeSubTotal = cakeCart?.reduce((total, cartItem) => {
+        let cakeSubTotal = cakeCart?.reduce((total, cartItem) => {
             return total + cartItem?.Price * cartItem?.Quantity;
         }, 0);
+        // if (coffeeSubTotal === null || coffeeSubTotal === undefined) {
+        //     coffeeSubTotal = 0
+        // } else if (teaSubTotal === null || teaSubTotal === undefined) {
+        //     teaSubTotal = 0
+        // } else if (cakeSubTotal === null || cakeSubTotal === undefined) {
+        //     cakeSubTotal = 0
+        // } else {
+        //     setSubTotal(coffeeSubTotal + teaSubTotal + cakeSubTotal);
+        // }
         setSubTotal(coffeeSubTotal + teaSubTotal + cakeSubTotal);
+
     }
 
     useEffect(() => {
@@ -181,39 +199,13 @@ const CartPage = () => {
                 }
 
                 <div className='bill-container'>
-                    <div className='coupon-code'>
-                        <div className='input-coupon'>
-                            <input type="text" placeholder='Apply The Coupon' />
-                            <button>
-                                <h1>
-                                    Check Discount Coupon
-                                </h1>
-                            </button>
-                        </div>
-                    </div>
                     <div className='check-bill'>
                         <div className='sub-total'>
                             <h3>
-                                Subtotal:
+                                Total Price:
                             </h3>
                             <h3>
                                 {subTotal}฿
-                            </h3>
-                        </div>
-                        <div className='coupon-total'>
-                            <h3>
-                                Discount Coupon:
-                            </h3>
-                            <h3>
-                                100฿
-                            </h3>
-                        </div>
-                        <div className='grand-total'>
-                            <h3>
-                                <span>?</span> Grand total:
-                            </h3>
-                            <h3>
-                                100฿
                             </h3>
                         </div>
 
