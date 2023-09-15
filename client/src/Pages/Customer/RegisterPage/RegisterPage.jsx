@@ -6,11 +6,12 @@ import Coffee_Beans from "../../../assets/Background/Coffee_Beans.jpg"
 import Cafe_Crafter_Logo from "../../../assets/Logo/Cafe_Crafter_Logo.png"
 import { useAuth } from '../../../Context/Authentication'
 import CountryStateData from "../../../data/CountryStateData.json"
-import Swal from 'sweetalert2'
+import AlertPopUp from '../../../Components/AlertPopUp/AlertPopUp'
 
 const RegisterPage = () => {
 
     let [registerPage, setRegisterPage] = useState(1)
+
     const [name, setName] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -21,40 +22,34 @@ const RegisterPage = () => {
     const [country, setCountry] = useState("")
     const [city, setCity] = useState("")
     const [phone_number, setPhone_number] = useState("")
+
     const { register } = useAuth()
+
     const phoneNumberRegex = /^[0-9]+$/
 
     const countries = CountryStateData
     const cities = CountryStateData.flatMap(country => country.states)
 
-    const handleNextRegisterPage = (event) => {
-        event.preventDefault()
-        if (name === "") {
-            Swal.fire({
-                title: '<strong>Wrong Name</strong>',
-                icon: 'info',
+    const [alertPopUp, setAlertPopUp] = useState(false)
 
-                html: "The Name input cannot be blank.",
-                showClass: {
-                    popup: 'animate__animated animate__fadeInDown'
-                },
-                hideClass: {
-                    popup: 'animate__animated animate__fadeOutUp'
-                },
-                timer: 1500,
-            })
+    const handleNextRegisterPage = (event) => {
+
+        event.preventDefault()
+
+        if (name === "") {
+            setAlertPopUp(true)
         } else if (username === "") {
-            alert("The Username input cannot be blank.")
+            setAlertPopUp(true)
         } else if (username.length < 8) {
-            alert("The Username input should enter at least 6 characters.")
+            setAlertPopUp(true)
         } else if (password === "") {
-            alert("The Password input cannot be blank.")
+            setAlertPopUp(true)
         } else if (password.length < 10) {
-            alert("The Password input should enter at least 10 characters.")
+            setAlertPopUp(true)
         } else if (confirmPassword === "") {
-            alert("The Confirm Password input cannot be blank")
+            setAlertPopUp(true)
         } else if (password != confirmPassword) {
-            alert("The Password not match cannot be blank")
+            setAlertPopUp(true)
         }
         else {
             setRegisterPage(registerPage = 2)
@@ -98,9 +93,62 @@ const RegisterPage = () => {
         }
     }
 
+    if (alertPopUp) {
+        setTimeout(() => {
+            setAlertPopUp(false)
+        }, 3500);
+    }
+
 
     return (
         <>
+            {alertPopUp && (
+                <>
+                    {confirmPassword != password && (
+                        <AlertPopUp
+                            headingAlert="Wrong Password"
+                            detailsAlert="The Password not match."
+                        />
+                    )}
+                    {confirmPassword === "" && (
+                        <AlertPopUp
+                            headingAlert="Wrong Confirm Password"
+                            detailsAlert="The Confirm Password input cannot be blank."
+                        />
+                    )}
+                    {password.length < 10 && (
+                        <AlertPopUp
+                            headingAlert="Wrong Password"
+                            detailsAlert="The Password input should enter at least 10 characters."
+                        />
+                    )}
+                    {password === "" && (
+                        <AlertPopUp
+                            headingAlert="Wrong Password"
+                            detailsAlert="The Password input cannot be blank."
+                        />
+                    )}
+                    {username.length < 8 && (
+                        <AlertPopUp
+                            headingAlert="Wrong Username"
+                            detailsAlert="The Username input should enter at least 8 characters."
+                        />
+                    )
+                    }
+                    {username === "" && (
+                        <AlertPopUp
+                            headingAlert="Wrong Username"
+                            detailsAlert="The Username input cannot be blank."
+                        />
+                    )}
+                    {name === "" && (
+                        <AlertPopUp
+                            headingAlert="Wrong Name"
+                            detailsAlert="The Name input cannot be blank."
+                        />
+                    )}
+                </>
+            )}
             <NavigationbarRegisLogin />
             <img src={Coffee_Beans} alt="coffee beans" className='register-background' />
             <div className='register-container'>
