@@ -95,17 +95,17 @@ func GetCakeCarts(userId int) ([]Cart, error) {
 	return cartCakeList, nil
 }
 
-func GetSubTotal(userId int) (*Cart, error, error) {
-	subTotal := &Cart{}
+func GetTotalPrice(userId int) (*Cart, error, error) {
+	totalPrice := &Cart{}
 
-	query := Config.DB.QueryRow(`SELECT SUM(carts.quantity * coffeemenu.price) AS sub_total
+	query := Config.DB.QueryRow(`SELECT SUM(carts.quantity * coffeemenu.price) AS total_price
 	FROM carts
 	INNER JOIN users ON carts.user_id = users.id
 	INNER JOIN coffeemenu ON carts.coffee_id = coffeemenu.id
 	WHERE user_id = ?`, userId)
 
 	err := query.Scan(
-		&subTotal.Sub_total,
+		&totalPrice.Total_price,
 	)
 
 	if err == sql.ErrNoRows {
@@ -113,7 +113,7 @@ func GetSubTotal(userId int) (*Cart, error, error) {
 	} else if err != nil {
 		return nil, err, nil
 	} else {
-		return subTotal, nil, nil
+		return totalPrice, nil, nil
 	}
 
 }
@@ -319,4 +319,26 @@ func EditReduceToCart(userId int, cart_id int) (*Cart, error, error) {
 		return cartData, nil, nil
 	}
 
+}
+
+func DeleteCart(cartId int) (bool, error) {
+	var count int
+
+	query := `SELECT COUNT(*) FROM coffeedatabase.carts WHERE cart_id = ?`
+
+	deleteCartById := `DELETE FROM coffeedatabase.carts WHERE cart_id = ?`
+
+	err := Config.DB.QueryRow(query, cartId).Scan(&count)
+
+	if err != nil {
+		return false, err
+	}
+
+	_, err = Config.DB.Exec(deleteCartById, cartId)
+
+	if err != nil {
+		return false, err
+	}
+
+	return count > 0, nil
 }

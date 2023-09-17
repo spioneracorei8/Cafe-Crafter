@@ -30,26 +30,27 @@ const RegisterPage = () => {
     const countries = CountryStateData
     const cities = CountryStateData.flatMap(country => country.states)
 
-    const [alertPopUp, setAlertPopUp] = useState(false)
+    const [alertPopUpOne, setAlertPopUpOne] = useState(false)
+    const [alertPopUpTwo, setAlertPopUpTwo] = useState(false)
 
     const handleNextRegisterPage = (event) => {
 
         event.preventDefault()
 
         if (name === "") {
-            setAlertPopUp(true)
+            setAlertPopUpOne(true)
         } else if (username === "") {
-            setAlertPopUp(true)
+            setAlertPopUpOne(true)
         } else if (username.length < 8) {
-            setAlertPopUp(true)
+            setAlertPopUpOne(true)
         } else if (password === "") {
-            setAlertPopUp(true)
+            setAlertPopUpOne(true)
         } else if (password.length < 10) {
-            setAlertPopUp(true)
+            setAlertPopUpOne(true)
         } else if (confirmPassword === "") {
-            setAlertPopUp(true)
+            setAlertPopUpOne(true)
         } else if (password != confirmPassword) {
-            setAlertPopUp(true)
+            setAlertPopUpOne(true)
         }
         else {
             setRegisterPage(registerPage = 2)
@@ -65,18 +66,23 @@ const RegisterPage = () => {
         event.preventDefault()
 
         if (email === "") {
-            alert("The Email input cannot be blank.")
+            setAlertPopUpTwo(true)
         } else if (phone_number === "") {
-            alert("The Phone Number input cannot be blank.")
+            setAlertPopUpTwo(true)
         } else if (phone_number.length < 10) {
-            alert("The Phone Number input should have at least 10 digits.")
+            setAlertPopUpTwo(true)
         } else if (!phoneNumberRegex.test(phone_number)) {
-            alert("The Phone Number input is malformed.")
+            setAlertPopUpTwo(true)
         } else if (address === "") {
-            alert("The Address input cannot be blank.")
+            setAlertPopUpTwo(true)
         } else if (address.length < 30) {
-            alert("The Address input should have at least 30 characters.")
-        } else {
+            setAlertPopUpTwo(true)
+        } else if (country === "") {
+            setAlertPopUpTwo(true)
+        } else if (city === "") {
+            setAlertPopUpTwo(true)
+        }
+        else {
             const data = {
                 name,
                 username,
@@ -93,16 +99,21 @@ const RegisterPage = () => {
         }
     }
 
-    if (alertPopUp) {
+    if (alertPopUpOne) {
         setTimeout(() => {
-            setAlertPopUp(false)
+            setAlertPopUpOne(false)
+        }, 3500);
+    }
+    if (alertPopUpTwo) {
+        setTimeout(() => {
+            setAlertPopUpTwo(false)
         }, 3500);
     }
 
 
     return (
         <>
-            {alertPopUp && (
+            {alertPopUpOne && (
                 <>
                     {confirmPassword != password && (
                         <AlertPopUp
@@ -145,6 +156,60 @@ const RegisterPage = () => {
                         <AlertPopUp
                             headingAlert="Wrong Name"
                             detailsAlert="The Name input cannot be blank."
+                        />
+                    )}
+                </>
+            )}
+
+            {alertPopUpTwo && (
+                <>
+                    {city === "" && (
+                        <AlertPopUp
+                            headingAlert="Wrong City"
+                            detailsAlert="The City input cannot be blank."
+                        />
+                    )}
+                    {country === "" && (
+                        <AlertPopUp
+                            headingAlert="Wrong Country"
+                            detailsAlert="The Country input cannot be blank."
+                        />
+                    )}
+                    {address.length < 30 && (
+                        <AlertPopUp
+                            headingAlert="Wrong Address"
+                            detailsAlert="The Address input should have at least 30 characters."
+                        />
+                    )}
+                    {address === "" && (
+                        <AlertPopUp
+                            headingAlert="Wrong Address"
+                            detailsAlert="The Address input cannot be blank."
+                        />
+                    )}
+                    {!phoneNumberRegex.test(phone_number) && (
+                        <AlertPopUp
+                            headingAlert="Wrong Phone Number"
+                            detailsAlert="The Phone Number input is malformed."
+                        />
+                    )
+                    }
+                    {phone_number.length < 10 && (
+                        <AlertPopUp
+                            headingAlert="Wrong Phone Number"
+                            detailsAlert="The Phone Number input should have at least 10 digits."
+                        />
+                    )}
+                    {phone_number === "" && (
+                        <AlertPopUp
+                            headingAlert="Wrong Phone Number"
+                            detailsAlert="The Phone Number input cannot be blank."
+                        />
+                    )}
+                    {email === "" && (
+                        <AlertPopUp
+                            headingAlert="Wrong Email"
+                            detailsAlert="The Email input cannot be blank."
                         />
                     )}
                 </>
@@ -323,10 +388,7 @@ const RegisterPage = () => {
                                         </div>
 
 
-                                        <div className='register-form-checkbox'>
-                                            <p>I agree to the <span>Terms of service</span></p>
-                                            <input type="checkbox" />
-                                        </div>
+                                        
                                     </div>
 
                                 </div>

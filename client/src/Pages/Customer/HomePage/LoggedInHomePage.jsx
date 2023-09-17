@@ -36,9 +36,9 @@ const LoggedInHomePage = () => {
 
     const { logout } = useAuth()
 
-    const { getAllCoffee, isLoading, isError } = useMenus()
+    const { getAllCoffee } = useMenus()
 
-    const { getCartQuantity, cartQuantity } = useCart()
+    const { getCartQuantity, cartQuantity, isLoading, isError } = useCart()
 
     const [category, setCategory] = useState("Coffee")
 
@@ -48,7 +48,7 @@ const LoggedInHomePage = () => {
     }, [])
     useEffect(() => {
         getCartQuantity()
-    }, [isLoading])
+    }, [])
 
     const handleNavigate = (event, id) => {
         event.preventDefault()

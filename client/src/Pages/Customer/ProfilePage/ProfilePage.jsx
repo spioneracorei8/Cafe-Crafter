@@ -187,7 +187,7 @@ const ProfilePage = () => {
                         <div className='profile-data country-data'>
                             <label htmlFor="country">country</label>
                             {isEdit
-                                ? <select className='form-select'
+                                ? <select
                                     value={country}
                                     onChange={(event) => setCountry(event.target.value)}
                                     style={{
@@ -206,7 +206,7 @@ const ProfilePage = () => {
                                             </option>
                                         ))}
                                 </select>
-                                : <select className='form-select'
+                                : <select
                                     disabled
                                     value={country}
                                     onChange={(event) => setCountry(event.target.value)}
@@ -232,7 +232,7 @@ const ProfilePage = () => {
                         <div className='profile-data gender-data'>
                             <label htmlFor="city">city</label>
                             {isEdit
-                                ? <select className='form-select'
+                                ? <select
                                     value={city}
                                     onChange={(event) => setCity(event.target.value)}
                                     style={{
@@ -262,7 +262,7 @@ const ProfilePage = () => {
                                             );
                                         })}
                                 </select>
-                                : <select className='form-select'
+                                : <select
                                     disabled
                                     value={city}
                                     onChange={(event) => setCity(event.target.value)}

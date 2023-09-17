@@ -3,8 +3,7 @@ import "./CartPage.css"
 import NavigationbarProfile from '../../../Components/Navigationbar/NavigationbarProfile'
 import Footer from '../../../Components/Footer/Footer'
 import axios from 'axios'
-import Loading from '../../../Components/Loading/Loading'
-import Swal from 'sweetalert2'
+import Bin_Icon from "../../../assets/Icon/Bin_Icon.png"
 
 const CartPage = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -13,7 +12,8 @@ const CartPage = () => {
     const [coffeeCart, setCoffeeCart] = useState([])
     const [teaCart, setTeaCart] = useState([])
     const [cakeCart, setCakeCart] = useState([])
-    const [subTotal, setSubTotal] = useState(0)
+
+    const [totalPrice, setTotalPrice] = useState(0)
 
     const GetCoffeeCart = async () => {
         try {
@@ -57,14 +57,12 @@ const CartPage = () => {
         }
     }
 
-    console.log(subTotal);
-
-    const GetSubTotal = async () => {
+    const GetTotalPrice = async () => {
         try {
             setIsLoading(true)
             setIsError(false)
-            const result = await axios.get(`http://localhost:4000/cart/subtotal/${localStorage.getItem("id")}`)
-            // setSubtotal(result?.data?.data?.Sub_total)
+            const result = await axios.get(`http://localhost:4000/cart/total-price/${localStorage.getItem("id")}`)
+            setTotalPrice(result?.data?.data?.Total_price)
             setIsLoading(false)
         } catch (error) {
             setIsLoading(false)
@@ -73,52 +71,18 @@ const CartPage = () => {
         }
     }
 
-    const handleCalculateSubTotal = () => {
-        const coffeeCartObj = coffeeCart.reduce((acc, curr, index) => {
-            acc[index] = curr
-            return acc
-        }, {})
-
-        let coffeeSubTotal = coffeeCart?.reduce((total, cartItem) => {
-            return total + cartItem?.Price * cartItem?.Quantity;
-        }, 0);
-        let teaSubTotal = teaCart?.reduce((total, cartItem) => {
-            return total + cartItem?.Price * cartItem?.Quantity;
-        }, 0);
-        let cakeSubTotal = cakeCart?.reduce((total, cartItem) => {
-            return total + cartItem?.Price * cartItem?.Quantity;
-        }, 0);
-        // if (coffeeSubTotal === null || coffeeSubTotal === undefined) {
-        //     coffeeSubTotal = 0
-        // } else if (teaSubTotal === null || teaSubTotal === undefined) {
-        //     teaSubTotal = 0
-        // } else if (cakeSubTotal === null || cakeSubTotal === undefined) {
-        //     cakeSubTotal = 0
-        // } else {
-        //     setSubTotal(coffeeSubTotal + teaSubTotal + cakeSubTotal);
-        // }
-        setSubTotal(coffeeSubTotal + teaSubTotal + cakeSubTotal);
-
-    }
-
-    useEffect(() => {
-        handleCalculateSubTotal();
-    }, [isLoading])
 
     useEffect(() => {
         GetCoffeeCart()
         GetTeaCart()
         GetCakeCart()
+        GetTotalPrice()
     }, [isLoading])
 
 
     return (
 
         <>
-            {isError &&
-                <h1>Fetching Data Error...</h1>
-            }
-
             <NavigationbarProfile />
 
             <section className='cart-container'>
@@ -155,6 +119,9 @@ const CartPage = () => {
                             </li>
                         </ul>
                     </div>
+                    <div className='blank-cart-list'>
+
+                    </div>
                 </div>
                 <div className='underline-cart-topic'></div>
 
@@ -163,11 +130,12 @@ const CartPage = () => {
                         <CartItem
                             key={index}
                             item={item}
+                            GetCoffeeCart={GetCoffeeCart}
+                            GetCakeCart={GetCakeCart}
+                            GetTeaCart={GetTeaCart}
                             setIsLoading={setIsLoading}
                             isLoading={isLoading}
                             setIsError={setIsError}
-                            GetSubTotal={GetSubTotal}
-                            handleCalculateSubTotal={handleCalculateSubTotal}
                         />
                     ))
                 }
@@ -176,11 +144,12 @@ const CartPage = () => {
                         <CartItem
                             key={index}
                             item={item}
+                            GetCoffeeCart={GetCoffeeCart}
+                            GetCakeCart={GetCakeCart}
+                            GetTeaCart={GetTeaCart}
                             setIsLoading={setIsLoading}
                             isLoading={isLoading}
                             setIsError={setIsError}
-                            GetSubTotal={GetSubTotal}
-                            handleCalculateSubTotal={handleCalculateSubTotal}
                         />
                     ))
                 }
@@ -189,11 +158,12 @@ const CartPage = () => {
                         <CartItem
                             key={index}
                             item={item}
+                            GetCoffeeCart={GetCoffeeCart}
+                            GetCakeCart={GetCakeCart}
+                            GetTeaCart={GetTeaCart}
                             setIsLoading={setIsLoading}
                             isLoading={isLoading}
                             setIsError={setIsError}
-                            GetSubTotal={GetSubTotal}
-                            handleCalculateSubTotal={handleCalculateSubTotal}
                         />
                     ))
                 }
@@ -205,7 +175,7 @@ const CartPage = () => {
                                 Total Price:
                             </h3>
                             <h3>
-                                {subTotal}฿
+                                {totalPrice}฿
                             </h3>
                         </div>
 
@@ -218,16 +188,16 @@ const CartPage = () => {
                     </button>
                 </div>
             </section>
-
             <Footer />
         </>
     )
 }
 
-const CartItem = ({ item, setIsLoading, isLoading, setIsError, GetSubTotal, handleCalculateSubTotal }) => {
+const CartItem = ({ item, setIsLoading, isLoading, setIsError, GetCoffeeCart, GetCakeCart, GetTeaCart }) => {
     const [quantity, setQuantity] = useState(item?.Quantity)
     const price = item?.Price
     const [totalMenuPrice, setTotalMenuPrice] = useState(0)
+    const [isDeleteCart, setIsDeleteCart] = useState(false)
 
     const addQuantity = async (event, cart_id) => {
         event.preventDefault()
@@ -236,7 +206,6 @@ const CartItem = ({ item, setIsLoading, isLoading, setIsError, GetSubTotal, hand
             setIsLoading(true)
             setIsError(false)
             await axios.put(`http://localhost:4000/cart/add/${cart_id}/${localStorage.getItem("id")}`)
-            handleCalculateSubTotal()
             setIsLoading(false)
         } catch (error) {
             setIsLoading(false)
@@ -264,17 +233,31 @@ const CartItem = ({ item, setIsLoading, isLoading, setIsError, GetSubTotal, hand
         }
     }
 
+    const deleteCart = async (event, cart_id) => {
+        // event.preventDefault()
+        try {
+            setIsLoading(true)
+            setIsError(false)
+            await axios.delete(`http://localhost:4000/cart/delete/${cart_id}`)
+            setIsLoading(false)
+        } catch (error) {
+            setIsLoading(false)
+            setIsError(true)
+            console.log(error);
+        }
+    }
+
     const handleCalculatePriceMenu = () => {
         setTotalMenuPrice(price * quantity)
     }
-    useEffect(() => {
-        handleCalculateSubTotal();
-    }, [isLoading])
 
     useEffect(() => {
         handleCalculatePriceMenu()
-        GetSubTotal()
-    }, [quantity])
+        GetCoffeeCart()
+        GetCakeCart()
+        GetTeaCart()
+    }, [isLoading])
+
 
     return (
         <div className='added-menu-container'>
@@ -317,8 +300,11 @@ const CartItem = ({ item, setIsLoading, isLoading, setIsError, GetSubTotal, hand
                 <div className='total-added'>
                     <p>{totalMenuPrice}฿</p>
                 </div>
-            </div>
 
+            </div>
+            <div className='bin-icon'>
+                <img src={Bin_Icon} alt="bin-icon" onClick={(event) => deleteCart(event, item?.Cart_id, setIsDeleteCart(!isDeleteCart))} />
+            </div>
         </div>
     )
 }

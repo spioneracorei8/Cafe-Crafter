@@ -10,7 +10,7 @@ const AlertPopUp = ({ detailsAlert, headingAlert }) => {
         <div className='alert-pop'>
           <div className='alert-content'>
             <h1>
-              {headingAlert}
+              {headingAlert} !!
             </h1>
             <p>
               {detailsAlert}

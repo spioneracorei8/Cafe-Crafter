@@ -8,7 +8,7 @@ type Cart struct {
 	Cake_id       int
 	Quantity      int
 	Cart_quantity int
-	Sub_total     float64
+	Total_price     float64
 	Name          string
 	Category      string
 	Price         float64

@@ -53,11 +53,12 @@ func SetRouter() *gin.Engine {
 		CartRoutes.GET("/coffee/:user_id", ControllersCart.GetCoffeeCarts)
 		CartRoutes.GET("/tea/:user_id", ControllersCart.GetTeaCarts)
 		CartRoutes.GET("/cake/:user_id", ControllersCart.GetCakeCarts)
-		CartRoutes.GET("/subtotal/:user_id", ControllersCart.GetSubTotal)
+		CartRoutes.GET("/total-price/:user_id", ControllersCart.GetTotalPrice)
 		CartRoutes.GET("/cart-quantity/:user_id", ControllersCart.GetCartQuantity)
 		CartRoutes.POST("/:user_id", ControllersCart.AddToCart)
 		CartRoutes.PUT("/add/:cart_id/:user_id", ControllersCart.EditAddToCart)
 		CartRoutes.PUT("/reduce/:cart_id/:user_id", ControllersCart.EditReduceToCart)
+		CartRoutes.DELETE("/delete/:cart_id", ControllersCart.DeleteCart)
 	}
 	return r
 

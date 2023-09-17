@@ -77,7 +77,7 @@ func GetCakeCarts(c *gin.Context) {
 
 }
 
-func GetSubTotal(c *gin.Context) {
+func GetTotalPrice(c *gin.Context) {
 	id := c.Param("user_id")
 
 	userId, err := strconv.Atoi(id)
@@ -87,7 +87,7 @@ func GetSubTotal(c *gin.Context) {
 		return
 	}
 
-	subTotal, err, errNoRow := ModelsCart.GetSubTotal(userId)
+	subTotal, err, errNoRow := ModelsCart.GetTotalPrice(userId)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -233,4 +233,32 @@ func EditReduceToCart(c *gin.Context) {
 			"message": "edit cart successfully.",
 		})
 	}
+}
+
+func DeleteCart(c *gin.Context) {
+	cart_id := c.Param("cart_id")
+
+	cartId, err := strconv.Atoi(cart_id)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid syntax url path should be number"})
+		return
+	}
+
+	isDeleted, err := ModelsCart.DeleteCart(cartId)
+
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if isDeleted {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "deleted cart successfully.",
+		})
+	} else {
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "The id you entered does not exist."})
+		return
+	}
+
 }
